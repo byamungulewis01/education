@@ -11,7 +11,7 @@
 
     <!-- Custom CSS -->
     <link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet">
-
+    <link rel="stylesheet" href="{{ asset('assets/toast/css/jquery.toast.css') }}">
 </head>
 
 <body>
@@ -44,20 +44,7 @@
 
                     <div class="col-lg-9 col-md-9 col-sm-12">
 
-                        <!-- Row -->
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 pb-4">
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-                                    </ol>
-                                </nav>
-                            </div>
-                        </div>
-                        <!-- /Row -->
-
-                     @yield('body')
+                        @yield('body')
 
                     </div>
 
@@ -66,26 +53,6 @@
             </div>
         </section>
         <!-- ============================ Dashboard: Dashboard End ================================== -->
-
-        <!-- ============================ Call To Action ================================== -->
-        <section class="theme-bg call_action_wrap-wrap">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-
-                        <div class="call_action_wrap">
-                            <div class="call_action_wrap-head">
-                                <h3>Do You Have Questions ?</h3>
-                                <span>We'll help you to grow your career and growth.</span>
-                            </div>
-                            <a href="#" class="btn btn-call_action_wrap">Contact Us Today</a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- ============================ Call To Action End ================================== -->
 
 
         <a id="back2Top" class="top-scroll" title="Back to top" href="#"><i class="ti-arrow-up"></i></a>
@@ -116,6 +83,72 @@
 
     <!-- Custom Morrisjs JavaScript -->
     <script src="{{ asset('assets/js/morris.js') }}"></script>
+
+    {{-- <script src="{{ asset('assets/toast/jquery.js') }}"></script> --}}
+    <script src="{{ asset('assets/toast/js/jquery.toast.js') }}"></script>
+
+    @if (session()->has('success'))
+        <script>
+            $(document).ready(function() {
+                $.toast({
+                    heading: 'Success',
+                    text: '{{ session()->get('success') }}',
+                    showHideTransition: 'fade',
+                    icon: 'success',
+                    position: 'top-right'
+                });
+            });
+        </script>
+    @endif
+    @if (session()->has('warning'))
+        <script>
+            $(document).ready(function() {
+                $.toast({
+                    heading: 'Message',
+                    text: '{{ session()->get('warning') }}',
+                    showHideTransition: 'fade',
+                    icon: 'warning',
+                    position: 'top-right'
+                });
+            });
+        </script>
+    @endif
+    @if (session()->has('error'))
+        <script>
+            $(document).ready(function() {
+                $.toast({
+                    heading: 'Error',
+                    text: '{{ session()->get('error') }}',
+                    showHideTransition: 'fade',
+                    icon: 'error',
+                    position: 'top-right'
+                });
+            });
+        </script>
+    @endif
+
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+        @endforeach
+        @php
+            $data = 'Error Accurs';
+        @endphp
+        <script>
+            $(document).ready(function() {
+                $.toast({
+                    heading: 'Error',
+                    text: '{{ $error }}',
+                    showHideTransition: 'fade',
+                    icon: 'error',
+                    position: 'top-right',
+                    hideAfter: 5000,
+                });
+            });
+        </script>
+    @endif
+
+
+
     <!-- ============================================================== -->
     <!-- This page plugins -->
     <!-- ============================================================== -->

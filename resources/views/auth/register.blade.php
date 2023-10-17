@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <div class="crs_log__footer d-flex justify-content-between">
-                            <div class="fhg_45"><p class="musrt">Already have account? <a href="login.html" class="theme-cl">Login</a></p></div>
+                            <div class="fhg_45"><p class="musrt">Already have account? <a href="{{ route('login') }}" class="theme-cl">Login</a></p></div>
                             <div class="fhg_45"><p class="musrt"><a href="forgot.html" class="text-danger">Forgot Password?</a></p></div>
                         </div>
                     </div>
