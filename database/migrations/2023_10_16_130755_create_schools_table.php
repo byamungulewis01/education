@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('schools', function (Blueprint $table) {
             $table->id();
             $table->string('title')->unique();
+            $table->string('imageName')->default('course.png');
             $table->string('description');
             $table->timestamps();
         });

@@ -28,11 +28,15 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form class="forms_block" method="post" action="{{ route('admin.school.store') }}">
+                                    <form class="forms_block" method="post" action="{{ route('admin.school.store') }}" enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group smalls">
                                             <label>School Name</label>
                                             <input name="title" type="text" class="form-control" placeholder="School">
+                                        </div>
+                                        <div class="form-group smalls">
+                                            <label>Image</label>
+                                            <input name="image" type="file" class="form-control">
                                         </div>
                                         <div class="form-group smalls">
                                             <label>Description</label>
@@ -64,6 +68,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
+                                        <th scope="col">Photo</th>
                                         <th scope="col">School</th>
                                         <th scope="col">Description</th>
                                         <th scope="col">Action</th>
@@ -73,8 +78,12 @@
                                     @foreach ($schools as $item)
                                         <tr>
                                             <th scope="row">{{ $loop->iteration }}</th>
+                                            <td><img src="{{ asset('images/'.$item->imageName) }}" class="img-fluid circle"
+                                                    width="40" alt=""></td>
                                             <td class="font-weight-bold">{{ $item->title }}</td>
-                                            <td>{{ $item->description }}</td>
+                                            <td>{{ implode(' ', array_slice(str_word_count($item->description, 2), 0, 7)) }}...
+                                            </td>
+
                                             <td>
                                                 <button class="btn btn-sm btn-primary" data-toggle="modal"
                                                     data-target="#editModel{{ $item->id }}">Edit</button>
@@ -92,7 +101,7 @@
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form class="forms_block" method="post"
+                                                                <form class="forms_block" method="post" enctype="multipart/form-data"
                                                                     action="{{ route('admin.school.update', $item->id) }}">
                                                                     @csrf
                                                                     @method('PUT')
@@ -101,6 +110,11 @@
                                                                         <input name="title" type="text"
                                                                             class="form-control"
                                                                             value="{{ $item->title }}">
+                                                                    </div>
+                                                                    <div class="form-group smalls">
+                                                                        <label>Image</label>
+                                                                        <input name="image" type="file"
+                                                                            class="form-control">
                                                                     </div>
                                                                     <div class="form-group smalls">
                                                                         <label>Description</label>

@@ -23,22 +23,11 @@
                 </ul>
             </li>
 
-            <li class="dropdown">
-                <a href="javascript:void(0);"><i class="fas fa-user-shield"></i>Admins<span
-                        class="ti-angle-left"></span></a>
-                <ul class="nav nav-second-level">
-                    <li><a href="manage-admins.html">Manage Admins</a></li>
-                    <li><a href="add-admin.html">Add New Admins</a></li>
-                </ul>
+            <li class="{{ Request::routeIs('admin.user.index') ? 'active' : '' }}">
+                <a href="{{ route('admin.user.index') }}"><i class="fas fa-user-shield"></i>Admins</a>
             </li>
-            <li class="dropdown">
-                <a href="javascript:void(0);"><i class="fas fa-toolbox"></i>Instructors<span
-                        class="ti-angle-left"></span></a>
-                <ul class="nav nav-second-level">
-                    <li><a href="manage-instructor.html">Manage Instructors</a></li>
-                    <li><a href="add-instructor.html">Add New Instructors</a></li>
-                    <li><a href="instructor-payout.html">Instructors Payouts</a></li>
-                </ul>
+            <li class="{{ Request::routeIs('admin.instructor.index') ? 'active' : '' }}">
+                <a href="{{ route('admin.instructor.index') }}"><i class="fas fa-toolbox"></i>Instructors</a>
             </li>
             <li class="dropdown">
                 <a href="javascript:void(0);"><i class="fas fa-user"></i>Students<span class="ti-angle-left"></span></a>

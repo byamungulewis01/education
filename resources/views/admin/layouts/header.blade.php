@@ -9,140 +9,11 @@
 
             </div>
             <div class="nav-menus-wrapper" style="transition-property: none;">
-                <ul class="nav-menu">
 
-                    <li><a href="#">Home<span class="submenu-indicator"></span></a>
-                        <ul class="nav-dropdown nav-submenu">
-                            <li><a href="index.html">Home 1</a></li>
-                            <li><a href="home-2.html">Home 2</a></li>
-                            <li><a href="home-3.html">Home 3</a></li>
-                            <li><a href="home-4.html">Home 4</a></li>
-                            <li><a href="home-5.html">Home 5</a></li>
-                            <li><a href="home-6.html">Home 6</a></li>
-                            <li><a href="home-7.html">Home 7</a></li>
-                        </ul>
-                    </li>
-
-                    <li><a href="#">Courses<span class="submenu-indicator"></span></a>
-                        <ul class="nav-dropdown nav-submenu">
-                            <li><a href="#">Search Courses in Grid<span class="submenu-indicator"></span></a>
-                                <ul class="nav-dropdown nav-submenu">
-                                    <li><a href="grid-layout-with-sidebar.html">Grid Layout Style 1</a></li>
-                                    <li><a href="grid-layout-with-sidebar-2.html">Grid Layout Style 2</a></li>
-                                    <li><a href="grid-layout-with-sidebar-3.html">Grid Layout Style 3</a></li>
-                                    <li><a href="grid-layout-with-sidebar-4.html">Grid Layout Style 4</a></li>
-                                    <li><a href="grid-layout-with-sidebar-5.html">Grid Layout Style 5</a></li>
-                                    <li><a href="grid-layout-full.html">Grid Full Width</a></li>
-                                    <li><a href="grid-layout-full-2.html">Grid Full Width 2</a></li>
-                                    <li><a href="grid-layout-full-3.html">Grid Full Width 3</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Search Courses in List<span class="submenu-indicator"></span></a>
-                                <ul class="nav-dropdown nav-submenu">
-                                    <li><a href="list-layout-with-sidebar.html">List Layout Style 1</a></li>
-                                    <li><a href="list-layout-with-full.html">List Full Width</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Courses Detail<span class="submenu-indicator"></span></a>
-                                <ul class="nav-dropdown nav-submenu">
-                                    <li><a href="course-detail.html">Course Detail 01</a></li>
-                                    <li><a href="course-detail-2.html">Course Detail 02</a></li>
-                                    <li><a href="course-detail-3.html">Course Detail 03</a></li>
-                                    <li><a href="course-detail-4.html">Course Detail 04</a></li>
-                                </ul>
-                            </li>
-
-                            <li><a href="explore-category.html">Explore Category</a></li>
-                            <li><a href="find-instructor.html">Find Instructor</a></li>
-                            <li><a href="instructor-detail.html">Instructor Detail</a></li>
-                        </ul>
-                    </li>
-
-                    <li><a href="#">Pages<span class="submenu-indicator"></span></a>
-                        <ul class="nav-dropdown nav-submenu">
-                            <li><a href="#">Shop Pages<span class="submenu-indicator"></span></a>
-                                <ul class="nav-dropdown nav-submenu">
-                                    <li><a href="shop-with-sidebar.html">Shop Sidebar Left</a></li>
-                                    <li><a href="shop-with-right-sidebar.html">Shop Sidebar Right</a></li>
-                                    <li><a href="list-shop-with-sidebar.html">Shop List Style</a></li>
-                                    <li><a href="wishlist.html">Wishlist</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="product-detail.html">Product Detail</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="about.html">About Us</a></li>
-                            <li><a href="contact.html">Say Hello</a></li>
-                            <li><a href="blogs.html">Blog Style</a></li>
-                            <li><a href="pricing.html">Pricing</a></li>
-                            <li><a href="404.html">404 Page</a></li>
-                            <li><a href="component.html">Elements</a></li>
-                            <li><a href="faq.html">FAQs</a></li>
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href="signup.html">Signup</a></li>
-                            <li><a href="forgot.html">Forgot</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="active"><a href="dashboard.html">Dashboard</a></li>
-
-                </ul>
 
                 <ul class="nav-menu nav-menu-social align-to-right">
 
-                    <li class="account-drop">
-                        <a href="javascript:void(0);" class="crs_yuo12" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-                            <span class="embos_45"><i class="fas fa-shopping-basket"></i><i
-                                    class="embose_count">4</i></span>
-                        </a>
-                        <div class="dropdown-menu pull-right animated flipInX">
-                            <div class="drp_menu_headr bg-purple">
-                                <h4>Wishlist Product</h4>
-                            </div>
-                            <div class="ground-list ground-hover-list">
-                                <div class="ground ground-list-single">
-                                    <div class="grd_thum"><img src="{{ asset('assets/img/cr-1.jpg') }}" class="img-fluid rounded"
-                                            width="50" alt="" /></div>
-                                    <div class="ground-content">
-                                        <h6>Web History<small class="float-right text-fade">$120</small></h6>
-                                        <a href="#" class="small text-danger">Remove</a>
-                                    </div>
-                                </div>
 
-                                <div class="ground ground-list-single">
-                                    <div class="grd_thum"><img src="{{ asset('assets/img/cr-3.jpg') }}" class="img-fluid rounded"
-                                            width="50" alt="" /></div>
-                                    <div class="ground-content">
-                                        <h6>Physics Beginning<small class="float-right text-fade">$99</small></h6>
-                                        <a href="#" class="small text-danger">Remove</a>
-                                    </div>
-                                </div>
-
-                                <div class="ground ground-list-single">
-                                    <div class="grd_thum"><img src="{{ asset('assets/img/cr-4.jpg') }}" class="img-fluid rounded"
-                                            width="50" alt="" /></div>
-                                    <div class="ground-content">
-                                        <h6>Computer Fundamental<small class="float-right text-fade">$99</small></h6>
-                                        <a href="#" class="small text-danger">Remove</a>
-                                    </div>
-                                </div>
-
-                                <div class="ground ground-list-single">
-                                    <div class="grd_thum"><img src="{{ asset('assets/img/cr-5.jpg') }}" class="img-fluid rounded"
-                                            width="50" alt="" /></div>
-                                    <div class="ground-content">
-                                        <h6>Computer Advance<small class="float-right text-fade">$49</small></h6>
-                                        <a href="#" class="small text-danger">Remove</a>
-                                    </div>
-                                </div>
-
-                                <div class="ground ground-list-single">
-                                    <button type="button" class="btn theme-bg text-white full-width">Go To Cart</button>
-                                </div>
-
-                            </div>
-                        </div>
-                    </li>
                     <li class="account-drop">
                         <a href="javascript:void(0);" class="crs_yuo12" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
@@ -150,7 +21,7 @@
                         </a>
                         <div class="dropdown-menu pull-right animated flipInX">
                             <div class="drp_menu_headr bg-warning">
-                                <h4>22 Notifications</h4>
+                                <h4>2 Notifications</h4>
                             </div>
                             <div class="ground-list ground-hover-list">
                                 <div class="ground ground-list-single">
@@ -178,34 +49,6 @@
                                         <h6><a href="#">Shilpa Rana</a></h6>
                                         <small class="text-fade">Shilpa Send a Message</small>
                                         <span class="small">02 Min Ago</span>
-                                    </div>
-                                </div>
-
-                                <div class="ground ground-list-single">
-                                    <div
-                                        class="rounded-circle p-3 p-sm-4 d-flex align-items-center justify-content-center bg-light-info">
-                                        <div class="position-absolute text-info h5 mb-0"><i
-                                                class="fas fa-grin-squint-tears"></i></div>
-                                    </div>
-
-                                    <div class="ground-content">
-                                        <h6><a href="#">Amar Muskali</a></h6>
-                                        <small class="text-fade">Need Responsive Business Tem...</small>
-                                        <span class="small">10 Min Ago</span>
-                                    </div>
-                                </div>
-
-                                <div class="ground ground-list-single">
-                                    <div
-                                        class="rounded-circle p-3 p-sm-4 d-flex align-items-center justify-content-center bg-light-purple">
-                                        <div class="position-absolute text-purple h5 mb-0"><i
-                                                class="fas fa-briefcase"></i></div>
-                                    </div>
-
-                                    <div class="ground-content">
-                                        <h6><a href="#">Maryam Amiri</a></h6>
-                                        <small class="text-fade">Next Meeting on Tuesday..</small>
-                                        <span class="small">15 Min Ago</span>
                                     </div>
                                 </div>
 

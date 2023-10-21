@@ -1,5 +1,5 @@
 @extends('home.app')
-@section('title','Home')
+@section('title', 'Home')
 @section('body')
     <!-- ============================ Hero Banner  Start================================== -->
     <div class="hero_banner image-cover image_bottom h7_bg">
@@ -42,194 +42,37 @@
     <!-- ============================ Hero Banner End ================================== -->
 
     <!-- ============================ Cources Start ================================== -->
-    <section>
+    <section class="min">
         <div class="container">
 
             <div class="row justify-content-center">
-                <div class="col-lg-7 col-md-8">
-                    <div class="sec-heading center">
-                        <h2>Featured Cources <span class="theme-cl">For You</span></h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                <div class="col-lg-7 col-md-10 text-center">
+                    <div class="sec-heading center mb-4">
+                        <h2>Explore Top <span class="theme-cl">Categories</span></h2>
+                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
+                            deleniti atque corrupti quos dolores</p>
                     </div>
                 </div>
             </div>
 
-            <div class="row justify-content-center">
-
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                    <div class="crs_grid_list">
-
-                        <div class="crs_grid_list_thumb">
-                            <a href="course-detail.html"><img src="assets/img/cr-2.jpg" class="img-fluid rounded"
-                                    alt=""></a>
-                        </div>
-
-                        <div class="crs_grid_list_caption">
-                            <div class="crs_lt_101">
-                                <span class="est st_1">Development</span>
-                                <span class="est st_2">PHP</span>
+            <div class="row">
+                @foreach ($schools as $item)
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <div class="edu_cat_2 cat-{{ $loop->iteration }}">
+                            <div class="edu_cat_icons">
+                                <a class="pic-main" href="{{ route('school', encrypt($item->id)) }}"><img
+                                        src="{{ asset('images/' . $item->imageName) }}" class="img-fluid"
+                                        alt="" /></a>
                             </div>
-                            <div class="crs_lt_102">
-                                <h4 class="crs_tit">Advance PHP knowledge with laravel to make smart web</h4>
-                                <span class="crs_auth"><i>By</i> Adam Wilson</span>
-                            </div>
-                            <div class="crs_lt_103">
-                                <div class="crs_info_detail">
-                                    <ul>
-                                        <li><i class="fa fa-video"></i><span>24 Videos</span></li>
-                                        <li><i class="fa fa-user"></i><span>10k User</span></li>
-                                        <li><i class="fa fa-eye"></i><span>92k Views</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="crs_flex">
-                                <div class="crs_fl_first">
-                                    <div class="crs_price">
-                                        <h2><span class="currency">$</span><span class="theme-cl">99</span></h2>
-                                    </div>
-                                </div>
-                                <div class="crs_fl_last">
-                                    <div class="crs_linkview"><a href="course-detail.html"
-                                            class="btn btn_view_detail theme-bg text-light">Enroll Now</a></div>
-                                </div>
+                            <div class="edu_cat_data">
+                                <h4 class="title"><a href="{{ route('school', encrypt($item->id)) }}">{{ $item->title }}</a></h4>
+                                <ul class="meta">
+                                    <li class="font-weight-bold">{{ $item->courses->count() }} Courses</li>
+                                </ul>
                             </div>
                         </div>
-
                     </div>
-                </div>
-
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                    <div class="crs_grid_list">
-
-                        <div class="crs_grid_list_thumb">
-                            <a href="course-detail.html"><img src="assets/img/cr-3.jpg" class="img-fluid rounded"
-                                    alt=""></a>
-                        </div>
-
-                        <div class="crs_grid_list_caption">
-                            <div class="crs_lt_101">
-                                <span class="est st_1">Insurence</span>
-                                <span class="est st_2">Banking</span>
-                            </div>
-                            <div class="crs_lt_102">
-                                <h4 class="crs_tit">The complete accounting & bank financial course 2021</h4>
-                                <span class="crs_auth"><i>By</i> Mike Hussey</span>
-                            </div>
-                            <div class="crs_lt_103">
-                                <div class="crs_info_detail">
-                                    <ul>
-                                        <li><i class="fa fa-video"></i><span>24 Videos</span></li>
-                                        <li><i class="fa fa-user"></i><span>10k User</span></li>
-                                        <li><i class="fa fa-eye"></i><span>92k Views</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="crs_flex">
-                                <div class="crs_fl_first">
-                                    <div class="crs_price">
-                                        <h2><span class="currency">$</span><span class="theme-cl">139</span></h2>
-                                    </div>
-                                </div>
-                                <div class="crs_fl_last">
-                                    <div class="crs_linkview"><a href="course-detail.html"
-                                            class="btn btn_view_detail theme-bg text-light">Enroll Now</a></div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                    <div class="crs_grid_list">
-
-                        <div class="crs_grid_list_thumb">
-                            <a href="course-detail.html"><img src="assets/img/cr-4.jpg" class="img-fluid rounded"
-                                    alt=""></a>
-                        </div>
-
-                        <div class="crs_grid_list_caption">
-                            <div class="crs_lt_101">
-                                <span class="est st_1">Software</span>
-                                <span class="est st_2">Technology</span>
-                            </div>
-                            <div class="crs_lt_102">
-                                <h4 class="crs_tit">The complete business plan course includes 50 templates</h4>
-                                <span class="crs_auth"><i>By</i> Litha Joshi</span>
-                            </div>
-                            <div class="crs_lt_103">
-                                <div class="crs_info_detail">
-                                    <ul>
-                                        <li><i class="fa fa-video"></i><span>24 Videos</span></li>
-                                        <li><i class="fa fa-user"></i><span>10k User</span></li>
-                                        <li><i class="fa fa-eye"></i><span>92k Views</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="crs_flex">
-                                <div class="crs_fl_first">
-                                    <div class="crs_price">
-                                        <h2><span class="currency">$</span><span class="theme-cl">77.99</span></h2>
-                                    </div>
-                                </div>
-                                <div class="crs_fl_last">
-                                    <div class="crs_linkview"><a href="course-detail.html"
-                                            class="btn btn_view_detail theme-bg text-light">Enroll Now</a></div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                    <div class="crs_grid_list">
-
-                        <div class="crs_grid_list_thumb">
-                            <a href="course-detail.html"><img src="assets/img/cr-5.jpg" class="img-fluid rounded"
-                                    alt=""></a>
-                        </div>
-
-                        <div class="crs_grid_list_caption">
-                            <div class="crs_lt_101">
-                                <span class="est st_1">Business</span>
-                                <span class="est st_2">Finance</span>
-                            </div>
-                            <div class="crs_lt_102">
-                                <h4 class="crs_tit">Full web designing course with 20 web template designing</h4>
-                                <span class="crs_auth"><i>By</i> Adam Wilson</span>
-                            </div>
-                            <div class="crs_lt_103">
-                                <div class="crs_info_detail">
-                                    <ul>
-                                        <li><i class="fa fa-video"></i><span>24 Videos</span></li>
-                                        <li><i class="fa fa-user"></i><span>10k User</span></li>
-                                        <li><i class="fa fa-eye"></i><span>92k Views</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="crs_flex">
-                                <div class="crs_fl_first">
-                                    <div class="crs_price">
-                                        <h2><span class="currency">$</span><span class="theme-cl">129</span></h2>
-                                    </div>
-                                </div>
-                                <div class="crs_fl_last">
-                                    <div class="crs_linkview"><a href="course-detail.html"
-                                            class="btn btn_view_detail theme-bg text-light">Enroll Now</a></div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row justify-content-center">
-                <div class="col-lg-7 col-md-8 mt-2">
-                    <div class="text-center"><a href="grid-layout-with-sidebar.html"
-                            class="btn btn-md theme-bg-light theme-cl">Explore More Cources</a></div>
-                </div>
+                @endforeach
             </div>
 
         </div>

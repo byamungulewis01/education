@@ -7,11 +7,12 @@
     <meta charset="utf-8" />
     <meta name="author" content="Themezhub" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title')</title>
-
+    <title>@yield('title') - Boost</title>
+    <link rel="shortcut icon" href="{{ asset('assets/img/light-logo.png') }}">
     <!-- Custom CSS -->
     <link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/toast/css/jquery.toast.css') }}">
+    @yield('css')
 </head>
 
 <body>
@@ -86,6 +87,7 @@
 
     {{-- <script src="{{ asset('assets/toast/jquery.js') }}"></script> --}}
     <script src="{{ asset('assets/toast/js/jquery.toast.js') }}"></script>
+    @yield('js')
 
     @if (session()->has('success'))
         <script>

@@ -1,64 +1,111 @@
 @extends('home.app')
-@section('title','Register')
+@section('title', 'Register')
 @section('body')
-<section>
-    <div class="container">
-        <div class="row justify-content-center">
+    <section>
+        <div class="container">
+            <div class="row justify-content-center">
 
-            <div class="col-xl-7 col-lg-8 col-md-12 col-sm-12">
-                <form>
-                    <div class="crs_log_wrap">
-
-                        <div class="crs_log__caption">
-
-                            <div class="rcs_log_124">
-                                <div class="Lpo09"><h4>Login Your Account</h4></div>
-                                <div class="form-group row mb-0">
-                                    <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label>First Name</label>
-                                            <input type="text" class="form-control" placeholder="First Name" />
+                <div class="col-xl-7 col-lg-8 col-md-12 col-sm-12">
+                    <form method="post" action="{{ route('register_auth') }}">
+                        @csrf
+                        <div class="crs_log_wrap">
+                            <div class="crs_log__caption">
+                                <div class="rcs_log_124">
+                                    <div class="Lpo09">
+                                        <h4>Login Your Account</h4>
+                                    </div>
+                                    @if (session('success'))
+                                        <div class="alert alert-success mb-2"><strong>Success</strong>
+                                            {{ session('success') }}
+                                        </div>
+                                    @endif
+                                    <div class="form-group row mb-0">
+                                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group smalls">
+                                                <label>First Name</label>
+                                                <input type="text" name="fname" value="{{ old('fname') }}"
+                                                    class="form-control" placeholder="First Name" required />
+                                            </div>
+                                            @error('fname')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group smalls">
+                                                <label>Last Name</label>
+                                                <input type="text" name="lname" value="{{ old('lname') }}"
+                                                    class="form-control" placeholder="Last Name" required />
+                                            </div>
+                                            @error('lname')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
-                                    <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label>Last Name</label>
-                                            <input type="text" class="form-control" placeholder="Last Name" />
+                                    <div class="form-group row mb-0">
+                                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                                            <label>Gender</label>
+                                            <select name="gender" class="form-control" required>
+                                                <option {{ old('gender') == 'male' ? 'selected' : '' }} value="male">Male
+                                                </option>
+                                                <option {{ old('gender') == 'female' ? 'selected' : '' }} value="female">
+                                                    Female</option>
+                                            </select>
+                                            @error('gender')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group smalls">
+                                                <label>Date Of Birth</label>
+                                                <input type="date" name="dob" value="{{ old('dob') }}"
+                                                    class="form-control" max="{{ now()->toDateString() }}" required />
+                                            </div>
+                                            @error('date')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="text" class="form-control" placeholder="support@themezhub.com" />
-                                </div>
-                                <div class="form-group">
-                                    <label>Password</label>
-                                    <input type="text" class="form-control" placeholder="*******" />
-                                </div>
-                                <div class="form-group">
-                                    <button type="button" class="btn full-width btn-sm theme-bg text-white">Sign Up</button>
+                                    <div class="form-group smalls">
+                                        <label>Phone Number</label>
+                                        <input type="text" name="phone" value="{{ old('phone') }}"
+                                            class="form-control" placeholder="Phone Number" required />
+                                        @error('phone')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group smalls">
+                                        <label>Email</label>
+                                        <input type="text" name="email" value="{{ old('email') }}"
+                                            class="form-control" placeholder="email@domain.com" required />
+                                        @error('email')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group smalls">
+                                        <label>Password</label>
+                                        <input type="password" name="password" class="form-control" placeholder="*******"
+                                            required />
+                                        @error('password')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn full-width btn-sm theme-bg text-white">Sign
+                                            Up</button>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="rcs_log_125">
-                                <span>Or SignUp with Social Info</span>
-                            </div>
-                            <div class="rcs_log_126">
-                                <ul class="social_log_45 row">
-                                    <li class="col-xl-4 col-lg-4 col-md-4 col-4"><a href="javascript:void(0);" class="sl_btn"><i class="ti-facebook text-info"></i>Facebook</a></li>
-                                    <li class="col-xl-4 col-lg-4 col-md-4 col-4"><a href="javascript:void(0);" class="sl_btn"><i class="ti-google text-danger"></i>Google</a></li>
-                                    <li class="col-xl-4 col-lg-4 col-md-4 col-4"><a href="javascript:void(0);" class="sl_btn"><i class="ti-twitter theme-cl"></i>Twitter</a></li>
-                                </ul>
+                            <div class="crs_log__footer d-flex justify-content-between">
+                                <div class="fhg_45">
+                                    <p class="musrt">Already have account? <a href="{{ route('login') }}"
+                                            class="theme-cl">Login</a></p>
+                                </div>
+
                             </div>
                         </div>
-                        <div class="crs_log__footer d-flex justify-content-between">
-                            <div class="fhg_45"><p class="musrt">Already have account? <a href="{{ route('login') }}" class="theme-cl">Login</a></p></div>
-                            <div class="fhg_45"><p class="musrt"><a href="forgot.html" class="text-danger">Forgot Password?</a></p></div>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
-
         </div>
-    </div>
-</section>
+    </section>
 @endsection

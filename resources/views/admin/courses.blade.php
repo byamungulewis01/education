@@ -1,5 +1,8 @@
 @extends('admin.layouts.app')
 @section('title', 'Courses')
+@section('css')
+<link rel="stylesheet" href="{{ asset('assets/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}">
+@endsection
 @section('body')
     <!-- Row -->
     <div class="row justify-content-between">
@@ -88,7 +91,7 @@
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 mb-2">
                         <div class="table-responsive">
-                            <table class="table dash_list">
+                            <table id="datatable" class="table dash_list">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -108,9 +111,21 @@
                                             <td>{{ $item->program->title }}</td>
                                             <td>{{ $item->price }} $ </td>
                                             <td>
-                                                <button class="btn btn-sm btn-primary" data-toggle="modal"
-                                                    data-target="#editModel{{ $item->id }}">Edit</button>
-                                                <!-- Modal -->
+                                                <div class="dropdown show">
+                                                    <a class="btn btn-action" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fas fa-ellipsis-h"></i>
+                                                    </a>
+                                                    <div class="drp-select dropdown-menu">
+                                                        <a class="dropdown-item" href="JavaScript:Void(0);" data-toggle="modal"
+                                                        data-target="#editModel{{ $item->id }}">Edit</a>
+                                                        <form action="{{ route('admin.course.destroy', $item->id) }}"
+                                                            method="post" class="d-inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                        <a class="dropdown-item" onclick="return confirm('Are you Sure to Delete ?')" href="JavaScript:Void(0);">Delete</a>
+                                                    </form>
+                                                    </div>
+                                                </div>
                                                 <div class="modal" id="editModel{{ $item->id }}" tabindex="-1"
                                                     role="dialog" aria-labelledby="catModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
@@ -185,6 +200,12 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </td>
+                                            {{-- <td>
+
+                                                <button class="btn btn-sm btn-primary" data-toggle="modal"
+                                                    data-target="#editModel{{ $item->id }}">Edit</button>
+                                                <!-- Modal -->
                                                 <form action="{{ route('admin.course.destroy', $item->id) }}"
                                                     method="post" class="d-inline">
                                                     @csrf
@@ -193,7 +214,7 @@
                                                     <button class="btn btn-danger"
                                                         onclick="return confirm('Are you Sure to Delete ?')">Delete</button>
                                                 </form>
-                                            </td>
+                                            </td> --}}
                                         </tr>
                                     @endforeach
 
@@ -206,4 +227,15 @@
         </div>
     </div>
 
+@endsection
+@section('js')
+<script src="{{ asset('assets/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/datatables.net/js/dataTables.bootstrap5.min.js') }}"></script>
+<script>
+    $(function () {
+        $("#datatable").DataTable({
+            scrollX: true,
+        });
+    });
+</script>
 @endsection

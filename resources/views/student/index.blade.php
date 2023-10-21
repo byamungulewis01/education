@@ -6,37 +6,7 @@
 
             <div class="row">
 
-                <div class="col-lg-3 col-md-3">
-                    <div class="dashboard-navbar">
-
-                        <div class="d-user-avater">
-                            <img src="{{ asset('assets/img/user-3.jpg') }}" class="img-fluid avater" alt="">
-                            <h4>Adam Harshvardhan</h4>
-                            <span>Senior Designer</span>
-                        </div>
-
-                        <div class="d-navigation">
-                            <ul id="side-menu">
-                                <li class="active"><a href="dashboard.html"><i class="fas fa-th"></i>Dashboard</a></li>
-
-                                <li><a href="my-profile.html"><i class="fas fa-address-card"></i>My Profile</a></li>
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);"><i class="fas fa-cog"></i>Settings<span
-                                            class="ti-angle-left"></span></a>
-                                    <ul class="nav nav-second-level">
-                                        <li><a href="website-settings.html">Website Settings</a></li>
-                                        <li><a href="system-settings.html">System Settings</a></li>
-                                        <li><a href="payment_settings.html">Payment Settings</a></li>
-                                        <li><a href="social-login.html">Social Logins</a></li>
-                                        <li><a href="smtp-setting.html">SMTP Settings</a></li>
-                                        <li><a href="dash-about.html">About App</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-
-                    </div>
-                </div>
+                @include('student.sidebar')
 
                 <div class="col-lg-9 col-md-9 col-sm-12">
 
