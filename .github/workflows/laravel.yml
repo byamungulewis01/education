@@ -18,7 +18,7 @@ jobs:
       with:
         php-version: '8.2'
     - name: Copy .env
-      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      run: php -r "file_exists('.env.serve') || copy('.env.example', '.env');"
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
     - name: Generate key
@@ -30,7 +30,7 @@ jobs:
         server: ftp.nigoote.com
         username: u573317500.eric
         password: Eric@ftp1234
-        server-dir: /public_html/eric/
+        server-dir: /
 
 
 
