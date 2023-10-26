@@ -27,7 +27,7 @@ jobs:
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:
-        server: ftp://nigoote.com
+        server: ftp://191.101.79.161
         username: u573317500.eric
         password: Eric@ftp1234
         server-dir: /public_html/eric/
