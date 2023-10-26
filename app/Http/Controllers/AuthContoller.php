@@ -38,17 +38,39 @@ class AuthContoller extends Controller
         $request->validate([
             'fname' => 'required|string|min:3',
             'lname' => 'required|string|min:3',
-            'email' => 'required|email',
-            'phone' => 'required',
+            'email' => 'required|email|unique:students,email',
+            'phone' => 'required|numeric|unique:students,phone',
             'dob' => 'required',
             'gender' => 'required',
-            'password' => 'required',
+            'password' => 'required|min:6',
+            'academic_doc' => 'required|mimes:pdf,png,jpg',
+            'identity_doc' => 'required|mimes:pdf,png,jpg',
         ]);
         $request->merge(['password' => Hash::make($request->password)]);
 
-        Student::create($request->all());
-        Mail::to($request->email)->send(new CreateAccount($request->fname, $request->lname));
-        return to_route('register')->with('success', 'Account Created Succesfully');
+        if ($request->hasFile('academic_doc')) {
+            $file1 = $request->file('academic_doc');
+            $file1Name = time() . '.' . $file1->getClientOriginalExtension();
+            $request->merge(['academic_doc_path' => $file1Name]);
+        }
+
+        if ($request->hasFile('identity_doc')) {
+            $file2 = $request->file('identity_doc');
+            $file2Name = time() + 1 . '.' . $file2->getClientOriginalExtension();
+            $request->merge(['identity_doc_path' => $file2Name]);
+        }
+        try {
+            Student::create($request->all());
+            $file1->move(public_path('/files'), $file1Name);
+            $file2->move(public_path('/files'), $file2Name);
+
+            Mail::to($request->email)->send(new CreateAccount($request->fname, $request->lname));
+            return to_route('register')->with('success', 'Account Created Succesfully');
+        } catch (\Throwable $th) {
+            //throw $th;
+            // return back()->with('error', $th->getMessage());
+            return back()->with('error', 'Some things went wrong try again');
+        }
     }
 
     public function logout()

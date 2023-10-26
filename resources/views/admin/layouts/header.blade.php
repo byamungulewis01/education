@@ -59,16 +59,20 @@
                         <div class="btn-group account-drop">
                             <a href="javascript:void(0);" class="crs_yuo12 btn btn-order-by-filt" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
-                                <img src="{{ asset('assets/img/user-5.jpg') }}" class="avater-img" alt="">
+                                <img src="{{ asset('images/users/' .auth()->user()->imageName) }}" class="avater-img" alt="">
                             </a>
                             <div class="dropdown-menu pull-right animated flipInX">
                                 <div class="drp_menu_headr">
-                                    <h4>Hi, Daniel</h4>
+                                    @php
+                                        $name = auth()->user()->name;
+                                        $fname = explode(' ',$name)[0];
+                                    @endphp
+                                    <h4>Hi, {{ $fname }}</h4>
                                 </div>
                                 <ul>
-                                    <li><a href="dashboard.html"><i class="fa fa-tachometer-alt"></i>Dashboard<span
+                                    <li><a href="{{ route('admin.index') }}"><i class="fa fa-tachometer-alt"></i>Dashboard<span
                                                 class="notti_coun style-1">4</span></a></li>
-                                    <li><a href="my-profile.html"><i class="fa fa-user-tie"></i>My Profile</a></li>
+                                    <li><a href="{{ route('admin.profile') }}"><i class="fa fa-user-tie"></i>My Profile</a></li>
 
                                     <li><a href="messages.html"><i class="fas fa-comments"></i>Messages</a></li>
                                     <li><a href="{{ route('admin.logout') }}"><i class="fa fa-unlock-alt"></i>Sign Out</a></li>

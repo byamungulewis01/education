@@ -25,10 +25,10 @@
 
                     </li>
 
-                    <li><a href="#">Schools<span class="submenu-indicator"></span></a>
+                    <li><a href="#">Trainings<span class="submenu-indicator"></span></a>
                         <ul class="nav-dropdown nav-submenu">
-                            @foreach (\App\Models\School::all() as $item)
-                                <li><a href="{{ route('school', encrypt($item->id)) }}">{{ $item->title }}</a>
+                            @foreach (\App\Models\Category::all() as $item)
+                                <li><a href="{{ route('training', encrypt($item->id)) }}">{{ $item->title }}</a>
                                 </li>
                             @endforeach
 

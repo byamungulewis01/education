@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Enroll;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -14,5 +15,10 @@ class StudentController extends Controller
     public function profile()
     {
         return view('student.profile');
+    }
+    public function courses()
+    {
+        $courses = Enroll::where('student_id',auth()->guard('student')->user()->id)->get();
+        return view('student.courses', compact('courses'));
     }
 }

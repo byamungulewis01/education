@@ -18,8 +18,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone')->unique();
             $table->string('dob');
-            $table->enum('gender',['male','female']);
+            $table->enum('gender', ['male', 'female']);
             $table->string('password');
+            $table->string('imageName')->default('default.jpeg');
+            $table->string('identity_doc_path');
+            $table->string('academic_doc_path');
+            $table->boolean('approved')->default(false);
             $table->timestamps();
         });
     }

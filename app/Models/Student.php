@@ -25,6 +25,10 @@ class Student extends Authenticatable
         'dob',
         'gender',
         'password',
+        'imageName',
+        'identity_doc_path',
+        'academic_doc_path',
+        'approved',
     ];
 
     /**

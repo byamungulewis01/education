@@ -19,7 +19,7 @@ class UsersController extends Controller
             'name' => 'required|string|min:4',
             'email' => 'required|email|unique:users,email',
             'phone' => 'required|numeric|unique:users,phone',
-            'image' => 'required|mimes:png,jpg'
+            'image' => 'required|mimes:png,jpg,jpeg'
         ]);
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -46,7 +46,7 @@ class UsersController extends Controller
             'name' => 'required|string|min:4',
             'email' => 'required|email|unique:users,email,' . $id,
             'phone' => 'required|numeric|unique:users,phone,' . $id,
-            'image' => 'nullable|mimes:png,jpg'
+            'image' => 'nullable|mimes:png,jpg,jpeg'
         ]);
         if ($request->hasFile('image')) {
             $image = $request->file('image');

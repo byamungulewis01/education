@@ -14,10 +14,10 @@
 # Inner page design
 # General Features
 # Blog Designs
-# Education Detail 
+# Education Detail
 # E-Commerce & Product Designs
 # Dashboard Design
-# Footer Start 
+# Footer Start
 # Responsiveness Start
 ------------- List Of Table ----------*/
 
@@ -81,7 +81,7 @@ a:focus {
 a.link {
   color:#e42d29; }
 a.link:hover, a.link:focus, a:hover, a:focus {
-    color:#23a16f; 
+    color:#23a16f;
 }
 a.text-success:focus, a.text-success:hover {
     color:#27b737 !important;
@@ -96,7 +96,7 @@ a.text-danger:focus, a.text-danger:hover {
     color:#f33066 !important;
 }
 a.white-link {
-  color: #ffffff; 
+  color: #ffffff;
 }
 a.white-link:hover, a.white-link:focus {
 	color: #263238;
@@ -118,7 +118,7 @@ section.min{
 }
 p {
     line-height:1.8;
-}	
+}
 
 .gray{
 	background:#f7f8f9;
@@ -126,7 +126,7 @@ p {
 
 .tbl {
     display: table;
-} 
+}
 .full-height {
     height: 100%;
 }
@@ -162,7 +162,7 @@ p, ul, ol, dl, dt, dd, blockquote, address {
 }
 
 
-/*------------ GLobal Settings: Heading-------------*/ 
+/*------------ GLobal Settings: Heading-------------*/
 h1,
 h2,
 h3,
@@ -178,7 +178,7 @@ h6 {
 h5,
 h6 {
 	color:#192a31;
-font-weight:500;	
+font-weight:500;
 }
 
 .font-2{
@@ -496,9 +496,9 @@ div[data-overlay] p{
     color: #fff;
 }
 .gr_bg{
-	background:#23a16f; 
+	background:#23a16f;
 	background: -webkit-linear-gradient(to right, #12ca86, #23a16f);
-	background:linear-gradient(to right, #12ca86, #23a16f); 
+	background:linear-gradient(to right, #12ca86, #23a16f);
 }
 
 /*-------------- GLobal Settings: Text Colors ----------------*/
@@ -675,10 +675,10 @@ html body .bg-light-extra {
 
 html body .bg-light-warning {
   background-color: #fff8ec; }
-  
+
 html body .bg-light-purple {
   background-color:#f1efff; }
-  
+
 html body .bg-light-danger {
   background-color: #f9e7eb; }
 
@@ -690,19 +690,19 @@ html body .bg-light {
 
 html body .bg-white {
   background-color: #ffffff; }
- 
+
 html body .bg-whites {
   background-color: #f4f5f7; }
-  
+
 html body .bg-red {
   background-color: #e21137; }
-  
+
 html body .bg-green {
   background-color: #4caf50; }
-  
+
 html body .bg-sky {
   background-color: #20b2c1; }
-  
+
 html body .bg-blue {
   background-color: #03a9f4; }
 
@@ -773,7 +773,7 @@ table.table tr th {
 
 .btn {
 	color: #ffffff;
-	padding: 12px 25px;
+	padding: 5px 10px;
 	cursor: pointer;
 	-webkit-transition: 0s;
 	-o-transition: 0s;
@@ -885,7 +885,7 @@ table.table tr th {
 /*----------- Global Settings: Custom Checkbox & Radio Button ----------------*/
 .checkbox-custom, .radio-custom {
 opacity: 0;
-position: absolute;   
+position: absolute;
 }
 
 .checkbox-custom, .checkbox-custom-label, .radio-custom, .radio-custom-label {
@@ -1168,7 +1168,7 @@ label i.count{
 	color:#ffffff;
 }
 .color-heading .sec-heading h2{
-    color: #e42d29;	
+    color: #e42d29;
 }
 .sec-heading p{
 	margin-bottom:5px;
@@ -1918,7 +1918,7 @@ nav a:hover {
 	background:#ffffff;
 	border-radius: 0.5rem;
     box-shadow: 0px 0px 42px 0px rgba(32, 32, 32, 0.15);
-	-webkit-box-shadow: 0px 0px 42px 0px rgba(32, 32, 32, 0.15);    
+	-webkit-box-shadow: 0px 0px 42px 0px rgba(32, 32, 32, 0.15);
 }
 .nav-menu>li>.nav-dropdown:before {
   background-color: #ffffff;
@@ -1935,7 +1935,7 @@ nav a:hover {
   -o-transition: all 0.2s ease 0s;
   transition: all 0.2s ease 0s;
   -webkit-transition: all 0.2s ease 0s;
-  -moz-transition: all 0.2s ease 0s; 
+  -moz-transition: all 0.2s ease 0s;
 }
 .nav-dropdown>li {
     width: 100%;
@@ -2675,7 +2675,7 @@ nav .menu > li.dropdown  li.dropdown > a:before{
 
 nav .menu li.dropdown.open > a{
     color: #e74c3c;
-	
+
 }
 .top-header {
     background:#232c3d;
@@ -2705,7 +2705,7 @@ nav .menu li.dropdown.open > a{
 .top-social li{
 	list-style:none;
 	display:inline-block;
-	margin-right:15px;	
+	margin-right:15px;
 }
 .top-social li:last-child{
 	margin-right:0;
@@ -5045,7 +5045,7 @@ span.tes_quote {
 }
 
 /*==================================================
-	Education Detail 
+	Education Detail
 =================================================*/
 /*--------------- Education Detail ----------------*/
 .ed_detail_head {
@@ -5519,7 +5519,7 @@ ul.edu_list.third li {
 	margin-bottom:30px;
 }
 .ed_view_box.border {
-  border: 1px solid #e7ecf5;  
+  border: 1px solid #e7ecf5;
 }
 .ed_view_box .property_video.sm {
     margin-bottom: 1rem;
@@ -6732,7 +6732,7 @@ ul.woo_info li {
 }
 .d-navigation ul li.active>a {
     color:#23a16f !important;
-    background:rgba(3, 185, 124,0.12) !important; 
+    background:rgba(3, 185, 124,0.12) !important;
 }
 .d-navigation ul li a i{
 	margin-right:10px;
@@ -6831,7 +6831,7 @@ ul.nav.nav-second-level.collapse.show {
     flex: 0 0 33.333333%;
     width: 33.333333%;
     text-align: center;
-	
+
 }
 .elso_syu77 span {
     font-size: 13px;
@@ -7325,7 +7325,7 @@ th.next.available, .prev.available {
     padding-top: 1rem;
 }
 /*-------------------------------------------------
-  Footer Start   
+  Footer Start
 --------------------------------------------------*/
 /*---------- Call To Action -------------------*/
 .call_action_wrap-wrap {
@@ -7551,13 +7551,13 @@ footer.skin-dark-footer ul.footer-bottom-social li a:hover, footer.skin-dark-foo
 	Responsiveness Start
 ---------------------------------------------------*/
 @media all and (min-height: 600px) and (min-width: 767px) {
- 
+
 }
 @media all and (min-width: 993px) and (max-width: 1024px) {
 
 }
 @media all and (min-width: 993px) and (max-width: 1199px) {
-	
+
 }
 @media (max-height: 600px) {
 
@@ -7639,7 +7639,7 @@ footer.skin-dark-footer ul.footer-bottom-social li a:hover, footer.skin-dark-foo
 	.elso_syu89 ul li {
 		padding: 0 2px;
 	}
-}	
+}
 
 @media (max-width: 1023px) {
 	.crt_io90 h6 {
@@ -7762,10 +7762,10 @@ footer.skin-dark-footer ul.footer-bottom-social li a:hover, footer.skin-dark-foo
 	.elso_syu77 {
 		flex-wrap: wrap;
 	}
-	
+
 }
 
-@media (max-width: 992px) {	
+@media (max-width: 992px) {
 	.light-menu .nav-toggle:before {
 		background-color: #ffffff;
 		box-shadow: 0 0.5em 0 0 #ffffff, 0 1em 0 0 #ffffff;
@@ -7802,7 +7802,7 @@ footer.skin-dark-footer ul.footer-bottom-social li a:hover, footer.skin-dark-foo
 		display: none;
 	}
 }
-@media (max-width: 991px) {	
+@media (max-width: 991px) {
 	.ovrlio.min{
 		margin-top:0;
 	}
@@ -8058,7 +8058,7 @@ footer.skin-dark-footer ul.footer-bottom-social li a:hover, footer.skin-dark-foo
 
 
 @media (max-width: 600px) {
-	
+
 }
 @media (max-width:375px) {
 	.nav-brand img {
@@ -8078,6 +8078,6 @@ footer.skin-dark-footer ul.footer-bottom-social li a:hover, footer.skin-dark-foo
 		position: relative;
 		padding: 19px 4px;
 	}
-	
-	
+
+
 }

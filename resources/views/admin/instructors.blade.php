@@ -110,16 +110,14 @@
                                                         <i class="fas fa-ellipsis-h"></i>
                                                     </a>
                                                     <div class="drp-select dropdown-menu">
-                                                        <a class="dropdown-item" href="JavaScript:Void(0);"
-                                                            data-toggle="modal"
-                                                            data-target="#editModel{{ $item->id }}">Edit</a>
+                                                        <button class="dropdown-item" data-toggle="modal"
+                                                            data-target="#editModel{{ $item->id }}">Edit</button>
                                                         <form action="{{ route('admin.instructor.destroy', $item->id) }}"
                                                             method="post" class="d-inline">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <a class="dropdown-item"
-                                                                onclick="return confirm('Are you Sure to Delete ?')"
-                                                                href="JavaScript:Void(0);">Delete</a>
+                                                            <button class="dropdown-item"
+                                                                onclick="return confirm('Are you Sure to Delete ?')">Delete</button>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -137,7 +135,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <form class="forms_block" method="post"
-                                                                    action="{{ route('admin.instructor.update', $item->id) }}">
+                                                                    action="{{ route('admin.instructor.update', $item->id) }}" enctype="multipart/form-data">
                                                                     @csrf
                                                                     @method('PUT')
                                                                     <div class="form-group smalls">

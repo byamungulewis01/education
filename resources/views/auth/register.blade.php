@@ -6,17 +6,22 @@
             <div class="row justify-content-center">
 
                 <div class="col-xl-7 col-lg-8 col-md-12 col-sm-12">
-                    <form method="post" action="{{ route('register_auth') }}">
+                    <form method="post" action="{{ route('register_auth') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="crs_log_wrap">
                             <div class="crs_log__caption">
                                 <div class="rcs_log_124">
                                     <div class="Lpo09">
-                                        <h4>Login Your Account</h4>
+                                        <h4>Create Your Account</h4>
                                     </div>
                                     @if (session('success'))
                                         <div class="alert alert-success mb-2"><strong>Success</strong>
                                             {{ session('success') }}
+                                        </div>
+                                    @endif
+                                    @if (session('error'))
+                                        <div class="alert alert-danger mb-2"><strong>Danger</strong>
+                                            {{ session('error') }}
                                         </div>
                                     @endif
                                     <div class="form-group row mb-0">
@@ -44,7 +49,7 @@
                                     <div class="form-group row mb-0">
                                         <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
                                             <label>Gender</label>
-                                            <select name="gender" class="form-control" required>
+                                            <select name="gender" class="form-select" required>
                                                 <option {{ old('gender') == 'male' ? 'selected' : '' }} value="male">Male
                                                 </option>
                                                 <option {{ old('gender') == 'female' ? 'selected' : '' }} value="female">
@@ -80,6 +85,32 @@
                                         @error('email')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
+                                    </div>
+                                    <div class="form-group row mb-0">
+                                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group smalls">
+
+                                                <label>ID / Passport Doc</label>
+                                                <input type="file" accept=".pdf,.png,.jpg" name="identity_doc"
+                                                    class="form-control" required />
+                                                @error('identity_doc')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group smalls">
+                                                <label>Academic Doc</label>
+                                                <input type="file" accept=".pdf,.png,.jpg" name="academic_doc"
+                                                    class="form-control" required />
+                                                @error('academic_doc')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            @error('date')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
                                     </div>
                                     <div class="form-group smalls">
                                         <label>Password</label>
