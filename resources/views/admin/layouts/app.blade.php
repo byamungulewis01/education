@@ -8,7 +8,7 @@
     <meta name="author" content="Themezhub" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title') - Boost</title>
-    <link rel="shortcut icon" href="{{ asset('assets/img/light-logo.png') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/logo.jpg') }}">
     <!-- Custom CSS -->
     <link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/toast/css/jquery.toast.css') }}">

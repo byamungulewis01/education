@@ -29,7 +29,9 @@ use App\Http\Controllers\TrainingController;
 // Route::group(['middleware' => 'guest'], function () {
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('index');
-    Route::get('/instructors', 'instructor')->name('instructor');
+    Route::get('/about-us', 'about')->name('about');
+    Route::get('/contact-us', 'contact')->name('contact');
+    Route::get('/consultance', 'consultance')->name('consultance');
     Route::get('/training/{id}', 'training')->name('training');
     Route::get('/training/show/{id}', 'show')->name('show');
     Route::post('/training/{id}', 'filter')->name('filter');

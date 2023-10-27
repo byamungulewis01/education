@@ -58,7 +58,7 @@
                                     <div class="crs_grid_caption">
 
                                         <div class="crs_title">
-                                            <h4><a href="course-detail.html" class="crs_title_link">{{ $training->title }}</a>
+                                            <h4><a href="{{ route('show', encrypt($training->id)) }}" class="crs_title_link">{{ $training->title }}</a>
                                             </h4>
                                         </div>
                                         {{-- <div class="crs_cates cl_3"><span>AMATA</span></div> --}}

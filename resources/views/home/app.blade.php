@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="author" content="Boost" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="{{ asset('assets/img/light-logo.png') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/logo.jpg') }}">
     <title>@yield('title') - Boost</title>
 
     <!-- Custom CSS -->
@@ -67,7 +67,7 @@
 
                         <div class="col-lg-5 col-md-5">
                             <div class="footer_widget">
-                                <img src="assets/img/logo-light.png" class="img-footer small mb-2" alt="" />
+                                <img src="assets/logo.jpg" width="50" height="50" class="img-footer small mb-2" alt="" />
                                 <h4 class="extream mb-3">Do you need help with<br>anything?</h4>
                                 <p>Receive updates, hot deals, tutorials, discounts sent straignt in your inbox every
                                     month</p>
@@ -90,7 +90,7 @@
                                         <h4 class="widget_title">All Sections</h4>
                                         <ul class="footer-menu">
                                             <li><a href="{{ route('index') }}">Home</a></li>
-                                            <li><a href="{{ route('instructor') }}">Instructors</a></li>
+                                            <li><a href="{{ route('consultance') }}">Consultance</a></li>
                                             <li><a href="#">About Us</a></li>
                                             <li><a href="#">Contact Us</a></li>
                                         </ul>

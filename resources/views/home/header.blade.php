@@ -35,10 +35,10 @@
                         </ul>
                     </li>
 
-                    <li class="{{ Request::routeIs('instructor') ? 'active' : '' }}"><a
-                            href="{{ route('instructor') }}">Instructors</a></li>
-                    <li><a href="/about">About Us</a></li>
-                    <li><a href="/contact">Contact Us</a></li>
+                    <li class="{{ Request::routeIs('consultance') ? 'active' : '' }}"><a
+                            href="{{ route('consultance') }}">Consultance</a></li>
+                    <li><a href="{{ route('about') }}">About Us</a></li>
+                    <li><a href="{{ route('contact') }}">Contact Us</a></li>
 
                 </ul>
                 @if (auth()->guard('student')->check())

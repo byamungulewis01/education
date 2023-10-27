@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Course;
 use App\Models\School;
 use App\Models\Program;
+use App\Models\Category;
 use App\Models\Training;
+use App\Models\Consultance;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -17,9 +18,10 @@ class HomeController extends Controller
         $categories = Category::orderBy('title')->get();
         return view('home.index', compact('categories'));
     }
-    public function instructor()
+    public function consultance()
     {
-        return view('home.instructor');
+        $consultances = Consultance::orderBy('title')->get();
+        return view('home.consultance', compact('consultances'));
     }
     public function training($id)
     {
@@ -32,11 +34,10 @@ class HomeController extends Controller
 
     public function filter(Request $request, $id)
     {
-        $school = School::findorfail(decrypt($id));
+        $training = Training::findorfail(decrypt($id));
         // courses
-        $q = Course::where('school_id', decrypt($id))
-            ->where('title', 'like', '%' . $request->title . '%')
-            ->where('program_id', $request->program_id);
+        $q = Training::where('category_id', decrypt($id))
+            ->where('title', 'like', '%' . $request->title . '%');
 
         if ($request->price == 'free') {
             $q->where('price', 0);
@@ -44,14 +45,22 @@ class HomeController extends Controller
             $q->where('price', '>', 0);
         }
 
-        $courses = $q->paginate(6);
-        $coursesCount = Course::where('school_id', decrypt($id));
-        $programs = Program::all();
-        return view('home.show-course', compact('school', 'courses', 'coursesCount', 'programs'));
+        $trainings = $q->paginate(6);
+        $trainingsCount = Training::where('category_id', decrypt($id));
+
+        return view('home.show-trainings', compact('training', 'trainings', 'trainingsCount'));
     }
     public function show($id)
     {
         $training = Training::findorfail(decrypt($id));
         return view('home.detail-training', compact('training'));
+    }
+    public function about()
+    {
+        return view('home.about');
+    }
+    public function contact()
+    {
+        return view('home.contact');
     }
 }
