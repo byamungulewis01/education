@@ -67,7 +67,7 @@
 
                         <div class="col-lg-5 col-md-5">
                             <div class="footer_widget">
-                                <img src="assets/logo.jpg" width="50" height="50" class="img-footer small mb-2" alt="" />
+                                <img src="{{ asset('assets/logo.jpg') }}" width="50" height="50" class="img-footer small mb-2" alt="" />
                                 <h4 class="extream mb-3">Do you need help with<br>anything?</h4>
                                 <p>Receive updates, hot deals, tutorials, discounts sent straignt in your inbox every
                                     month</p>
@@ -120,7 +120,7 @@
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-12 col-md-12 text-center">
-                            <p class="mb-0">© {{ date("Y") }} Boost. Designd By <a href="#">Precast Technology</a>.
+                            <p class="mb-0">© {{ date("Y") }} Boost. Designd By <a href="#">Eric NDIKUMANA</a>.
                             </p>
                         </div>
                     </div>
