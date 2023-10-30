@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('layouts.app')
 @section('title', 'Instructors')
 @section('body')
     <!-- Row -->
@@ -81,7 +81,7 @@
                                         <th scope="col">Email</th>
                                         <th scope="col">Phone</th>
                                         <th scope="col">Status</th>
-                                        <th scope="col">Active Courses</th>
+                                        <th scope="col">Active Trainings</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -101,7 +101,15 @@
                                                     <span class="badge bg-primary">Inactive</span>
                                                 @endif
                                             </td>
-                                            <td>12 Courses</td>
+                                            <td>
+                                                @php
+                                                    $trainings = \App\Models\Training::where('user_id', $item->id)->count();
+                                                @endphp
+                                                {{ $trainings }} @if ($trainings == 1) Training
+                                                @else
+                                                    Trainings
+                                                @endif
+                                            </td>
 
                                             <td>
                                                 <div class="dropdown show">
@@ -135,7 +143,8 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <form class="forms_block" method="post"
-                                                                    action="{{ route('admin.instructor.update', $item->id) }}" enctype="multipart/form-data">
+                                                                    action="{{ route('admin.instructor.update', $item->id) }}"
+                                                                    enctype="multipart/form-data">
                                                                     @csrf
                                                                     @method('PUT')
                                                                     <div class="form-group smalls">

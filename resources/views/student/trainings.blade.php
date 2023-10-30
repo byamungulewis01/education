@@ -28,15 +28,15 @@
                             <div class="row">
 
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                    @foreach ($courses as $item)
+                                    @foreach ($trainings as $item)
                                         <div class="grousp_crs">
                                             <div class="grousp_crs_left">
                                                 <div class="grousp_crs_thumb"><img
-                                                        src="{{ asset('images/' . $item->course->school->imageName) }}"
+                                                        src="{{ asset('images/' . $item->training->category->imageName) }}"
                                                         class="img-fluid" alt=""></div>
                                                 <div class="grousp_crs_caption">
-                                                    <h4>{{ $item->course->title }} </h4>
-                                                    <h6>{{ $item->course->school->title }}</h6>
+                                                    <h4>{{ $item->training->title }} </h4>
+                                                    <h6>{{ $item->training->category->title }}</h6>
                                                 </div>
                                                 {{-- <div class="grousp_crs_caption">
                                                 <h4>Instructor</h4>
@@ -45,14 +45,14 @@
                                             </div>
                                             <div class="grousp_crs_right">
                                                 <div class="frt_125">
-                                                    @if ($item->course->price == 0)
+                                                    @if ($item->training->price == 0)
                                                         Free
                                                     @else
-                                                        ${{ $item->course->price }}
+                                                        ${{ $item->training->price }}
                                                     @endif
                                                 </div>
                                                 <div class="frt_but"><a href="#" class="btn text-white theme-bg">View
-                                                        Course</a></div>
+                                                        Training</a></div>
                                             </div>
                                         </div>
                                     @endforeach

@@ -19,7 +19,11 @@ class AdminAuthController extends Controller
         ]);
         $credentials = $request->only('email', 'password');
         if (auth()->attempt($credentials)) {
-            return redirect()->route('admin.index');
+            if (auth()->user()->role == 'instructor') {
+                return redirect()->route('instructor.index');
+            } else {
+                return redirect()->route('admin.index');
+            }
         }
         return redirect()->route('admin.login')->with('error', 'Invalid Credentials');
     }

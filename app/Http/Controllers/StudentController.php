@@ -16,9 +16,9 @@ class StudentController extends Controller
     {
         return view('student.profile');
     }
-    public function courses()
+    public function trainings()
     {
-        $courses = Enroll::where('student_id',auth()->guard('student')->user()->id)->get();
-        return view('student.courses', compact('courses'));
+        $trainings = Enroll::where('student_id',auth()->guard('student')->user()->id)->get();
+        return view('student.trainings', compact('trainings'));
     }
 }

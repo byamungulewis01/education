@@ -12,8 +12,8 @@
             <ul id="side-menu">
                 <li class="{{ Request::routeIs('student.index') ? 'active' : '' }}"><a
                         href="{{ route('student.index') }}"><i class="fas fa-th"></i>Dashboard</a></li>
-                <li class="{{ Request::routeIs('student.courses') ? 'active' : '' }}">
-                    <a href="{{ route('student.courses') }}"><i class="fas fa-shopping-basket"></i>Courses</a>
+                <li class="{{ Request::routeIs('student.trainings') ? 'active' : '' }}">
+                    <a href="{{ route('student.trainings') }}"><i class="fas fa-shopping-basket"></i>Training</a>
                 </li>
 
                 <li class="{{ Request::routeIs('student.profile') ? 'active' : '' }}"><a

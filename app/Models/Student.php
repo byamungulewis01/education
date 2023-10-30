@@ -28,7 +28,8 @@ class Student extends Authenticatable
         'imageName',
         'identity_doc_path',
         'academic_doc_path',
-        'approved',
+        'status',
+        'reason',
     ];
 
     /**

@@ -26,7 +26,7 @@
         <!-- Top header  -->
         <!-- ============================================================== -->
         <!-- Start Navigation -->
-        @include('admin.layouts.header')
+        @include('layouts.header')
         <!-- End Navigation -->
         <div class="clearfix"></div>
         <!-- ============================================================== -->
@@ -40,7 +40,11 @@
                 <div class="row">
 
                     <div class="col-lg-3 col-md-3">
-                        @include('admin.layouts.sidebar')
+                        @if (auth()->user()->role == 'instructor')
+                            @include('layouts.instructor-sidebar')
+                        @else
+                            @include('layouts.sidebar')
+                        @endif
                     </div>
 
                     <div class="col-lg-9 col-md-9 col-sm-12">

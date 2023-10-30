@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('layouts.app')
 @section('title', 'Students')
 @section('body')
     <!-- Row -->
@@ -10,12 +10,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Home</a></li>
                             <li class="breadcrumb-item active" aria-current="page">
-                                @if (Request::routeIs('admin.student.application'))
-                                Application
-                                @endif
-                                @if (Request::routeIs('admin.student.index'))
-                                Enroll Students
-                                @endif
+                                Approved List
                             </li>
                         </ol>
                     </nav>
@@ -35,11 +30,11 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">First Name</th>
-                                        <th scope="col">Last Name</th>
+                                        <th scope="col">Fname</th>
+                                        <th scope="col">Lname</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Phone</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col">Required Docs</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -50,10 +45,10 @@
                                             <td>{{ $item->lname }}</td>
                                             <td>{{ $item->email }}</td>
                                             <td>{{ $item->phone }}</td>
-
-                                            <td>
-                                              Details
-                                            </td>
+                                          <td>
+                                            <a class="text-info" target="blank" href="{{ asset('files/'.$item->identity_doc_path) }}">ID/Passpord</a> |
+                                            <a class="text-info" target="blank" href="{{ asset('files/'.$item->academic_doc_path) }}">Academic</a>
+                                          </td>
                                         </tr>
                                     @endforeach
 

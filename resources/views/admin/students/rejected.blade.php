@@ -1,8 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Trainings')
-@section('css')
-    <link rel="stylesheet" href="{{ asset('assets/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}">
-@endsection
+@section('title', 'Students')
 @section('body')
     <!-- Row -->
     <div class="row justify-content-between">
@@ -12,11 +9,12 @@
                     <nav class="transparent">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Trainings</li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                Rejected List
+                            </li>
                         </ol>
                     </nav>
                 </div>
-
             </div>
         </div>
     </div>
@@ -28,34 +26,31 @@
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 mb-2">
                         <div class="table-responsive">
-                            <table class="table dash_list" style="width: 100%">
+                            <table class="table dash_list">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Training</th>
-                                        <th scope="col">Category</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">Status</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Phone</th>
+                                        <th scope="col">Required Docs</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($trainings as $item)
+                                    @foreach ($students as $item)
                                         <tr>
                                             <th scope="row">{{ $loop->iteration }}</th>
-                                            <td class="font-weight-bold">{{ $item->title }}</td>
-                                            <td>{{ $item->category->title }}</td>
-                                            <td>{{ $item->price }} $ </td>
+                                            <td>{{ $item->fname }} {{ $item->lname }}</td>
+                                            <td>{{ $item->email }}</td>
+                                            <td>{{ $item->phone }}</td>
+                                          <td>
+                                            <a class="text-info" target="blank" href="{{ asset('files/'.$item->identity_doc_path) }}">ID/Passpord</a> |
+                                            <a class="text-info" target="blank" href="{{ asset('files/'.$item->academic_doc_path) }}">Academic</a>
+                                          </td>
+
                                             <td>
-                                                @if ($item->status == 'active')
-                                                    <span class="badge bg-info">Active</span>
-                                                @else
-                                                    <span class="badge bg-primary">Inactive</span>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                <a href="{{ route('admin.training.show', $item->id) }}"
-                                                    class="btn btn-info"><i class="fas fa-eye mr-0"></i></a>
+                                              <button class="btn btn-danger"><i class="fas fa-times mr-0"></i></button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -68,9 +63,5 @@
             </div>
         </div>
     </div>
-
-
-@endsection
-@section('js')
 
 @endsection

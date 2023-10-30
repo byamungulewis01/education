@@ -12,7 +12,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ConsultanceController;
 use App\Http\Controllers\EnrollController;
 use App\Http\Controllers\InstructorController;
-use App\Http\Controllers\InstructorTrainings;
+use App\Http\Controllers\InstructorRegistration;
 use App\Http\Controllers\TrainingController;
 
 /*
@@ -52,7 +52,7 @@ Route::group(['middleware' => 'student'], function () {
     Route::controller(StudentController::class)->prefix('student')->name('student.')->group(function () {
         Route::get('/home', 'index')->name('index');
         Route::get('/profile', 'profile')->name('profile');
-        Route::get('/courses', 'courses')->name('courses');
+        Route::get('/trainings', 'trainings')->name('trainings');
     });
     Route::controller(EnrollController::class)->prefix('enroll')->name('enroll.')->group(function () {
         Route::post('/free-course/{id}', 'free_course')->name('free_course');
@@ -82,6 +82,10 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
         Route::post('/', 'store')->name('store');
         Route::put('/{id}', 'update')->name('update');
         Route::delete('/{id}', 'destroy')->name('destroy');
+        Route::get('/show/{id}', 'show')->name('show');
+        Route::post('/component/{id}', 'store_component')->name('store_component');
+        Route::put('/component/{id}', 'update_component')->name('update_component');
+        Route::delete('/component/{id}', 'destroy_component')->name('destroy_component');
     });
 
     Route::controller(ConsultanceController::class)->prefix('consultances')->name('consultance.')->group(function () {
@@ -91,20 +95,20 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
         Route::delete('/{id}', 'destroy')->name('destroy');
     });
 
-    Route::controller(InstructorTrainings::class)->prefix('instructor-trainings')->name('instructorTrainings.')->group(function () {
-        Route::get('/', 'index')->name('index');
-    });
 
     Route::controller(AdminStudentController::class)->prefix('students')->name('student.')->group(function () {
-        Route::get('/', 'index')->name('index');
+        Route::get('/approved', 'approved')->name('approved');
+        Route::put('/approved/{id}', 'approve')->name('approve');
+        Route::get('/rejected', 'rejected')->name('rejected');
+        Route::put('/reject/{id}', 'reject')->name('reject');
         Route::get('/application', 'application')->name('application');
     });
 
 
 
-    Route::controller(InstructorController::class)
+    Route::controller(InstructorRegistration::class)
         ->prefix('instructors')->name('instructor.')
-        ->middleware('user-access:admin')
+        // ->middleware('user-access:admin')
         ->group(function () {
             Route::get('/', 'index')->name('index');
             Route::post('/', 'store')->name('store');
@@ -124,4 +128,11 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::get('403', function () {
         return view('errors.403');
     })->name('403');
+});
+Route::group(['middleware' => 'auth', 'prefix' => 'instructor', 'as' => 'instructor.'], function () {
+    Route::controller(InstructorController::class)->group(function () {
+        Route::get('/dashboard', 'index')->name('index');
+        Route::get('/trainings', 'trainings')->name('trainings');
+        Route::get('/students', 'students')->name('students');
+    })->middleware('user-access:instructor');
 });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Stripe\Stripe;
 use App\Models\Course;
 use App\Models\Enroll;
+use App\Models\Training;
 use Illuminate\Http\Request;
 use Stripe\Checkout\Session;
 
@@ -14,22 +15,22 @@ class EnrollController extends Controller
     public function free_course($id)
     {
         $enroll = Enroll::where('student_id', auth()->guard('student')->user()->id)
-            ->where('course_id', $id)->first();
+            ->where('training_id', $id)->first();
         if ($enroll) {
-            return back()->with('warning', 'Arleady Course Enrolled');
+            return back()->with('warning', 'Arleady Training Enrolled');
         }
 
         Enroll::create([
             'student_id' => auth()->guard('student')->user()->id,
-            'course_id' => $id,
+            'training_id' => $id,
         ]);
-        return to_route('student.courses')->with('success', 'Course Enrolled Successfully');
+        return to_route('student.trainings')->with('success', 'Training Enrolled Successfully');
     }
     public function paid_course($id)
     {
         Stripe::setApiKey(config('stripe.sk'));
 
-        $price = Course::findorfail($id)->price . '00';
+        $price = Training::findorfail($id)->price . '00';
         $student = auth()->guard('student')->user()->fname . ' ' . auth()->guard('student')->user()->lname;
 
         $session = Session::create([
@@ -46,13 +47,13 @@ class EnrollController extends Controller
                 ],
             ],
             'mode'        => 'payment',
-            'success_url' => route('student.courses'),
-            'cancel_url'  => route('course', encrypt($id)),
+            'success_url' => route('student.trainings'),
+            'cancel_url'  => route('training', encrypt($id)),
         ]);
 
         Enroll::create([
             'student_id' => auth()->guard('student')->user()->id,
-            'course_id' => $id,
+            'training_id' => $id,
         ]);
 
         return redirect()->away($session->url);

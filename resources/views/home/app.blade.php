@@ -20,7 +20,9 @@
     <link href="{{ asset('new/assets/css/user.min.css') }}" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;family=Open+Sans:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;family=Open+Sans:wght@300;400;600;700;800&amp;display=swap"
+        rel="stylesheet">
 
 </head>
 
@@ -40,12 +42,14 @@
             <div class="container">
                 <div class="row align-items-center gx-4">
                     <div class="col-auto d-none d-lg-block fs--1"><span class="fas fa-map-marker-alt text-warning me-2"
-                            data-fa-transform="grow-3"></span>1010 Avenue, New York, NY 10018 US. </div>
+                            data-fa-transform="grow-3"></span>Niboyi, Kicukiro, Rwanda. </div>
                     <div class="col-auto ms-md-auto order-md-2 d-none d-sm-flex fs--1 align-items-center"><span
-                            class="fas fa-clock text-warning me-2" data-fa-transform="grow-3"></span>Mon-Sat, 8.00-18.00. Sunday
+                            class="fas fa-clock text-warning me-2" data-fa-transform="grow-3"></span>Mon-Sat,
+                        8.00-18.00. Sunday
                         CLOSED</div>
-                    <div class="col-auto"><span class="fas fa-phone-alt text-warning" data-fa-transform="shrink-3"></span><a
-                            class="ms-2 fs--1 d-inline text-white fw-bold" href="tel:2123865575">212 386 5575, 212 386 5576</a>
+                    <div class="col-auto"><span class="fas fa-phone-alt text-warning"
+                            data-fa-transform="shrink-3"></span><a class="ms-2 fs--1 d-inline text-white fw-bold"
+                            href="tel: +250783590293">+250783590293</a>
                     </div>
                 </div>
             </div>
@@ -67,7 +71,8 @@
 
                         <div class="col-lg-5 col-md-5">
                             <div class="footer_widget">
-                                <img src="{{ asset('assets/logo.jpg') }}" width="50" height="50" class="img-footer small mb-2" alt="" />
+                                <img src="{{ asset('assets/logo.jpg') }}" width="50" height="50"
+                                    class="img-footer small mb-2" alt="" />
                                 <h4 class="extream mb-3">Do you need help with<br>anything?</h4>
                                 <p>Receive updates, hot deals, tutorials, discounts sent straignt in your inbox every
                                     month</p>
@@ -120,7 +125,8 @@
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-12 col-md-12 text-center">
-                            <p class="mb-0">© {{ date("Y") }} Boost. Designd By <a href="#">Eric NDIKUMANA</a>.
+                            <p class="mb-0">© {{ date('Y') }} Boost. Designd By <a href="#">Eric
+                                    NDIKUMANA</a>.
                             </p>
                         </div>
                     </div>
@@ -157,8 +163,8 @@
     <script src="{{ asset('new/vendors/popper/popper.min.js') }}"></script>
     <script src="{{ asset('new/vendors/bootstrap/bootstrap.min.js') }}"></script>
     <script src="{{ asset('new/vendors/is/is.min.js') }}"></script>
-    <script src="{{ asset('new/vendors/bigpicture/BigPicture.js') }}"> </script>
-    <script src="{{ asset('new/vendors/countup/countUp.umd.js') }}"> </script>
+    <script src="{{ asset('new/vendors/bigpicture/BigPicture.js') }}"></script>
+    <script src="{{ asset('new/vendors/countup/countUp.umd.js') }}"></script>
     <script src="{{ asset('new/vendors/swiper/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('new/vendors/fontawesome/all.min.js') }}"></script>
     <script src="{{ asset('new/vendors/lodash/lodash.min.js') }}"></script>

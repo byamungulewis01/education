@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('layouts.app')
 @section('title', 'Unathorized Access')
 @section('body')
 <div class="container">
@@ -11,7 +11,7 @@
                 <h3>You don't have permission </h3>
                 <p>Maecenas quis consequat libero, a feugiat eros. Nunc ut lacinia tortor morbi ultricies laoreet
                     ullamcorper phasellus semper</p>
-                <a class="btn theme-bg text-white btn-md" href="javascript:history.back()">Back To Home</a>
+                <a class="btn theme-bg text-white btn-md" href="javascript:history.back()">Back</a>
 
             </div>
         </div>

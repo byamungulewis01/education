@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('layouts.app')
 @section('title', 'Trainings')
 @section('css')
     <link rel="stylesheet" href="{{ asset('assets/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}">
@@ -119,8 +119,9 @@
                                                 @endif
                                             </td>
                                             <td>
+                                                <a href="{{ route('admin.training.show',$item->id) }}" class="btn btn-info"><i class="fas fa-eye mr-0"></i></a>
                                                 <button class="btn btn-primary" data-toggle="modal"
-                                                    data-target="#editModel{{ $item->id }}">Edit</button>
+                                                    data-target="#editModel{{ $item->id }}"><i class="fas fa-edit mr-0"></i></button>
 
 
 
@@ -129,7 +130,7 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     <button class="btn btn-danger"
-                                                        onclick="return confirm('Are you Sure to Delete ?')">Delete</button>
+                                                        onclick="return confirm('Are you Sure to Delete ?')"><i class="fas fa-trash mr-0"></i></button>
                                                 </form>
 
 
