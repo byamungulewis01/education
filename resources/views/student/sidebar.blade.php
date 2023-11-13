@@ -1,12 +1,12 @@
 <div class="col-lg-3 col-md-3">
     <div class="dashboard-navbar">
 
-        <div class="d-user-avater">
+        {{-- <div class="d-user-avater">
             <img src="{{ asset('images/students/' .auth()->guard('student')->user()->imageName) }}"
                 class="img-fluid avater" alt="">
             <h4>{{ auth()->guard('student')->user()->fname }} {{ auth()->guard('student')->user()->lname }}</h4>
             <span>{{ auth()->guard('student')->user()->email }}</span>
-        </div>
+        </div> --}}
 
         <div class="d-navigation">
             <ul id="side-menu">

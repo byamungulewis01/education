@@ -82,6 +82,72 @@
             </div>
         </div>
     </section>
+    <x-services />
+    <!-- <section> begin ============================-->
+    <section class="bg-light text-center">
+
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-10 col-md-6">
+                    <h3 class="fs-2 fs-lg-3">Our Merits</h3>
+                    {{-- <p class="px-lg-4 mt-3">Get expert consultancy and support with Elixir, an advisory firm that stand by your side always.</p> --}}
+                    <hr class="short"
+                        data-zanim-xs='{"from":{"opacity":0,"width":0},"to":{"opacity":1,"width":"4.20873rem"},"duration":0.8}'
+                        data-zanim-trigger="scroll" />
+                </div>
+            </div>
+            <div class="row mt-0">
+                <div class="col-sm-6 col-lg-6" data-zanim-timeline="{}" data-zanim-trigger="scroll">
+                    <div class="card">
+                        <div class="card-body text-start">
+
+                            {{-- <div class="ring-icon mx-auto" data-zanim-xs='{"delay":0}'><span class="far fa-chart-bar"></span></div> --}}
+                            <h5 class="mt-4" data-zanim-xs='{"delay":0.1}'>Creative Solutions</h5>
+                            <p class="mb-0 mt-3 px-3" data-zanim-xs='{"delay":0.2}'>
+                                Unique and creative financial Business and management solutions that meet the client’s expectations
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-6" data-zanim-timeline="{}" data-zanim-trigger="scroll">
+                    {{-- <div class="ring-icon mx-auto" data-zanim-xs='{"delay":0}'><span class="far fa-bell"></span></div> --}}
+                    <div class="card">
+                        <div class="card-body text-start">
+                    <h5 class="mt-4" data-zanim-xs='{"delay":0.1}'>Professional Team</h5>
+                    <p class="mb-0 mt-3 px-3" data-zanim-xs='{"delay":0.2}'>High quality of Professional services provided
+                        by a highly motivated team. </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-6" data-zanim-timeline="{}" data-zanim-trigger="scroll">
+                    {{-- <div class="ring-icon mx-auto" data-zanim-xs='{"delay":0}'><span class="far fa-lightbulb"></span></div> --}}
+                    <div class="card">
+                        <div class="card-body text-start">
+                    <h5 class="mt-4" data-zanim-xs='{"delay":0.1}'>Professional Networking</h5>
+                    <p class="mb-0 mt-3 px-3" data-zanim-xs='{"delay":0.2}'>We have Solid network of members in Rwanda and
+                        in worldwide to emphasize delivering same quality with national and international standards for each
+                        client.</p>
+                </div>
+                </div>
+                </div>
+                <div class="col-sm-6 col-lg-6" data-zanim-timeline="{}" data-zanim-trigger="scroll">
+                    {{-- <div class="ring-icon mx-auto" data-zanim-xs='{"delay":0}'><span class="fas fa-headset"></span></div> --}}
+                    <div class="card">
+                        <div class="card-body text-start">
+                    <h5 class="mt-4" data-zanim-xs='{"delay":0.1}'>Quality Control</h5>
+                    <p class="mb-0 mt-3 px-3" data-zanim-xs='{"delay":0.2}'>
+                        Boost Consultancy & Coaching Hub Ltd follow & apply a latest International Standard on business
+                        management, financial, project management, Auditing, and accounting.
+                        {{-- All Member firms have to be
+                        under Quality Control of the local competent national professional body. --}}
+                    </p>
+                </div>
+                </div>
+                </div>
+            </div>
+        </div><!-- end of .container-->
+    </section><!-- <section> close ============================-->
+    <!-- ============================================-->
 
     <!-- ============================ Cources Start ================================== -->
     <section class="min">
@@ -90,9 +156,9 @@
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-md-10 text-center">
                     <div class="sec-heading center mb-4">
-                        <h2>Explore Top <span class="theme-cl">Categories</span></h2>
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-                            deleniti atque corrupti quos dolores</p>
+                        <h2>Our <span class="theme-cl">Trainings</span></h2>
+                        <p>Boost Consultancy & Coaching Hub Ltd Office provides the best services for our dear customers to
+                            benefit their business and get the best results. </p>
                     </div>
                 </div>
             </div>
@@ -117,10 +183,12 @@
                     </div>
                 @endforeach
             </div>
-
         </div>
     </section>
     <div class="clearfix"></div>
     <!-- ============================ Cources End ================================== -->
+    <div class="container py-3 bg-light">
+        <x-mission />
+    </div>
 
 @endsection

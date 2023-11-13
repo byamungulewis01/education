@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('title', 'Consultance')
+@section('css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.css">
+@endsection
 @section('body')
     <!-- Row -->
     <div class="row justify-content-between">
@@ -9,7 +12,7 @@
                     <nav class="transparent">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Consultance</li>
+                            <li class="breadcrumb-item active" aria-current="page">Consultancy</li>
                         </ol>
                     </nav>
                 </div>
@@ -19,7 +22,7 @@
                     <!-- Modal -->
                     <div class="modal" id="addModel" tabindex="-1" role="dialog" aria-labelledby="catModalLabel"
                         aria-hidden="true">
-                        <div class="modal-dialog" role="document">
+                        <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title">Add Service</h5>
@@ -41,7 +44,7 @@
                                         </div>
                                         <div class="form-group smalls">
                                             <label>Description</label>
-                                            <textarea name="description" class="form-control" placeholder="Description"></textarea>
+                                            <textarea name="description" class="form-control summernote" placeholder="Description"></textarea>
                                         </div>
 
                                         <div class="form-group smalls">
@@ -70,7 +73,9 @@
                     <div class="dash_crs_cat_caption">
                         <div class="dash_crs_cat_head">
                             <h4>{{ $item->title }}</h4>
-                            <span>{{ implode(' ', array_slice(str_word_count($item->description, 2), 0, 7)) }}...</span>
+                            <span>{!! Illuminate\Support\Str::limit(strip_tags($item->description), 130) !!}</span>
+                            {{-- <span>{!! $item->description !!}</span> --}}
+                            {{-- <span>{!! implode(' ', array_slice(str_word_count($item->description, 2), 0, 7)) !!}...</span> --}}
                         </div>
                         <div class="dash_crs_cat_bottom d-flex align-items-center justify-content-center gap-3">
                             <a href="#" data-toggle="modal" data-target="#editModel{{ $item->id }}"
@@ -109,7 +114,7 @@
                                             </div>
                                             <div class="form-group smalls">
                                                 <label>Description</label>
-                                                <textarea name="description" class="form-control">{{ $item->description }}</textarea>
+                                                <textarea name="description" class="form-control summernote">{{ $item->description }}</textarea>
                                             </div>
 
                                             <div class="form-group smalls">
@@ -126,4 +131,18 @@
             </div>
         @endforeach
     </div>
+@endsection
+
+@section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.summernote').summernote({
+            height: 600, // set editor height
+            minHeight: null, // set minimum height of editor
+            maxHeight: null, // set maximum height of editor
+            focus: true // set focus to editable area after initializing summernote
+        });
+    });
+</script>
 @endsection

@@ -1,9 +1,9 @@
-<div class="header header-light">
+<div class="header header-light" style="background-color: #001a4d">
     <div class="container">
         <nav id="navigation" class="navigation navigation-landscape">
             <div class="nav-header">
                 <a class="nav-brand" href="#">
-                    <img src="{{ asset('assets/img/logo.png') }}" class="logo" alt="" />
+                    <img src="{{ asset('assets/img/light-logo3.png') }}" class="logo" alt="" />
                 </a>
                 <div class="nav-toggle"></div>
 
@@ -74,7 +74,7 @@
                                                 class="notti_coun style-1">4</span></a></li>
                                     <li><a href="{{ route('admin.profile') }}"><i class="fa fa-user-tie"></i>My Profile</a></li>
 
-                                    <li><a href="messages.html"><i class="fas fa-comments"></i>Messages</a></li>
+                                    {{-- <li><a href="messages.html"><i class="fas fa-comments"></i>Messages</a></li> --}}
                                     <li><a href="{{ route('admin.logout') }}"><i class="fa fa-unlock-alt"></i>Sign Out</a></li>
                                 </ul>
                             </div>

@@ -1,6 +1,6 @@
 <div class="dashboard-navbar">
 
-    <div class="d-user-avater">
+    {{-- <div class="d-user-avater">
         <img src="{{ asset('images/users/' . auth()->user()->imageName) }}" class="img-fluid avater" alt="">
         <h4>{{ auth()->user()->name }}</h4>
         <span>
@@ -12,7 +12,7 @@
                 Instructor
             @endif
         </span>
-    </div>
+    </div> --}}
 
     <div class="d-navigation">
         <ul id="side-menu">
@@ -22,7 +22,7 @@
                 <li class="{{ Request::routeIs('admin.user.index') ? 'active' : '' }}">
                     <a href="{{ route('admin.user.index') }}"><i class="fas fa-user-shield"></i>Admins</a>
                 </li>
-            @else
+                @endif
                 <li class="{{ Request::routeIs('admin.consultance.index') ? 'active' : '' }}">
                     <a href="{{ route('admin.consultance.index') }}"><i class="fas fa-box"></i>Consultance</a>
                 </li>
@@ -48,7 +48,6 @@
                                 href="{{ route('admin.student.rejected') }}">Rejected</a></li>
                     </ul>
                 </li>
-            @endif
             <li class="{{ Request::routeIs('admin.profile') ? 'active' : '' }}"><a
                     href="{{ route('admin.profile') }}"><i class="fas fa-address-card"></i>My Profile</a></li>
         </ul>

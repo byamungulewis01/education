@@ -1,9 +1,9 @@
 <div class="dashboard-navbar">
-    <div class="d-user-avater">
+    {{-- <div class="d-user-avater">
         <img src="{{ asset('images/users/' . auth()->user()->imageName) }}" class="img-fluid avater" alt="">
         <h4>{{ auth()->user()->name }}</h4>
         <span> Instructor </span>
-    </div>
+    </div> --}}
     <div class="d-navigation">
         <ul id="side-menu">
             <li class="{{ Request::routeIs('instructor.index') ? 'active' : '' }}"><a href="{{ route('instructor.index') }}"><i

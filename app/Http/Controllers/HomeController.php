@@ -20,8 +20,7 @@ class HomeController extends Controller
     }
     public function consultance()
     {
-        $consultances = Consultance::orderBy('title')->get();
-        return view('home.consultance', compact('consultances'));
+        return view('home.consultance');
     }
     public function training($id)
     {

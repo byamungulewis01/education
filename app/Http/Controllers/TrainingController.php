@@ -33,7 +33,7 @@ class TrainingController extends Controller
             Training::create($request->all());
             return back()->with('success', 'Training Added Successfully');
         } catch (\Throwable $th) {
-            dd($th);
+            // dd($th);
             return back()->with('error', 'Some things went wrong try again');
         }
     }

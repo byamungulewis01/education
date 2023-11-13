@@ -160,7 +160,7 @@
     <!-- This page plugins -->
     <!-- ============================================================== -->
 
-    <script src="{{ asset('new/vendors/popper/popper.min.js') }}"></script>
+    {{-- <script src="{{ asset('new/vendors/popper/popper.min.js') }}"></script> --}}
     <script src="{{ asset('new/vendors/bootstrap/bootstrap.min.js') }}"></script>
     <script src="{{ asset('new/vendors/is/is.min.js') }}"></script>
     <script src="{{ asset('new/vendors/bigpicture/BigPicture.js') }}"></script>
