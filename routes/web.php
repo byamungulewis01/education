@@ -86,6 +86,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
         Route::post('/component/{id}', 'store_component')->name('store_component');
         Route::put('/component/{id}', 'update_component')->name('update_component');
         Route::delete('/component/{id}', 'destroy_component')->name('destroy_component');
+        Route::post('/question/{id}', 'store_question')->name('store_question');
+        Route::put('/question/{id}', 'update_question')->name('update_question');
+        Route::delete('/question/{id}', 'destroy_question')->name('destroy_question');
     });
 
     Route::controller(ConsultanceController::class)->prefix('consultances')->name('consultance.')->group(function () {

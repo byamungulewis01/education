@@ -7,11 +7,11 @@
     <meta charset="utf-8" />
     <meta name="author" content="Boost" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="{{ asset('assets/logo.jpg') }}">
+    <link rel="shortcut icon" href="{{ asset('assets1/logo.jpg') }}">
     <title>@yield('title') - Boost</title>
 
     <!-- Custom CSS -->
-    <link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets1/css/styles.css') }}" rel="stylesheet">
 
     <link href="{{ asset('new/vendors/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
     <link href="{{ asset('new/vendors/hamburgers/hamburgers.min.css') }}" rel="stylesheet">
@@ -71,7 +71,7 @@
 
                         <div class="col-lg-5 col-md-5">
                             <div class="footer_widget">
-                                <img src="{{ asset('assets/logo.jpg') }}" width="50" height="50"
+                                <img src="{{ asset('assets1/logo.jpg') }}" width="50" height="50"
                                     class="img-footer small mb-2" alt="" />
                                 <h4 class="extream mb-3">Do you need help with<br>anything?</h4>
                                 <p>Receive updates, hot deals, tutorials, discounts sent straignt in your inbox every
@@ -146,16 +146,16 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/js/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/select2.min.js') }}"></script>
-    <script src="{{ asset('assets/js/slick.js') }}"></script>
-    <script src="{{ asset('assets/js/moment.min.js') }}"></script>
-    <script src="{{ asset('assets/js/daterangepicker.js') }}"></script>
-    <script src="{{ asset('assets/js/summernote.min.js') }}"></script>
-    <script src="{{ asset('assets/js/metisMenu.min.js') }}"></script>
-    <script src="{{ asset('assets/js/custom.js') }}"></script>
+    <script src="{{ asset('assets1/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets1/js/popper.min.js') }}"></script>
+    <script src="{{ asset('assets1/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets1/js/select2.min.js') }}"></script>
+    <script src="{{ asset('assets1/js/slick.js') }}"></script>
+    <script src="{{ asset('assets1/js/moment.min.js') }}"></script>
+    <script src="{{ asset('assets1/js/daterangepicker.js') }}"></script>
+    <script src="{{ asset('assets1/js/summernote.min.js') }}"></script>
+    <script src="{{ asset('assets1/js/metisMenu.min.js') }}"></script>
+    <script src="{{ asset('assets1/js/custom.js') }}"></script>
     <!-- ============================================================== -->
     <!-- This page plugins -->
     <!-- ============================================================== -->

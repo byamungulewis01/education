@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\TrainingComponent;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Question;
 use App\Models\Training;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class TrainingController extends Controller
     //index
     public function index()
     {
-        $trainings = Training::orderBy('title')->get();
+        $trainings = Training::orderByDesc('id')->get();
         $categories = Category::orderBy('title')->get();
         $instructors = User::where('role', 'instructor')->where('status', 'active')->orderByDesc('id')->get();
 
@@ -63,7 +64,8 @@ class TrainingController extends Controller
     {
         $training = Training::find($id);
         $components = TrainingComponent::where('training_id', $id)->orderByDesc('id')->get();
-        return view('admin.trainings.show', compact('training', 'components'));
+        $questions = Question::where('training_id', $id)->get();
+        return view('admin.trainings.show', compact('training', 'components','questions'));
     }
     public function store_component(Request $request, $id)
     {
@@ -108,5 +110,48 @@ class TrainingController extends Controller
     {
         TrainingComponent::findorfail($id)->delete();
         return back()->with('success', 'Component Delete Successfully');
+    }
+    public function store_question(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required',
+            'choice_one' => 'required',
+            'choice_two' => 'required',
+            'choice_three' =>'nullable',
+            'choice_four' =>'nullable',
+            'answer' =>'required',
+        ]);
+
+        $request->merge(['training_id' => $id]);
+        try {
+            Question::create($request->all());
+
+            return back()->with('success', 'Question Added Successfully');
+        } catch (\Throwable $th) {
+            return back()->with('error', 'Some things went wrong try again');
+        }
+    }
+    public function update_question(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required',
+            'choice_one' => 'required',
+            'choice_two' => 'required',
+            'choice_three' =>'nullable',
+            'choice_four' =>'nullable',
+            'answer' =>'required',
+        ]);
+
+        try {
+            Question::findorfail($id)->update($request->all());
+            return back()->with('success', 'Question Updated Successfully');
+        } catch (\Throwable $th) {
+            return back()->with('error', 'Some things went wrong try again');
+        }
+    }
+    public function destroy_question($id)
+    {
+        Question::findorfail($id)->delete();
+        return back()->with('success', 'Question Delete Successfully');
     }
 }
