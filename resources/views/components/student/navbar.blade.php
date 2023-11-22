@@ -22,7 +22,6 @@
         <!-- /Search -->
         <ul class="navbar-nav flex-row align-items-center ms-auto">
             <!-- Notification -->
-
             <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown"
                     data-bs-auto-close="outside" aria-expanded="false">
@@ -71,15 +70,9 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <span class="fw-semibold d-block">{{ auth()->user()->name }}</span>
+                                    <span class="fw-semibold d-block">{{ auth()->guard('student')->user()->fname }} {{ auth()->guard('student')->user()->lname }}</span>
                                     <small class="text-muted">
-                                        @if (auth()->user()->role == 'admin')
-                                            Administrator
-                                        @elseif(auth()->user()->role == 'super_admin')
-                                            Super Admin
-                                        @else
-                                            Instructor
-                                        @endif
+                                            Student
                                     </small>
                                 </div>
                             </div>
@@ -89,7 +82,7 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a href="{{ route('admin.logout') }}" type="submit" class="dropdown-item">
+                        <a href="{{ route('student.logout') }}" type="submit" class="dropdown-item">
                             <i class="ti ti-logout me-2 ti-sm"></i>
                             <span class="align-middle">Log Out</span>
                         </a>

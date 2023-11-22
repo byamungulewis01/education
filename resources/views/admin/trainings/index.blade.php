@@ -1,7 +1,9 @@
 @extends('layouts.app')
 @section('title', 'Trainings')
 @section('css')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css') }}">
 @endsection
 @section('body')
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -9,7 +11,8 @@
         <div class="card">
             <div class="card-header border-bottom">
                 <h5 class="card-title mb-0">Trainings List
-                    <a class="btn btn-dark text-white pull-left float-end" data-bs-toggle="modal" data-bs-target="#addModal">
+                    <a class="btn btn-dark text-white pull-left float-end" data-bs-toggle="modal"
+                        data-bs-target="#addModal">
                         <i class="ti ti-plus me-0 me-sm-1 ti-xs"></i>
                         <span class="d-none d-sm-inline-block">Training</span></a>
                 </h5>
@@ -76,8 +79,8 @@
 
             </div>
 
-            <div class="table-responsive text-nowrap">
-                <table class="table">
+            <div class="card-datatable table-responsive">
+                <table id="datatable" class="table">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -104,12 +107,14 @@
                                         <span class="badge bg-danger">Inactive</span>
                                     @endif
                                 </td>
+
                                 <td>
-                                    <a href="{{ route('admin.training.show', $item->id) }}" class="btn btn-sm btn-info"><i
-                                            class="fas fa-eye mr-0"></i></a>
-                                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                    {{-- <a href="javascript:;" class="text-body delete-record 1"><i class="ti ti-trash ti-sm mx-2" data-id="1"></i></a> --}}
+                                    <a href="{{ route('admin.training.show', $item->id) }}"
+                                        class="text-body"><i class="ti ti-eye ti-sm mx-1"></i></a>
+                                    <a href="javascript:;" class="text-body" data-bs-toggle="modal"
                                         data-bs-target="#editModel{{ $item->id }}"><i
-                                            class="fas fa-edit mr-0"></i></button>
+                                            class="ti ti-edit ti-sm mx-1"></i></a>
 
                                     <div class="modal fade" id="editModel{{ $item->id }}" tabindex="-1"
                                         aria-hidden="true">
@@ -197,13 +202,15 @@
 
 
 
-                                    <form action="{{ route('admin.training.destroy', $item->id) }}" method="post"
+                                    <form id="deleteForm_{{ $item->id }}"
+                                        action="{{ route('admin.training.destroy', $item->id) }}" method="post"
                                         class="d-inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-sm btn-danger"
-                                            onclick="return confirm('Are you Sure to Delete ?')"><i
-                                                class="fas fa-trash mr-0"></i></button>
+                                        <a href="javascript:;" class="text-body delete-record {{ $item->id }}"
+                                            data-form-id="deleteForm_{{ $item->id }}">
+                                            <i class="ti ti-trash ti-sm mx-1"></i>
+                                        </a>
                                     </form>
                                 </td>
                             </tr>
@@ -217,15 +224,41 @@
 
 @endsection
 @section('js')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.js"></script>
+    <script src="{{ asset('assets/vendor/libs/datatables/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/datatables-responsive/datatables.responsive.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $('.summernote').summernote({
-                height: 300, // set editor height
-                minHeight: null, // set minimum height of editor
-                maxHeight: null, // set maximum height of editor
-                focus: true // set focus to editable area after initializing summernote
-            });
+            $('#datatable').DataTable({});
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Find all elements with class 'delete-record'
+            var deleteLinks = document.getElementsByClassName('delete-record');
+
+            // Loop through each delete link
+            for (var i = 0; i < deleteLinks.length; i++) {
+                // Add click event listener to each delete link
+                deleteLinks[i].addEventListener('click', function(e) {
+                    e.preventDefault(); // Prevent the default link behavior
+
+                    // Get the form id from the 'data-form-id' attribute
+                    var formId = this.getAttribute('data-form-id');
+
+                    // Find the form with the specified id
+                    var form = document.getElementById(formId);
+
+                    // Confirm deletion
+                    var confirmDelete = confirm('Are you sure to delete?');
+
+                    // If confirmed, submit the form
+                    if (confirmDelete) {
+                        form.submit();
+                    }
+                });
+            }
         });
     </script>
 @endsection

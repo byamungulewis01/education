@@ -1,142 +1,97 @@
-@extends('home.app')
+@extends('layouts.guest-auth')
 @section('title', 'Register')
 @section('body')
-    <section>
-        <div class="container">
-            <div class="row justify-content-center">
+    <!-- /Left Text -->
+    <div class="d-none d-lg-flex col-lg-6 p-0">
+        <div class="auth-cover-bg auth-cover-bg-color d-flex justify-content-center align-items-center">
+            <img src="{{ asset('assets/img/illustrations/auth-login-illustration-light.png') }}" alt="auth-login-cover"
+                class="img-fluid my-5 auth-illustration" data-app-light-img="illustrations/auth-login-illustration-light.png"
+                data-app-dark-img="illustrations/auth-login-illustration-dark.png">
 
-                <div class="col-xl-7 col-lg-8 col-md-12 col-sm-12">
-                    <form method="post" action="{{ route('register_auth') }}" enctype="multipart/form-data">
-                        @csrf
-                        <div class="crs_log_wrap">
-                            <div class="crs_log__caption">
-                                <div class="rcs_log_124">
-                                    <div class="Lpo09">
-                                        <h4>Create Your Account</h4>
-                                    </div>
-                                    @if (session('success'))
-                                        <div class="alert alert-success mb-2"><strong>Success</strong>
-                                            {{ session('success') }}
-                                        </div>
-                                    @endif
-                                    @if (session('error'))
-                                        <div class="alert alert-danger mb-2"><strong>Danger</strong>
-                                            {{ session('error') }}
-                                        </div>
-                                    @endif
-                                    <div class="form-group row mb-0">
-                                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
-                                            <div class="form-group smalls">
-                                                <label>First Name</label>
-                                                <input type="text" name="fname" value="{{ old('fname') }}"
-                                                    class="form-control" placeholder="First Name" required />
-                                            </div>
-                                            @error('fname')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
-                                            <div class="form-group smalls">
-                                                <label>Last Name</label>
-                                                <input type="text" name="lname" value="{{ old('lname') }}"
-                                                    class="form-control" placeholder="Last Name" required />
-                                            </div>
-                                            @error('lname')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="form-group row mb-0">
-                                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
-                                            <label>Gender</label>
-                                            <select name="gender" class="form-select" required>
-                                                <option {{ old('gender') == 'male' ? 'selected' : '' }} value="male">Male
-                                                </option>
-                                                <option {{ old('gender') == 'female' ? 'selected' : '' }} value="female">
-                                                    Female</option>
-                                            </select>
-                                            @error('gender')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
-                                            <div class="form-group smalls">
-                                                <label>Date Of Birth</label>
-                                                <input type="date" name="dob" value="{{ old('dob') }}"
-                                                    class="form-control" max="{{ now()->toDateString() }}" required />
-                                            </div>
-                                            @error('date')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="form-group smalls">
-                                        <label>Phone Number</label>
-                                        <input type="text" name="phone" value="{{ old('phone') }}"
-                                            class="form-control" placeholder="Phone Number" required />
-                                        @error('phone')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group smalls">
-                                        <label>Email</label>
-                                        <input type="text" name="email" value="{{ old('email') }}"
-                                            class="form-control" placeholder="email@domain.com" required />
-                                        @error('email')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group row mb-0">
-                                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
-                                            <div class="form-group smalls">
-
-                                                <label>ID / Passport Doc</label>
-                                                <input type="file" accept=".pdf,.png,.jpg" name="identity_doc"
-                                                    class="form-control" required />
-                                                @error('identity_doc')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
-                                            <div class="form-group smalls">
-                                                <label>Academic Doc</label>
-                                                <input type="file" accept=".pdf,.png,.jpg" name="academic_doc"
-                                                    class="form-control" required />
-                                                @error('academic_doc')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                            @error('date')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="form-group smalls">
-                                        <label>Password</label>
-                                        <input type="password" name="password" class="form-control" placeholder="*******"
-                                            required />
-                                        @error('password')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <button class="btn full-width btn-sm theme-bg text-white">Sign
-                                            Up</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="crs_log__footer d-flex justify-content-between">
-                                <div class="fhg_45">
-                                    <p class="musrt">Already have account? <a href="{{ route('login') }}"
-                                            class="theme-cl">Login</a></p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            <img src="{{ asset('assets/img/illustrations/bg-shape-image-light.png') }}" alt="auth-login-cover"
+                class="platform-bg" data-app-light-img="illustrations/bg-shape-image-light.png"
+                data-app-dark-img="illustrations/bg-shape-image-dark.png">
         </div>
-    </section>
+    </div>
+    <!-- /Left Text -->
+    <!-- Login -->
+    <div class="d-flex col-12 col-lg-6 align-items-center p-sm-5">
+        <div class="w-px-800 mx-auto">
+
+            <!-- /Logo -->
+            <h3 class="mb-1">Welcome to Vuexy! 👋</h3>
+            <p class="mb-4">Please sign-in to your account and start the adventure</p>
+            @if (session('error'))
+                <div class="alert alert-danger d-flex align-items-center" role="alert">
+                    <span class="alert-icon text-danger me-2">
+                        <i class="ti ti-ban ti-xs"></i>
+                    </span>
+                    {{ session('error') }}
+                </div>
+            @endif
+            @if ($errors->any())
+                <div class="alert alert-danger d-flex align-items-center" role="alert">
+                    <span class="alert-icon text-danger me-2">
+                        <i class="ti ti-ban ti-xs"></i>
+                    </span>
+                    @foreach ($errors->all() as $error)
+                        {{ $error }}
+                    @endforeach
+                </div>
+            @endif
+            <form id="formAuthentication" class="row mb-3" action="{{ route('login_auth') }}" method="POST">
+                @csrf
+                <div class="col-md-6 mb-3">
+                    <label for="fname" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter your first name" required
+                        autofocus>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="lname" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter your last name" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="email" class="form-label">Email or Username</label>
+                    <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email"
+                        autofocus>
+                </div>
+                <div class="col-md-6 mb-3 form-password-toggle">
+                    <div class="d-flex justify-content-between">
+                        <label class="form-label" for="password">Password</label>
+                        <a href="#">
+                            <small>Forgot Password?</small>
+                        </a>
+                    </div>
+                    <div class="input-group input-group-merge">
+                        <input type="password" id="password" class="form-control" name="password"
+                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                            aria-describedby="password" />
+                        <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="remember-me">
+                        <label class="form-check-label" for="remember-me">
+                            Remember Me
+                        </label>
+                    </div>
+                </div>
+                <button class="btn btn-primary d-grid w-100">
+                    Sign in
+                </button>
+            </form>
+
+            <p class="text-center">
+                <span>New on our platform?</span>
+                <a href="auth-register-cover.html">
+                    <span>Create an account</span>
+                </a>
+            </p>
+
+
+        </div>
+    </div>
+    <!-- /Login -->
+
 @endsection

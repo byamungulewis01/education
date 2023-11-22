@@ -8,10 +8,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>@yield('page_name') | RBA MIS</title>
+    <title>@yield('title') | BCCH LTD</title>
 
-    <meta name="description" content="Rwanda Bar Association Management Information System" />
-    <meta name="keywords" content="RBA MIS, Rwanda Bar Association dashboard, RBA System, RBA Informations">
+    <meta name="description" content="Boost Consultancy & Coaching Hub LTD" />
+    <meta name="keywords" content="Boost Consultancy & Coaching Hub LTD,Boost Consultancy,BCCH LTD">
 
 
     <!-- Favicon -->

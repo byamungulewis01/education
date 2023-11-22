@@ -1,5 +1,5 @@
 @extends('layouts.auth')
-@section('page_name')
+@section('title')
     Login
 @endsection
 

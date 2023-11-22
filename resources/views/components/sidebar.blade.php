@@ -27,13 +27,26 @@
             </a>
         </li>
 
-        <li class="menu-item {{ Request::routeIs('admin.consultance.index') ? 'active' : '' }}">
-            <a href="{{ route('admin.consultance.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-brand-zoom"></i>
-                <div data-i18n="Consultance">Consultance</div>
-            </a>
-        </li>
 
+        <li class="menu-item {{ Request::routeIs(['admin.consultance.index','admin.consultance.create','admin.consultance.edit']) ? 'open' : '' }} ">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-components"></i>
+                <div data-i18n="Consultance">Consultancy</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ Request::routeIs('admin.consultance.index','admin.consultance.edit') ? 'active' : '' }}">
+                    <a href="{{ route('admin.consultance.index') }}" class="menu-link">
+                        <div data-i18n="List">List</div>
+                    </a>
+                </li>
+
+                <li class="menu-item {{ Request::routeIs('admin.consultance.create') ? 'active' : '' }}">
+                    <a href="{{ route('admin.consultance.create') }}" class="menu-link">
+                        <div data-i18n="New Consultancy">New Consultancy</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
         <li class="menu-item {{ Request::routeIs(['admin.category.index', 'admin.training.index','admin.training.show']) ? 'open' : '' }} ">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-link"></i>

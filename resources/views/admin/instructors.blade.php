@@ -1,210 +1,204 @@
 @extends('layouts.app')
 @section('title', 'Instructors')
+@section('css')
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css') }}">
+@endsection
 @section('body')
-    <!-- Row -->
-    <div class="row justify-content-between">
-        <div class="col-lg-12 col-md-12 col-sm-12 pb-4">
-            <div class="dashboard_wrap d-flex align-items-center justify-content-between">
-                <div class="arion">
-                    <nav class="transparent">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Instructors</li>
-                        </ol>
-                    </nav>
-                </div>
-                <div class="elkios">
-                    <a href="#" class="add_new_btn" data-toggle="modal" data-target="#addModel"><i
-                            class="fas fa-plus-circle mr-1"></i>Add Instructor</a>
-                    <!-- Modal -->
-                    <div class="modal" id="addModel" tabindex="-1" role="dialog" aria-labelledby="catModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Add Instructor</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true"><i class="fas fa-times-circle"></i></span>
-                                    </button>
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <!-- Users List Table -->
+        <div class="card">
+            <div class="card-header border-bottom">
+                <h5 class="card-title mb-0">Instructors List
+                    <a class="btn btn-dark text-white pull-left float-end" data-bs-toggle="modal"
+                        data-bs-target="#addModal">
+                        <i class="ti ti-plus me-0 me-sm-1 ti-xs"></i>
+                        <span class="d-none d-sm-inline-block">Instructor</span></a>
+                </h5>
+                <div class="modal fade" id="addModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered1 modal-simple modal-add-new-cc">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                                <div class="text-center mb-2">
+                                    <h3>Add New Training</h3>
                                 </div>
-                                <div class="modal-body">
-                                    <form class="forms_block" method="post" action="{{ route('admin.instructor.store') }}"
-                                        enctype="multipart/form-data">
-                                        @csrf
-                                        <div class="form-group smalls">
-                                            <label>Instructor Name</label>
-                                            <input name="name" type="text" value="{{ old('name') }}"
-                                                class="form-control" placeholder="Instructor Name">
-                                        </div>
-                                        <div class="form-group smalls">
-                                            <label>Instructor Email</label>
-                                            <input name="email" type="email" value="{{ old('email') }}"
-                                                class="form-control" placeholder="Instructor Email">
-                                        </div>
-                                        <div class="form-group smalls">
-                                            <label>Instructor Phone</label>
-                                            <input name="phone" type="text" value="{{ old('phone') }}"
-                                                class="form-control" placeholder="Instructor Phone">
-                                        </div>
-                                        <div class="form-group smalls">
-                                            <label>Image</label>
-                                            <input name="image" type="file" class="form-control">
-                                        </div>
+                                <form method="POST" class="row g-2" action="{{ route('admin.instructor.store') }}"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="col-12">
+                                        <label for="title" class="form-label">Title</label>
+                                        <input name="title" type="text" class="form-control" required
+                                            placeholder="Training Title" value="{{ old('title') }}">
+                                    </div>
 
-                                        <div class="form-group smalls">
-                                            <button class="btn full-width theme-bg text-white">Submit</button>
-                                        </div>
+                                    <div class="col-md-12">
 
-                                    </form>
-                                </div>
+                                        <label for="description" class="form-label">Description</label>
+                                        <textarea id="description" name="description" rows="6" class="form-control" placeholder="Description">{{ old('description') }}</textarea>
+                                    </div>
+                                    <div class="col-12 mt-4 text-center">
+                                        <button type="submit" class="btn btn-primary me-sm-3 me-1">Submit</button>
+                                        <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal"
+                                            aria-label="Close">Cancel</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
-        </div>
-    </div>
-    <!-- /Row -->
 
-    <div class="row">
-        <div class="col-xl-12 col-lg-12 col-md-12">
-            <div class="dashboard_wrap">
-                <div class="row">
-                    <div class="col-xl-12 col-lg-12 col-md-12 mb-2">
-                        <div class="table-responsive">
-                            <table class="table dash_list">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Photo</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Phone</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Active Trainings</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($instructors as $item)
-                                        <tr>
-                                            <th scope="row">{{ $loop->iteration }}</th>
-                                            <td><img src="{{ asset('images/users/' . $item->imageName) }}"
-                                                    class="img-fluid circle" width="40" alt=""></td>
-                                            <td>{{ $item->name }}</td>
-                                            <td>{{ $item->email }}</td>
-                                            <td>{{ $item->phone }}</td>
-                                            <td>
-                                                @if ($item->status == 'active')
-                                                    <span class="badge bg-info">Active</span>
-                                                @else
-                                                    <span class="badge bg-primary">Inactive</span>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @php
-                                                    $trainings = \App\Models\Training::where('user_id', $item->id)->count();
-                                                @endphp
-                                                {{ $trainings }} @if ($trainings == 1) Training
-                                                @else
-                                                    Trainings
-                                                @endif
-                                            </td>
+            <div class="card-datatable table-responsive">
+                <table id="datatable" class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Users</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Active Trainings</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($instructors as $item)
+                            <tr>
+                                <td>
+                                    <div class="d-flex justify-content-start align-items-center user-name">
+                                        <div class="avatar-wrapper">
+                                            <div class="avatar me-3"><img src="{{ asset('images/users/' . $item->imageName) }}"
+                                                    alt="Avatar" class="rounded-circle"></div>
+                                        </div>
+                                        <div class="d-flex flex-column"><a href="app-user-view-account.html"
+                                                class="text-body text-truncate"><span class="fw-medium">{{ $item->name }}</span></a><small
+                                                class="text-muted">{{ $item->email }}</small></div>
+                                    </div>
+                                </td>
+                                <td>{{ $item->phone }}</td>
+                                <td>
+                                    @if ($item->status == 'active')
+                                        <span class="badge bg-info">Active</span>
+                                    @else
+                                        <span class="badge bg-primary">Inactive</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @php
+                                        $trainings = \App\Models\Training::where('user_id', $item->id)->count();
+                                    @endphp
+                                    {{ $trainings }} @if ($trainings == 1) Trainings
+                                    @else
+                                        Training
+                                    @endif
+                                </td>
 
-                                            <td>
-                                                <div class="dropdown show">
-                                                    <a class="btn btn-action" href="#" data-toggle="dropdown"
-                                                        aria-haspopup="true" aria-expanded="false">
-                                                        <i class="fas fa-ellipsis-h"></i>
-                                                    </a>
-                                                    <div class="drp-select dropdown-menu">
-                                                        <button class="dropdown-item" data-toggle="modal"
-                                                            data-target="#editModel{{ $item->id }}">Edit</button>
-                                                        <form action="{{ route('admin.instructor.destroy', $item->id) }}"
-                                                            method="post" class="d-inline">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button class="dropdown-item"
-                                                                onclick="return confirm('Are you Sure to Delete ?')">Delete</button>
-                                                        </form>
+                                <td>
+
+                                    <a href="javascript:;" class="text-body" data-bs-toggle="modal"
+                                        data-bs-target="#editModel{{ $item->id }}"><i
+                                            class="ti ti-edit ti-sm mx-1"></i></a>
+
+                                    <div class="modal fade" id="editModel{{ $item->id }}" tabindex="-1"
+                                        aria-hidden="true">
+                                        <div
+                                            class="modal-dialog modal-lg modal-dialog-centered1 modal-simple modal-add-new-cc">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                    <div class="text-center mb-2">
+                                                        <h3>Edit Training</h3>
                                                     </div>
-                                                </div>
-                                                <div class="modal" id="editModel{{ $item->id }}" tabindex="-1"
-                                                    role="dialog" aria-labelledby="catModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title">Edit Instructor</h5>
-                                                                <button type="button" class="close"
-                                                                    data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true"><i
-                                                                            class="fas fa-times-circle"></i></span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <form class="forms_block" method="post"
-                                                                    action="{{ route('admin.instructor.update', $item->id) }}"
-                                                                    enctype="multipart/form-data">
-                                                                    @csrf
-                                                                    @method('PUT')
-                                                                    <div class="form-group smalls">
-                                                                        <label>Instructor Name</label>
-                                                                        <input name="name" type="text"
-                                                                            value="{{ $item->name }}"
-                                                                            class="form-control">
-                                                                    </div>
-                                                                    <div class="form-group smalls">
-                                                                        <label>Instructor Email</label>
-                                                                        <input name="email" type="email"
-                                                                            value="{{ $item->email }}"
-                                                                            class="form-control">
-                                                                    </div>
-                                                                    <div class="form-group smalls">
-                                                                        <label>Instructor Phone</label>
-                                                                        <input name="phone" type="text"
-                                                                            value="{{ $item->phone }}"
-                                                                            class="form-control">
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="form-group smalls col-md-7">
-                                                                            <label>Image</label>
-                                                                            <input name="image" type="file"
-                                                                                class="form-control">
-                                                                        </div>
-                                                                        <div class="form-group smalls col-md-5">
-                                                                            <label>Status</label>
-                                                                            <select name="status" class="form-control">
-                                                                                <option
-                                                                                    {{ $item->status == 'active' ? 'selected' : '' }}
-                                                                                    value="active">Active</option>
-                                                                                <option
-                                                                                    {{ $item->status == 'inactive' ? 'selected' : '' }}
-                                                                                    value="inactive">Inactive</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="form-group smalls">
-                                                                        <button
-                                                                            class="btn full-width theme-bg text-white">Save</button>
-                                                                    </div>
-
-                                                                </form>
-                                                            </div>
+                                                    <form method="POST" class="row g-3"
+                                                        action="{{ route('admin.training.update', $item->id) }}">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <div class="col-12">
+                                                            <label for="title" class="form-label">Title</label>
+                                                            <input name="title" type="text" class="form-control"
+                                                                required value="{{ $item->title }}">
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
 
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                                                        <div class="col-md-12">
+
+                                                            <label for="description"
+                                                                class="form-label">Description</label>
+                                                            <textarea id="description" name="description" rows="6" class="form-control" placeholder="Description">{{ $item->description }}</textarea>
+                                                        </div>
+                                                        <div class="col-12 mt-4 text-center">
+                                                            <button type="submit"
+                                                                class="btn btn-primary me-sm-3 me-1">Save</button>
+                                                            <button type="reset" class="btn btn-label-secondary"
+                                                                data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <form id="deleteForm_{{ $item->id }}"
+                                        action="{{ route('admin.training.destroy', $item->id) }}" method="post"
+                                        class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <a href="javascript:;" class="text-body delete-record {{ $item->id }}"
+                                            data-form-id="deleteForm_{{ $item->id }}">
+                                            <i class="ti ti-trash ti-sm mx-1"></i>
+                                        </a>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+
+                </table>
             </div>
         </div>
     </div>
 
+@endsection
+@section('js')
+    <script src="{{ asset('assets/vendor/libs/datatables/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/datatables-responsive/datatables.responsive.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#datatable').DataTable({});
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Find all elements with class 'delete-record'
+            var deleteLinks = document.getElementsByClassName('delete-record');
+
+            // Loop through each delete link
+            for (var i = 0; i < deleteLinks.length; i++) {
+                // Add click event listener to each delete link
+                deleteLinks[i].addEventListener('click', function(e) {
+                    e.preventDefault(); // Prevent the default link behavior
+
+                    // Get the form id from the 'data-form-id' attribute
+                    var formId = this.getAttribute('data-form-id');
+
+                    // Find the form with the specified id
+                    var form = document.getElementById(formId);
+
+                    // Confirm deletion
+                    var confirmDelete = confirm('Are you sure to delete?');
+
+                    // If confirmed, submit the form
+                    if (confirmDelete) {
+                        form.submit();
+                    }
+                });
+            }
+        });
+    </script>
 @endsection

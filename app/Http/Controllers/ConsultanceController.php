@@ -11,7 +11,16 @@ class ConsultanceController extends Controller
     public function index()
     {
         $consultances = Consultance::orderBy('title')->get();
-        return view('admin.consultances', ['consultances' => $consultances]);
+        return view('admin.consultancy.index', ['consultances' => $consultances]);
+    }
+    public function create()
+    {
+        return view('admin.consultancy.create');
+    }
+    public function edit($id)
+    {
+        $item = Consultance::findorfail($id);
+        return view('admin.consultancy.edit',compact('item'));
     }
     public function store(Request $request)
     {

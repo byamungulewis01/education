@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- beautify ignore:start -->
 
-<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed " dir="ltr" data-theme="theme-default" data-assets-path="{{ asset('assets') }}/" data-template="vertical-menu-template">
+<html lang="en" class="light-style  customizer-hide" dir="ltr" data-theme="theme-default" data-assets-path="{{ asset('assets') }}/" data-template="vertical-menu-template">
 
 
 <head>
@@ -12,7 +12,6 @@
 
     <meta name="description" content="Boost Consultancy & Coaching Hub LTD" />
     <meta name="keywords" content="Boost Consultancy & Coaching Hub LTD,Boost Consultancy,BCCH LTD">
-
 
 
     <!-- Favicon -->
@@ -31,86 +30,38 @@
     <!-- Core CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/rtl/core.css') }}" class="template-customizer-core-css" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/rtl/theme-default.css') }}" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}" />
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/node-waves/node-waves.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/typeahead-js/typeahead.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/swiper/swiper.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/toastr/toastr.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/animate-css/animate.css') }}" />
+    <!-- Vendor -->
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/formvalidation/dist/css/formValidation.min.css') }}" />
+
+    <!-- Page CSS -->
+    <!-- Page -->
+    <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-auth.css') }}">
     <!-- Helpers -->
     <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
 
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
     <script src="{{ asset('assets/vendor/js/template-customizer.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('assets/toast/css/jquery.toast.css') }}">
-    @yield('css')
-
-    <!-- Form Validation -->
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/formvalidation/dist/css/formValidation.min.css') }}" />
-
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('assets/js/config.js') }}"></script>
 </head>
 
 <body>
 
-  <!-- Layout wrapper -->
-<div class="layout-wrapper layout-content-navbar  ">
-  <div class="layout-container">
-    @if (auth()->user())
-    <x-sidebar/>
-    @else
-    <x-student.sidebar />
-    @endif
 
-
-
-    <!-- Layout container -->
-    <div class="layout-page">
-    @if (auth()->user())
-    <x-navbar/>
-    @else
-    <x-student.navbar/>
-    @endif
-
-
-      <!-- Content wrapper -->
-      <div class="content-wrapper">
-
-        @yield('body')
-
-        <!-- Footer -->
-        @if (auth()->user())
-        <x-footer/>
-        @else
-        <x-student.footer/>
-        @endif
-        <!-- / Footer -->
-
-
-          <div class="content-backdrop fade"></div>
-        </div>
-        <!-- Content wrapper -->
-      </div>
-      <!-- / Layout page -->
+<div class="authentication-wrapper authentication-cover authentication-bg">
+    <div class="authentication-inner row">
+     @yield('body')
     </div>
-
-
-
-    <!-- Overlay -->
-    <div class="layout-overlay layout-menu-toggle"></div>
-
-
-    <!-- Drag Target Area To SlideIn Menu On Small Screens -->
-    <div class="drag-target"></div>
-
   </div>
-  <!-- / Layout wrapper -->
 
+  <!-- / Content -->
+  <!-- / Content -->
 
   <!-- Core JS -->
   <!-- build:js assets/vendor/js/core.js -->
@@ -127,15 +78,17 @@
   <script src="{{ asset('assets/vendor/js/menu.js') }}"></script>
   <!-- endbuild -->
 
+  <!-- Vendors JS -->
+  <script src="{{ asset('assets/vendor/libs/formvalidation/dist/js/FormValidation.min.js') }}"></script>
+  <script src="{{ asset('assets/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js') }}"></script>
+  <script src="{{ asset('assets/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js') }}"></script>
+
   <!-- Main JS -->
   <script src="{{ asset('assets/js/main.js') }}"></script>
-  <script src="{{ asset('assets/toast/js/jquery.toast.js') }}"></script>
 
-  @include('layouts.flash_message')
+  <!-- Page JS -->
+  <script src="{{ asset('assets/js/pages-auth.js') }}"></script>
 
-  @yield('js')
-  <!-- Vendors JS -->
-  <script src="{{ asset('assets/vendor/libs/toastr/toastr.js') }}"></script>
 </body>
 
 
