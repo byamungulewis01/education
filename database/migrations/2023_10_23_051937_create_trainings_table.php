@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('price');
             $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('exam_status', ['active', 'inactive'])->default('inactive');
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();

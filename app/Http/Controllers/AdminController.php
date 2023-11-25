@@ -35,7 +35,7 @@ class AdminController extends Controller
 
         try {
             User::findorfail($id)->update($request->all());
-            return back()->with('success', 'Profile Updated Successfully');
+            return back()->with('message', 'Profile Updated Successfully');
         } catch (\Throwable $th) {
             return back()->with('error', 'Some things went wrong try again');
         }
@@ -49,7 +49,7 @@ class AdminController extends Controller
         $user = User::findorfail(auth()->user()->id);
         if (Hash::check($request->old_password, $user->password)) {
             $user->update(['password' => Hash::make($request->password)]);
-            return back()->with('success', 'Password Changed Successfully');
+            return back()->with('message', 'Password Changed Successfully');
         } else {
             return back()->with('error', 'Old Password Not Matched');
         }

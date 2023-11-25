@@ -1,194 +1,734 @@
-@extends('home.app')
+@extends('layouts.front')
 @section('title', 'Home')
 @section('body')
-
-    <section class="py-0">
-        <div class="swiper theme-slider min-vh-100"
-            data-swiper='{"loop":true,"allowTouchMove":false,"autoplay":{"delay":5000},"effect":"fade","speed":800}'>
-            <div class="swiper-wrapper">
-                <div class="swiper-slide" data-zanim-timeline="{}">
-                    <div class="bg-holder" style="background-image:url({{ asset('new/assets/img/header-6.jpg') }});"></div>
-                    <!--/.bg-holder-->
-                    <div class="container">
-                        <div class="row min-vh-100 py-8 align-items-center" data-inertia='{"weight":1.5}'>
-                            <div class="col-sm-8 col-lg-7 px-5 px-sm-3">
-                                <div class="overflow-hidden">
-                                    <h1 class="fs-4 fs-md-5 lh-1" data-zanim-xs='{"delay":0}'>Helping Leaders</h1>
-                                </div>
-                                <div class="overflow-hidden">
-                                    <p class="text-primary pt-4 mb-5 fs-1 fs-md-2 lh-xs" data-zanim-xs='{"delay":0.1}'>We
-                                        look forward to help you in taking your company to new height.</p>
-                                </div>
-                                <div class="overflow-hidden">
-                                    <div data-zanim-xs='{"delay":0.2}'><a class="btn btn-primary me-3 mt-3"
-                                            href="#!">Read more<span class="fas fa-chevron-right ms-2"></span></a><a
-                                            class="btn btn-warning mt-3" href="contact.html">Contact us<span
-                                                class="fas fa-chevron-right ms-2"></span></a></div>
-                                </div>
-                            </div>
-                        </div>
+    <!-- Hero: Start -->
+    <section id="hero-animation">
+        <div id="landingHero" class="section-py landing-hero position-relative">
+            <div class="container">
+                <div class="hero-text-box text-center">
+                    <h1 class="text-primary hero-title display-6 fw-bold">One dashboard to manage all your
+                        businesses</h1>
+                    <h2 class="hero-sub-title h6 mb-4 pb-1">
+                        Production-ready & easy to use Admin Template<br class="d-none d-lg-block" />
+                        for Reliability and Customizability.
+                    </h2>
+                    <div class="landing-hero-btn d-inline-block position-relative">
+                        <span class="hero-btn-item position-absolute d-none d-md-flex text-heading">Join community
+                            <img src="assets/img/front-pages/icons/Join-community-arrow.png" alt="Join community arrow"
+                                class="scaleX-n1-rtl" /></span>
+                        <a href="#landingPricing" class="btn btn-primary btn-lg">Get early access</a>
                     </div>
                 </div>
-                <div class="swiper-slide" data-zanim-timeline="{}">
-                    <div class="bg-holder" style="background-image:url({{ asset('new/assets/img/header-5.jpg') }});"></div>
-                    <!--/.bg-holder-->
-                    <div class="container">
-                        <div class="row min-vh-100 py-8 align-items-center" data-inertia='{"weight":1.5}'>
-                            <div class="col-sm-8 col-lg-7 px-5 px-sm-3">
-                                <div class="overflow-hidden">
-                                    <h1 class="fs-4 fs-md-5 lh-1" data-zanim-xs='{"delay":0}'>Expert Consultants</h1>
-                                </div>
-                                <div class="overflow-hidden">
-                                    <p class="text-primary pt-4 mb-5 fs-1 fs-md-2 lh-xs" data-zanim-xs='{"delay":0.1}'>Over
-                                        10 years of experience in helping clients finding comprehensive solutions.</p>
-                                </div>
-                                <div class="overflow-hidden">
-                                    <div data-zanim-xs='{"delay":0.2}'><a class="btn btn-primary me-3 mt-3"
-                                            href="#!">Read more<span class="fas fa-chevron-right ms-2"></span></a><a
-                                            class="btn btn-warning mt-3" href="contact.html">Contact us<span
-                                                class="fas fa-chevron-right ms-2"></span></a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide" data-zanim-timeline="{}">
-                    <div class="bg-holder" style="background-image:url({{ asset('new/assets/img/header-1.jpg') }});"></div>
-                    <!--/.bg-holder-->
-                    <div class="container">
-                        <div class="row min-vh-100 py-8 align-items-center" data-inertia='{"weight":1.5}'>
-                            <div class="col-sm-8 col-lg-7 px-5 px-sm-3">
-                                <div class="overflow-hidden">
-                                    <h1 class="fs-4 fs-md-5 lh-1" data-zanim-xs='{"delay":0}'>Growth Partners</h1>
-                                </div>
-                                <div class="overflow-hidden">
-                                    <p class="text-primary pt-4 mb-5 fs-1 fs-md-2 lh-xs" data-zanim-xs='{"delay":0.1}'>
-                                        Connect with top consultants hand-picked by Elixir consulting and finance.</p>
-                                </div>
-                                <div class="overflow-hidden">
-                                    <div data-zanim-xs='{"delay":0.2}'><a class="btn btn-primary me-3 mt-3"
-                                            href="#!">Read more<span class="fas fa-chevron-right ms-2"></span></a><a
-                                            class="btn btn-warning mt-3" href="contact.html">Contact us<span
-                                                class="fas fa-chevron-right ms-2"></span></a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="swiper-nav">
-                <div class="swiper-button-prev"><span class="fas fa-chevron-left"></span></div>
-                <div class="swiper-button-next"><span class="fas fa-chevron-right"></span></div>
             </div>
         </div>
     </section>
-    <x-services />
-    <!-- <section> begin ============================-->
-    <section class="bg-light text-center">
+    <!-- Hero: End -->
 
+    <!-- Useful features: Start -->
+    <section id="landingFeatures" class="section-py landing-features">
         <div class="container">
-            <div class="row justify-content-center text-center">
-                <div class="col-10 col-md-6">
-                    <h3 class="fs-2 fs-lg-3">Our Merits</h3>
-                    {{-- <p class="px-lg-4 mt-3">Get expert consultancy and support with Elixir, an advisory firm that stand by your side always.</p> --}}
-                    <hr class="short"
-                        data-zanim-xs='{"from":{"opacity":0,"width":0},"to":{"opacity":1,"width":"4.20873rem"},"duration":0.8}'
-                        data-zanim-trigger="scroll" />
+            <div class="text-center mb-3 pb-1">
+                <span class="badge bg-label-primary">Useful Features</span>
+            </div>
+            <h3 class="text-center mb-1">
+                <span class="section-title">Everything you need</span> to start your next project
+            </h3>
+            <p class="text-center mb-3 mb-md-5 pb-3">
+                Not just a set of tools, the package includes ready-to-deploy conceptual application.
+            </p>
+            <div class="features-icon-wrapper row gx-0 gy-4 g-sm-5">
+                <div class="col-lg-4 col-sm-6 text-center features-icon-box">
+                    <div class="text-center mb-3">
+                        <img src="assets/img/front-pages/icons/laptop.png" alt="laptop charging" />
+                    </div>
+                    <h5 class="mb-3">Quality Code</h5>
+                    <p class="features-icon-description">
+                        Code structure that all developers will easily understand and fall in love with.
+                    </p>
+                </div>
+                <div class="col-lg-4 col-sm-6 text-center features-icon-box">
+                    <div class="text-center mb-3">
+                        <img src="assets/img/front-pages/icons/rocket.png" alt="transition up" />
+                    </div>
+                    <h5 class="mb-3">Continuous Updates</h5>
+                    <p class="features-icon-description">
+                        Free updates for the next 12 months, including new demos and features.
+                    </p>
+                </div>
+                <div class="col-lg-4 col-sm-6 text-center features-icon-box">
+                    <div class="text-center mb-3">
+                        <img src="assets/img/front-pages/icons/paper.png" alt="edit" />
+                    </div>
+                    <h5 class="mb-3">Stater-Kit</h5>
+                    <p class="features-icon-description">
+                        Start your project quickly without having to remove unnecessary features.
+                    </p>
+                </div>
+                <div class="col-lg-4 col-sm-6 text-center features-icon-box">
+                    <div class="text-center mb-3">
+                        <img src="assets/img/front-pages/icons/check.png" alt="3d select solid" />
+                    </div>
+                    <h5 class="mb-3">API Ready</h5>
+                    <p class="features-icon-description">
+                        Just change the endpoint and see your own data loaded within seconds.
+                    </p>
+                </div>
+                <div class="col-lg-4 col-sm-6 text-center features-icon-box">
+                    <div class="text-center mb-3">
+                        <img src="assets/img/front-pages/icons/user.png" alt="lifebelt" />
+                    </div>
+                    <h5 class="mb-3">Excellent Support</h5>
+                    <p class="features-icon-description">An easy-to-follow doc with lots of references and code
+                        examples.</p>
+                </div>
+                <div class="col-lg-4 col-sm-6 text-center features-icon-box">
+                    <div class="text-center mb-3">
+                        <img src="assets/img/front-pages/icons/keyboard.png" alt="google docs" />
+                    </div>
+                    <h5 class="mb-3">Well Documented</h5>
+                    <p class="features-icon-description">An easy-to-follow doc with lots of references and code
+                        examples.</p>
                 </div>
             </div>
-            <div class="row mt-0">
-                <div class="col-sm-6 col-lg-6" data-zanim-timeline="{}" data-zanim-trigger="scroll">
-                    <div class="card">
-                        <div class="card-body text-start">
+        </div>
+    </section>
+    <!-- Useful features: End -->
 
-                            {{-- <div class="ring-icon mx-auto" data-zanim-xs='{"delay":0}'><span class="far fa-chart-bar"></span></div> --}}
-                            <h5 class="mt-4" data-zanim-xs='{"delay":0.1}'>Creative Solutions</h5>
-                            <p class="mb-0 mt-3 px-3" data-zanim-xs='{"delay":0.2}'>
-                                Unique and creative financial Business and management solutions that meet the client’s expectations
+    <!-- Real customers reviews: Start -->
+    <section id="landingReviews" class="section-py bg-body landing-reviews pb-0">
+        <!-- What people say slider: Start -->
+        <div class="container">
+            <div class="row align-items-center gx-0 gy-4 g-lg-5">
+                <div class="col-md-6 col-lg-5 col-xl-3">
+                    <div class="mb-3 pb-1">
+                        <span class="badge bg-label-primary">Real Customers Reviews</span>
+                    </div>
+                    <h3 class="mb-1"><span class="section-title">What people say</span></h3>
+                    <p class="mb-3 mb-md-5">
+                        See what our customers have to<br class="d-none d-xl-block" />
+                        say about their experience.
+                    </p>
+                    <div class="landing-reviews-btns">
+                        <button id="reviews-previous-btn" class="btn btn-label-primary reviews-btn me-3 scaleX-n1-rtl"
+                            type="button">
+                            <i class="ti ti-chevron-left ti-sm"></i>
+                        </button>
+                        <button id="reviews-next-btn" class="btn btn-label-primary reviews-btn scaleX-n1-rtl"
+                            type="button">
+                            <i class="ti ti-chevron-right ti-sm"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-7 col-xl-9">
+                    <div class="swiper-reviews-carousel overflow-hidden mb-5 pb-md-2 pb-md-3">
+                        <div class="swiper" id="swiper-reviews">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="card h-100">
+                                        <div class="card-body text-body d-flex flex-column justify-content-between h-100">
+                                            <div class="mb-3">
+                                                <img src="assets/img/front-pages/branding/logo-1.png" alt="client logo"
+                                                    class="client-logo img-fluid" />
+                                            </div>
+                                            <p>
+                                                “Vuexy is hands down the most useful front end Bootstrap theme I've
+                                                ever used. I can't wait
+                                                to use it again for my next project.”
+                                            </p>
+                                            <div class="text-warning mb-3">
+                                                <i class="ti ti-star-filled ti-sm"></i>
+                                                <i class="ti ti-star-filled ti-sm"></i>
+                                                <i class="ti ti-star-filled ti-sm"></i>
+                                                <i class="ti ti-star-filled ti-sm"></i>
+                                                <i class="ti ti-star-filled ti-sm"></i>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar me-2 avatar-sm">
+                                                    <img src="assets/img/avatars/1.png" alt="Avatar"
+                                                        class="rounded-circle" />
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0">Cecilia Payne</h6>
+                                                    <p class="small text-muted mb-0">CEO of Airbnb</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="card h-100">
+                                        <div class="card-body text-body d-flex flex-column justify-content-between h-100">
+                                            <div class="mb-3">
+                                                <img src="assets/img/front-pages/branding/logo-2.png" alt="client logo"
+                                                    class="client-logo img-fluid" />
+                                            </div>
+                                            <p>
+                                                “I've never used a theme as versatile and flexible as Vuexy. It's my
+                                                go to for building
+                                                dashboard sites on almost any project.”
+                                            </p>
+                                            <div class="text-warning mb-3">
+                                                <i class="ti ti-star-filled ti-sm"></i>
+                                                <i class="ti ti-star-filled ti-sm"></i>
+                                                <i class="ti ti-star-filled ti-sm"></i>
+                                                <i class="ti ti-star-filled ti-sm"></i>
+                                                <i class="ti ti-star-filled ti-sm"></i>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar me-2 avatar-sm">
+                                                    <img src="assets/img/avatars/2.png" alt="Avatar"
+                                                        class="rounded-circle" />
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0">Eugenia Moore</h6>
+                                                    <p class="small text-muted mb-0">Founder of Hubspot</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="card h-100">
+                                        <div class="card-body text-body d-flex flex-column justify-content-between h-100">
+                                            <div class="mb-3">
+                                                <img src="assets/img/front-pages/branding/logo-3.png" alt="client logo"
+                                                    class="client-logo img-fluid" />
+                                            </div>
+                                            <p>
+                                                This template is really clean & well documented. The docs are really
+                                                easy to understand and
+                                                it's always easy to find a screenshot from their website.
+                                            </p>
+                                            <div class="text-warning mb-3">
+                                                <i class="ti ti-star-filled ti-sm"></i>
+                                                <i class="ti ti-star-filled ti-sm"></i>
+                                                <i class="ti ti-star-filled ti-sm"></i>
+                                                <i class="ti ti-star-filled ti-sm"></i>
+                                                <i class="ti ti-star-filled ti-sm"></i>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar me-2 avatar-sm">
+                                                    <img src="assets/img/avatars/3.png" alt="Avatar"
+                                                        class="rounded-circle" />
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0">Curtis Fletcher</h6>
+                                                    <p class="small text-muted mb-0">Design Lead at Dribbble</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="card h-100">
+                                        <div class="card-body text-body d-flex flex-column justify-content-between h-100">
+                                            <div class="mb-3">
+                                                <img src="assets/img/front-pages/branding/logo-4.png" alt="client logo"
+                                                    class="client-logo img-fluid" />
+                                            </div>
+                                            <p>
+                                                All the requirements for developers have been taken into
+                                                consideration, so I’m able to build
+                                                any interface I want.
+                                            </p>
+                                            <div class="text-warning mb-3">
+                                                <i class="ti ti-star-filled ti-sm"></i>
+                                                <i class="ti ti-star-filled ti-sm"></i>
+                                                <i class="ti ti-star-filled ti-sm"></i>
+                                                <i class="ti ti-star-filled ti-sm"></i>
+                                                <i class="ti ti-star ti-sm"></i>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar me-2 avatar-sm">
+                                                    <img src="assets/img/avatars/4.png" alt="Avatar"
+                                                        class="rounded-circle" />
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0">Sara Smith</h6>
+                                                    <p class="small text-muted mb-0">Founder of Continental</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="card h-100">
+                                        <div class="card-body text-body d-flex flex-column justify-content-between h-100">
+                                            <div class="mb-3">
+                                                <img src="assets/img/front-pages/branding/logo-5.png" alt="client logo"
+                                                    class="client-logo img-fluid" />
+                                            </div>
+                                            <p>
+                                                “I've never used a theme as versatile and flexible as Vuexy. It's my
+                                                go to for building
+                                                dashboard sites on almost any project.”
+                                            </p>
+                                            <div class="text-warning mb-3">
+                                                <i class="ti ti-star-filled ti-sm"></i>
+                                                <i class="ti ti-star-filled ti-sm"></i>
+                                                <i class="ti ti-star-filled ti-sm"></i>
+                                                <i class="ti ti-star-filled ti-sm"></i>
+                                                <i class="ti ti-star-filled ti-sm"></i>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar me-2 avatar-sm">
+                                                    <img src="assets/img/avatars/5.png" alt="Avatar"
+                                                        class="rounded-circle" />
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0">Eugenia Moore</h6>
+                                                    <p class="small text-muted mb-0">Founder of Hubspot</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="card h-100">
+                                        <div class="card-body text-body d-flex flex-column justify-content-between h-100">
+                                            <div class="mb-3">
+                                                <img src="assets/img/front-pages/branding/logo-6.png" alt="client logo"
+                                                    class="client-logo img-fluid" />
+                                            </div>
+                                            <p>
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam nemo
+                                                mollitia, ad eum
+                                                officia numquam nostrum repellendus consequuntur!
+                                            </p>
+                                            <div class="text-warning mb-3">
+                                                <i class="ti ti-star-filled ti-sm"></i>
+                                                <i class="ti ti-star-filled ti-sm"></i>
+                                                <i class="ti ti-star-filled ti-sm"></i>
+                                                <i class="ti ti-star-filled ti-sm"></i>
+                                                <i class="ti ti-star ti-sm"></i>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar me-2 avatar-sm">
+                                                    <img src="assets/img/avatars/1.png" alt="Avatar"
+                                                        class="rounded-circle" />
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0">Sara Smith</h6>
+                                                    <p class="small text-muted mb-0">Founder of Continental</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- What people say slider: End -->
+        <hr class="m-0" />
+        <!-- Logo slider: Start -->
+        <div class="container">
+            <div class="swiper-logo-carousel py-4 my-lg-2">
+                <div class="swiper" id="swiper-clients-logos">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="assets/img/front-pages/branding/logo_1-light.png" alt="client logo"
+                                class="client-logo" data-app-light-img="front-pages/branding/logo_1-light.png"
+                                data-app-dark-img="front-pages/branding/logo_1-dark.png" />
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="assets/img/front-pages/branding/logo_2-light.png" alt="client logo"
+                                class="client-logo" data-app-light-img="front-pages/branding/logo_2-light.png"
+                                data-app-dark-img="front-pages/branding/logo_2-dark.png" />
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="assets/img/front-pages/branding/logo_3-light.png" alt="client logo"
+                                class="client-logo" data-app-light-img="front-pages/branding/logo_3-light.png"
+                                data-app-dark-img="front-pages/branding/logo_3-dark.png" />
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="assets/img/front-pages/branding/logo_4-light.png" alt="client logo"
+                                class="client-logo" data-app-light-img="front-pages/branding/logo_4-light.png"
+                                data-app-dark-img="front-pages/branding/logo_4-dark.png" />
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="assets/img/front-pages/branding/logo_5-light.png" alt="client logo"
+                                class="client-logo" data-app-light-img="front-pages/branding/logo_5-light.png"
+                                data-app-dark-img="front-pages/branding/logo_5-dark.png" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Logo slider: End -->
+    </section>
+    <!-- Real customers reviews: End -->
+
+    <!-- Our great team: Start -->
+    <section id="landingTeam" class="section-py landing-team">
+        <div class="container">
+            <div class="text-center mb-3 pb-1">
+                <span class="badge bg-label-primary">Our Great Team</span>
+            </div>
+            <h3 class="text-center mb-1"><span class="section-title">Supported</span> by Real People</h3>
+            <p class="text-center mb-md-5 pb-3">Who is behind these great-looking interfaces?</p>
+            <div class="row gy-5 mt-2">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card mt-3 mt-lg-0 shadow-none">
+                        <div class="bg-label-primary position-relative team-image-box">
+                            <img src="assets/img/front-pages/landing-page/team-member-1.png"
+                                class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl"
+                                alt="human image" />
+                        </div>
+                        <div class="card-body border border-top-0 border-label-primary text-center">
+                            <h5 class="card-title mb-0">Sophie Gilbert</h5>
+                            <p class="text-muted mb-0">Project Manager</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card mt-3 mt-lg-0 shadow-none">
+                        <div class="bg-label-info position-relative team-image-box">
+                            <img src="assets/img/front-pages/landing-page/team-member-2.png"
+                                class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl"
+                                alt="human image" />
+                        </div>
+                        <div class="card-body border border-top-0 border-label-info text-center">
+                            <h5 class="card-title mb-0">Paul Miles</h5>
+                            <p class="text-muted mb-0">UI Designer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card mt-3 mt-lg-0 shadow-none">
+                        <div class="bg-label-danger position-relative team-image-box">
+                            <img src="assets/img/front-pages/landing-page/team-member-3.png"
+                                class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl"
+                                alt="human image" />
+                        </div>
+                        <div class="card-body border border-top-0 border-label-danger text-center">
+                            <h5 class="card-title mb-0">Nannie Ford</h5>
+                            <p class="text-muted mb-0">Development Lead</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card mt-3 mt-lg-0 shadow-none">
+                        <div class="bg-label-success position-relative team-image-box">
+                            <img src="assets/img/front-pages/landing-page/team-member-4.png"
+                                class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl"
+                                alt="human image" />
+                        </div>
+                        <div class="card-body border border-top-0 border-label-success text-center">
+                            <h5 class="card-title mb-0">Chris Watkins</h5>
+                            <p class="text-muted mb-0">Marketing Manager</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Our great team: End -->
+
+    <!-- Pricing plans: Start -->
+    <section id="landingPricing" class="section-py bg-body landing-pricing">
+        <div class="container">
+
+            <h3 class="text-center mb-1"><span class="section-title">Tailored pricing plans</span> designed for
+                you</h3>
+            <p class="text-center mb-4 pb-3">
+                All plans include 40+ advanced tools and features to boost your product.<br />Choose the best plan
+                to fit
+                your needs.
+            </p>
+
+            <div class="row gy-4 pt-lg-3">
+
+                <!-- Standard Plan: Start -->
+                @foreach ($categories as $item)
+                <div class="col-xl-4">
+                    <div class="card border border-primary shadow-lg">
+                        <div class="card-body">
+                            <div class="text-center">
+                                {{-- <img src="{{ asset('images/' . $item->imageName) }}" alt="shuttle rocket icon"
+                                    class="" /> --}}
+                                <h4 class="">{{ $item->title }}</h4>
+                                <p>{{ $item->trainings->count() }} Trainings</p>
+
+
+                            </div>
+                            <div class="d-grid">
+                                <a href="{{ route('training', encrypt($item->id)) }}" class="btn btn-label-primary">Get Started</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+                <!-- Standard Plan: End -->
+            </div>
+        </div>
+    </section>
+    <!-- Pricing plans: End -->
+
+    <!-- Fun facts: Start -->
+    <section id="landingFunFacts" class="section-py landing-fun-facts">
+        <div class="container">
+            <div class="row gy-3">
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card border border-label-primary shadow-none">
+                        <div class="card-body text-center">
+                            <img src="assets/img/front-pages/icons/laptop.png" alt="laptop" class="mb-2" />
+                            <h5 class="h2 mb-1">7.1k+</h5>
+                            <p class="fw-medium mb-0">
+                                Support Tickets<br />
+                                Resolved
                             </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-lg-6" data-zanim-timeline="{}" data-zanim-trigger="scroll">
-                    {{-- <div class="ring-icon mx-auto" data-zanim-xs='{"delay":0}'><span class="far fa-bell"></span></div> --}}
-                    <div class="card">
-                        <div class="card-body text-start">
-                    <h5 class="mt-4" data-zanim-xs='{"delay":0.1}'>Professional Team</h5>
-                    <p class="mb-0 mt-3 px-3" data-zanim-xs='{"delay":0.2}'>High quality of Professional services provided
-                        by a highly motivated team. </p>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card border border-label-success shadow-none">
+                        <div class="card-body text-center">
+                            <img src="assets/img/front-pages/icons/user-success.png" alt="laptop" class="mb-2" />
+                            <h5 class="h2 mb-1">50k+</h5>
+                            <p class="fw-medium mb-0">
+                                Join creatives<br />
+                                community
+                            </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-lg-6" data-zanim-timeline="{}" data-zanim-trigger="scroll">
-                    {{-- <div class="ring-icon mx-auto" data-zanim-xs='{"delay":0}'><span class="far fa-lightbulb"></span></div> --}}
-                    <div class="card">
-                        <div class="card-body text-start">
-                    <h5 class="mt-4" data-zanim-xs='{"delay":0.1}'>Professional Networking</h5>
-                    <p class="mb-0 mt-3 px-3" data-zanim-xs='{"delay":0.2}'>We have Solid network of members in Rwanda and
-                        in worldwide to emphasize delivering same quality with national and international standards for each
-                        client.</p>
-                </div>
-                </div>
-                </div>
-                <div class="col-sm-6 col-lg-6" data-zanim-timeline="{}" data-zanim-trigger="scroll">
-                    {{-- <div class="ring-icon mx-auto" data-zanim-xs='{"delay":0}'><span class="fas fa-headset"></span></div> --}}
-                    <div class="card">
-                        <div class="card-body text-start">
-                    <h5 class="mt-4" data-zanim-xs='{"delay":0.1}'>Quality Control</h5>
-                    <p class="mb-0 mt-3 px-3" data-zanim-xs='{"delay":0.2}'>
-                        Boost Consultancy & Coaching Hub Ltd follow & apply a latest International Standard on business
-                        management, financial, project management, Auditing, and accounting.
-                        {{-- All Member firms have to be
-                        under Quality Control of the local competent national professional body. --}}
-                    </p>
-                </div>
-                </div>
-                </div>
-            </div>
-        </div><!-- end of .container-->
-    </section><!-- <section> close ============================-->
-    <!-- ============================================-->
-
-    <!-- ============================ Cources Start ================================== -->
-    <section class="min">
-        <div class="container">
-
-            <div class="row justify-content-center">
-                <div class="col-lg-7 col-md-10 text-center">
-                    <div class="sec-heading center mb-4">
-                        <h2>Our <span class="theme-cl">Trainings</span></h2>
-                        <p>Boost Consultancy & Coaching Hub Ltd Office provides the best services for our dear customers to
-                            benefit their business and get the best results. </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                @foreach ($categories as $item)
-                    <div class="col-lg-4 col-md-4 col-sm-6">
-                        <div class="edu_cat_2 cat-{{ $loop->iteration }}">
-                            <div class="edu_cat_icons">
-                                <a class="pic-main" href="{{ route('training', encrypt($item->id)) }}"><img
-                                        src="{{ asset('images/' . $item->imageName) }}" class="img-fluid"
-                                        alt="" /></a>
-                            </div>
-                            <div class="edu_cat_data">
-                                <h4 class="title"><a
-                                        href="{{ route('training', encrypt($item->id)) }}">{{ $item->title }}</a></h4>
-                                <ul class="meta">
-                                    <li class="font-weight-bold">{{ $item->trainings->count() }} Trainings</li>
-                                </ul>
-                            </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card border border-label-info shadow-none">
+                        <div class="card-body text-center">
+                            <img src="assets/img/front-pages/icons/diamond-info.png" alt="laptop" class="mb-2" />
+                            <h5 class="h2 mb-1">4.8/5</h5>
+                            <p class="fw-medium mb-0">
+                                Highly Rated<br />
+                                Products
+                            </p>
                         </div>
                     </div>
-                @endforeach
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card border border-label-warning shadow-none">
+                        <div class="card-body text-center">
+                            <img src="assets/img/front-pages/icons/check-warning.png" alt="laptop" class="mb-2" />
+                            <h5 class="h2 mb-1">100%</h5>
+                            <p class="fw-medium mb-0">
+                                Money Back<br />
+                                Guarantee
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-    <div class="clearfix"></div>
-    <!-- ============================ Cources End ================================== -->
-    <div class="container py-3 bg-light">
-        <x-mission />
-    </div>
+    <!-- Fun facts: End -->
 
+    <!-- FAQ: Start -->
+    <section id="landingFAQ" class="section-py bg-body landing-faq">
+        <div class="container">
+            <div class="text-center mb-3 pb-1">
+                <span class="badge bg-label-primary">FAQ</span>
+            </div>
+            <h3 class="text-center mb-1">Frequently asked <span class="section-title">questions</span></h3>
+            <p class="text-center mb-5 pb-3">Browse through these FAQs to find answers to commonly asked questions.
+            </p>
+            <div class="row gy-5">
+                <div class="col-lg-5">
+                    <div class="text-center">
+                        <img src="assets/img/front-pages/landing-page/faq-boy-with-logos.png" alt="faq boy with logos"
+                            class="faq-image" />
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="accordion" id="accordionExample">
+                        <div class="card accordion-item active">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button type="button" class="accordion-button" data-bs-toggle="collapse"
+                                    data-bs-target="#accordionOne" aria-expanded="true" aria-controls="accordionOne">
+                                    Do you charge for each upgrade?
+                                </button>
+                            </h2>
+
+                            <div id="accordionOne" class="accordion-collapse collapse show"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    Lemon drops chocolate cake gummies carrot cake chupa chups muffin topping.
+                                    Sesame snaps icing
+                                    marzipan gummi bears macaroon dragée danish caramels powder. Bear claw dragée
+                                    pastry topping
+                                    soufflé. Wafer gummi bears marshmallow pastry pie.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                                    data-bs-target="#accordionTwo" aria-expanded="false" aria-controls="accordionTwo">
+                                    Do I need to purchase a license for each website?
+                                </button>
+                            </h2>
+                            <div id="accordionTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    Dessert ice cream donut oat cake jelly-o pie sugar plum cheesecake. Bear claw
+                                    dragée oat cake
+                                    dragée ice cream halvah tootsie roll. Danish cake oat cake pie macaroon tart
+                                    donut gummies. Jelly
+                                    beans candy canes carrot cake. Fruitcake chocolate chupa chups.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                                    data-bs-target="#accordionThree" aria-expanded="false"
+                                    aria-controls="accordionThree">
+                                    What is regular license?
+                                </button>
+                            </h2>
+                            <div id="accordionThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    Regular license can be used for end products that do not charge users for access
+                                    or service(access
+                                    is free and there will be no monthly subscription fee). Single regular license
+                                    can be used for
+                                    single end product and end product can be used by you or your client. If you
+                                    want to sell end
+                                    product to multiple clients then you will need to purchase separate license for
+                                    each client. The
+                                    same rule applies if you want to use the same end product on multiple
+                                    domains(unique setup). For
+                                    more info on regular license you can check official description.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card accordion-item">
+                            <h2 class="accordion-header" id="headingFour">
+                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                                    data-bs-target="#accordionFour" aria-expanded="false" aria-controls="accordionFour">
+                                    What is extended license?
+                                </button>
+                            </h2>
+                            <div id="accordionFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis et aliquid
+                                    quaerat possimus maxime!
+                                    Mollitia reprehenderit neque repellat deleniti delectus architecto dolorum
+                                    maxime, blanditiis
+                                    earum ea, incidunt quam possimus cumque.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card accordion-item">
+                            <h2 class="accordion-header" id="headingFive">
+                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                                    data-bs-target="#accordionFive" aria-expanded="false" aria-controls="accordionFive">
+                                    Which license is applicable for SASS application?
+                                </button>
+                            </h2>
+                            <div id="accordionFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi molestias
+                                    exercitationem ab cum
+                                    nemo facere voluptates veritatis quia, eveniet veniam at et repudiandae mollitia
+                                    ipsam quasi
+                                    labore enim architecto non!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- FAQ: End -->
+
+
+    <!-- Contact Us: Start -->
+    <section id="landingContact" class="section-py bg-body landing-contact">
+        <div class="container">
+            <div class="text-center mb-3 pb-1">
+                <span class="badge bg-label-primary">Contact US</span>
+            </div>
+            <h3 class="text-center mb-1"><span class="section-title">Let's work</span> together</h3>
+            <p class="text-center mb-4 mb-lg-5 pb-md-3">Any question or remark? just write us a message</p>
+            <div class="row gy-4">
+                <div class="col-lg-5">
+                    <div class="contact-img-box position-relative border p-2 h-100">
+                        <img src="assets/img/front-pages/landing-page/contact-customer-service.png"
+                            alt="contact customer service" class="contact-img w-100 scaleX-n1-rtl" />
+                        <div class="pt-3 px-4 pb-1">
+                            <div class="row gy-3 gx-md-4">
+                                <div class="col-md-6 col-lg-12 col-xl-6">
+                                    <div class="d-flex align-items-center">
+                                        <div class="badge bg-label-primary rounded p-2 me-2"><i
+                                                class="ti ti-mail ti-sm"></i></div>
+                                        <div>
+                                            <p class="mb-0">Email</p>
+                                            <h5 class="mb-0">
+                                                <a href="mailto:example@gmail.com"
+                                                    class="text-heading">example@gmail.com</a>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-12 col-xl-6">
+                                    <div class="d-flex align-items-center">
+                                        <div class="badge bg-label-success rounded p-2 me-2">
+                                            <i class="ti ti-phone-call ti-sm"></i>
+                                        </div>
+                                        <div>
+                                            <p class="mb-0">Phone</p>
+                                            <h5 class="mb-0"><a href="tel:+1234-568-963" class="text-heading">+1234 568
+                                                    963</a></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="mb-1">Send a message</h4>
+                            <p class="mb-4">
+                                If you would like to discuss anything related to payment, account, licensing,<br
+                                    class="d-none d-lg-block" />
+                                partnerships, or have pre-sales questions, you’re at the right place.
+                            </p>
+                            <form>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="contact-form-fullname">Full Name</label>
+                                        <input type="text" class="form-control" id="contact-form-fullname"
+                                            placeholder="john" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="contact-form-email">Email</label>
+                                        <input type="text" id="contact-form-email" class="form-control"
+                                            placeholder="johndoe@gmail.com" />
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label" for="contact-form-message">Message</label>
+                                        <textarea id="contact-form-message" class="form-control" rows="8" placeholder="Write a message"></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary">Send inquiry</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact Us: End -->
 @endsection

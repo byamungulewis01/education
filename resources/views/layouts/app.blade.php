@@ -61,21 +61,42 @@
   <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar  ">
   <div class="layout-container">
+    <!-- Menu -->
+
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+
+
+    <div class="app-brand demo ">
+        <a href="{{ route('admin.index') }}" class="app-brand-link">
+            <img src="{{ asset('assets/logo/logo-simplified.png') }}" class="mt-1" alt="RBA Logo" width="170">
+        </a>
+
+        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+            <i class="ti menu-toggle-icon d-none d-xl-block ti-sm align-middle"></i>
+            <i class="ti ti-x d-block d-xl-none ti-sm align-middle"></i>
+        </a>
+    </div>
+    <div class="menu-inner-shadow"></div>
     @if (auth()->user())
-    <x-sidebar/>
-    @else
-    <x-student.sidebar />
+    @if (auth()->user()->role == 'instructor')
+<x-instructor.sidebar/>
+@else
+<x-sidebar/>
+@endif
+@else
+<x-student.sidebar />
     @endif
+</aside>
 
 
 
     <!-- Layout container -->
     <div class="layout-page">
     @if (auth()->user())
-    <x-navbar/>
-    @else
-    <x-student.navbar/>
-    @endif
+<x-navbar/>
+@else
+<x-student.navbar/>
+@endif
 
 
       <!-- Content wrapper -->
@@ -85,10 +106,10 @@
 
         <!-- Footer -->
         @if (auth()->user())
-        <x-footer/>
-        @else
-        <x-student.footer/>
-        @endif
+<x-footer/>
+@else
+<x-student.footer/>
+@endif
         <!-- / Footer -->
 
 

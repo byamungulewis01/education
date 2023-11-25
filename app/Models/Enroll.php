@@ -17,4 +17,8 @@ class Enroll extends Model
     {
         return $this->belongsTo(Training::class);
     }
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
 }

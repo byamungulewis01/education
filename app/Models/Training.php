@@ -15,6 +15,7 @@ class Training extends Model
         'user_id',
         'price',
         'status',
+        'exam_status',
     ];
     public function user()
     {

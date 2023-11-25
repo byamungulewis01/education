@@ -160,6 +160,26 @@
                             data-bs-target="#addQuestionModal">
                             <i class="ti ti-plus ti-xs"></i>
                             <span class="d-none d-sm-inline-block">New Question</span></a>
+                        @if ($training->exam_status == 'active')
+                            <form action="{{ route('admin.training.disactivate_exam', $training->id) }}" method="post"
+                                class="d-inline">
+                                @csrf
+                                @method('PUT')
+                                <button onclick="return confirm('Are you Sure to Disactive Exam ?')"
+                                    class="btn btn-sm me-3 btn-danger text-white float-end">
+                                    <span class="d-none d-sm-inline-block">Disactive Exam</span></button>
+                            </form>
+                        @else
+                            <form action="{{ route('admin.training.activate_exam', $training->id) }}" method="post"
+                                class="d-inline">
+                                @csrf
+                                @method('PUT')
+                                <button onclick="return confirm('Are you Sure to Activate Exam ?')"
+                                    class="btn btn-sm me-3 btn-primary text-white float-end">
+                                    <span class="d-none d-sm-inline-block">Activate Exam</span></button>
+                            </form>
+                        @endif
+
                     </h4>
                     <div class="modal fade" id="addQuestionModal" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog modal-lg modal-dialog-centered1 modal-simple modal-add-new-cc">

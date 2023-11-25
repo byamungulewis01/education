@@ -50,9 +50,9 @@ Route::controller(AdminAuthController::class)->prefix('admin')->name('admin.')->
 
 Route::group(['middleware' => 'student'], function () {
     Route::controller(StudentController::class)->prefix('student')->name('student.')->group(function () {
-        Route::get('/home', 'index')->name('index');
         Route::get('/profile', 'profile')->name('profile');
-        Route::get('/trainings', 'trainings')->name('trainings');
+        Route::get('/my-trainings', 'trainings')->name('trainings');
+        Route::get('/my-trainings/{id}', 'trainingShow')->name('trainingShow');
     });
     Route::controller(EnrollController::class)->prefix('enroll')->name('enroll.')->group(function () {
         Route::post('/free-course/{id}', 'free_course')->name('free_course');
@@ -64,13 +64,13 @@ Route::group(['middleware' => 'student'], function () {
 
 Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::controller(AdminController::class)->group(function () {
-        Route::get('/dashboard', 'index')->name('index');
+        Route::get('/dashboard', 'index')->name('index')->middleware('user-access:admin,super_admin');
         Route::get('/profile', 'profile')->name('profile');
         Route::put('/changeProfile', 'changeProfile')->name('changeProfile');
         Route::put('/changePassword', 'changePassword')->name('changePassword');
     });
 
-    Route::controller(CategoryController::class)->prefix('categories')->name('category.')->group(function () {
+    Route::controller(CategoryController::class)->middleware('user-access:admin,super_admin')->prefix('categories')->name('category.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/', 'store')->name('store');
         Route::put('/{id}', 'update')->name('update');
@@ -89,9 +89,12 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
         Route::post('/question/{id}', 'store_question')->name('store_question');
         Route::put('/question/{id}', 'update_question')->name('update_question');
         Route::delete('/question/{id}', 'destroy_question')->name('destroy_question');
+
+        Route::put('/activate_exam/{id}', 'activate_exam')->name('activate_exam');
+        Route::put('/disactivate_exam/{id}', 'disactivate_exam')->name('disactivate_exam');
     });
 
-    Route::controller(ConsultanceController::class)->prefix('consultances')->name('consultance.')->group(function () {
+    Route::controller(ConsultanceController::class)->prefix('consultances')->name('consultance.')->middleware('user-access:admin,super_admin')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
         Route::get('/edit/{id}', 'edit')->name('edit');
@@ -101,7 +104,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
     });
 
 
-    Route::controller(AdminStudentController::class)->prefix('students')->name('student.')->group(function () {
+    Route::controller(AdminStudentController::class)->prefix('students')->middleware('user-access:admin,super_admin')->name('student.')->group(function () {
         Route::get('/approved', 'approved')->name('approved');
         Route::put('/approved/{id}', 'approve')->name('approve');
         Route::get('/rejected', 'rejected')->name('rejected');
@@ -109,11 +112,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
         Route::get('/application', 'application')->name('application');
     });
 
-
-
     Route::controller(InstructorRegistration::class)
         ->prefix('instructors')->name('instructor.')
-        // ->middleware('user-access:admin')
+        ->middleware('user-access:admin,super_admin')
         ->group(function () {
             Route::get('/', 'index')->name('index');
             Route::post('/', 'store')->name('store');
@@ -139,5 +140,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'instructor', 'as' => 'instruc
         Route::get('/dashboard', 'index')->name('index');
         Route::get('/trainings', 'trainings')->name('trainings');
         Route::get('/students', 'students')->name('students');
-    })->middleware('user-access:instructor');
-});
+    });
+    Route::get('training/{id}', [TrainingController::class, 'show'])->name('training.show');
+})->middleware('user-access:instructor');

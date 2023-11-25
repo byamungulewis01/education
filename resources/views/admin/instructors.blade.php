@@ -17,27 +17,36 @@
                         <span class="d-none d-sm-inline-block">Instructor</span></a>
                 </h5>
                 <div class="modal fade" id="addModal" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-lg modal-dialog-centered1 modal-simple modal-add-new-cc">
+                    <div class="modal-dialog modal-dialog-centered1 modal-simple modal-add-new-cc">
                         <div class="modal-content">
                             <div class="modal-body">
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                                 <div class="text-center mb-2">
-                                    <h3>Add New Training</h3>
+                                    <h3>Add New Instructor</h3>
                                 </div>
                                 <form method="POST" class="row g-2" action="{{ route('admin.instructor.store') }}"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="col-12">
-                                        <label for="title" class="form-label">Title</label>
-                                        <input name="title" type="text" class="form-control" required
-                                            placeholder="Training Title" value="{{ old('title') }}">
+                                        <label>Instructor Name</label>
+                                        <input name="name" type="text" value="{{ old('name') }}"
+                                            class="form-control" placeholder="Instructor Name">
                                     </div>
 
                                     <div class="col-md-12">
-
-                                        <label for="description" class="form-label">Description</label>
-                                        <textarea id="description" name="description" rows="6" class="form-control" placeholder="Description">{{ old('description') }}</textarea>
+                                        <label>Instructor Email</label>
+                                        <input name="email" type="email" value="{{ old('email') }}"
+                                            class="form-control" placeholder="Instructor Email">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label>Instructor Phone</label>
+                                        <input name="phone" type="text" value="{{ old('phone') }}"
+                                            class="form-control" placeholder="Instructor Phone">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label>Image</label>
+                                        <input name="image" type="file" class="form-control">
                                     </div>
                                     <div class="col-12 mt-4 text-center">
                                         <button type="submit" class="btn btn-primary me-sm-3 me-1">Submit</button>
@@ -69,27 +78,29 @@
                                 <td>
                                     <div class="d-flex justify-content-start align-items-center user-name">
                                         <div class="avatar-wrapper">
-                                            <div class="avatar me-3"><img src="{{ asset('images/users/' . $item->imageName) }}"
-                                                    alt="Avatar" class="rounded-circle"></div>
+                                            <div class="avatar me-3"><img
+                                                    src="{{ asset('images/users/' . $item->imageName) }}" alt="Avatar"
+                                                    class="rounded-circle"></div>
                                         </div>
-                                        <div class="d-flex flex-column"><a href="app-user-view-account.html"
-                                                class="text-body text-truncate"><span class="fw-medium">{{ $item->name }}</span></a><small
+                                        <div class="d-flex flex-column"><span
+                                                class="fw-medium">{{ $item->name }}</span><small
                                                 class="text-muted">{{ $item->email }}</small></div>
                                     </div>
                                 </td>
                                 <td>{{ $item->phone }}</td>
                                 <td>
                                     @if ($item->status == 'active')
-                                        <span class="badge bg-info">Active</span>
+                                        <span class="badge bg-primary">Active</span>
                                     @else
-                                        <span class="badge bg-primary">Inactive</span>
+                                        <span class="badge bg-danger">Inactive</span>
                                     @endif
                                 </td>
                                 <td>
                                     @php
                                         $trainings = \App\Models\Training::where('user_id', $item->id)->count();
                                     @endphp
-                                    {{ $trainings }} @if ($trainings == 1) Trainings
+                                    {{ $trainings }} @if ($trainings == 1)
+                                        Trainings
                                     @else
                                         Training
                                     @endif
@@ -103,34 +114,51 @@
 
                                     <div class="modal fade" id="editModel{{ $item->id }}" tabindex="-1"
                                         aria-hidden="true">
-                                        <div
-                                            class="modal-dialog modal-lg modal-dialog-centered1 modal-simple modal-add-new-cc">
+                                        <div class="modal-dialog modal-dialog-centered1 modal-simple modal-add-new-cc">
                                             <div class="modal-content">
                                                 <div class="modal-body">
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                     <div class="text-center mb-2">
-                                                        <h3>Edit Training</h3>
+                                                        <h3>Edit Instructor</h3>
                                                     </div>
-                                                    <form method="POST" class="row g-3"
-                                                        action="{{ route('admin.training.update', $item->id) }}">
+                                                    <form method="POST" class="row g-2"
+                                                        action="{{ route('admin.instructor.update', $item->id) }}"
+                                                        enctype="multipart/form-data">
                                                         @csrf
                                                         @method('PUT')
                                                         <div class="col-12">
-                                                            <label for="title" class="form-label">Title</label>
-                                                            <input name="title" type="text" class="form-control"
-                                                                required value="{{ $item->title }}">
+                                                            <label>Instructor Name</label>
+                                                            <input name="name" type="text"
+                                                                value="{{ $item->name }}" class="form-control">
                                                         </div>
 
-                                                        <div class="col-md-12">
-
-                                                            <label for="description"
-                                                                class="form-label">Description</label>
-                                                            <textarea id="description" name="description" rows="6" class="form-control" placeholder="Description">{{ $item->description }}</textarea>
+                                                        <div class="col-12">
+                                                            <label>Instructor Email</label>
+                                                            <input name="email" type="email"
+                                                                value="{{ $item->email }}" class="form-control">
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <label>Instructor Phone</label>
+                                                            <input name="phone" type="text"
+                                                                value="{{ $item->phone }}" class="form-control">
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label>Image</label>
+                                                            <input name="image" type="file" class="form-control">
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label>Status</label>
+                                                            <select name="status" class="form-control">
+                                                                <option {{ $item->status == 'active' ? 'selected' : '' }}
+                                                                    value="active">Active</option>
+                                                                <option {{ $item->status == 'inactive' ? 'selected' : '' }}
+                                                                    value="inactive">Inactive</option>
+                                                            </select>
                                                         </div>
                                                         <div class="col-12 mt-4 text-center">
                                                             <button type="submit"
-                                                                class="btn btn-primary me-sm-3 me-1">Save</button>
+                                                                class="btn btn-primary me-sm-3 me-1">Submit</button>
                                                             <button type="reset" class="btn btn-label-secondary"
                                                                 data-bs-dismiss="modal" aria-label="Close">Cancel</button>
                                                         </div>
@@ -140,10 +168,8 @@
                                         </div>
                                     </div>
 
-
-
                                     <form id="deleteForm_{{ $item->id }}"
-                                        action="{{ route('admin.training.destroy', $item->id) }}" method="post"
+                                        action="{{ route('admin.instructor.destroy', $item->id) }}" method="post"
                                         class="d-inline">
                                         @csrf
                                         @method('DELETE')

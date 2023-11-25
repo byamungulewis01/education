@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Enroll;
 use App\Models\Training;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,9 @@ class InstructorController extends Controller
     }
     public function students()
     {
-        $trainings = Training::where('user_id', auth()->user()->id)->orderBy('title')->get();
-        return view('instructor.trainings', compact('trainings'));
+        $trainingIds = Training::where('user_id', auth()->user()->id)->pluck('id')->toArray();
+
+        $students = Enroll::whereIn('training_id', $trainingIds)->get();
+        return view('instructor.students', compact('students'));
     }
 }

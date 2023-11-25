@@ -154,4 +154,14 @@ class TrainingController extends Controller
         Question::findorfail($id)->delete();
         return back()->with('success', 'Question Delete Successfully');
     }
+    public function activate_exam($id)
+    {
+        Training::findorfail($id)->update(['exam_status' => 'active']);
+        return back()->with('success', 'Exam Acticated Successfully');
+    }
+    public function disactivate_exam($id)
+    {
+        Training::findorfail($id)->update(['exam_status' => 'inactive']);
+        return back()->with('success', 'Exam Disacticated Successfully');
+    }
 }

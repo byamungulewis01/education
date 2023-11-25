@@ -23,9 +23,9 @@ class AuthContoller extends Controller
         ]);
         $credentials = $request->only('email', 'password');
         if (auth()->guard('student')->attempt($credentials)) {
-            return redirect()->route('student.index');
+            return to_route('index')->with('message', 'Login Successful');
         }
-        return redirect()->route('login')->with('error', 'Invalid Credentials');
+        return redirect()->route('index')->with('error', 'Invalid Credentials');
     }
 
     public function register()
@@ -76,6 +76,6 @@ class AuthContoller extends Controller
     public function logout()
     {
         auth()->guard('student')->logout();
-        return to_route('login');
+        return to_route('index');
     }
 }

@@ -13,9 +13,11 @@ class UserAccess
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $role): Response
+    public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        if (auth()->user()->role != $role) {
+        $userRole = auth()->user()->role;
+
+        if (!in_array($userRole, $roles)) {
             return to_route('admin.403');
         }
         return $next($request);
