@@ -1,19 +1,20 @@
 <?php
 
-use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthContoller;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\StudentController;
-use App\Http\Controllers\AdminAuthController;
-use App\Http\Controllers\AdminStudentController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ConsultanceController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EnrollController;
-use App\Http\Controllers\InstructorController;
-use App\Http\Controllers\InstructorRegistration;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TrainingController;
+use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\ConsultanceController;
+use App\Http\Controllers\AdminStudentController;
+use App\Http\Controllers\InstructorRegistration;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,18 +30,16 @@ use App\Http\Controllers\TrainingController;
 // Route::group(['middleware' => 'guest'], function () {
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('index');
-    Route::get('/about-us', 'about')->name('about');
-    Route::get('/contact-us', 'contact')->name('contact');
-    Route::get('/consultance', 'consultance')->name('consultance');
+    Route::get('/consultancy/{id}', 'consultancy')->name('consultancy');
     Route::get('/training/{id}', 'training')->name('training');
     Route::get('/training/show/{id}', 'show')->name('show');
-    Route::post('/training/{id}', 'filter')->name('filter');
 });
 Route::controller(AuthContoller::class)->group(function () {
-    Route::get('/login', 'login')->name('login');
     Route::post('/login', 'login_auth')->name('login_auth');
-    Route::get('/register', 'register')->name('register');
     Route::post('/register', 'register_auth')->name('register_auth');
+
+    Route::post('/client_login', 'client_login_auth')->name('client_login_auth');
+    Route::post('/client_register', 'client_register_auth')->name('client_register_auth');
 });
 Route::controller(AdminAuthController::class)->prefix('admin')->name('admin.')->group(function () {
     Route::get('/login', 'login')->name('login');
@@ -53,12 +52,24 @@ Route::group(['middleware' => 'student'], function () {
         Route::get('/profile', 'profile')->name('profile');
         Route::get('/my-trainings', 'trainings')->name('trainings');
         Route::get('/my-trainings/{id}', 'trainingShow')->name('trainingShow');
+        Route::get('/my-trainings-exam/{id}', 'training_exam_show')->name('training_exam_show');
+        Route::post('/my-trainings-exam/{id}', 'trainingExam')->name('trainingExam');
     });
     Route::controller(EnrollController::class)->prefix('enroll')->name('enroll.')->group(function () {
         Route::post('/free-course/{id}', 'free_course')->name('free_course');
         Route::post('/paid-course/{id}', 'paid_course')->name('paid_course');
     });
     Route::get('student/logout', [AuthContoller::class, 'logout'])->name('student.logout');
+});
+
+
+Route::group(['middleware' => 'client'], function () {
+    Route::controller(ClientController::class)->prefix('client')->name('client.')->group(function () {
+        Route::get('/profile', 'profile')->name('profile');
+        Route::get('/my_consultancy', 'my_consultancy')->name('my_consultancy');
+        Route::post('/consultancy/apply/{id}', 'consultancy_apply')->name('consultancy_apply');
+    });
+    Route::get('client/logout', [AuthContoller::class, 'client_logout'])->name('client.logout');
 });
 
 

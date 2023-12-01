@@ -41,7 +41,7 @@
 
     <link rel="stylesheet" href="{{ asset('assets2/vendor/libs/nouislider/nouislider.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets2/vendor/libs/swiper/swiper.css') }}" />
-
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/select2/select2.css') }}" />
     <!-- Page CSS -->
 
     <link rel="stylesheet" href="{{ asset('assets/toast/css/jquery.toast.css') }}">
@@ -82,9 +82,10 @@
     <script src="{{ asset('assets2/vendor/js/bootstrap.js') }}"></script>
     <script src="{{ asset('assets2/vendor/libs/node-waves/node-waves.js') }}"></script>
 
-    <!-- endbuild -->
     <script src="{{ asset('assets/vendor/libs/jquery/jquery.js') }}"></script>
-
+    <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
+    <!-- endbuild -->
+    <script src="{{ asset('assets/js/modal-add-new-address.js') }}"></script>
     <script src="{{ asset('assets/toast/js/jquery.toast.js') }}"></script>
 
     @include('layouts.flash_message')
@@ -99,7 +100,14 @@
 
     <!-- Page JS -->
     <script src="{{ asset('assets2/js/front-page-landing.js') }}"></script>
-
+    @if(session('created'))
+    <script>
+        var myModal = new bootstrap.Modal(document.getElementById('loginModel'), {
+          keyboard: false
+        })
+        myModal.show()
+    </script>
+  @endif
 </body>
 
 </html>

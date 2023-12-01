@@ -18,9 +18,10 @@ class HomeController extends Controller
         $categories = Category::orderBy('title')->get();
         return view('home.index', compact('categories'));
     }
-    public function consultance()
+    public function consultancy($id)
     {
-        return view('home.consultance');
+        $consultancy = Consultance::findorfail($id);
+        return view('home.show-consultancy',compact('consultancy'));
     }
     public function training($id)
     {

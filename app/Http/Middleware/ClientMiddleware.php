@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class StudentMiddleware
+class ClientMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,7 +15,7 @@ class StudentMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()->guard('student')->check()) {
+        if (!auth()->guard('client')->check()) {
             return to_route('index');
         }
         return $next($request);
