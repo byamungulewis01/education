@@ -20,7 +20,7 @@ class ConsultanceController extends Controller
     public function edit($id)
     {
         $item = Consultance::findorfail($id);
-        return view('admin.consultancy.edit',compact('item'));
+        return view('admin.consultancy.edit', compact('item'));
     }
     public function store(Request $request)
     {
@@ -38,7 +38,7 @@ class ConsultanceController extends Controller
             Consultance::create($request->all());
             $image->move(public_path('/images'), $imageName);
 
-            return back()->with('success', 'Consultance Added Successfully');
+            return to_route('admin.consultance.index')->with('success', 'Consultance Added Successfully');
         } catch (\Throwable $th) {
             return back()->with('error', 'Some things went wrong try again');
         }

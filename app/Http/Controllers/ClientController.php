@@ -12,6 +12,10 @@ class ClientController extends Controller
     {
         return view('client.profile');
     }
+    public function chat()
+    {
+        return view('client.chat');
+    }
     public function my_consultancy()
     {
         return view('client.consultancy');

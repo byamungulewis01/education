@@ -5,8 +5,8 @@
             <div class="modal-body">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="text-center mb-4">
-                    <h3 class="address-title mb-2">Add New Address</h3>
-                    <p class="text-muted address-subtitle">Add new address for express delivery</p>
+                    {{-- <h3 class="address-title mb-2">Add New Address</h3>
+                    <p class="text-muted address-subtitle">Add new address for express delivery</p> --}}
                 </div>
                 <form id="addNewAddressForm" method="post" class="row g-3" action="{{ route('register_auth') }}"
                     enctype="multipart/form-data">

@@ -17,8 +17,8 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Fname</th>
-                            <th scope="col">Lname</th>
+                            <th scope="col">Reg Number</th>
+                            <th scope="col">Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Phone</th>
                             <th scope="col">Training</th>
@@ -28,8 +28,8 @@
                         @foreach ($students as $item)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $item->student->fname }}</td>
-                                <td>{{ $item->student->lname }}</td>
+                                <td>{{ $item->regnumber }}</td>
+                                <td>{{ $item->fname }} {{ $item->lname }}</td>
                                 <td>{{ $item->student->email }}</td>
                                 <td>{{ $item->student->phone }}</td>
                                 <td>{{ $item->training->title }}</td>

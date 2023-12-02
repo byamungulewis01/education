@@ -67,6 +67,7 @@ Route::group(['middleware' => 'client'], function () {
     Route::controller(ClientController::class)->prefix('client')->name('client.')->group(function () {
         Route::get('/profile', 'profile')->name('profile');
         Route::get('/my_consultancy', 'my_consultancy')->name('my_consultancy');
+        Route::get('/chat', 'chat')->name('chat');
         Route::post('/consultancy/apply/{id}', 'consultancy_apply')->name('consultancy_apply');
     });
     Route::get('client/logout', [AuthContoller::class, 'client_logout'])->name('client.logout');
@@ -138,6 +139,20 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
         Route::post('/', 'store')->name('store');
         Route::put('/{id}', 'update')->name('update');
         Route::delete('/{id}', 'destroy')->name('destroy');
+    });
+
+    Route::controller(UsersController::class)->prefix('students')->name('student.')->group(function () {
+        Route::get('/', 'students')->name('index');
+        Route::post('/', 'store_student')->name('store');
+        Route::put('/{id}', 'update_student')->name('update');
+        Route::delete('/{id}', 'destroy_student')->name('destroy');
+    });
+
+    Route::controller(UsersController::class)->prefix('clients')->name('client.')->group(function () {
+        Route::get('/', 'clients')->name('index');
+        Route::post('/', 'store_client')->name('store');
+        Route::put('/{id}', 'update_client')->name('update');
+        Route::delete('/{id}', 'destroy_client')->name('destroy');
     });
 
 

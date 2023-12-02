@@ -16,13 +16,11 @@ class CreateAccount extends Mailable
     /**
      * Create a new message instance.
      */
-    public $fname;
-    public $lname;
-    public function __construct(string $fname, string $lname)
+    public $student;
+    public function __construct(string $student)
     {
         //
-        $this->fname = $fname;
-        $this->lname = $lname;
+        $this->student = $student;
     }
 
     /**

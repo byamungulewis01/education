@@ -65,8 +65,8 @@
                     <div class="w-px-400 mx-auto">
 
                         <!-- /Logo -->
-                        <h3 class="mb-1">Welcome to Vuexy! 👋</h3>
-                        <p class="mb-4">Please sign-in to your account and start the adventure</p>
+                        <h3 class="mb-1">Welcome to BCCH Ltd! 👋</h3>
+                        {{-- <p class="mb-4">Please sign-in to your account and start the adventure</p> --}}
                         @if (session('error'))
                             <div class="alert alert-danger d-flex align-items-center" role="alert">
                                 <span class="alert-icon text-danger me-2">
@@ -143,8 +143,8 @@
                     <div class="w-px-400 mx-auto">
 
                         <!-- /Logo -->
-                        <h3 class="mb-1">Welcome to Vuexy! 👋</h3>
-                        <p class="mb-4">Please sign-in to your account and start the adventure</p>
+                        <h3 class="mb-1">Welcome to BCCH Ltd! 👋</h3>
+                        {{-- <p class="mb-4">Please sign-in to your account and start the adventure</p> --}}
                         @if (session('error'))
                             <div class="alert alert-danger d-flex align-items-center" role="alert">
                                 <span class="alert-icon text-danger me-2">

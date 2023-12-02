@@ -16,7 +16,7 @@
 
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.ico') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/boost.png') }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="{{ asset('assets/fonts/googleapis.com/index.html') }}">
@@ -40,6 +40,8 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/swiper/swiper.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/toastr/toastr.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/animate-css/animate.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/select2/select2.css') }}" />
+
     <!-- Helpers -->
     <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
 
@@ -68,7 +70,7 @@
 
     <div class="app-brand demo ">
         <a href="{{ route('admin.index') }}" class="app-brand-link">
-            <img src="{{ asset('assets/logo/logo-simplified.png') }}" class="mt-1" alt="RBA Logo" width="170">
+            <img src="{{ asset('assets/logo/light-logo2.png') }}" class="mt-1" alt="BCCH Logo" width="170">
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -151,6 +153,11 @@
   <!-- Main JS -->
   <script src="{{ asset('assets/js/main.js') }}"></script>
   <script src="{{ asset('assets/toast/js/jquery.toast.js') }}"></script>
+
+
+  <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
+  <script src="{{ asset('assets2/js/modal-add-new-address.js') }}"></script>
+
 
   @include('layouts.flash_message')
 

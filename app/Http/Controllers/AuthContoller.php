@@ -42,7 +42,7 @@ class AuthContoller extends Controller
             'identity_doc' => 'required|mimes:pdf,png,jpg',
         ]);
         $count = str_pad(Student::count() + 1, 3, '0', STR_PAD_LEFT);
-        $regnumber = now()->year . '/BCCH/ ' . $count;
+        $regnumber = now()->year . '/BCCH/' . $count;
         $request->merge(['password' => Hash::make($request->password), 'regnumber' => $regnumber]);
 
         if ($request->hasFile('academic_doc')) {
@@ -57,11 +57,11 @@ class AuthContoller extends Controller
             $request->merge(['identity_doc_path' => $file2Name]);
         }
         try {
-            Student::create($request->all());
+            $student = Student::create($request->all());
             $file1->move(public_path('/files'), $file1Name);
             $file2->move(public_path('/files'), $file2Name);
 
-            Mail::to($request->email)->send(new CreateAccount($request->fname, $request->lname));
+            Mail::to($request->email)->send(new CreateAccount($student));
             return to_route('index')->with('created');
         } catch (\Throwable $th) {
             //throw $th;

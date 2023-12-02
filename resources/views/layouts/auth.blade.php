@@ -15,7 +15,7 @@
 
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.ico') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/boost.png') }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="{{ asset('assets/fonts/googleapis.com/index.html') }}">

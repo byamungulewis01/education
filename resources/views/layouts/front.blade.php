@@ -13,11 +13,7 @@
     <meta name="keywords" content="Boost Consultancy & Coaching Hub LTD,Boost Consultancy,BCCH LTD">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.ico') }}" />
-
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/boost.png') }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -73,7 +69,7 @@
     </div>
     <!-- Footer: Start -->
     @if (Request::routeIs('index'))
-        <x-student.footer />
+        {{-- <x-student.footer /> --}}
     @endif
 
     <!-- Core JS -->

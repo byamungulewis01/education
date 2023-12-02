@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('imageName')->default('default.jpeg');
             $table->string('identity_doc_path');
             $table->string('academic_doc_path');
+            $table->enum('status', ['pending', 'approved', 'rejected']);
             $table->boolean('approved')->default(false);
             $table->timestamps();
         });
