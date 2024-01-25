@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Module;
 use App\Models\TrainingComponent;
 use App\Models\User;
-use App\Models\Category;
 use App\Models\Question;
 use App\Models\Training;
 use Illuminate\Http\Request;
@@ -15,10 +15,9 @@ class TrainingController extends Controller
     public function index()
     {
         $trainings = Training::orderByDesc('id')->get();
-        $categories = Category::orderBy('title')->get();
         $instructors = User::where('role', 'instructor')->where('status', 'active')->orderByDesc('id')->get();
 
-        return view('admin.trainings.index', compact('trainings', 'categories', 'instructors'));
+        return view('admin.trainings.index', compact('trainings', 'instructors'));
     }
     public function store(Request $request)
     {
@@ -26,7 +25,6 @@ class TrainingController extends Controller
             'title' => 'required|unique:trainings,title',
             'description' => 'required',
             'price' => 'required|numeric',
-            'category_id' => 'required',
             'user_id' => 'required',
         ]);
 
@@ -45,7 +43,6 @@ class TrainingController extends Controller
             'description' => 'required',
             'price' => 'required|numeric',
             'user_id' => 'required',
-            'category_id' => 'required',
         ]);
 
         try {
@@ -63,68 +60,32 @@ class TrainingController extends Controller
     public function show($id)
     {
         $training = Training::find($id);
-        $components = TrainingComponent::where('training_id', $id)->orderByDesc('id')->get();
+        $modules = Module::where('training_id', $id)->orderByDesc('id')->get();
         $questions = Question::where('training_id', $id)->get();
-        return view('admin.trainings.show', compact('training', 'components','questions'));
+        return view('admin.trainings.show', compact('training', 'modules', 'questions'));
     }
-    public function store_component(Request $request, $id)
-    {
-        $request->validate([
-            'title' => 'required',
-            'file' => 'required|mimes:pdf'
-        ]);
-        if ($request->hasFile('file')) {
-            $file = $request->file('file');
-            $fileUrl = time() . '.' . $file->getClientOriginalExtension();
-        }
-        $request->merge(['fileUrl' => $fileUrl, 'training_id' => $id]);
-        try {
-            TrainingComponent::create($request->all());
-            $file->move(public_path('/files/components'), $fileUrl);
 
-            return back()->with('success', 'Component Added Successfully');
-        } catch (\Throwable $th) {
-            return back()->with('error', 'Some things went wrong try again');
-        }
-    }
-    public function update_component(Request $request, $id)
-    {
-        $request->validate([
-            'title' => 'required',
-            'file' => 'nullable|mimes:pdf'
-        ]);
-        if ($request->hasFile('file')) {
-            $file = $request->file('file');
-            $fileUrl = time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('/files/components'), $fileUrl);
-            $request->merge(['fileUrl' => $fileUrl]);
-        }
-        try {
-            TrainingComponent::findorfail($id)->update($request->all());
-            return back()->with('success', 'Component Updated Successfully');
-        } catch (\Throwable $th) {
-            return back()->with('error', 'Some things went wrong try again');
-        }
-    }
-    public function destroy_component($id)
-    {
-        TrainingComponent::findorfail($id)->delete();
-        return back()->with('success', 'Component Delete Successfully');
-    }
     public function store_question(Request $request, $id)
     {
+
         $request->validate([
             'title' => 'required',
-            'choice_one' => 'required',
-            'choice_two' => 'required',
-            'choice_three' =>'nullable',
-            'choice_four' =>'nullable',
-            'answer' =>'required',
+            'choices' => 'required|array',
+            'answers' => 'required|array',
+            'marks' => 'required',
         ]);
 
-        $request->merge(['training_id' => $id]);
+        $choices = implode('//next//', $request->choices);
+        $answers = implode(',', $request->answers);
+
         try {
-            Question::create($request->all());
+            Question::create([
+                'title' => $request->title,
+                'choices' => $choices,
+                'answers' => $answers,
+                'marks' => $request->marks,
+                'training_id' => $id
+            ]);
 
             return back()->with('success', 'Question Added Successfully');
         } catch (\Throwable $th) {
@@ -137,9 +98,9 @@ class TrainingController extends Controller
             'title' => 'required',
             'choice_one' => 'required',
             'choice_two' => 'required',
-            'choice_three' =>'nullable',
-            'choice_four' =>'nullable',
-            'answer' =>'required',
+            'choice_three' => 'nullable',
+            'choice_four' => 'nullable',
+            'answer' => 'required',
         ]);
 
         try {

@@ -21,8 +21,8 @@ class Training extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function category()
+    public function modules()
     {
-        return $this->belongsTo(Category::class);
+        return $this->hasMany(Module::class);
     }
 }

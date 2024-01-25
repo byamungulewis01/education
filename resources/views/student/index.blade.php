@@ -17,7 +17,6 @@
                             <tr>
                                 <th>#</th>
                                 <th scope="col">Training</th>
-                                <th scope="col">Category</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Action</th>
@@ -28,7 +27,6 @@
                                 <tr>
                                     <th>{{ $loop->iteration }}</th>
                                     <td class="font-weight-bold">{{ $item->training->title }}</td>
-                                    <td>{{ $item->training->category->title }}</td>
                                     <td>{{ $item->training->price }} $ </td>
                                     <td>
                                         @if ($item->training->status == 'active')

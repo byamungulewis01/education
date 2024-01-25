@@ -32,25 +32,14 @@
                                         <input name="title" type="text" class="form-control" required
                                             placeholder="Training Title" value="{{ old('title') }}">
                                     </div>
-                                    <div class="col-md-7">
 
-                                        <label for="category_id" class="form-label">Category</label>
-                                        <select name="category_id" id="category_id" class="form-select">
-                                            <option value="" selected disabled>Select</option>
-                                            @foreach ($categories as $category)
-                                                <option {{ old('category_id') == $category->id ? 'selected' : '' }}
-                                                    value="{{ $category->id }}">{{ $category->title }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                    <div class="col-md-5">
+                                    <div class="col-md-4">
                                         <label for="price" class="form-label">Price</label>
                                         <input name="price" type="number" id="price" value="{{ old('price') }}"
                                             min="0" class="form-control" placeholder="Training Price">
                                     </div>
 
-                                    <div class="col-md-12">
+                                    <div class="col-md-8">
 
                                         <label for="instructor" class="form-label">Instructor</label>
                                         <select name="user_id" id="instructor" class="form-select">
@@ -85,7 +74,6 @@
                         <tr>
                             <th>#</th>
                             <th scope="col">Training</th>
-                            <th scope="col">Category</th>
                             <th scope="col">Price</th>
                             <th scope="col">Instructor</th>
                             <th scope="col">Status</th>
@@ -97,7 +85,6 @@
                             <tr>
                                 <th>{{ $loop->iteration }}</th>
                                 <td class="font-weight-bold">{{ $item->title }}</td>
-                                <td>{{ $item->category->title }}</td>
                                 <td>{{ $item->price }} $ </td>
                                 <td>{{ $item->user->name }}</td>
                                 <td>
@@ -110,8 +97,8 @@
 
                                 <td>
                                     {{-- <a href="javascript:;" class="text-body delete-record 1"><i class="ti ti-trash ti-sm mx-2" data-id="1"></i></a> --}}
-                                    <a href="{{ route('admin.training.show', $item->id) }}"
-                                        class="text-body"><i class="ti ti-eye ti-sm mx-1"></i></a>
+                                    <a href="{{ route('admin.training.show', $item->id) }}" class="text-body"><i
+                                            class="ti ti-eye ti-sm mx-1"></i></a>
                                     <a href="javascript:;" class="text-body" data-bs-toggle="modal"
                                         data-bs-target="#editModel{{ $item->id }}"><i
                                             class="ti ti-edit ti-sm mx-1"></i></a>
@@ -136,30 +123,7 @@
                                                             <input name="title" type="text" class="form-control"
                                                                 required value="{{ $item->title }}">
                                                         </div>
-                                                        <div class="col-md-7">
-
-                                                            <label for="category_id" class="form-label">Category</label>
-                                                            <select name="category_id" id="category_id"
-                                                                class="form-select">
-                                                                <option value="" selected disabled>Select</option>
-                                                                @foreach ($categories as $category)
-                                                                    <option
-                                                                        {{ $item->category_id == $category->id ? 'selected' : '' }}
-                                                                        value="{{ $category->id }}">
-                                                                        {{ $category->title }}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-
-                                                        <div class="col-md-5">
-                                                            <label for="price" class="form-label">Price</label>
-                                                            <input name="price" type="number" id="price"
-                                                                value="{{ $item->price }}" min="0"
-                                                                class="form-control">
-                                                        </div>
-
-                                                        <div class="col-md-7">
+                                                        <div class="col-md-12">
 
                                                             <label for="instructor" class="form-label">Instructor</label>
                                                             <select name="user_id" id="instructor" class="form-select">
@@ -173,7 +137,13 @@
                                                                 @endforeach
                                                             </select>
                                                         </div>
-                                                        <div class="col-md-5">
+                                                        <div class="col-md-6">
+                                                            <label for="price" class="form-label">Price</label>
+                                                            <input name="price" type="number" id="price"
+                                                                value="{{ $item->price }}" min="0"
+                                                                class="form-control">
+                                                        </div>
+                                                        <div class="col-md-6">
                                                             <label for="status" class="form-label">Status</label>
                                                             <select name="status" id="status" class="form-select">
                                                                 <option {{ $item->status == 'active' ? 'selected' : '' }}

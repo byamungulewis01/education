@@ -106,7 +106,7 @@
             <div class="row gy-4 pt-lg-3">
 
                 <!-- Standard Plan: Start -->
-                @foreach ($categories as $item)
+                @foreach ($trainings as $item)
                     <div class="col-xl-4">
                         <div class="card border border-primary shadow-lg">
                             <div class="card-body">
@@ -114,7 +114,7 @@
                                     {{-- <img src="{{ asset('images/' . $item->imageName) }}" alt="shuttle rocket icon"
                                     class="" /> --}}
                                     <h4 class="">{{ $item->title }}</h4>
-                                    <p>{{ $item->trainings->count() }} Trainings</p>
+                                    <p>{{ $item->modules->count() }} Modules</p>
 
 
                                 </div>

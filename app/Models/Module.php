@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Question extends Model
+class Module extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'title',
+        'name',
+        'description',
+        'fileUrl',
         'training_id',
-        'choices',
-        'answers',
-        'marks',
     ];
 }

@@ -8,7 +8,7 @@
 
         <div class="row mb-3">
             <!-- Invoice -->
-            <div class="col-xl-6">
+            <div class="col-xl-5">
                 <div class="card h-100">
                     <div class="card-body">
                         <h4 class="fw-semibold mb-2">{{ $training->title }} </h4>
@@ -17,14 +17,14 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-6">
+            <div class="col-xl-7">
                 <div class="card mb-4 h-100">
                     <div class="card-header">
-                        <h4 class="card-title mb-0">Component
+                        <h4 class="card-title mb-0">List of modules
                             <a class="btn btn-sm btn-dark text-white pull-left float-end" data-bs-toggle="modal"
                                 data-bs-target="#addModal">
                                 <i class="ti ti-plus ti-xs"></i>
-                                <span class="d-none d-sm-inline-block">Training</span></a>
+                                <span class="d-none d-sm-inline-block">Module</span></a>
                         </h4>
                         <div class="modal fade" id="addModal" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered1 modal-simple modal-add-new-cc">
@@ -33,22 +33,26 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                         <div class="text-center mb-2">
-                                            <h3>Add New Training</h3>
+                                            <h3>New Module</h3>
                                         </div>
                                         <form method="POST" class="row g-2"
-                                            action="{{ route('admin.training.store_component', $training->id) }}"
+                                            action="{{ route('admin.module.store', $training->id) }}"
                                             enctype="multipart/form-data">
                                             @csrf
                                             <div class="col-12">
-                                                <label>Title</label>
-                                                <input name="title" type="text" class="form-control"
-                                                    placeholder="Title">
+                                                <label>Name</label>
+                                                <input name="name" value="{{ old('name') }}" type="text"
+                                                    class="form-control" placeholder="Title">
                                             </div>
                                             <div class="col-12">
-                                                <label>File <span class="text-danger">Only PDF
+                                                <label>Component <span class="text-danger">Only PDF
                                                         Required</span></label>
                                                 <input name="file" required accept=".pdf" type="file"
                                                     class="form-control">
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="description" class="form-label">Description</label>
+                                                <textarea id="description" name="description" rows="3" class="form-control" placeholder="Description">{{ old('description') }}</textarea>
                                             </div>
 
                                             <div class="col-12 mt-4 text-center">
@@ -69,18 +73,21 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th scope="col">Title</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Description</th>
                                         <th scope="col">File</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($components as $item)
+                                    @forelse ($modules as $item)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->title }}</td>
+                                            <td>{{ $item->name }}</td>
+                                            <td>{{ $item->description }}</td>
                                             <td><a class="text-info" target="blank"
-                                                    href="{{ asset('files/components/' . $item->fileUrl) }}">Component</a>
+                                                    href="{{ asset('files/components/' . $item->fileUrl) }}">
+                                                    <i class="fas fa-download mr-0"></i></a>
                                             </td>
                                             <td>
                                                 <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
@@ -95,24 +102,29 @@
                                                                 <button type="button" class="btn-close"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 <div class="text-center mb-2">
-                                                                    <h3>Edit Component</h3>
+                                                                    <h3>Edit Module</h3>
                                                                 </div>
                                                                 <form method="POST" class="row g-2"
-                                                                    action="{{ route('admin.training.update_component', $item->id) }}"
+                                                                    action="{{ route('admin.module.update', $item->id) }}"
                                                                     enctype="multipart/form-data">
                                                                     @csrf
                                                                     @method('PUT')
                                                                     <div class="col-12">
-                                                                        <label>Title</label>
-                                                                        <input name="title" type="text"
+                                                                        <label>Name</label>
+                                                                        <input name="name" type="text"
                                                                             class="form-control"
-                                                                            value="{{ $item->title }}">
+                                                                            value="{{ $item->name }}">
                                                                     </div>
                                                                     <div class="col-12">
                                                                         <label>File <span class="text-danger">Only PDF
                                                                                 Required</span></label>
                                                                         <input name="file" accept=".pdf" type="file"
                                                                             class="form-control">
+                                                                    </div>
+                                                                    <div class="col-12">
+                                                                        <label for="description"
+                                                                            class="form-label">Description</label>
+                                                                        <textarea id="description" name="description" rows="3" class="form-control" placeholder="Description">{{ $item->description }}</textarea>
                                                                     </div>
 
                                                                     <div class="col-12 mt-4 text-center">
@@ -128,7 +140,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <form action="{{ route('admin.training.destroy_component', $item->id) }}"
+                                                <form action="{{ route('admin.module.destroy', $item->id) }}"
                                                     method="post" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
@@ -200,44 +212,42 @@
                                                 placeholder="Title">
                                         </div>
                                         <div class="col-12 mb-2">
-                                            <label>Choice A</label>
-                                            <input name="choice_one" type="text" required class="form-control"
-                                                placeholder="Choice A">
-                                        </div>
-                                        <div class="col-12 mb-2">
-                                            <label>Choice B</label>
-                                            <input name="choice_two" type="text" required class="form-control"
-                                                placeholder="Choice B">
-                                        </div>
-                                        <div class="col-12 mb-2">
-                                            <label>Choice C</label>
-                                            <input name="choice_three" type="text" class="form-control"
-                                                placeholder="Choice C">
-                                        </div>
-                                        <div class="col-12 mb-2">
-                                            <label>Choice D</label>
-                                            <input name="choice_four" type="text" class="form-control"
-                                                placeholder="Choice D">
-                                        </div>
-                                        <div class="col-6">
-                                            <label>Answer</label>
-                                            <select name="answer" class="form-select" id="">
-                                                <option value="choice_one">A</option>
-                                                <option value="choice_two">B</option>
-                                                <option value="choice_three">C</option>
-                                                <option value="choice_four">D</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-6">
-                                            <label>Total Marks</label>
-                                            <input name="marks" placeholder="Total Marks" min="1"
-                                                max="100" required type="number" class="form-control">
+                                            <label>Chooses</label>
+                                            <table id="item_table" style="width: 95%">
+                                                <tr>
+                                                    <td>
+                                                        <div class="row mb-2">
+                                                            <div class="col-1">
+                                                                <input type="checkbox" value="1" name="answers[1]"
+                                                                    class="form-check-input"
+                                                                    style="width: 31px; height: 31px;">
+                                                            </div>
+                                                            <div class="col-10">
+                                                                <input name="choices[1]" type="text" required
+                                                                    class="form-control" placeholder="Choice 1">
+                                                            </div>
+                                                            <div class="col-1">
+                                                                <button type="button" class="btn btn-primary add"><i
+                                                                        class="ti ti-plus ti-xs"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </div>
 
-                                        <div class="col-12 mt-4 text-center">
-                                            <button type="submit" class="btn btn-primary me-sm-3 me-1">Submit</button>
-                                            <button type="reset" class="btn btn-label-secondary"
-                                                data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                                        <div class="col-12 mt-2">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <input name="marks" type="number" required class="form-control"
+                                                        placeholder="Marks">
+                                                </div>
+                                                <div class="col-6">
+                                                    <button type="submit"
+                                                        class="btn btn-primary me-sm-3 me-1">Submit</button>
+
+                                                </div>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
@@ -357,43 +367,21 @@
                                     </div>
                                     <div class="card-body">
                                         <ul class="p-0 m-0">
-                                            <li class="d-flex mb-2 pb-1 align-items-center">
+                                            @php
+                                                $choices = explode('//next//', $item->choices);
+                                            @endphp
+                                            @foreach ($choices as $key => $choice)
 
-                                                <strong>A)</strong><span class="text-muted">{{ $item->choice_one }}</span>
-                                            </li>
-                                            <li class="d-flex mb-2 pb-1 align-items-center">
-                                                <strong>B) </strong><span
-                                                    class="text-muted">{{ $item->choice_two }}</span>
-                                            </li>
-                                            @if ($item->choice_three)
-                                                <li class="d-flex mb-2 pb-1 align-items-center">
-                                                    <strong>C) </strong><span
-                                                        class="text-muted">{{ $item->choice_three }}</span>
+                                                <li class="d-flex mb-2">
+                                                    <strong>{{ $key + 1 }} ) &nbsp;</strong><span class="text-muted">
+                                                        {{ $choice }}</span>
                                                 </li>
-                                            @endif
-                                            @if ($item->choice_four)
-                                                <li class="d-flex mb-2 pb-1 align-items-center">
-                                                    <strong>D) </strong><span class="text-muted">{{ $item->choice_four }}
-                                                    </span>
-                                                </li>
-                                            @endif
+                                            @endforeach
+
+
 
                                         </ul>
-                                        <h6 class="text-danger">Answer :
-                                            @if ($item->answer == 'choice_one')
-                                                <span class="text-muted"><strong>A) </strong>
-                                                    {{ $item->choice_one }}</span>
-                                            @elseif($item->answer == 'choice_two')
-                                                <span class="text-muted"><strong>B) </strong>
-                                                    {{ $item->choice_two }}</span>
-                                            @elseif($item->answer == 'choice_three')
-                                                <span class="text-muted"><strong>C) </strong>
-                                                    {{ $item->choice_three }}</span>
-                                            @else
-                                                <span class="text-muted"><strong>D) </strong>
-                                                    {{ $item->choice_four }}</span>
-                                            @endif
-                                        </h6>
+                                        <h6 class="text-danger">Answer :<strong> {{ $item->answers }} </strong></h6>
                                         <h6 class="text-info">Total Marks :<span class="text-muted"> {{ $item->marks }}
                                             </span>
                                         </h6>
@@ -413,5 +401,25 @@
 
 @endsection
 @section('js')
+    <script>
+        $(document).ready(function() {
 
+            $(document).on('click', '.add', function() {
+                var html = '';
+                var number_of_rows = $('#item_table tr').length + 1;
+
+                html +=
+                    `<tr><td><div class="row mb-3">
+                    <div class="col-1"><input type="checkbox" value="${number_of_rows}" name="answers[${number_of_rows}]" class="form-check-input" style="width: 31px; height: 31px;"></div>
+                    <div class="col-10"><input name="choices[${number_of_rows}]" type="text" required class="form-control" placeholder="Choice ${number_of_rows}"></div>
+                    <div class="col-1"> <button class="btn btn-danger remove"><i class="ti ti-minus"></i></button></div></div></td></tr>`;
+                $('#item_table').append(html);
+            });
+
+            $(document).on('click', '.remove', function() {
+                $(this).closest('tr').remove();
+            });
+
+        });
+    </script>
 @endsection

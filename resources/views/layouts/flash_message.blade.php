@@ -11,6 +11,19 @@
         });
     </script>
 @endif
+@if (session()->has('success'))
+    <script>
+        $(document).ready(function() {
+            $.toast({
+                heading: 'Success',
+                text: '{{ session()->get('success') }}',
+                showHideTransition: 'fade',
+                icon: 'success',
+                position: 'top-right'
+            });
+        });
+    </script>
+@endif
 @if (session()->has('warning'))
     <script>
         $(document).ready(function() {

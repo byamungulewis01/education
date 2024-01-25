@@ -10,7 +10,13 @@
             <div data-i18n="Dashboard">Dashboard</div>
         </a>
     </li>
+    <li class="menu-item {{ Request::routeIs('admin.training.index', 'admin.training.show') ? 'active' : '' }}">
+        <a href="{{ route('admin.training.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-link"></i>
+            <div data-i18n="Trainings">Trainings</div>
+        </a>
 
+    </li>
 
     <li
         class="menu-item {{ Request::routeIs(['admin.consultance.index', 'admin.consultance.create', 'admin.consultance.edit']) ? 'open' : '' }} ">
@@ -33,26 +39,7 @@
             </li>
         </ul>
     </li>
-    <li
-        class="menu-item {{ Request::routeIs(['admin.category.index', 'admin.training.index', 'admin.training.show']) ? 'open' : '' }} ">
-        <a href="javascript:void(0);" class="menu-link menu-toggle">
-            <i class="menu-icon tf-icons ti ti-link"></i>
-            <div data-i18n="Trainings">Trainings</div>
-        </a>
-        <ul class="menu-sub">
-            <li class="menu-item {{ Request::routeIs('admin.training.index', 'admin.training.show') ? 'active' : '' }}">
-                <a href="{{ route('admin.training.index') }}" class="menu-link">
-                    <div data-i18n="List">List</div>
-                </a>
-            </li>
 
-            <li class="menu-item {{ Request::routeIs('admin.category.index') ? 'active' : '' }}">
-                <a href="{{ route('admin.category.index') }}" class="menu-link">
-                    <div data-i18n="Categories">Categories</div>
-                </a>
-            </li>
-        </ul>
-    </li>
 
     <li
         class="menu-item {{ Request::routeIs(['admin.student.application', 'admin.student.approved', 'admin.student.rejected']) ? 'open' : '' }} ">
@@ -82,7 +69,8 @@
     </li>
 
 
-    <li class="menu-item {{ Request::routeIs(['admin.user.index', 'admin.instructor.index','admin.student.index','admin.client.index']) ? 'open' : '' }} ">
+    <li
+        class="menu-item {{ Request::routeIs(['admin.user.index', 'admin.instructor.index', 'admin.student.index', 'admin.client.index']) ? 'open' : '' }} ">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons ti ti-users"></i>
             <div data-i18n="Users">Users</div>

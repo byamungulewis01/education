@@ -8,6 +8,7 @@ use App\Models\Program;
 use App\Models\Category;
 use App\Models\Training;
 use App\Models\Consultance;
+use App\Models\Module;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -15,21 +16,20 @@ class HomeController extends Controller
     //index
     public function index()
     {
-        $categories = Category::orderBy('title')->get();
-        return view('home.index', compact('categories'));
+        $trainings = Training::orderBy('title')->get();
+        return view('home.index', compact('trainings'));
     }
     public function consultancy($id)
     {
         $consultancy = Consultance::findorfail($id);
-        return view('home.show-consultancy',compact('consultancy'));
+        return view('home.show-consultancy', compact('consultancy'));
     }
     public function training($id)
     {
-        $category = Category::findorfail(decrypt($id));
+        $training = Training::findorfail(decrypt($id));
         // trainigs
-        $trainings = Training::where('category_id', decrypt($id))->paginate(6);
-        $trainingsCount = Training::where('category_id', decrypt($id));
-        return view('home.show-trainings', compact('category', 'trainings', 'trainingsCount'));
+        $modules = Module::where('training_id', decrypt($id))->paginate(6);
+        return view('home.show-trainings', compact('training', 'modules'));
     }
 
     public function filter(Request $request, $id)

@@ -15,11 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title')->unique();
             $table->foreignId('training_id')->constrained()->cascadeOnDelete();
-            $table->string('choice_one');
-            $table->string('choice_two');
-            $table->string('choice_three')->nullable();
-            $table->string('choice_four')->nullable();
-            $table->string('answer');
+            $table->longText('choices');
+            $table->string('answers');
             $table->integer('marks');
             $table->timestamps();
         });

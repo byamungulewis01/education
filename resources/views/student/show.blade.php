@@ -17,7 +17,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6">
+                    {{-- <div class="col-6">
                         <div class="card mb-4 h-100">
                             <div class="card-header">
                                 <h4 class="card-title mb-0">Component
@@ -57,7 +57,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

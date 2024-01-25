@@ -15,6 +15,7 @@ use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\ConsultanceController;
 use App\Http\Controllers\AdminStudentController;
 use App\Http\Controllers\InstructorRegistration;
+use App\Http\Controllers\ModuleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,15 +96,20 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
         Route::put('/{id}', 'update')->name('update');
         Route::delete('/{id}', 'destroy')->name('destroy');
         Route::get('/show/{id}', 'show')->name('show');
-        Route::post('/component/{id}', 'store_component')->name('store_component');
-        Route::put('/component/{id}', 'update_component')->name('update_component');
-        Route::delete('/component/{id}', 'destroy_component')->name('destroy_component');
+
+
         Route::post('/question/{id}', 'store_question')->name('store_question');
         Route::put('/question/{id}', 'update_question')->name('update_question');
         Route::delete('/question/{id}', 'destroy_question')->name('destroy_question');
 
         Route::put('/activate_exam/{id}', 'activate_exam')->name('activate_exam');
         Route::put('/disactivate_exam/{id}', 'disactivate_exam')->name('disactivate_exam');
+    });
+
+    Route::controller(ModuleController::class)->prefix('module')->name('module.')->group(function () {
+        Route::post('/{id}', 'store')->name('store');
+        Route::put('/{id}', 'update')->name('update');
+        Route::delete('/{id}', 'destroy')->name('destroy');
     });
 
     Route::controller(ConsultanceController::class)->prefix('consultances')->name('consultance.')->middleware('user-access:admin,super_admin')->group(function () {

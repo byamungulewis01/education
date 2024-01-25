@@ -22,37 +22,25 @@
                                                     {{ $item->title }}
                                                     <span class="float-end">Marks : <span
                                                             class="text-danger">{{ $item->marks }}</span></span>
+                                                    @php
+                                                        $type = is_numeric($item->answers) ? 'radio' : 'checkbox';
+                                                    @endphp
+
                                                 </h5>
                                                 <div class="demo-inline-spacing mt-3">
                                                     <div class="list-group">
-                                                        <label class="list-group-item cursor-pointer">
-                                                            <input class="form-check-input me-1" required type="radio"
-                                                                name="question[{{ $item->id }}]"
-                                                                value="{{ $item->id }}-choice_one">
-                                                            {{ $item->choice_one }}
-                                                        </label>
-                                                        <label class="list-group-item cursor-pointer">
-                                                            <input class="form-check-input me-1" required type="radio"
-                                                                name="question[{{ $item->id }}]"
-                                                                value="{{ $item->id }}-choice_two">
-                                                            {{ $item->choice_two }}
-                                                        </label>
-                                                        @if ($item->choice_three)
+                                                        @php
+                                                            $choices = explode('//next//', $item->choices);
+                                                        @endphp
+                                                        @foreach ($choices as $key => $choice)
                                                             <label class="list-group-item cursor-pointer">
-                                                                <input class="form-check-input me-1" required type="radio"
-                                                                    name="question[{{ $item->id }}]"
-                                                                    value="{{ $item->id }}-choice_three">
-                                                                {{ $item->choice_three }}
+                                                                <input class="form-check-input me-1"
+                                                                    type="{{ $type }}"
+                                                                    name="q-{{ $item->id }}[]"
+                                                                    value="{{ $key + 1 }}">
+                                                                {{ $choice }}
                                                             </label>
-                                                        @endif
-                                                        @if ($item->choice_four)
-                                                            <label class="list-group-item cursor-pointer">
-                                                                <input class="form-check-input me-1" required type="radio"
-                                                                    name="question[{{ $item->id }}]"
-                                                                    value="{{ $item->id }}-choice_four">
-                                                                {{ $item->choice_four }}
-                                                            </label>
-                                                        @endif
+                                                        @endforeach
                                                     </div>
                                                 </div>
                                             </div>
@@ -76,61 +64,32 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    @foreach (explode(',', $exam_set->questions_answers) as $value)
+                                    @foreach (json_decode($exam_set->questions_answers, true) as $quest => $value)
                                         @php
-                                            $q = explode('-', $value)[0];
-                                            $c = explode('-', $value)[1];
+                                            $q = explode('-', $quest)[1];
                                             $question = \App\Models\Question::findorfail($q);
-                                            $ex_marks = $c == $question->answer ? $question->marks : 0;
+                                            $ex_marks = $value == $question->answers ? $question->marks : 0;
                                         @endphp
                                         <div class="col-lg-12 mb-5">
-                                            <h5 class="text-light fw-medium">Q. {{ $loop->iteration }} )
+                                            <h5 class="text-light fw-medium">Q.{{ $loop->iteration }} )
                                                 {{ $question->title }}
                                                 <span class="float-end">Marks : {{ $ex_marks }}/<span
                                                         class="text-danger">{{ $question->marks }}</span></span>
                                             </h5>
                                             <div class="demo-inline-spacing mt-3">
                                                 <div class="list-group">
-                                                    <label class="list-group-item cursor-pointer">
-                                                        <input class="form-check-input me-1"
-                                                            {{ $c == 'choice_one' ? 'checked' : '' }} type="radio">
-                                                        A) {{ $question->choice_one }}
-                                                    </label>
-                                                    <label class="list-group-item cursor-pointer">
-                                                        <input class="form-check-input me-1"
-                                                            {{ $c == 'choice_two' ? 'checked' : '' }} type="radio">
-                                                        B) {{ $question->choice_two }}
-                                                    </label>
-                                                    @if ($question->choice_three)
+                                                    @php
+                                                        $choices = explode('//next//', $question->choices);
+                                                    @endphp
+                                                    @foreach ($choices as $key => $choice)
                                                         <label class="list-group-item cursor-pointer">
-                                                            <input class="form-check-input me-1"
-                                                                {{ $c == 'choice_three' ? 'checked' : '' }} type="radio">
-                                                            C) {{ $question->choice_three }}
+                                                            {{ $key + 1 }}) {{ $choice }}
                                                         </label>
-                                                    @endif
-                                                    @if ($question->choice_four)
-                                                        <label class="list-group-item cursor-pointer">
-                                                            <input class="form-check-input me-1"
-                                                                {{ $c == 'choice_four' ? 'checked' : '' }} type="radio">
-                                                            D) {{ $question->choice_four }}
-                                                        </label>
-                                                    @endif
+                                                    @endforeach
                                                 </div>
                                             </div>
                                             <h6 class="text-danger mt-3">Correct Answer :
-                                                @if ($question->answer == 'choice_one')
-                                                    <span class="text-muted"><strong>A) </strong>
-                                                        {{ $question->choice_one }}</span>
-                                                @elseif($question->answer == 'choice_two')
-                                                    <span class="text-muted"><strong>B) </strong>
-                                                        {{ $question->choice_two }}</span>
-                                                @elseif($question->answer == 'choice_three')
-                                                    <span class="text-muted"><strong>C) </strong>
-                                                        {{ $question->choice_three }}</span>
-                                                @else
-                                                    <span class="text-muted"><strong>D) </strong>
-                                                        {{ $question->choice_four }}</span>
-                                                @endif
+                                                <span class="text-muted">{{ $value }}</span>
                                             </h6>
                                         </div>
                                     @endforeach

@@ -25,36 +25,47 @@ class StudentController extends Controller
     public function trainingShow($id)
     {
         $training = Training::find($id);
-        $components = TrainingComponent::where('training_id', $id)->orderByDesc('id')->get();
-        return view('student.show', compact('training', 'components'));
+        // $components = TrainingComponent::where('training_id', $id)->orderByDesc('id')->get();
+        return view('student.show', compact('training'));
     }
     public function training_exam_show($id)
     {
         $exam_set = ExamSetting::where('training_id', $id)->where('student_id', auth()->guard('student')->user()->id)->first();
-        return view('student.exam_show', compact('id','exam_set'));
+        $questions = Question::where('training_id', $id)->get();
+        // dd(json_decode($exam_set->questions_answers), true);
+        return view('student.exam_show', compact('id', 'exam_set', 'questions'));
     }
     public function trainingExam(Request $request, $id)
     {
+        $checkboxData = $request->all(); // Get all data from the request
+
+        $formattedData = [];
         $marks = 0;
 
-        foreach ($request->question as $value) {
-            $q = explode('-', $value)[0];
-            $c = explode('-', $value)[1];
-            $question = Question::findorfail($q);
-            $ex_marks = ($c == $question->answer) ? $question->marks : 0;
-            $marks += $ex_marks;
+        foreach ($checkboxData as $key => $values) {
+            // Check if the key starts with 'q-' and has values
+            if (strpos($key, 'q-') === 0 && is_array($values)) {
+                $questionId = intval(str_replace('q-', '', $key));
+                $question = Question::findorfail($questionId);
+
+                $c = implode(',', $values);
+                $ex_marks = ($c == $question->answers) ? $question->marks : 0;
+                $marks += $ex_marks;
+                $formattedData[$key] = implode(',', $values);
+            }
         }
+
+
         $total_marks = (int)Question::where('training_id', $id)->sum('marks');
         $status = ($marks >= ($total_marks * 0.5)) ? 'success' : 'failure';
-        $answers = implode(',', $request->question);
 
         ExamSetting::create([
             'training_id' => $id,
             'student_id' => auth()->guard('student')->user()->id,
-            'questions_answers' => $answers,
+            'questions_answers' => json_encode($formattedData),
             'total_marks' => $marks,
             'status' => $status,
         ]);
-        return back()->with('message', 'success message');
+        return back()->with('message', 'Exam Completed Successfully.');
     }
 }
