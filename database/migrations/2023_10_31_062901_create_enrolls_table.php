@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('student_id')->constrained()->cascadeOnDelete();
             $table->foreignId('training_id')->constrained()->cascadeOnDelete();
+            $table->boolean('is_payed')->default(false);
+            $table->string('payment_date')->nullable();
             $table->timestamps();
         });
     }

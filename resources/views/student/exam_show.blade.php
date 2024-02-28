@@ -1,108 +1,130 @@
 @extends('layouts.front')
 @section('title', 'Training Exam')
 @section('body')
-    <!-- Fun facts: Start -->
-    <section class="section-py landing-fun-facts mt-3">
-        <div class="container">
-            <div class="card">
-                <div class="row">
-                    @if (!$exam_set)
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title mb-0">Exam Questions</h4>
+    <!--SECTION START-->
+    <section>
+        @include('student.navbar')
+        <div class="stu-db">
+            <div class="container pg-inn">
+                @include('student.sidebar')
 
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <form action="{{ route('student.trainingExam', $id) }}" method="post">
-                                        @csrf
-                                        @foreach ($questions as $item)
-                                            <div class="col-lg-12 mb-5">
-                                                <h5 class="text-light fw-medium">Q. {{ $loop->iteration }} )
-                                                    {{ $item->title }}
-                                                    <span class="float-end">Marks : <span
-                                                            class="text-danger">{{ $item->marks }}</span></span>
-                                                    @php
-                                                        $type = is_numeric($item->answers) ? 'radio' : 'checkbox';
-                                                    @endphp
+                <div class="col-md-9">
+                    <div class="udb">
+                        <div class="udb-sec udb-cour">
+                            @if (!$exam_set)
+                                <h4>{{ \App\Models\Training::findorfail($id)->title }}'s Exam</h4>
 
-                                                </h5>
-                                                <div class="demo-inline-spacing mt-3">
-                                                    <div class="list-group">
-                                                        @php
-                                                            $choices = explode('//next//', $item->choices);
-                                                        @endphp
-                                                        @foreach ($choices as $key => $choice)
-                                                            <label class="list-group-item cursor-pointer">
-                                                                <input class="form-check-input me-1"
-                                                                    type="{{ $type }}"
-                                                                    name="q-{{ $item->id }}[]"
-                                                                    value="{{ $key + 1 }}">
-                                                                {{ $choice }}
-                                                            </label>
-                                                        @endforeach
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                        <div class="col-lg-12">
+                                <form action="{{ route('student.trainingExam', $id) }}" method="post">
+                                    @csrf
+                                    @foreach ($questions as $item)
+                                        <div>
+                                            <h5>Q. {{ $loop->iteration }} )
+                                                {{ $item->title }} <strong style="color: #f82424">({{ $item->marks }}
+                                                    Marks)</strong></h5> <br>
+                                            @php
+                                                $type = is_numeric($item->answers) ? 'radio' : 'checkbox';
+                                                $choices = explode('//next//', $item->choices);
+                                            @endphp
 
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-primary">Submit</button>
-
-                                    </form>
-
-                                </div>
-
-                            </div>
-                        </div>
-                    @else
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title mb-0">Exam Results</h4>
-
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    @foreach (json_decode($exam_set->questions_answers, true) as $quest => $value)
-                                        @php
-                                            $q = explode('-', $quest)[1];
-                                            $question = \App\Models\Question::findorfail($q);
-                                            $ex_marks = $value == $question->answers ? $question->marks : 0;
-                                        @endphp
-                                        <div class="col-lg-12 mb-5">
-                                            <h5 class="text-light fw-medium">Q.{{ $loop->iteration }} )
-                                                {{ $question->title }}
-                                                <span class="float-end">Marks : {{ $ex_marks }}/<span
-                                                        class="text-danger">{{ $question->marks }}</span></span>
-                                            </h5>
-                                            <div class="demo-inline-spacing mt-3">
-                                                <div class="list-group">
-                                                    @php
-                                                        $choices = explode('//next//', $question->choices);
-                                                    @endphp
+                                            <table class="table table-hover">
+                                                <tbody>
                                                     @foreach ($choices as $key => $choice)
-                                                        <label class="list-group-item cursor-pointer">
-                                                            {{ $key + 1 }}) {{ $choice }}
-                                                        </label>
+                                                        <tr>
+                                                            <td style="width: 30px;">
+                                                                <input class="filled-in" type="{{ $type }}"
+                                                                    name="q-{{ $item->id }}[]"
+                                                                    value="{{ $key + 1 }}"
+                                                                    id="filled{{ $item->id }}{{ $key }}">
+                                                                <label
+                                                                    for="filled{{ $item->id }}{{ $key }}"></label>
+                                                            </td>
+                                                            <td>
+                                                                <span id="filled{{ $item->id }}{{ $key }}">
+                                                                    {{ $choice }}
+                                                                </span>
+                                                            </td>
+                                                        </tr>
                                                     @endforeach
-                                                </div>
-                                            </div>
-                                            <h6 class="text-danger mt-3">Correct Answer :
-                                                <span class="text-muted">{{ $value }}</span>
-                                            </h6>
+
+                                                </tbody>
+                                            </table>
+
                                         </div>
                                     @endforeach
-                                </div>
-                            </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                            @else
+                                @if (session()->has('exam_success'))
+                                    <div class="alert alert-success">
+                                        {{ session()->get('exam_success') }}
+                                    </div>
+                                @endif
+                                @if (session()->has('exam_fail'))
+                                    <div class="alert alert-danger">
+                                        {{ session()->get('exam_fail') }}
+                                    </div>
+                                @endif
+                                <h4>Exam Results <strong style="color: #f82424">(
+                                        {{ $exam_set->total_marks }}</strong>/{{ \App\Models\Question::where('training_id',$exam_set->training_id)->sum('marks')}}
+                                    Marks)
+                                    @if ($exam_set->status == 'success')
+                                        <a href="{{ route('student.certificate',auth()->guard('student')->user()->id) }}" class="btn btn-primary btn-sm" style="float: right; margin-top: -2%"><i
+                                                class="fa fa-download" aria-hidden="true"></i> Get Certficate</a>
+                                    @else
+                                        <form action="{{ route('student.trainingRetake', $id) }}" method="post">
+                                            @csrf
+                                            <button class="btn btn-danger btn-sm" style="float: right; margin-top: -5%">
+                                                Retake</button>
+                                        </form>
+                                    @endif
+                                </h4> <br>
+                                @foreach (json_decode($exam_set->questions_answers, true) as $quest => $value)
+                                    @php
+                                        $q = explode('-', $quest)[1];
+                                        $question = \App\Models\Question::findorfail($q);
+                                        $ex_marks = $value == $question->answers ? $question->marks : 0;
+                                    @endphp
+                                    <div>
+                                        <h5>Q. {{ $loop->iteration }} )
+                                            {{ $question->title }} <strong style="color: #f82424">(
+                                                {{ $ex_marks }}</strong>/{{ $question->marks }}
+                                            Marks)</h5> <br>
+                                        @php
+                                            $choices = explode('//next//', $question->choices);
+                                        @endphp
+
+                                        <table class="table table-hover">
+                                            <tbody>
+                                                @foreach ($choices as $key => $choice)
+                                                    <tr>
+                                                        <td style="width: 30px;">
+                                                            {{ $key + 1 }})
+                                                        </td>
+                                                        <td>
+                                                            <span>
+                                                                {{ $choice }}
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+
+                                            </tbody>
+                                        </table>
+
+                                        <h6 class="text-danger mt-3">Correct Answer :
+                                            <span class="text-muted"> {{ $value }}</span>
+                                        </h6>
+
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
-                    @endif
-
+                    </div>
                 </div>
-
             </div>
         </div>
-        </div>
     </section>
-    <!-- Fun facts: End -->
+    <!--SECTION END-->
 @endsection

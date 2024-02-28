@@ -43,6 +43,10 @@ class Student extends Authenticatable
         'password',
         'remember_token',
     ];
+    public function enrolls()
+    {
+        return $this->hasMany(Enroll::class);
+    }
 
     /**
      * The attributes that should be cast.

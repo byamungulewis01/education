@@ -25,11 +25,19 @@ class TrainingController extends Controller
             'title' => 'required|unique:trainings,title',
             'description' => 'required',
             'price' => 'required|numeric',
+            'image' => 'required|mimes:png,jpg|max:10000|dimensions:max_width=166.7,max_height=166.7',
             'user_id' => 'required',
         ]);
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+        }
+        $request->merge(['imageName' => $imageName]);
 
         try {
             Training::create($request->all());
+            $image->move(public_path('/images/trainings'), $imageName);
+
             return back()->with('success', 'Training Added Successfully');
         } catch (\Throwable $th) {
             // dd($th);
@@ -42,8 +50,16 @@ class TrainingController extends Controller
             'title' => 'required|unique:trainings,title,' . $id,
             'description' => 'required',
             'price' => 'required|numeric',
+            'image' => 'nullable|mimes:png,jpg|max:10000|dimensions:max_width=166.7,max_height=166.7',
             'user_id' => 'required',
         ]);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $request->merge(['imageName' => $imageName]);
+            $image->move(public_path('/images/trainings'), $imageName);
+        }
 
         try {
             Training::findorfail($id)->update($request->all());

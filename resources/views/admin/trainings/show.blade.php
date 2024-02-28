@@ -84,7 +84,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->name }}</td>
-                                            <td>{{ $item->description }}</td>
+                                            <td>{{ Illuminate\Support\Str::limit(strip_tags($item->description), 40) }}</td>
                                             <td><a class="text-info" target="blank"
                                                     href="{{ asset('files/components/' . $item->fileUrl) }}">
                                                     <i class="fas fa-download mr-0"></i></a>

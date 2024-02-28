@@ -21,9 +21,9 @@
                         <tr>
                             <th>#</th>
                             <th scope="col">Training</th>
-                            <th scope="col">Category</th>
                             <th scope="col">Price</th>
                             <th scope="col">Status</th>
+                            <th scope="col">Students</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -32,7 +32,6 @@
                             <tr>
                                 <th>{{ $loop->iteration }}</th>
                                 <td class="font-weight-bold">{{ $item->title }}</td>
-                                <td>{{ $item->category->title }}</td>
                                 <td>{{ $item->price }} $ </td>
                                 <td>
                                     @if ($item->status == 'active')
@@ -42,6 +41,7 @@
                                     @endif
                                 </td>
 
+                                <td>{{ $item->students() }}</td>
                                 <td>
                                     {{-- <a href="javascript:;" class="text-body delete-record 1"><i class="ti ti-trash ti-sm mx-2" data-id="1"></i></a> --}}
                                     <a href="{{ route('instructor.training.show', $item->id) }}"

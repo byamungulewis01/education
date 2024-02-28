@@ -10,7 +10,7 @@ class ConsultanceController extends Controller
     //index
     public function index()
     {
-        $consultances = Consultance::orderBy('title')->get();
+        $consultances = Consultance::orderByDesc('id')->get();
         return view('admin.consultancy.index', ['consultances' => $consultances]);
     }
     public function create()
@@ -46,7 +46,7 @@ class ConsultanceController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required|unique:categories,title,' . $id,
+            'title' => 'required|unique:consultances,title,' . $id,
             'description' => 'required',
             'image' => 'nullable|mimes:png,jpg'
         ]);
