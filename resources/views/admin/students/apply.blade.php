@@ -21,6 +21,7 @@
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Phone</th>
+                            <th scope="col">Apply Training</th>
                             <th scope="col">Required Docs</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -33,6 +34,7 @@
                                 <td>{{ $item->fname }} {{ $item->lname }}</td>
                                 <td>{{ $item->email }}</td>
                                 <td>{{ $item->phone }}</td>
+                                <td>{{ @$item->enrolls->first()->training->title }}</td>
                                 <td>
                                     <a class="text-primary" target="blank"
                                         href="{{ asset('files/' . $item->identity_doc_path) }}">ID/Passpord</a> |

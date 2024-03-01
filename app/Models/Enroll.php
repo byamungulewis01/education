@@ -11,6 +11,8 @@ class Enroll extends Model
     protected $fillable = [
         'student_id',
         'training_id',
+        'is_payed',
+        'payment_date',
     ];
 
     public function training()
@@ -21,4 +23,5 @@ class Enroll extends Model
     {
         return $this->belongsTo(Student::class);
     }
+
 }

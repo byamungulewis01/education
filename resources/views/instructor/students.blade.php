@@ -22,18 +22,21 @@
                             <th scope="col">Email</th>
                             <th scope="col">Phone</th>
                             <th scope="col">Training</th>
+                            <th scope="col">Chat</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($students as $item)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $item->regnumber }}</td>
-                                <td>{{ $item->fname }} {{ $item->lname }}</td>
+                                <td>{{ $item->student->regnumber }}</td>
+                                <td>{{ $item->student->fname }} {{ $item->student->lname }}</td>
                                 <td>{{ $item->student->email }}</td>
                                 <td>{{ $item->student->phone }}</td>
                                 <td>{{ $item->training->title }}</td>
-
+                                <td><a href="{{ route('instructor.chat', $item->id) }}"
+                                        class="btn btn-sm btn-primary"><i class="menu-icon tf-icons ti ti-messages"></i>
+                                        Chat</a></td>
                             </tr>
                         @endforeach
                     </tbody>

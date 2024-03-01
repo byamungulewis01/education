@@ -16,6 +16,7 @@ use App\Http\Controllers\ConsultanceController;
 use App\Http\Controllers\AdminStudentController;
 use App\Http\Controllers\InstructorRegistration;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\PagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,13 +32,18 @@ use App\Http\Controllers\ModuleController;
 // Route::group(['middleware' => 'guest'], function () {
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('index');
-    Route::get('/consultancy/{id}', 'consultancy')->name('consultancy');
-    Route::get('/training/{id}', 'training')->name('training');
-    Route::get('/training/show/{id}', 'show')->name('show');
+    Route::get('/about-us', 'about')->name('about');
+    Route::get('/consultancy', 'consultancy')->name('consultancy');
+    Route::get('/consultancy/{id}', 'consultancyShow')->name('consultancyShow');
+    Route::get('/trainings', 'trainings')->name('trainings');
+    Route::get('/trainings/{id}', 'training')->name('training');
+    Route::get('/admission/{id}', 'admission')->name('admission');
+    Route::get('/contact-us', 'contact')->name('contact');
+    Route::get('/accreditations', 'accreditations')->name('accreditations');
 });
 Route::controller(AuthContoller::class)->group(function () {
     Route::post('/login', 'login_auth')->name('login_auth');
-    Route::post('/register', 'register_auth')->name('register_auth');
+    Route::post('/register/{id}', 'register_auth')->name('register_auth');
 
     Route::post('/client_login', 'client_login_auth')->name('client_login_auth');
     Route::post('/client_register', 'client_register_auth')->name('client_register_auth');
@@ -51,10 +57,23 @@ Route::controller(AdminAuthController::class)->prefix('admin')->name('admin.')->
 Route::group(['middleware' => 'student'], function () {
     Route::controller(StudentController::class)->prefix('student')->name('student.')->group(function () {
         Route::get('/profile', 'profile')->name('profile');
+        Route::get('/my-dashboard', 'dashboard')->name('dashboard');
         Route::get('/my-trainings', 'trainings')->name('trainings');
-        Route::get('/my-trainings/{id}', 'trainingShow')->name('trainingShow');
+        Route::get('/my-notifications', 'notifications')->name('notifications');
+        Route::get('/my-trainings/{id}', 'training_show')->name('training_show');
+        Route::get('/chat/{id}', 'chat')->name('chat');
+        Route::post('/chat/{id}', 'storeChat')->name('storeChat');
         Route::get('/my-trainings-exam/{id}', 'training_exam_show')->name('training_exam_show');
         Route::post('/my-trainings-exam/{id}', 'trainingExam')->name('trainingExam');
+        Route::post('/my-trainings-retake/{id}', 'trainingRetake')->name('trainingRetake');
+        Route::get('/retake-callback/{id}', 'trainingRetakeCallback')->name('trainingRetakeCallback');
+
+        Route::post('/my-trainings-pay/{id}', 'trainingPay')->name('trainingPay');
+        Route::get('/trainingPay-callback/{id}', 'trainingPayCallback')->name('trainingPayCallback');
+
+        Route::post('/my-trainings-book/{id}', 'bookTraining')->name('bookTraining');
+        Route::get('/admission/{id}', 'admission')->name('admission');
+        Route::get('/certificate/{id}', 'certificate')->name('certificate');
     });
     Route::controller(EnrollController::class)->prefix('enroll')->name('enroll.')->group(function () {
         Route::post('/free-course/{id}', 'free_course')->name('free_course');
@@ -89,9 +108,16 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
         Route::put('/{id}', 'update')->name('update');
         Route::delete('/{id}', 'destroy')->name('destroy');
     });
+    Route::controller(PagesController::class)->middleware('user-access:admin,super_admin')->prefix('pages')->name('pages.')->group(function () {
+        Route::get('/about-us', 'about')->name('about');
+        Route::put('/about-us', 'aboutUpdate')->name('aboutUpdate');
+        Route::put('/about-us/mission', 'aboutMissionUpdate')->name('aboutMissionUpdate');
+        Route::get('/contact-us', 'contact')->name('contact');
+    });
 
     Route::controller(TrainingController::class)->prefix('trainings')->name('training.')->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::get('/{id}/students', 'students')->name('students');
         Route::post('/', 'store')->name('store');
         Route::put('/{id}', 'update')->name('update');
         Route::delete('/{id}', 'destroy')->name('destroy');
@@ -172,6 +198,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'instructor', 'as' => 'instruc
         Route::get('/dashboard', 'index')->name('index');
         Route::get('/trainings', 'trainings')->name('trainings');
         Route::get('/students', 'students')->name('students');
+        Route::get('/chat/{id}', 'chat')->name('chat');
+        Route::post('/chat/{id}', 'storeChat')->name('storeChat');
     });
     Route::get('training/{id}', [TrainingController::class, 'show'])->name('training.show');
 })->middleware('user-access:instructor');

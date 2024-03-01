@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('questions_answers');
             $table->integer('total_marks');
             $table->enum('status',['success','failure']);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

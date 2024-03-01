@@ -11,8 +11,8 @@ class Training extends Model
     protected $fillable = [
         'title',
         'description',
-        'category_id',
         'user_id',
+        'imageName',
         'price',
         'status',
         'exam_status',
@@ -24,5 +24,9 @@ class Training extends Model
     public function modules()
     {
         return $this->hasMany(Module::class);
+    }
+    public function students()
+    {
+        return Enroll::where('training_id', $this->id)->count();
     }
 }

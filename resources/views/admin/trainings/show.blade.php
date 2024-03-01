@@ -84,7 +84,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->name }}</td>
-                                            <td>{{ $item->description }}</td>
+                                            <td>{{ Illuminate\Support\Str::limit(strip_tags($item->description), 40) }}</td>
                                             <td><a class="text-info" target="blank"
                                                     href="{{ asset('files/components/' . $item->fileUrl) }}">
                                                     <i class="fas fa-download mr-0"></i></a>
@@ -284,86 +284,7 @@
 
                                             </div>
                                         </div>
-                                        <div class="modal fade" id="editQuestionModal{{ $item->id }}" tabindex="-1"
-                                            aria-hidden="true">
-                                            <div
-                                                class="modal-dialog modal-lg modal-dialog-centered1 modal-simple modal-add-new-cc">
-                                                <div class="modal-content">
-                                                    <div class="modal-body">
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                        <div class="text-center mb-2">
-                                                            <h3>Edit Question</h3>
-                                                        </div>
-                                                        <form method="POST" class="row g-2"
-                                                            action="{{ route('admin.training.update_question', $item->id) }}"
-                                                            enctype="multipart/form-data">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <div class="col-12 mb-2">
-                                                                <label>Question</label>
-                                                                <input name="title" type="text" required
-                                                                    class="form-control" value="{{ $item->title }}">
-                                                            </div>
-                                                            <div class="col-12 mb-2">
-                                                                <label>Choice A</label>
-                                                                <input name="choice_one" type="text" required
-                                                                    class="form-control" value="{{ $item->choice_one }}">
-                                                            </div>
-                                                            <div class="col-12 mb-2">
-                                                                <label>Choice B</label>
-                                                                <input name="choice_two" type="text" required
-                                                                    class="form-control" value="{{ $item->choice_two }}">
-                                                            </div>
-                                                            <div class="col-12 mb-2">
-                                                                <label>Choice C</label>
-                                                                <input name="choice_three" type="text"
-                                                                    class="form-control"
-                                                                    value="{{ $item->choice_three }}">
-                                                            </div>
-                                                            <div class="col-12 mb-2">
-                                                                <label>Choice D</label>
-                                                                <input name="choice_four" type="text"
-                                                                    class="form-control"
-                                                                    value="{{ $item->choice_four }}">
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <label>Answer</label>
-                                                                <select name="answer" class="form-select"
-                                                                    id="">
-                                                                    <option
-                                                                        {{ $item->answer == 'choice_one' ? 'selected' : '' }}
-                                                                        value="choice_one">A</option>
-                                                                    <option
-                                                                        {{ $item->answer == 'choice_two' ? 'selected' : '' }}
-                                                                        value="choice_two">B</option>
-                                                                    <option
-                                                                        {{ $item->answer == 'choice_three' ? 'selected' : '' }}
-                                                                        value="choice_three">C</option>
-                                                                    <option
-                                                                        {{ $item->answer == 'choice_four' ? 'selected' : '' }}
-                                                                        value="choice_four">D</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <label>Total Marks</label>
-                                                                <input name="marks" value="{{ $item->marks }}"
-                                                                    min="1" max="100" required type="number"
-                                                                    class="form-control">
-                                                            </div>
-
-                                                            <div class="col-12 mt-4 text-center">
-                                                                <button type="submit"
-                                                                    class="btn btn-primary me-sm-3 me-1">Save</button>
-                                                                <button type="reset" class="btn btn-label-secondary"
-                                                                    data-bs-dismiss="modal"
-                                                                    aria-label="Close">Cancel</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                
                                     </div>
                                     <div class="card-body">
                                         <ul class="p-0 m-0">
@@ -387,8 +308,82 @@
                                         </h6>
 
                                     </div>
+
                                 </div>
                             </div>
+
+
+                            <div class="modal fade" id="editQuestionModal{{ $item->id }}" tabindex="-1" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg modal-dialog-centered1 modal-simple modal-add-new-cc">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                        <div class="text-center mb-2">
+                                                            <h3>Edit Question</h3>
+                                                        </div>
+                                                        <form method="POST" class="row g-2"
+                                                            action="{{ route('admin.training.update_question', $item->id) }}">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <div class="col-12 mb-2">
+                                                                <label>Question</label>
+                                                                <input name="title" type="text" required class="form-control" value="{{ $item->title }}">
+                                                            </div>
+                                                            <div class="col-12 mb-2">
+                                                                <label>Chooses</label>
+                                                                <table class="item_table1" style="width: 95%">
+                                                                @php
+                                                                $answer = explode(',',$item->answers);
+                                                                @endphp
+                                                                @foreach ($choices as $key => $choice)
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div class="row mb-2">
+                                                                                <div class="col-1">
+                                                                                    <input type="checkbox" value="{{ $key + 1 }}" name="answers[{{ $key + 1 }}]"
+                                                                                        class="form-check-input" 
+                                                                                        style="width: 31px; height: 31px;">
+                                                                                </div>
+                                                                                <div class="col-10">
+                                                                                    <input name="choices[{{ $key + 1 }}]" type="text" required
+                                                                                        class="form-control" value="{{ $choice }}">
+                                                                                </div>
+                                                                                <div class="col-1">
+                                                                                    @if($key == 0)
+                                                                                    <button type="button" class="btn btn-primary add1"><i
+                                                                                            class="ti ti-plus ti-xs"></i></button>
+                                                                                   @else
+                                                                                   <button class="btn btn-danger remove1"><i class="ti ti-minus"></i></button>
+                                                                                   @endif
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    @endforeach
+
+                                                                </table>
+                                                            </div>
+
+                                                            <div class="col-12 mt-2">
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                        <input name="marks" type="number" required class="form-control"
+                                                                           value="{{ $item->marks }}">
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <button type="submit"
+                                                                            class="btn btn-primary me-sm-3 me-1">Submit</button>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                         @endforeach
                     </div>
                 </div>
@@ -417,6 +412,27 @@
             });
 
             $(document).on('click', '.remove', function() {
+                $(this).closest('tr').remove();
+            });
+
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+
+            $(document).on('click', '.add1', function() {
+                var html = '';
+                var number_of_rows = $('.item_table1 tr').length + 1;
+
+                html +=
+                    `<tr><td><div class="row mb-3">
+                    <div class="col-1"><input type="checkbox" value="${number_of_rows}" name="answers[${number_of_rows}]" class="form-check-input" style="width: 31px; height: 31px;"></div>
+                    <div class="col-10"><input name="choices[${number_of_rows}]" type="text" required class="form-control" placeholder="Choice ${number_of_rows}"></div>
+                    <div class="col-1"> <button class="btn btn-danger remove1"><i class="ti ti-minus"></i></button></div></div></td></tr>`;
+                $('.item_table1').append(html);
+            });
+
+            $(document).on('click', '.remove1', function() {
                 $(this).closest('tr').remove();
             });
 

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
+use App\Models\Enroll;
 use App\Models\Student;
 use App\Mail\CreateAccount;
-use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -22,12 +23,16 @@ class AuthContoller extends Controller
         ]);
         $credentials = $request->only('email', 'password');
         if (auth()->guard('student')->attempt($credentials)) {
-            return redirect()->intended('/')->with('message', 'login success');
+            $training = Enroll::where('student_id', auth()->guard('student')->user()->id)->first();
+            if (!$training) {
+                return to_route('trainings')->with('warning', 'login success !!! , first Apply Training');
+            }
+            return to_route('student.dashboard')->with('message', 'login success');
         }
         return redirect()->route('index')->with('error', 'Invalid Credentials');
     }
 
-    public function register_auth(Request $request)
+    public function register_auth(Request $request, $id)
     {
         $request->validate([
             'fname' => 'required|string|min:3',
@@ -61,10 +66,16 @@ class AuthContoller extends Controller
             $file1->move(public_path('/files'), $file1Name);
             $file2->move(public_path('/files'), $file2Name);
 
-            Mail::to($request->email)->send(new CreateAccount($student));
-            return to_route('index')->with('created');
+            Enroll::create([
+                'student_id' => $student->id,
+                'training_id' => $id,
+            ]);
+
+            Mail::to($request->email)->send(new CreateAccount($student->fname, $student->lname, $student->regnumber));
+            return to_route('index')->with('message', 'Your Request Sent Successful');
         } catch (\Throwable $th) {
             //throw $th;
+            // dd($th->getMessage());
             // return back()->with('error', $th->getMessage());
             return back()->with('error', 'Some things went wrong try again');
         }
@@ -104,7 +115,7 @@ class AuthContoller extends Controller
             Client::create($request->all());
 
             // Mail::to($request->email)->send(new CreateAccount($request->fname, $request->lname));
-            return back()->with('message','Account Created Successefully');
+            return back()->with('message', 'Account Created Successefully');
         } catch (\Throwable $th) {
             //throw $th;
             // return back()->with('error', $th->getMessage());

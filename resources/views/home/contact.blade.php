@@ -1,120 +1,77 @@
-@extends('home.app')
+@extends('layouts.front')
 @section('title', 'Contuct Us')
 @section('body')
-    <!-- ============================ Page Title Start================================== -->
-    {{-- <section class="page-title gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12">
 
-                    <div class="breadcrumbs-wrap">
-                        <h1 class="breadcrumb-title">Get In Touch</h1>
-                        <nav class="transparent">
-                            <ol class="breadcrumb p-0">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active theme-cl" aria-current="page">Contact Us</li>
-                            </ol>
-                        </nav>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section> --}}
-    <!-- ============================ Page Title End ================================== -->
-
-    <!-- ============================ Contact Detail ================================== -->
+    <!--SECTION START-->
     <section>
-        <div class="container">
-            <div class="row align-items-start">
-                <div class="col-xl-7 col-lg-6 col-md-12 col-sm-12">
-                    <div class="form-group">
-                        <h4>We'd love to here from you</h4>
-                        <span>Send a message and we'll responed as soos as possible </span>
-                    </div>
-                    <div class="row">
-                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                            <div class="form-group">
-                                <label>Name</label>
-                                <input type="text" class="form-control" placeholder="Name" />
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="text" class="form-control" placeholder="Email" />
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                            <div class="form-group">
-                                <label>Company</label>
-                                <input type="text" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                            <div class="form-group">
-                                <label>Phone</label>
-                                <input type="text" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                            <div class="form-group">
-                                <label>Name</label>
-                                <input type="text" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                            <div class="form-group">
-                                <button class="btn theme-bg text-white btn-md" type="button">Send Message</button>
-                            </div>
+        <div class="container com-sp pad-bot-70">
+            <div class="row">
+                <div class="cor about-sp">
+                    <div class="ed-about-tit">
+                        <div class="con-title">
+                            <h2>Contact <span> Us</span></h2>
+                            <p>Fusce id sem at ligula laoreet hendrerit venenatis sed purus. Ut pellentesque maximus lacus, nec pharetra augue.</p>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12">
-                    <div class="lmp_caption pl-lg-5">
-                        <ol class="list-unstyled p-0">
-                            <li class="d-flex align-items-start my-3 my-md-4">
-                                <div
-                                    class="rounded-circle p-3 p-sm-4 d-flex align-items-center justify-content-center theme-bg-light">
-                                    <div class="position-absolute theme-cl h5 mb-0"><i class="fas fa-home"></i></div>
-                                </div>
-                                <div class="ml-3 ml-md-4">
-                                    <h4>Reach Us</h4>
-                                    <p>
-                                        2512, New Market,<br>Eliza Road, Sincher 80 CA,<br>Canada, USA
-                                    </p>
-                                </div>
-                            </li>
-                            <li class="d-flex align-items-start my-3 my-md-4">
-                                <div
-                                    class="rounded-circle p-3 p-sm-4 d-flex align-items-center justify-content-center theme-bg-light">
-                                    <div class="position-absolute theme-cl h5 mb-0"><i class="fas fa-at"></i></div>
-                                </div>
-                                <div class="ml-3 ml-md-4">
-                                    <h4>Drop A Mail</h4>
-                                    <p>
-                                        support@Rikada.com<br>Rikada@gmail.com
-                                    </p>
-                                </div>
-                            </li>
-                            <li class="d-flex align-items-start my-3 my-md-4">
-                                <div
-                                    class="rounded-circle p-3 p-sm-4 d-flex align-items-center justify-content-center theme-bg-light">
-                                    <div class="position-absolute theme-cl h5 mb-0"><i class="fas fa-phone-alt"></i></div>
-                                </div>
-                                <div class="ml-3 ml-md-4">
-                                    <h4>Make a Call</h4>
-                                    <p>
-                                        (41) 123 521 458<br>+91 235 548 7548
-                                    </p>
-                                </div>
-                            </li>
-                        </ol>
+                    <div class="pg-contact">
+                        <div class="col-md-3 col-sm-6 col-xs-12 new-con new-con1">
+                            <h2>Educate <span>Master</span></h2>
+                            <p>We Provide Outsourced Software Development Services To Over 50 Clients From 21 Countries.</p>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12 new-con new-con1"> <img src="img/contact/1.html" alt="">
+                            <h4>Address</h4>
+                            <p>28800 Orchard Lake Road, Suite 180 Farmington Hills, U.S.A.
+                                <br>Landmark : Next To Airport</p>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12 new-con new-con3"> <img src="img/contact/2.html" alt="">
+                            <h4>CONTACT INFO:</h4>
+                            <p> <a href="tel://0099999999" class="contact-icon">Phone: 01 234874 965478</a>
+                                <br> <a href="tel://0099999999" class="contact-icon">Mobile: 01 654874 965478</a>
+                                <br> <a href="mailto:mytestmail@gmail.com" class="contact-icon">Email: info@company.com</a> </p>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12 new-con new-con4"> <img src="img/contact/3.html" alt="">
+                            <h4>Website</h4>
+                            <p> <a href="#">Website: www.mycompany.com</a>
+                                <br> <a href="#">Facebook: www.facebook/my</a>
+                                <br> <a href="#">Blog: www.blog.mycompany.com</a> </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- ============================ Contact Detail ================================== -->
+    <!--SECTION END-->
+
+    <section id="map">
+        <div class="row contact-map">
+            <!-- IFRAME: GET YOUR LOCATION FROM GOOGLE MAP -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6290413.804893654!2d-93.99620524741552!3d39.66116578737809!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880b2d386f6e2619%3A0x7f15825064115956!2sIllinois%2C+USA!5e0!3m2!1sen!2sin!4v1469954001005"
+                allowfullscreen=""></iframe>
+            <div class="container">
+                <div class="overlay-contact footer-part footer-part-form">
+                    <div class="map-head">
+                        <p>Send Us Now</p>
+                        <h2>GetIn Touch</h2> <span class="footer-ser-re">Service Request Form</span> </div>
+                    <!-- ENQUIRY FORM -->
+                    <form id="contact_form" name="contact_form" action="http://rn53themes.net/themes/demo/education-master/send.php">
+                        <ul>
+                            <li class="col-md-6 col-sm-6 col-xs-12 contact-input-spac">
+                                <input type="text" id="f1" value="" name="f1" placeholder="Name" required=""> </li>
+                            <li class="col-md-6 col-sm-6 col-xs-12 contact-input-spac">
+                                <input type="text" id="f2" value="" name="f2" placeholder="Phone" required=""> </li>
+                            <li class="col-md-6 col-sm-6 col-xs-12 contact-input-spac">
+                                <input type="text" id="f3" value="" name="f3" placeholder="City" required=""> </li>
+                            <li class="col-md-6 col-sm-6 col-xs-12 contact-input-spac">
+                                <input type="text" id="f4" value="" name="f4" placeholder="Country" required=""> </li>
+                            <li class="col-md-12 col-sm-12 col-xs-12 contact-input-spac">
+                                <textarea id="f5" name="f5" required=""></textarea>
+                            </li>
+                            <li class="col-md-6">
+                                <input type="submit" value="SUBMIT"> </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection

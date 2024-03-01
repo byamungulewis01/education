@@ -25,7 +25,7 @@
                                 <div class="text-center mb-2">
                                     <h3>Add New Training</h3>
                                 </div>
-                                <form method="POST" class="row g-2" action="{{ route('admin.training.store') }}">
+                                <form method="POST" class="row g-2" action="{{ route('admin.training.store') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="col-12">
                                         <label for="title" class="form-label">Title</label>
@@ -51,6 +51,10 @@
                                         </select>
                                     </div>
                                     <div class="col-md-12">
+                                        <label>Image</label>
+                                        <input name="image" type="file" class="form-control">
+                                    </div>
+                                    <div class="col-md-12">
 
                                         <label for="description" class="form-label">Description</label>
                                         <textarea id="description" name="description" rows="6" class="form-control" placeholder="Description">{{ old('description') }}</textarea>
@@ -73,9 +77,12 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th scope="col">Image</th>
                             <th scope="col">Training</th>
                             <th scope="col">Price</th>
                             <th scope="col">Instructor</th>
+                            <th scope="col">Students</th>
+
                             <th scope="col">Status</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -84,9 +91,21 @@
                         @foreach ($trainings as $item)
                             <tr>
                                 <th>{{ $loop->iteration }}</th>
+                                <td><img src="{{ asset('images/trainings/' . $item->imageName) }}" alt="image"
+                                        class="rounded-square w-50"></td>
                                 <td class="font-weight-bold">{{ $item->title }}</td>
                                 <td>{{ $item->price }} $ </td>
                                 <td>{{ $item->user->name }}</td>
+                                <td>
+                                    @if($item->students() == 0)
+                                    {{ $item->students() }} Student
+                                    @elseif($item->students() == 1)
+                                    <a href="{{ route('admin.training.students', $item->id) }}">{{ $item->students() }} Student</a>
+                                    @else
+                                   <a href="{{ route('admin.training.students', $item->id) }}"> {{ $item->students() }} Students</a>
+                                    @endif
+                                </td>
+
                                 <td>
                                     @if ($item->status == 'active')
                                         <span class="badge bg-primary">Active</span>
@@ -114,7 +133,7 @@
                                                     <div class="text-center mb-2">
                                                         <h3>Edit Training</h3>
                                                     </div>
-                                                    <form method="POST" class="row g-3"
+                                                    <form method="POST" class="row g-3" enctype="multipart/form-data"
                                                         action="{{ route('admin.training.update', $item->id) }}">
                                                         @csrf
                                                         @method('PUT')
@@ -151,6 +170,10 @@
                                                                 <option {{ $item->status == 'inactive' ? 'selected' : '' }}
                                                                     value="inactive">Inactive</option>
                                                             </select>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <label>Image</label>
+                                                            <input name="image" type="file" class="form-control">
                                                         </div>
                                                         <div class="col-md-12">
 

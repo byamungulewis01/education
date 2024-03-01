@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chat;
 use App\Models\Enroll;
+use App\Models\Student;
 use App\Models\Training;
 use Illuminate\Http\Request;
 
@@ -12,6 +14,27 @@ class InstructorController extends Controller
     public function index()
     {
         return view('instructor.index');
+    }
+    public function chat($id)
+    {
+        $enroll = Enroll::findorfail($id);
+
+        $student = Student::findorfail($enroll->student_id);
+        $chats = Chat::where('training_id', $enroll->training_id)->get();
+        return view('instructor.chat', compact('student', 'chats', 'id'));
+    }
+
+    public function storeChat(Request $request, $id)
+    {
+        $enroll = Enroll::findorfail($id);
+        Chat::create([
+            'training_id' => $enroll->training_id,
+            'student_id' =>  $enroll->student_id,
+            'user_id' => auth()->user()->id,
+            'message' => $request->message,
+            'sender_by' => 'user',
+        ]);
+        return back();
     }
     public function trainings()
     {

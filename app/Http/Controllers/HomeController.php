@@ -3,33 +3,46 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Module;
 use App\Models\School;
+use App\Models\Country;
 use App\Models\Program;
 use App\Models\Category;
 use App\Models\Training;
 use App\Models\Consultance;
-use App\Models\Module;
 use Illuminate\Http\Request;
+use App\Models\About;
+
 
 class HomeController extends Controller
 {
     //index
     public function index()
     {
-        $trainings = Training::orderBy('title')->get();
-        return view('home.index', compact('trainings'));
+
+        return view('home.index');
     }
-    public function consultancy($id)
+    public function consultancy()
+    {
+        return view('home.consultancy');
+    }
+
+    public function consultancyShow($id)
     {
         $consultancy = Consultance::findorfail($id);
-        return view('home.show-consultancy', compact('consultancy'));
+        return view('home.show-consultancy',compact('consultancy'));
     }
     public function training($id)
     {
-        $training = Training::findorfail(decrypt($id));
-        // trainigs
-        $modules = Module::where('training_id', decrypt($id))->paginate(6);
-        return view('home.show-trainings', compact('training', 'modules'));
+        $training = Training::findorfail($id);
+        $modules = Module::where('training_id', $id)->orderByDesc('id')->get();
+        return view('home.show-training', compact('training', 'modules'));
+    }
+    public function admission($id)
+    {
+        $training = Training::findorfail($id);
+        $countries = Country::orderBy('name')->get();
+        return view('home.admission', compact('countries','training'));
     }
 
     public function filter(Request $request, $id)
@@ -57,10 +70,19 @@ class HomeController extends Controller
     }
     public function about()
     {
-        return view('home.about');
+        $about = About::first();
+        return view('home.about',compact('about'));
+    }
+    public function trainings()
+    {
+        return view('home.trainings');
     }
     public function contact()
     {
         return view('home.contact');
+    }
+    public function accreditations()
+    {
+        return view('home.accreditations');
     }
 }

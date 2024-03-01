@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ApprovalStudent;
+use App\Mail\RejectStudent;
+use App\Models\Enroll;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class AdminStudentController extends Controller
 {
@@ -21,7 +25,11 @@ class AdminStudentController extends Controller
     public function approve($id)
     {
         try {
+            $student = Student::findorfail($id);
+            $training = Enroll::where('student_id',$id)->first()->training->title;
             Student::findorfail($id)->update(['status' => 'approved']);
+            Mail::to($student->email)->send(new ApprovalStudent($training));
+
             return back()->with('success', 'Approved Successfully');
         } catch (\Throwable $th) {
             return back()->with('error', 'Some things went wrong try again' . $th->getMessage());
@@ -35,7 +43,9 @@ class AdminStudentController extends Controller
     public function reject(Request $request, $id)
     {
         try {
+            $student = Student::findorfail($id);
             Student::findorfail($id)->update(['status' => 'rejected', 'reason' => $request->reason]);
+            Mail::to($student->email)->send(new RejectStudent($request->reason));
             return back()->with('success', 'Rejected Successfully');
         } catch (\Throwable $th) {
             return back()->with('error', 'Some things went wrong try again' . $th->getMessage());
