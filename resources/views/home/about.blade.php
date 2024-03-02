@@ -3,11 +3,16 @@
 @section('body')
     <!--SECTION START-->
     <section>
+<<<<<<< HEAD
         <div class="container com-sp pad-bot-70">
+=======
+        <div class="container com-sp pad-bot-50">
+>>>>>>> second_pc
             <div class="row">
                 <div class="cor about-sp">
                     <div class="ed-about-tit">
                         <div class="con-title">
+<<<<<<< HEAD
                             <h2>About <span> BCCH</span></h2>
                             <p>It serves as a means for visitors or stakeholders to understand who the organization is, what it stands for, and what it aims to accomplish..</p>
                         </div>
@@ -66,6 +71,26 @@
 
 
                         </div>
+=======
+                            <h2>{{ $about->title }}</h2>
+                            <p>{{ $about->header_section }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div>
+                            <!--POPULAR COURSES-->
+                            <div class="home-top-cour">
+                                <!--POPULAR COURSES IMAGE-->
+                                <div class="col-md-5"> 
+                                    <img src="{{ asset('images/abouts/'. $about->image) }}" alt=""> 
+                                </div>
+                                <!--POPULAR COURSES: CONTENT-->
+                                <div class="col-md-7 home-top-cour-desc">
+                                   {!! $about->description !!}
+                                </div>
+                            </div>
+                        </div>
+>>>>>>> second_pc
                     </div>
                 </div>
             </div>
@@ -83,9 +108,13 @@
                                     </div>
                                     <div class="ed-ad-dec">
                                         <h4>Our Mission</h4>
+<<<<<<< HEAD
                                         <p>Consultants are typically specialists in their respective fields and are hired to
                                             offer insights, strategies, and recommendations to help clients improve
                                             performance, solve problems, or achieve specific goals.'</p>
+=======
+                                        <p>{{ $about->mission }}</p>
+>>>>>>> second_pc
                                     </div>
                                 </li>
                                 <li>
@@ -94,10 +123,14 @@
                                     </div>
                                     <div class="ed-ad-dec">
                                         <h4>Our Vission</h4>
+<<<<<<< HEAD
                                         <p>In all areas of our business, we strive to achieve excellence and make our
                                             excellence unique in order that we remain top ranked among example in project
                                             management, HR, financial, taxation, auditing and accounting firms in Rwanda and
                                             begin conducting business beyond Rwanda’s borders by the end of 2023.</p>
+=======
+                                        <p>{{ $about->vission }}</p>
+>>>>>>> second_pc
                                     </div>
                                 </li>
                                 <li>
@@ -106,9 +139,13 @@
                                     </div>
                                     <div class="ed-ad-dec">
                                         <h4>Objective</h4>
+<<<<<<< HEAD
                                         <p>The objective of coaching varies depending on the context, but generally, it
                                             revolves around facilitating personal or professional development, improving
                                             performance, and achieving specific goals.</p>
+=======
+                                        <p>{{ $about->objective }}</p>
+>>>>>>> second_pc
                                     </div>
                                 </li>
 

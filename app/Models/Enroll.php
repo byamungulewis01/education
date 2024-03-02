@@ -23,4 +23,5 @@ class Enroll extends Model
     {
         return $this->belongsTo(Student::class);
     }
+
 }

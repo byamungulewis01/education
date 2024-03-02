@@ -7,6 +7,7 @@ use App\Models\TrainingComponent;
 use App\Models\User;
 use App\Models\Question;
 use App\Models\Training;
+use App\Models\Enroll;
 use Illuminate\Http\Request;
 
 class TrainingController extends Controller
@@ -18,6 +19,11 @@ class TrainingController extends Controller
         $instructors = User::where('role', 'instructor')->where('status', 'active')->orderByDesc('id')->get();
 
         return view('admin.trainings.index', compact('trainings', 'instructors'));
+    }
+    public function students($id)
+    {
+        $students = Enroll::where('training_id', $id)->get();       
+        return view('admin.trainings.students', compact('students'));
     }
     public function store(Request $request)
     {
@@ -112,15 +118,22 @@ class TrainingController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'choice_one' => 'required',
-            'choice_two' => 'required',
-            'choice_three' => 'nullable',
-            'choice_four' => 'nullable',
-            'answer' => 'required',
+            'choices' => 'required|array',
+            'answers' => 'required|array',
+            'marks' => 'required',
         ]);
 
+        $choices = implode('//next//', $request->choices);
+        $answers = implode(',', $request->answers);
+
         try {
-            Question::findorfail($id)->update($request->all());
+            Question::findorfail($id)->update([
+                'title' => $request->title,
+                'choices' => $choices,
+                'answers' => $answers,
+                'marks' => $request->marks,
+            ]);
+
             return back()->with('success', 'Question Updated Successfully');
         } catch (\Throwable $th) {
             return back()->with('error', 'Some things went wrong try again');

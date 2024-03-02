@@ -81,6 +81,8 @@
                             <th scope="col">Training</th>
                             <th scope="col">Price</th>
                             <th scope="col">Instructor</th>
+                            <th scope="col">Students</th>
+
                             <th scope="col">Status</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -94,6 +96,16 @@
                                 <td class="font-weight-bold">{{ $item->title }}</td>
                                 <td>{{ $item->price }} $ </td>
                                 <td>{{ $item->user->name }}</td>
+                                <td>
+                                    @if($item->students() == 0)
+                                    {{ $item->students() }} Student
+                                    @elseif($item->students() == 1)
+                                    <a href="{{ route('admin.training.students', $item->id) }}">{{ $item->students() }} Student</a>
+                                    @else
+                                   <a href="{{ route('admin.training.students', $item->id) }}"> {{ $item->students() }} Students</a>
+                                    @endif
+                                </td>
+
                                 <td>
                                     @if ($item->status == 'active')
                                         <span class="badge bg-primary">Active</span>

@@ -10,7 +10,7 @@
             <div data-i18n="Dashboard">Dashboard</div>
         </a>
     </li>
-    <li class="menu-item {{ Request::routeIs('admin.training.index', 'admin.training.show') ? 'active' : '' }}">
+    <li class="menu-item {{ Request::routeIs('admin.training.index', 'admin.training.show','admin.training.students') ? 'active' : '' }}">
         <a href="{{ route('admin.training.index') }}" class="menu-link">
             <i class="menu-icon tf-icons ti ti-link"></i>
             <div data-i18n="Trainings">Trainings</div>
@@ -65,6 +65,32 @@
                     <div data-i18n="Rejected">Rejected</div>
                 </a>
             </li>
+        </ul>
+    </li>
+
+    <li
+        class="menu-item {{ Request::routeIs(['admin.pages.about', 'admin.pages.contact']) ? 'open' : '' }} ">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon tf-icons ti ti-user"></i>
+            <div data-i18n="Pages">Pages</div>
+        </a>
+        <ul class="menu-sub">
+        <li class="menu-item {{ Request::routeIs('admin.pages.about') ? 'active' : '' }}">
+                <a href="{{ route('admin.pages.about') }}" class="menu-link">
+                    <div data-i18n="About">About</div>
+                </a>
+            </li>
+
+            <li class="menu-item {{ Request::routeIs('admin.pages.contact') ? 'active' : '' }}">
+                <a href="{{ route('admin.pages.contact') }}" class="menu-link">
+                    <div data-i18n="Contact Us">Contact Us</div>
+                </a>
+            </li>
+            <!-- <li class="menu-item {{ Request::routeIs('admin.student.rejected') ? 'active' : '' }}">
+                <a href="{{ route('admin.student.rejected') }}" class="menu-link">
+                    <div data-i18n="Hero Section">Hero Section</div>
+                </a>
+            </li> -->
         </ul>
     </li>
 

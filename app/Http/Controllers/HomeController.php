@@ -11,6 +11,8 @@ use App\Models\Category;
 use App\Models\Training;
 use App\Models\Consultance;
 use Illuminate\Http\Request;
+use App\Models\About;
+
 
 class HomeController extends Controller
 {
@@ -68,7 +70,12 @@ class HomeController extends Controller
     }
     public function about()
     {
-        return view('home.about');
+        $about = About::first();
+        return view('home.about',compact('about'));
+    }
+    public function trainings()
+    {
+        return view('home.trainings');
     }
     public function trainings()
     {

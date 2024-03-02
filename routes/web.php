@@ -16,6 +16,7 @@ use App\Http\Controllers\ConsultanceController;
 use App\Http\Controllers\AdminStudentController;
 use App\Http\Controllers\InstructorRegistration;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\PagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -107,9 +108,16 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
         Route::put('/{id}', 'update')->name('update');
         Route::delete('/{id}', 'destroy')->name('destroy');
     });
+    Route::controller(PagesController::class)->middleware('user-access:admin,super_admin')->prefix('pages')->name('pages.')->group(function () {
+        Route::get('/about-us', 'about')->name('about');
+        Route::put('/about-us', 'aboutUpdate')->name('aboutUpdate');
+        Route::put('/about-us/mission', 'aboutMissionUpdate')->name('aboutMissionUpdate');
+        Route::get('/contact-us', 'contact')->name('contact');
+    });
 
     Route::controller(TrainingController::class)->prefix('trainings')->name('training.')->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::get('/{id}/students', 'students')->name('students');
         Route::post('/', 'store')->name('store');
         Route::put('/{id}', 'update')->name('update');
         Route::delete('/{id}', 'destroy')->name('destroy');

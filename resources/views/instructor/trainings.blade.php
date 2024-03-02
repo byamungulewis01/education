@@ -43,6 +43,16 @@
 
                                 <td>{{ $item->students() }}</td>
                                 <td>
+                                    @if($item->students() == 0)
+                                    {{ $item->students() }} Student
+                                    @elseif($item->students() == 1)
+                                    <a href="">{{ $item->students() }} Student</a>
+                                    @else
+                                   <a href=""> {{ $item->students() }} Students</a>
+                                    @endif
+                                </td>
+
+                                <td>
                                     {{-- <a href="javascript:;" class="text-body delete-record 1"><i class="ti ti-trash ti-sm mx-2" data-id="1"></i></a> --}}
                                     <a href="{{ route('instructor.training.show', $item->id) }}"
                                         class="text-body"><i class="ti ti-eye ti-sm mx-1"></i></a>

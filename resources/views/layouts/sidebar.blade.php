@@ -26,7 +26,7 @@
                 <li class="{{ Request::routeIs('admin.consultance.index') ? 'active' : '' }}">
                     <a href="{{ route('admin.consultance.index') }}"><i class="fas fa-box"></i>Consultance</a>
                 </li>
-                <li class="{{ Request::routeIs(['admin.training.index','admin.training.show']) ? 'active' : '' }}">
+                <li class="{{ Request::routeIs(['admin.training.index','admin.training.show','admin.training.students']) ? 'active' : '' }}">
                     <a href="{{ route('admin.training.index') }}"><i class="fas fa-shopping-basket"></i>Trainings</a>
                 </li>
                 <li class="{{ Request::routeIs('admin.category.index') ? 'active' : '' }}">
