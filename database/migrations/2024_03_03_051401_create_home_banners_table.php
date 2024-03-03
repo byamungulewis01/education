@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('trainings', function (Blueprint $table) {
+        Schema::create('home_banners', function (Blueprint $table) {
             $table->id();
             $table->string('title')->unique();
             $table->text('description');
             $table->string('imageName');
-            $table->string('price');
-            $table->enum('status', ['active', 'inactive'])->default('active');
-            $table->enum('exam_status', ['active', 'inactive'])->default('inactive');
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('trainings');
+        Schema::dropIfExists('home_banners');
     }
 };

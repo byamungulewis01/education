@@ -4,7 +4,7 @@
     <!--SECTION START-->
     <section class="c-all h-quote">
         {{-- <div class="container"> --}}
-        <div class="col-md-6 col-sm-12 col-xs-8">
+        <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="all-title quote-title qu-new">
                 <h2>Request an Admission TraIning In</h2>
                 <p class="help-line">{{ $training->title }}</p>

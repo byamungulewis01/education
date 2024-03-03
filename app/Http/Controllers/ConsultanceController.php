@@ -47,7 +47,6 @@ class ConsultanceController extends Controller
     {
         $request->validate([
             'title' => 'required|unique:consultances,title,' . $id,
-            'description' => 'required',
             'image' => 'nullable|mimes:png,jpg'
         ]);
 
@@ -56,6 +55,11 @@ class ConsultanceController extends Controller
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $request->merge(['imageName' => $imageName]);
             $image->move(public_path('/images'), $imageName);
+        }
+        if ($request->description != null) {
+            $request->merge(['description' => $request->description]);
+        } else {
+            $request->merge(['description' => Consultance::find($id)->description]);
         }
 
         try {

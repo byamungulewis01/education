@@ -9,32 +9,24 @@
                 <div class="cor about-sp">
                     <div class="ed-about-tit">
                         <div class="con-title">
-                            <h2>Contact <span> Us</span></h2>
-                            <p>Fusce id sem at ligula laoreet hendrerit venenatis sed purus. Ut pellentesque maximus lacus, nec pharetra augue.</p>
+                            <h2>{{ $contact->title }}</h2>
+                            <p>{{ $contact->header_section }}</p>
                         </div>
                     </div>
                     <div class="pg-contact">
-                        <div class="col-md-3 col-sm-6 col-xs-12 new-con new-con1">
-                            <h2>Educate <span>Master</span></h2>
-                            <p>We Provide Outsourced Software Development Services To Over 50 Clients From 21 Countries.</p>
+                        <div class="col-md-4 col-sm-6 col-xs-12 new-con new-con1">
+                            <h2>{{ $contact->company_desc_title }}</h2>
+                            <p>{{ $contact->company_descr }}</p>
                         </div>
-                        <div class="col-md-3 col-sm-6 col-xs-12 new-con new-con1"> <img src="img/contact/1.html" alt="">
-                            <h4>Address</h4>
-                            <p>28800 Orchard Lake Road, Suite 180 Farmington Hills, U.S.A.
-                                <br>Landmark : Next To Airport</p>
+                        <div class="col-md-4 col-sm-6 col-xs-12 new-con new-con1"> <img src="img/contact/1.html" alt="">
+                            <h4>{{ $contact->addr_title }}</h4>
+                            <p>{{ $contact->company_addr_details }}</p>
                         </div>
-                        <div class="col-md-3 col-sm-6 col-xs-12 new-con new-con3"> <img src="img/contact/2.html" alt="">
-                            <h4>CONTACT INFO:</h4>
-                            <p> <a href="tel://0099999999" class="contact-icon">Phone: 01 234874 965478</a>
-                                <br> <a href="tel://0099999999" class="contact-icon">Mobile: 01 654874 965478</a>
-                                <br> <a href="mailto:mytestmail@gmail.com" class="contact-icon">Email: info@company.com</a> </p>
+                        <div class="col-md-4 col-sm-6 col-xs-12 new-con new-con3"> <img src="img/contact/2.html" alt="">
+                            <h4>{{ $contact->contact_title }}</h4>
+                            <p>{{ $contact->contact_details }}</p>
                         </div>
-                        <div class="col-md-3 col-sm-6 col-xs-12 new-con new-con4"> <img src="img/contact/3.html" alt="">
-                            <h4>Website</h4>
-                            <p> <a href="#">Website: www.mycompany.com</a>
-                                <br> <a href="#">Facebook: www.facebook/my</a>
-                                <br> <a href="#">Blog: www.blog.mycompany.com</a> </p>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -55,14 +47,11 @@
                     <!-- ENQUIRY FORM -->
                     <form id="contact_form" name="contact_form" action="http://rn53themes.net/themes/demo/education-master/send.php">
                         <ul>
-                            <li class="col-md-6 col-sm-6 col-xs-12 contact-input-spac">
+                            <li class="col-md-12 col-sm-12 col-xs-12 contact-input-spac">
                                 <input type="text" id="f1" value="" name="f1" placeholder="Name" required=""> </li>
-                            <li class="col-md-6 col-sm-6 col-xs-12 contact-input-spac">
-                                <input type="text" id="f2" value="" name="f2" placeholder="Phone" required=""> </li>
-                            <li class="col-md-6 col-sm-6 col-xs-12 contact-input-spac">
-                                <input type="text" id="f3" value="" name="f3" placeholder="City" required=""> </li>
-                            <li class="col-md-6 col-sm-6 col-xs-12 contact-input-spac">
-                                <input type="text" id="f4" value="" name="f4" placeholder="Country" required=""> </li>
+                            <li class="col-md-12 col-sm-12 col-xs-12 contact-input-spac">
+                                <input type="text" id="f2" value="" name="f2" placeholder="Email" required=""> </li>
+
                             <li class="col-md-12 col-sm-12 col-xs-12 contact-input-spac">
                                 <textarea id="f5" name="f5" required=""></textarea>
                             </li>

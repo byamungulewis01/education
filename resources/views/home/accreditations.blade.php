@@ -26,7 +26,7 @@
                                             <span>9:15 am – 5:00 pm</span>
                                         </div>
                                         <div class="pg-eve-reg">
-                                           <a href="event-details.html">Read
+                                           <a href="#">Read
                                                 more</a>
                                         </div>
                                     </li>

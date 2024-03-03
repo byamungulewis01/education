@@ -1,6 +1,6 @@
 <div class="col-md-3">
     <div class="pro-user">
-        <img src="{{ asset('frontend/images/user.jpg') }}" alt="user">
+        <img src="{{ asset('images/students/'.auth()->guard('student')->user()->imageName) }}" alt="user">
     </div>
     <div class="pro-user-bio">
         <ul>

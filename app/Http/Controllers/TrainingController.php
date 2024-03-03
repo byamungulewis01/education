@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Enroll;
+use App\Models\ExamSetting;
 use App\Models\Module;
-use App\Models\TrainingComponent;
-use App\Models\User;
 use App\Models\Question;
 use App\Models\Training;
-use App\Models\Enroll;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TrainingController extends Controller
@@ -22,8 +22,13 @@ class TrainingController extends Controller
     }
     public function students($id)
     {
-        $students = Enroll::where('training_id', $id)->get();       
+        $students = Enroll::where('training_id', $id)->get();
         return view('admin.trainings.students', compact('students'));
+    }
+    public function marking_scheme($id)
+    {
+        $exam_set = ExamSetting::withTrashed()->find($id);
+        return view('admin.trainings.marking_scheme',['exam_set' => $exam_set]);
     }
     public function store(Request $request)
     {
@@ -31,7 +36,7 @@ class TrainingController extends Controller
             'title' => 'required|unique:trainings,title',
             'description' => 'required',
             'price' => 'required|numeric',
-            'image' => 'required|mimes:png,jpg|max:10000|dimensions:max_width=166.7,max_height=166.7',
+            'image' => 'required|mimes:png,jpg,jpeg',
             'user_id' => 'required',
         ]);
         if ($request->hasFile('image')) {
@@ -56,7 +61,7 @@ class TrainingController extends Controller
             'title' => 'required|unique:trainings,title,' . $id,
             'description' => 'required',
             'price' => 'required|numeric',
-            'image' => 'nullable|mimes:png,jpg|max:10000|dimensions:max_width=166.7,max_height=166.7',
+            'image' => 'nullable|mimes:png,jpg,jpeg',
             'user_id' => 'required',
         ]);
 
@@ -106,7 +111,7 @@ class TrainingController extends Controller
                 'choices' => $choices,
                 'answers' => $answers,
                 'marks' => $request->marks,
-                'training_id' => $id
+                'training_id' => $id,
             ]);
 
             return back()->with('success', 'Question Added Successfully');

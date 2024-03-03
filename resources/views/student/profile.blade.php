@@ -14,41 +14,41 @@
                         <div class="udb-sec udb-cour-stat">
                             <h4>Profile</h4>
                             <div class="col s12">
-                                <form method="post" action="" enctype="multipart/form-data">
+                                <form method="post" action="{{ route('student.changeProfile') }}" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <div class="form-group">
                                         <label class="control-label col-sm-3">First Name:</label>
                                         <div class="col-sm-9 input-field">
-                                            <input type="text" value="{{ auth()->guard('student')->user()->fname }}" class="validate" required="">
+                                            <input name="fname" type="text" value="{{ auth()->guard('student')->user()->fname }}" class="validate" required="">
                                         </div>
 
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-sm-3">Last Name:</label>
                                         <div class="col-sm-9 input-field">
-                                            <input type="text" value="{{ auth()->guard('student')->user()->lname }}" class="validate" required="">
+                                            <input name="lname" type="text" value="{{ auth()->guard('student')->user()->lname }}" class="validate" required="">
                                         </div>
 
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-sm-3">Email:</label>
                                         <div class="col-sm-9 input-field">
-                                            <input type="text" value="{{ auth()->guard('student')->user()->email }}"class="validate" required="">
+                                            <input name="email" type="text" value="{{ auth()->guard('student')->user()->email }}"class="validate" required="">
                                         </div>
 
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-sm-3">Phone:</label>
                                         <div class="col-sm-9 input-field">
-                                            <input type="text"  value="{{ auth()->guard('student')->user()->phone }}" class="validate" required="">
+                                            <input name="phone" type="text"  value="{{ auth()->guard('student')->user()->phone }}" class="validate" required="">
                                         </div>
 
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-sm-3">Profile Image:</label>
                                         <div class="col-sm-9 input-field">
-                                            <input type="file" value="" class="validate" required="">
+                                            <input type="file" name="image_file" class="validate">
                                         </div>
 
                                     </div>

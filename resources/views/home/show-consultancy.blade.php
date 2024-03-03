@@ -15,12 +15,14 @@
 
                                         <div class="pg-eve-desc pg-blog-desc">
                                             <a href="event-register.html">
-                                                <h4>{{ $consultancy->title }} <button style="float: right;"
-                                                        class="btn btn-danger">Apply Now</button></h4>
+                                                <h4>{{ $consultancy->title }}
+                                                    {{-- <button style="float: right;"
+                                                        class="btn btn-danger">Apply Now</button> --}}
+                                                    </h4>
                                             </a>
 
                                             <img src="{{ asset('images/' . $consultancy->imageName) }}" alt="">
-                                            <p>{{ $consultancy->description }}</p>
+                                            <p>{!! $consultancy->description !!}</p>
                                         </div>
                                     </li>
                                 </ul>

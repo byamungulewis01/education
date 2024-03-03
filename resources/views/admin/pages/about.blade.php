@@ -27,9 +27,9 @@
 
                         <div class="col-12">
                             <label for="header_section" class="form-label">Header Section </label>
-                            <textarea class="form-control" name="header_section" id="header_section" cols="30" rows="3">{{ $about->header_section }}</textarea>                     
+                            <textarea class="form-control" name="header_section" id="header_section" cols="30" rows="3">{{ $about->header_section }}</textarea>
                         </div>
-                      
+
                         <div class="col-12 mt-3">
                             <label for="title" class="form-label">Description</label>
                             <div id="full-editor">{!! $about->description !!}</div>
@@ -52,16 +52,16 @@
                         @method('PUT')
                         <div class="col-6">
                             <label for="title" class="form-label">Our Mission </label>
-                            <textarea class="form-control" name="mission" cols="30" rows="5">{{ $about->mission }}</textarea>     
+                            <textarea class="form-control" name="mission" cols="30" rows="5">{{ $about->mission }}</textarea>
                         </div>
                         <div class="col-6">
                             <label for="title" class="form-label">Our Vission </label>
-                            <textarea class="form-control" name="vission" cols="30" rows="5">{{ $about->mission }}</textarea>              
+                            <textarea class="form-control" name="vission" cols="30" rows="5">{{ $about->mission }}</textarea>
                         </div>
-                    
+
                         <div class="col-12">
                             <label for="title" class="form-label">Objective </label>
-                            <textarea class="form-control" name="objective" cols="30" rows="5">{{ $about->mission }}</textarea>              
+                            <textarea class="form-control" name="objective" cols="30" rows="5">{{ $about->mission }}</textarea>
                         </div>
                         <div class="col-12 mt-4 text-end">
                             <button type="submit" class="btn btn-primary me-sm-3 me-1">Submit</button>

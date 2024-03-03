@@ -1,22 +1,22 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthContoller;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\UsersController;
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\EnrollController;
-use App\Http\Controllers\StudentController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\AdminAuthController;
-use App\Http\Controllers\InstructorController;
-use App\Http\Controllers\ConsultanceController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminStudentController;
+use App\Http\Controllers\AuthContoller;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ConsultanceController;
+use App\Http\Controllers\EnrollController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\InstructorRegistration;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TrainingController;
+use App\Http\Controllers\UsersController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +27,7 @@ use App\Http\Controllers\PagesController;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
-*/
+ */
 
 // Route::group(['middleware' => 'guest'], function () {
 Route::controller(HomeController::class)->group(function () {
@@ -57,10 +57,12 @@ Route::controller(AdminAuthController::class)->prefix('admin')->name('admin.')->
 Route::group(['middleware' => 'student'], function () {
     Route::controller(StudentController::class)->prefix('student')->name('student.')->group(function () {
         Route::get('/profile', 'profile')->name('profile');
+        Route::put('/changeProfile', 'changeProfile')->name('changeProfile');
         Route::get('/my-dashboard', 'dashboard')->name('dashboard');
         Route::get('/my-trainings', 'trainings')->name('trainings');
         Route::get('/my-notifications', 'notifications')->name('notifications');
         Route::get('/my-trainings/{id}', 'training_show')->name('training_show');
+        Route::get('/my-marking_scheme/{id}', 'marking_scheme')->name('marking_scheme');
         Route::get('/chat/{id}', 'chat')->name('chat');
         Route::post('/chat/{id}', 'storeChat')->name('storeChat');
         Route::get('/my-trainings-exam/{id}', 'training_exam_show')->name('training_exam_show');
@@ -82,7 +84,6 @@ Route::group(['middleware' => 'student'], function () {
     Route::get('student/logout', [AuthContoller::class, 'logout'])->name('student.logout');
 });
 
-
 Route::group(['middleware' => 'client'], function () {
     Route::controller(ClientController::class)->prefix('client')->name('client.')->group(function () {
         Route::get('/profile', 'profile')->name('profile');
@@ -92,7 +93,6 @@ Route::group(['middleware' => 'client'], function () {
     });
     Route::get('client/logout', [AuthContoller::class, 'client_logout'])->name('client.logout');
 });
-
 
 Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::controller(AdminController::class)->group(function () {
@@ -113,16 +113,22 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
         Route::put('/about-us', 'aboutUpdate')->name('aboutUpdate');
         Route::put('/about-us/mission', 'aboutMissionUpdate')->name('aboutMissionUpdate');
         Route::get('/contact-us', 'contact')->name('contact');
+        Route::put('/contact-us', 'contactUpdate')->name('contactUpdate');
+        Route::get('/home-banners', 'home_banners')->name('home_banners');
+        Route::post('/home-banners', 'store_home_banner')->name('store_home_banner');
+        Route::put('/home-banners/{id}', 'update_home_banner')->name('update_home_banner');
+        Route::delete('/home-banners/{id}', 'destroy_home_banner')->name('destroy_home_banner');
+
     });
 
     Route::controller(TrainingController::class)->prefix('trainings')->name('training.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/{id}/students', 'students')->name('students');
+        Route::get('/marking-scheme/{id}', 'marking_scheme')->name('marking_scheme');
         Route::post('/', 'store')->name('store');
         Route::put('/{id}', 'update')->name('update');
         Route::delete('/{id}', 'destroy')->name('destroy');
         Route::get('/show/{id}', 'show')->name('show');
-
 
         Route::post('/question/{id}', 'store_question')->name('store_question');
         Route::put('/question/{id}', 'update_question')->name('update_question');
@@ -146,7 +152,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
         Route::put('/{id}', 'update')->name('update');
         Route::delete('/{id}', 'destroy')->name('destroy');
     });
-
 
     Route::controller(AdminStudentController::class)->prefix('students')->middleware('user-access:admin,super_admin')->name('student.')->group(function () {
         Route::get('/approved', 'approved')->name('approved');
@@ -186,7 +191,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
         Route::put('/{id}', 'update_client')->name('update');
         Route::delete('/{id}', 'destroy_client')->name('destroy');
     });
-
 
     Route::get('logout', [AdminAuthController::class, 'logout'])->name('logout');
     Route::get('403', function () {

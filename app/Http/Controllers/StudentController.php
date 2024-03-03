@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Chat;
 use App\Models\Enroll;
-use App\Models\Module;
-use App\Models\Student;
-use App\Models\Question;
-use App\Models\Training;
 use App\Models\ExamSetting;
-
-use Illuminate\Http\Request;
+use App\Models\Module;
+use App\Models\Question;
+use App\Models\Student;
+use App\Models\Training;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use KingFlamez\Rave\Facades\Rave as Flutterwave;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class StudentController extends Controller
 {
@@ -29,6 +30,30 @@ class StudentController extends Controller
     public function profile()
     {
         return view('student.profile');
+    }
+    public function changeProfile(Request $request)
+    {
+        $id = auth()->guard('student')->user()->id;
+        $request->validate([
+            'fname' => 'required|string|min:2',
+            'lname' => 'required|string|min:2',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'phone' => 'required|numeric|unique:users,phone,' . $id,
+            'image_file' => 'nullable|mimes:png,jpg,jpeg',
+        ]);
+        if ($request->hasFile('image_file')) {
+            $image = $request->file('image_file');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('/images/students'), $imageName);
+            $request->merge(['imageName' => $imageName]);
+        }
+
+        try {
+            Student::findorfail($id)->update($request->all());
+            return back()->with('message', 'Profile Updated Successfully');
+        } catch (\Throwable $th) {
+            return back()->with('error', 'Some things went wrong try again');
+        }
     }
     public function chat($id)
     {
@@ -49,8 +74,15 @@ class StudentController extends Controller
     }
     public function trainings()
     {
+
         $trainings = Enroll::where('student_id', auth()->guard('student')->user()->id)->get();
         return view('student.trainings', compact('trainings'));
+    }
+    public function marking_scheme($id)
+    {
+
+        $exam_set =  ExamSetting::withTrashed()->find($id);
+        return view('student.marking_scheme', compact('exam_set'));
     }
     public function notifications()
     {
@@ -97,8 +129,7 @@ class StudentController extends Controller
             }
         }
 
-
-        $total_marks = (int)Question::where('training_id', $id)->sum('marks');
+        $total_marks = (int) Question::where('training_id', $id)->sum('marks');
         $status = ($marks >= ($total_marks * 0.5)) ? 'success' : 'failure';
 
         $exam = ExamSetting::create([
@@ -149,17 +180,16 @@ class StudentController extends Controller
             'customer' => [
                 'email' => auth()->guard('student')->user()->email,
                 "phone_number" => auth()->guard('student')->user()->phone,
-                "name" => auth()->guard('student')->user()->fname . " " . auth()->guard('student')->user()->lname
+                "name" => auth()->guard('student')->user()->fname . " " . auth()->guard('student')->user()->lname,
             ],
 
             "customizations" => [
                 "title" => 'Boost Consultancy & Coaching Hub',
-                "description" => "Boost Consultancy & Coaching Hub Pay Retake Exam"
-            ]
+                "description" => "Boost Consultancy & Coaching Hub Pay Retake Exam",
+            ],
         ];
 
         $payment = Flutterwave::initializePayment($data);
-
 
         if ($payment['status'] !== 'success') {
             // notify something went wrong
@@ -173,7 +203,7 @@ class StudentController extends Controller
         $status = request()->status;
 
         //if payment is successful
-        if ($status ==  'successful') {
+        if ($status == 'successful') {
 
             $transactionID = Flutterwave::getTransactionIDFromCallback();
             $data = Flutterwave::verifyTransaction($transactionID);
@@ -181,7 +211,7 @@ class StudentController extends Controller
             ExamSetting::where('student_id', auth()->guard('student')->user()->id)
                 ->where('training_id', $id)->latest()->first()->delete();
             return to_route('student.training_exam_show', $id)->with('message', 'Payment Done Continue With Exam');
-        } elseif ($status ==  'cancelled') {
+        } elseif ($status == 'cancelled') {
             //Put desired action/code after transaction has been cancelled here
             return back()->with('warning', 'Transaction Cancelled');
         } else {
@@ -207,17 +237,16 @@ class StudentController extends Controller
             'customer' => [
                 'email' => auth()->guard('student')->user()->email,
                 "phone_number" => auth()->guard('student')->user()->phone,
-                "name" => auth()->guard('student')->user()->fname . " " . auth()->guard('student')->user()->lname
+                "name" => auth()->guard('student')->user()->fname . " " . auth()->guard('student')->user()->lname,
             ],
 
             "customizations" => [
                 "title" => 'Boost Consultancy & Coaching Hub',
-                "description" => "Boost Consultancy & Coaching Hub Paying Training Services"
-            ]
+                "description" => "Boost Consultancy & Coaching Hub Paying Training Services",
+            ],
         ];
 
         $payment = Flutterwave::initializePayment($data);
-
 
         if ($payment['status'] !== 'success') {
             return back()->with('warning', 'something went wrong try again');
@@ -230,7 +259,7 @@ class StudentController extends Controller
         $status = request()->status;
 
         //if payment is successful
-        if ($status ==  'successful') {
+        if ($status == 'successful') {
 
             $transactionID = Flutterwave::getTransactionIDFromCallback();
             $data = Flutterwave::verifyTransaction($transactionID);
@@ -238,7 +267,7 @@ class StudentController extends Controller
             Enroll::where('student_id', auth()->guard('student')->user()->id)
                 ->where('training_id', $id)->update(['is_payed' => true, 'payment_date' => now()]);
             return to_route('student.dashboard')->with('message', 'Payment Completed Successfully');
-        } elseif ($status ==  'cancelled') {
+        } elseif ($status == 'cancelled') {
             //Put desired action/code after transaction has been cancelled here
             return back()->with('warning', 'Transaction Cancelled');
         } else {
@@ -253,17 +282,40 @@ class StudentController extends Controller
         $student = Student::find($id);
         $training = Enroll::where('student_id', $id)->first()->training->title;
         // dd($student, $training);
-        $pdf = Pdf::loadView('student.admission', compact('student', 'training'))->setPaper('a4', 'portrait');
+        $pdf = Pdf::loadView('student.admission', compact('student', 'training'))->setPaper('a4', 'landscape');
         return $pdf->stream($student->regnumber . '.pdf');
     }
     public function certificate($id)
     {
 
-        // return view('student.certificate');
         $student = Student::find($id);
         $training = Enroll::where('student_id', $id)->first();
-        // dd($student, $training);
-        $pdf = Pdf::loadView('student.certificate', compact('student', 'training'))->setPaper('a4', 'landscape');
+
+        $qrCodeFilePath = $this->generateQrCodeAndSave($student->regnumber);
+
+
+
+        // $qrCode = QrCode::size(300)->generate($student->regnumber);
+        // $filePath = public_path('qrcodes/' . time() .'.png'); // Define the file path where you want to save the QR code
+        // file_put_contents($filePath, $qrCode);
+
+        // return view('student.certificate', compact('student', 'training', 'qrCodeFilePath'));
+        // // dd($student, $training);
+        $pdf = Pdf::loadView('student.certificate', compact('student', 'training','qrCodeFilePath'))->setPaper('a4', 'landscape');
         return $pdf->stream($student->regnumber . '.pdf');
+    }
+    public function generateQrCodeAndSave($studentRegNumber)
+    {
+        // Generate the QR code
+        $qrCode = QrCode::size(100)->generate($studentRegNumber);
+
+        // Define the file path to save the QR code image
+        $filePath = 'qrcodes/' . time() . '.png';
+
+        // Save the QR code image to storage
+        Storage::put($filePath, $qrCode);
+
+        // Return the file path to the saved QR code image
+        return $filePath;
     }
 }

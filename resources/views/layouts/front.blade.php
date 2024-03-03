@@ -57,7 +57,7 @@
                                 <li><a href="{{ route('trainings') }}">Trainings</a></li>
                                 <li><a href="{{ route('consultancy') }}">Consultancy</a></li>
                                 <li><a href="#">Partners & Accreditation</a></li>
-                                <li><a href="#">Journal</a></li>
+                                {{-- <li><a href="#">Journal</a></li> --}}
                                 <li><a href="{{ route('contact') }}">Contact us</a></li>
                             </ul>
 
@@ -73,23 +73,28 @@
         <!-- TOP BAR -->
         <div class="ed-top">
             <div class="container">
+                @php
+                    $contact = \App\Models\ContactUs::first();
+
+                @endphp
                 <div class="row" style="padding:1%">
                     <div class="col-md-12">
                         <div class="ed-com-t1-left">
                             <ul>
+
                                 <li><a href="#">Head Office Contact/USA</a>
                                 </li>
-                                <li><a href="#">Phone: +1(251)237-9112</a>
+                                <li><a href="#">Phone: {{ $contact->head_phone }}</a>
                                 </li>
-                                <li><a href="#">Email: info@boast.com</a>
+                                <li><a href="#">Email: {{ $contact->head_email }}</a>
                                 </li>
                             </ul>
                             <ul>
                                 <li><a href="#">Branch Contact </a>
                                 </li>
-                                <li><a href="#">Phone: 250783590293</a>
+                                <li><a href="#">Phone: {{ $contact->branch_phone }}</a>
                                 </li>
-                                <li><a href="#">Email: info@bcchbranch.com</a>
+                                <li><a href="#">Email: {{ $contact->branch_email }}</a>
                                 </li>
                             </ul>
                         </div>
@@ -124,8 +129,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="wed-logo">
-                            <a href="{{ route('index') }}"><img src="{{ asset('frontend/logo.png') }}" height="50"
-                                    alt="BCCH Logo" />
+                            <a href="{{ route('index') }}"><img src="{{ asset('assets/certificate/boost.png') }}"
+                                    height="50" alt="BCCH Logo" />
                             </a>
 
                         </div>
@@ -200,12 +205,15 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li><a href="{{ route('accreditations') }}"
+                                <li>
+                                    <a href="#">Partners &
+                                        Accreditation</a>
+                                    {{-- <a href="{{ route('accreditations') }}"
                                         @if (Request::routeIs('accreditations')) style="color: #e66030;" @endif>Partners &
-                                        Accreditation</a></li>
-                                <!--<li><a class='dropdown-button ed-sub-menu' href='#' data-activates='dropdown1'>Courses</a></li>-->
+                                        Accreditation</a> --}}
+                                </li>
 
-                                <li><a href="#">Journal</a>
+                                {{-- <li><a href="#">Journal</a> --}}
                                 </li>
 
                                 <li><a href="{{ route('contact') }}"
@@ -273,15 +281,16 @@
             <div class="row wed-foot-link-1">
                 <div class="col-md-4 foot-tc-mar-t-o">
                     <h4>Get In Touch</h4>
-                    <p>Address: 28800 Orchard Lake Road, Suite 180 Farmington Hills, U.S.A.</p>
-                    <p>Phone: <a href="#!">+101-1231-4321</a></p>
-                    <p>Email: <a href="#!">info@boast.com</a></p>
+                    <p style="color: #bebebe">Address: 28800 Orchard Lake Road, Suite 180 Farmington Hills, U.S.A.</p>
+                    <p style="color: #bebebe">Phone: <a style="color: #bebebe" href="#!">+101-1231-4321</a></p>
+                    <p style="color: #bebebe">Email: <a style="color: #bebebe" href="#!">info@boast.com</a></p>
                 </div>
                 <div class="col-md-4">
                     <h4>Top Trainings</h4>
                     <ul>
                         @foreach (\App\Models\Training::orderBy('title')->take(10)->get() as $item)
-                            <li><a href="{{ route('training', $item->id) }}">{{ $item->title }}</a></li>
+                            <li><a style="color: #bebebe"
+                                    href="{{ route('training', $item->id) }}">{{ $item->title }}</a></li>
                         @endforeach
                     </ul>
                 </div>
@@ -293,8 +302,7 @@
                         </li>
                         <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
                         </li>
-                        <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                        </li>
+
                         <li><a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a>
                         </li>
                         <li><a href="#"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
@@ -310,8 +318,8 @@
         <div class="container">
             <div class="row">
                 <div class="copy-right">
-                    <a target="_blank" href="https://www.templateshub.net">Boast Coaching and Consultancy
-                        Hub(BCCH)</a>
+                    <a style="color: #bebebe" target="_blank" href="#">BOOST CONSULTANCY & COACHING HUB
+                        (BCCH)</a>
                 </div>
             </div>
         </div>
@@ -384,19 +392,7 @@
     </section>
 
     <!-- SOCIAL MEDIA SHARE -->
-    <section>
-        <div class="icon-float">
-            <ul>
-                <li><a href="#" class="sh">1k <br> Share</a> </li>
-                <li><a href="#" class="fb1"><i class="fa fa-facebook" aria-hidden="true"></i></a> </li>
-                <li><a href="#" class="gp1"><i class="fa fa-google-plus" aria-hidden="true"></i></a> </li>
-                <li><a href="#" class="tw1"><i class="fa fa-twitter" aria-hidden="true"></i></a> </li>
-                <li><a href="#" class="li1"><i class="fa fa-linkedin" aria-hidden="true"></i></a> </li>
-                <li><a href="#" class="wa1"><i class="fa fa-whatsapp" aria-hidden="true"></i></a> </li>
-                <li><a href="#" class="sh1"><i class="fa fa-envelope-o" aria-hidden="true"></i></a> </li>
-            </ul>
-        </div>
-    </section>
+
 
     <!--Import jQuery before materialize.js-->
     <script src="{{ asset('assets/vendor/libs/jquery/jquery.js') }}"></script>

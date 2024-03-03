@@ -17,4 +17,10 @@ class ExamSetting extends Model
         'total_marks',
         'status'
     ];
+
+    public function training()
+    {
+        return $this->belongsTo(Training::class);
+    }
+
 }

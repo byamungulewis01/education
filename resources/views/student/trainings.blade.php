@@ -23,12 +23,19 @@
                                             <th>Price</th>
                                             <th>Join Date</th>
                                             <th>Status</th>
+                                            <th>Exam Scheme</th>
                                             <th>View</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
                                         @foreach ($trainings as $item)
+                                            @php
+                                                @$setting = App\Models\ExamSetting::withTrashed()
+                                                    ->where('student_id', $item->student_id)
+                                                    ->where('training_id', $item->training_id)
+                                                    ->first();
+                                            @endphp
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $item->training->title }}</td>
@@ -41,8 +48,18 @@
                                                         <span class="pro-bg-act">Not Paid</span>
                                                     @endif
                                                 </td>
-                                                <td> @if (auth()->guard('student')->user()->status == 'approved')<a href="{{ route('student.training_show', $item->training_id) }}"
-                                                        class="pro-edit">view</a>@endif</td>
+                                                <td>
+                                                    @if ($setting)
+                                                    <a href="{{ route('student.marking_scheme', $setting->id) }}">
+                                                        Check Here</a>
+                                                @endif
+                                                </td>
+                                                <td>
+                                                    @if (auth()->guard('student')->user()->status == 'approved')
+                                                        <a href="{{ route('student.training_show', $item->training_id) }}"
+                                                            class="pro-edit">view</a>
+                                                    @endif
+                                                </td>
                                             </tr>
                                         @endforeach
 

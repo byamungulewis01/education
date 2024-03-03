@@ -12,23 +12,56 @@
             <div class="card">
                 <h5 class="card-header">Create Contact</h5>
                 <div class="card-body">
-                    <form method="POST" class="row g-2" action="{{ route('admin.consultance.store') }}"
-                        enctype="multipart/form-data">
+                    <form method="POST" class="row g-4" action="{{ route('admin.pages.contactUpdate') }}">
                         @csrf
+                        @method('PUT')
                         <div class="col-6">
+                         <div class="mb-3">
                             <label for="title" class="form-label">Title</label>
-                            <input name="title" autofocus type="text" class="form-control" required placeholder="Title"
-                                value="{{ old('title') }}">
+                            <input name="title" type="text" class="form-control" required value="{{ $contact->title }}">
+                         </div>
+                         <div class="mb-3">
+                            <label for="company_desc_title" class="form-label">Company Description </label>
+                            <input name="company_desc_title" type="text" class="form-control mb-3" required value="{{ $contact->company_desc_title }}" />
+                            <textarea class="form-control" name="company_descr" cols="30" rows="2">{{ $contact->company_descr }}</textarea>
+                         </div>
                         </div>
                         <div class="col-6">
-                            <label for="title" class="form-label">Image</label>
-                            <input name="image" type="file" class="form-control">
+                            <label for="header_section" class="form-label">Header Section </label>
+                            <textarea class="form-control" name="header_section" id="header_section" cols="30" rows="8">{{ $contact->header_section }}</textarea>
                         </div>
-                        <div class="col-12 mt-3">
-                            <label for="title" class="form-label">Description</label>
-                            <div id="full-editor"></div>
-                            <input type="hidden" name="description" id="description-input">
+                        <hr>
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="addr_title" class="form-label">Company Address </label>
+                                <input name="addr_title" type="text" class="form-control mb-3" required value="{{ $contact->addr_title }}"/>
+                                <textarea class="form-control" name="company_addr_details" cols="30" rows="4">{{ $contact->company_addr_details }}</textarea>
+                             </div>
                         </div>
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="contact_title" class="form-label">Company Contact Info </label>
+                                <input name="contact_title" type="text" class="form-control mb-3" value="{{ $contact->contact_title }}" required />
+                                <textarea class="form-control" name="contact_details" cols="30" rows="4">{{ $contact->contact_details }}</textarea>
+                             </div>
+                        </div>
+
+                        <label class="form-label fs-20"><strong>Head Office Contact / USA</strong> </label>
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="head" class="form-label">Company Contact Info </label>
+                                <input name="head_phone" type="text" class="form-control mb-3" value="{{ $contact->head_phone }}" required />
+                                <input name="head_email" type="text" class="form-control mb-3" value="{{ $contact->head_email }}" required />
+                             </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="Branch" class="form-label">Branch Contact </label>
+                                <input name="branch_phone" type="text" class="form-control mb-3" value="{{ $contact->branch_phone }}" required />
+                                <input name="branch_email" type="text" class="form-control mb-3" value="{{ $contact->branch_email }}" required />
+                             </div>
+                        </div>
+
                         <div class="col-12 mt-4 text-end">
                             <button type="submit" class="btn btn-primary me-sm-3 me-1">Submit</button>
 

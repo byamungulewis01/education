@@ -98,7 +98,7 @@
                                 <td>{{ $item->user->name }}</td>
                                 <td>
                                     @if($item->students() == 0)
-                                    {{ $item->students() }} Student
+                                    <a href="{{ route('admin.training.students', $item->id) }}">{{ $item->students() }} Student </a>
                                     @elseif($item->students() == 1)
                                     <a href="{{ route('admin.training.students', $item->id) }}">{{ $item->students() }} Student</a>
                                     @else

@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course;
+use App\Models\About;
 use App\Models\Module;
-use App\Models\School;
 use App\Models\Country;
-use App\Models\Program;
-use App\Models\Category;
 use App\Models\Training;
+use App\Models\ContactUs;
+use App\Models\HomeBanner;
 use App\Models\Consultance;
 use Illuminate\Http\Request;
-use App\Models\About;
 
 
 class HomeController extends Controller
@@ -19,8 +17,11 @@ class HomeController extends Controller
     //index
     public function index()
     {
+        $about = About::first();
+        $banners = HomeBanner::orderByDesc('id')->get();
 
-        return view('home.index');
+
+        return view('home.index',compact('about','banners'));
     }
     public function consultancy()
     {
@@ -77,13 +78,11 @@ class HomeController extends Controller
     {
         return view('home.trainings');
     }
-    public function trainings()
-    {
-        return view('home.trainings');
-    }
     public function contact()
     {
-        return view('home.contact');
+        $contact = ContactUs::first();
+
+        return view('home.contact', compact('contact'));
     }
     public function accreditations()
     {

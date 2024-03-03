@@ -69,7 +69,7 @@
     </li>
 
     <li
-        class="menu-item {{ Request::routeIs(['admin.pages.about', 'admin.pages.contact']) ? 'open' : '' }} ">
+        class="menu-item {{ Request::routeIs(['admin.pages.about', 'admin.pages.contact','admin.pages.home_banners']) ? 'open' : '' }} ">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons ti ti-user"></i>
             <div data-i18n="Pages">Pages</div>
@@ -84,6 +84,11 @@
             <li class="menu-item {{ Request::routeIs('admin.pages.contact') ? 'active' : '' }}">
                 <a href="{{ route('admin.pages.contact') }}" class="menu-link">
                     <div data-i18n="Contact Us">Contact Us</div>
+                </a>
+            </li>
+            <li class="menu-item {{ Request::routeIs('admin.pages.home_banners') ? 'active' : '' }}">
+                <a href="{{ route('admin.pages.home_banners') }}" class="menu-link">
+                    <div data-i18n="Home Banner">Home Banner</div>
                 </a>
             </li>
             <!-- <li class="menu-item {{ Request::routeIs('admin.student.rejected') ? 'active' : '' }}">
