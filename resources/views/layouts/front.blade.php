@@ -169,7 +169,7 @@
                                                         <ul>
                                                             @foreach ($chunk as $item)
                                                                 <li><a
-                                                                        href="{{ route('training', $item->id) }}">{{ $item->title }}</a>
+                                                                        href="{{ route('admission', $item->id) }}">{{ $item->title }}</a>
                                                                 </li>
                                                             @endforeach
                                                         </ul>
@@ -195,7 +195,7 @@
                                                         <ul>
                                                             @foreach ($chunk as $item)
                                                                 <li><a
-                                                                        href="{{ route('training', $item->id) }}">{{ $item->title }}</a>
+                                                                        href="{{ route('consultancyShow', $item->id) }}">{{ $item->title }}</a>
                                                                 </li>
                                                             @endforeach
                                                         </ul>
