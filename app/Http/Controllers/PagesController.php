@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\About;
 use App\Models\ContactUs;
+use App\Models\Structure;
 use App\Models\HomeBanner;
 use Illuminate\Http\Request;
 
@@ -155,5 +156,72 @@ class PagesController extends Controller
     {
         HomeBanner::findorfail($id)->delete();
         return back()->with('success', 'Bunner Delete Successfully');
+    }
+
+    public function structure()
+    {
+        $structures = Structure::orderByDesc('id')->get();
+        return view('admin.pages.structure.index', ['structures' => $structures]);
+    }
+    public function create_structure()
+    {
+        return view('admin.pages.structure.create');
+    }
+    public function edit_structure($id)
+    {
+        $item = Structure::findorfail($id);
+        return view('admin.pages.structure.edit', compact('item'));
+    }
+    public function store_structure(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|unique:structures,title',
+            'description' => 'required',
+            'image' => 'required|mimes:png,jpg,jpeg,'
+        ]);
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+        }
+        $request->merge(['imageName' => $imageName]);
+        try {
+            Structure::create($request->all());
+            $image->move(public_path('/images/structure'), $imageName);
+
+            return to_route('admin.pages.structure')->with('success', 'Structure Added Successfully');
+        } catch (\Throwable $th) {
+            return back()->with('error', 'Some things went wrong try again');
+        }
+    }
+    public function update_structure(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required|unique:structures,title,' . $id,
+            'image' => 'nullable|mimes:png,jpg,jpeg,'
+        ]);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $request->merge(['imageName' => $imageName]);
+            $image->move(public_path('/images/structure'), $imageName);
+        }
+        if ($request->description != null) {
+            $request->merge(['description' => $request->description]);
+        } else {
+            $request->merge(['description' => Structure::find($id)->description]);
+        }
+
+        try {
+            Structure::findorfail($id)->update($request->all());
+            return back()->with('success', 'Structure Updated Successfully');
+        } catch (\Throwable $th) {
+            return back()->with('error', 'Some things went wrong try again' . $th->getMessage());
+        }
+    }
+    public function destroy_structure($id)
+    {
+        Structure::findorfail($id)->delete();
+        return back()->with('success', 'Structure Delete Successfully');
     }
 }

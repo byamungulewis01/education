@@ -18,11 +18,11 @@
                             <div class="home-top-cour">
                                 <!--POPULAR COURSES IMAGE-->
                                 <div class="col-md-5">
-                                    <img src="{{ asset('images/abouts/'. $about->image) }}" alt="">
+                                    <img src="{{ asset('images/abouts/' . $about->image) }}" alt="">
                                 </div>
                                 <!--POPULAR COURSES: CONTENT-->
                                 <div class="col-md-7 home-top-cour-desc">
-                                   {!! $about->description !!}
+                                    {!! $about->description !!}
                                 </div>
                             </div>
                         </div>
@@ -77,5 +77,33 @@
         </div>
     </section>
     <!--SECTION END-->
+    <section>
+        <div class="container com-sp pad-bot-50">
+            <div class="row">
+                <div class="cor about-sp">
+                    <div class="ed-about-tit">
+                        <div class="con-title">
+                            <h2><span>Organisation Structure</span></h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!--POPULAR COURSES-->
+                        @foreach ($structures as $item)
+                            <div class="home-top-cour">
+                                <!--POPULAR COURSES IMAGE-->
+                                <div class="col-md-7 home-top-cour-desc">
+                                    <h2>{{ $item->title }}</h2>
+                                    {!! $item->description !!}
+                                </div>
+                                <div class="col-md-5">
+                                    <img src="{{ asset('images/structure/' . $item->imageName) }}" alt="">
+                                </div>
+                                <!--POPULAR COURSES: CONTENT-->
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+    </section>
 
 @endsection

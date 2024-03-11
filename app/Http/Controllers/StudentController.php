@@ -81,7 +81,7 @@ class StudentController extends Controller
     public function marking_scheme($id)
     {
 
-        $exam_set =  ExamSetting::withTrashed()->find($id);
+        $exam_set = ExamSetting::withTrashed()->find($id);
         return view('student.marking_scheme', compact('exam_set'));
     }
     public function notifications()
@@ -293,15 +293,27 @@ class StudentController extends Controller
 
         $qrCodeFilePath = $this->generateQrCodeAndSave($student->regnumber);
 
-
-
         // $qrCode = QrCode::size(300)->generate($student->regnumber);
         // $filePath = public_path('qrcodes/' . time() .'.png'); // Define the file path where you want to save the QR code
         // file_put_contents($filePath, $qrCode);
 
         // return view('student.certificate', compact('student', 'training', 'qrCodeFilePath'));
         // // dd($student, $training);
-        $pdf = Pdf::loadView('student.certificate', compact('student', 'training','qrCodeFilePath'))->setPaper('a4', 'landscape');
+        $pdf = Pdf::loadView('student.certificate', compact('student', 'training', 'qrCodeFilePath'))->setPaper('a4', 'landscape');
+        return $pdf->stream($student->regnumber . '.pdf');
+    }
+    public function certificate_by_year(Request $request, $id)
+    {
+        $year = $request->year;
+        dd($year);
+        $student = Student::find($id);
+        $training = Enroll::where('student_id', $id)->where('training_id', $request->training_id)->first();
+
+        $qrCodeFilePath = $this->generateQrCodeAndSave($student->regnumber);
+
+        // return view('student.certificate', compact('student', 'training', 'qrCodeFilePath','year'));
+        // // dd($student, $training);
+        $pdf = Pdf::loadView('student.certificate', compact('student', 'training', 'qrCodeFilePath', 'year'))->setPaper('a4', 'landscape');
         return $pdf->stream($student->regnumber . '.pdf');
     }
     public function generateQrCodeAndSave($studentRegNumber)

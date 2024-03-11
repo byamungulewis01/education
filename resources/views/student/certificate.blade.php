@@ -108,7 +108,7 @@
                 having published a manuscript named</p>
             <p style="font-size: 30px; font-family :Georgia, 'Times New Roman', Times, serif;  font-weight:900">
                 {{ $training->training->title }}</p>
-            <p>In <strong>BOOST CONSULTANCY & COACHING HUB</strong>, Issue {{ $training->updated_at->format('d, F Y') }}
+            <p>In <strong>BOOST CONSULTANCY & COACHING HUB</strong>, Issue {{ $year }}
             </p>
             <img src="{{ public_path('assets/certificate/line.png') }}" alt="Line">
 

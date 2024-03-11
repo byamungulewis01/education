@@ -7,6 +7,7 @@ use App\Models\Module;
 use App\Models\Country;
 use App\Models\Training;
 use App\Models\ContactUs;
+use App\Models\Structure;
 use App\Models\HomeBanner;
 use App\Models\Consultance;
 use Illuminate\Http\Request;
@@ -72,7 +73,8 @@ class HomeController extends Controller
     public function about()
     {
         $about = About::first();
-        return view('home.about',compact('about'));
+        $structures = Structure::orderByDesc('id')->get();
+        return view('home.about',compact('about','structures'));
     }
     public function trainings()
     {

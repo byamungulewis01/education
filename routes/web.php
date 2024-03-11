@@ -14,6 +14,7 @@ use App\Http\Controllers\InstructorRegistration;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\StudentProfileController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -76,6 +77,8 @@ Route::group(['middleware' => 'student'], function () {
         Route::post('/my-trainings-book/{id}', 'bookTraining')->name('bookTraining');
         Route::get('/admission/{id}', 'admission')->name('admission');
         Route::get('/certificate/{id}', 'certificate')->name('certificate');
+        Route::post('certificateByYear/{id}', 'certificate_by_year')->name('certificate_by_year');
+
     });
     Route::controller(EnrollController::class)->prefix('enroll')->name('enroll.')->group(function () {
         Route::post('/free-course/{id}', 'free_course')->name('free_course');
@@ -119,6 +122,14 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
         Route::put('/home-banners/{id}', 'update_home_banner')->name('update_home_banner');
         Route::delete('/home-banners/{id}', 'destroy_home_banner')->name('destroy_home_banner');
 
+        // Organization Structure
+        Route::get('/structure', 'structure')->name('structure');
+        Route::get('/structure/create', 'create_structure')->name('create_structure');
+        Route::get('/structure/{id}/edit', 'edit_structure')->name('edit_structure');
+        Route::post('/structure', 'store_structure')->name('store_structure');
+        Route::put('/structure/{id}', 'update_structure')->name('update_structure');
+        Route::delete('/structure/{id}', 'destroy_structure')->name('destroy_structure');
+
     });
 
     Route::controller(TrainingController::class)->prefix('trainings')->name('training.')->group(function () {
@@ -160,6 +171,16 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
         Route::put('/reject/{id}', 'reject')->name('reject');
         Route::get('/application', 'application')->name('application');
     });
+    Route::controller(StudentProfileController::class)->prefix('student')->middleware('user-access:admin,super_admin')->name('student.profile.')->group(function () {
+        Route::get('/{id}', 'index')->name('index');
+        Route::put('/changePassword/{id}', 'changePassword')->name('changePassword');
+        Route::get('/training/{id}', 'training')->name('training');
+        Route::put('/training/{id}', 'training_joining')->name('training_joining');
+
+    });
+    Route::get('student/admission/{id}', [StudentController::class, 'admission'])->name('admission');
+    Route::get('student/certificate/{id}', [StudentController::class, 'certificate'])->name('certificate');
+    Route::post('student/certificateByYear/{id}', [StudentController::class, 'certificate_by_year'])->name('certificate_by_year');
 
     Route::controller(InstructorRegistration::class)
         ->prefix('instructors')->name('instructor.')

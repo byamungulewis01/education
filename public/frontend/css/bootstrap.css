@@ -6,7 +6,7 @@
  * Last Changes: 10 jan 2018
  * Author: RN53 Themes
  * Email:      rn53themes@gmail.com
- * Website:    http://www.rn53themes.net 
+ * Website:    http://www.rn53themes.net
  -----------------------------------------------*/
 html {
      font-family: sans-serif;
@@ -4992,7 +4992,7 @@ html {
      overflow: hidden;
      -webkit-overflow-scrolling: touch;
      outline: 0;
-    overflow: auto;	 
+    overflow: auto;
 }
  .modal.fade .modal-dialog {
      -webkit-transition: -webkit-transform .3s ease-out;
@@ -5095,6 +5095,10 @@ html {
     }
      .modal-sm {
          width: 300px;
+    }
+     .modal-mine {
+         width: 700px;
+         margin: 30px auto;
     }
 }
  @media (min-width: 992px) {

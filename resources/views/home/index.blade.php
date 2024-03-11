@@ -36,7 +36,7 @@
             </a>
         </div>
     </section>
-    <section>
+    {{-- <section>
         <div class="container">
             <div class="row">
                 <div class="wed-hom-ser">
@@ -64,7 +64,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <section>
         <div class="container com-sp pad-bot-70">

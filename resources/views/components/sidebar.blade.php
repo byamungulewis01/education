@@ -69,9 +69,9 @@
     </li>
 
     <li
-        class="menu-item {{ Request::routeIs(['admin.pages.about', 'admin.pages.contact','admin.pages.home_banners']) ? 'open' : '' }} ">
+        class="menu-item {{ Request::routeIs(['admin.pages.about', 'admin.pages.contact','admin.pages.home_banners','admin.pages.structure','admin.pages.create_structure','admin.pages.edit_structure']) ? 'open' : '' }} ">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
-            <i class="menu-icon tf-icons ti ti-user"></i>
+            <i class="menu-icon tf-icons ti ti-settings"></i>
             <div data-i18n="Pages">Pages</div>
         </a>
         <ul class="menu-sub">
@@ -89,6 +89,11 @@
             <li class="menu-item {{ Request::routeIs('admin.pages.home_banners') ? 'active' : '' }}">
                 <a href="{{ route('admin.pages.home_banners') }}" class="menu-link">
                     <div data-i18n="Home Banner">Home Banner</div>
+                </a>
+            </li>
+            <li class="menu-item {{ Request::routeIs(['admin.pages.structure','admin.pages.create_structure','admin.pages.edit_structure']) ? 'active' : '' }}">
+                <a href="{{ route('admin.pages.structure') }}" class="menu-link">
+                    <div data-i18n="Organization Structure">Organization Structure</div>
                 </a>
             </li>
             <!-- <li class="menu-item {{ Request::routeIs('admin.student.rejected') ? 'active' : '' }}">
@@ -119,11 +124,11 @@
                 </a>
             </li>
 
-            <li class="menu-item {{ Request::routeIs('admin.client.index') ? 'active' : '' }}">
+            {{-- <li class="menu-item {{ Request::routeIs('admin.client.index') ? 'active' : '' }}">
                 <a href="{{ route('admin.client.index') }}" class="menu-link">
                     <div data-i18n="Clients">Clients</div>
                 </a>
-            </li>
+            </li> --}}
 
             <li class="menu-item {{ Request::routeIs('admin.student.index') ? 'active' : '' }}">
                 <a href="{{ route('admin.student.index') }}" class="menu-link">

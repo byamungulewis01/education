@@ -58,7 +58,8 @@ return [
 
     'url' => env('APP_URL', $url),
 
-    'asset_url' => env('ASSET_URL', $url . '/public'),
+    'asset_url' => env('ASSET_URL',),
+    // 'asset_url' => env('ASSET_URL', $url . '/public'),
 
     /*
     |--------------------------------------------------------------------------

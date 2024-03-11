@@ -132,7 +132,9 @@
                         @foreach ($students as $item)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $item->regnumber }}</td>
+                                <td> <a
+                                        href="{{ route('admin.student.profile.index', $item->id) }}">{{ $item->regnumber }}</a>
+                                </td>
                                 <td>{{ $item->fname }} {{ $item->lname }}</td>
                                 <td>{{ $item->email }}</td>
                                 <td>{{ $item->phone }}</td>
@@ -153,6 +155,8 @@
                                 </td>
 
                                 <td>
+                                    <a href="{{ route('admin.student.profile.index', $item->id) }}" class="text-body"><i
+                                            class="ti ti-eye ti-sm mx-1"></i></a>
 
                                     <a href="javascript:;" class="text-body" data-bs-toggle="modal"
                                         data-bs-target="#editModel{{ $item->id }}"><i
@@ -242,8 +246,8 @@
                                                         <div class="col-6">
                                                             <label class="form-label" for="modalDoB">Date Of Bith</label>
                                                             <input type="date" name="dob" id="modalDoB"
-                                                                class="form-control" value="{{ $item->dob }}" max="{{ now()->toDateString() }}"
-                                                                required />
+                                                                class="form-control" value="{{ $item->dob }}"
+                                                                max="{{ now()->toDateString() }}" required />
                                                         </div>
                                                         <div class="col-6">
                                                             <label class="form-label" for="modalPassport">ID/Passport
@@ -260,7 +264,7 @@
                                                                 Doc</label>
                                                             <input type="file" id="modalAcademic"
                                                                 accept=".pdf,.png,.jpg" name="academic_doc"
-                                                                class="form-control"/>
+                                                                class="form-control" />
                                                             @error('academic_doc')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
