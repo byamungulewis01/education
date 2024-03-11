@@ -129,7 +129,7 @@
 
                                                                 </div>
                                                                 <div class="mb-3">
-                                                                    <label for="title" class="form-label">Year of
+                                                                    <label for="title" class="form-label">Date of
                                                                         Complishing</label>
                                                                     <input type="date" name="year"
                                                                         class="form-control" id="">
