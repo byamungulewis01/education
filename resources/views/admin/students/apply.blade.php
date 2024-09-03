@@ -86,7 +86,7 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                     <form method="POST" class="row g-2" enctype="multipart/form-data"
-                                                        action="{{ route('admin.student.approve', $item->id) }}">
+                                                        action="{{ route('admin.student.reject', $item->id) }}">
                                                         @csrf
                                                         @method('PUT')
                                                         <div class="text-center mb-0">

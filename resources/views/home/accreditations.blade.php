@@ -16,20 +16,25 @@
                         <div>
                             <div class="ho-event pg-eve-main">
                                 <ul>
-                                    <li>
-
-                                        <div class="ho-ev-link pg-eve-desc">
-                                            <a href="event-register.html">
-                                                <h4>Latinoo College Expo 2018 - DONATION</h4>
-                                            </a>
-                                            <p>Nulla at velit convallis, venenatis lacus quis, efficitur lectus.</p>
-                                            <span>9:15 am – 5:00 pm</span>
-                                        </div>
-                                        <div class="pg-eve-reg">
-                                           <a href="#">Read
-                                                more</a>
-                                        </div>
-                                    </li>
+                                    @foreach ($accreditations as $item)
+                                        <li>
+                                            <div class="ho-ev-img"><img
+                                                    src="{{ asset('images/accreditation/' . $item->imageName) }}"
+                                                    alt="">
+                                            </div>
+                                            <div class="ho-ev-link pg-eve-desc">
+                                                <a href="event-register.html">
+                                                    <h4>{{ $item->title }}</h4>
+                                                </a>
+                                                <p>{!! Illuminate\Support\Str::limit(strip_tags($item->description), 150) !!}</p>
+                                                {{-- <span>9:15 am – 5:00 pm</span> --}}
+                                            </div>
+                                            <div class="pg-eve-reg">
+                                                <a href="{{ route('show_accreditation', encrypt($item->id)) }}">Read
+                                                    more</a>
+                                            </div>
+                                        </li>
+                                    @endforeach
 
                                 </ul>
                             </div>

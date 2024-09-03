@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Enroll;
-use App\Models\ExamSetting;
 use App\Models\Module;
+use App\Models\Category;
 use App\Models\Question;
 use App\Models\Training;
-use App\Models\User;
+use App\Models\ExamSetting;
 use Illuminate\Http\Request;
 
 class TrainingController extends Controller
@@ -16,9 +17,18 @@ class TrainingController extends Controller
     public function index()
     {
         $trainings = Training::orderByDesc('id')->get();
+        $categories = Category::orderBy('title')->get();
         $instructors = User::where('role', 'instructor')->where('status', 'active')->orderByDesc('id')->get();
 
-        return view('admin.trainings.index', compact('trainings', 'instructors'));
+        return view('admin.trainings.index', compact('trainings', 'instructors','categories'));
+    }
+    public function category($id)
+    {
+        $trainings = Training::where('category_id',$id)->orderByDesc('id')->get();
+        $category = Category::find($id);
+        $instructors = User::where('role', 'instructor')->where('status', 'active')->orderByDesc('id')->get();
+
+        return view('admin.trainings.category', compact('trainings', 'instructors','category'));
     }
     public function students($id)
     {
@@ -37,6 +47,7 @@ class TrainingController extends Controller
             'description' => 'required',
             'price' => 'required|numeric',
             'image' => 'required|mimes:png,jpg,jpeg',
+            'category_id' => 'required',
             'user_id' => 'required',
         ]);
         if ($request->hasFile('image')) {
@@ -62,6 +73,7 @@ class TrainingController extends Controller
             'description' => 'required',
             'price' => 'required|numeric',
             'image' => 'nullable|mimes:png,jpg,jpeg',
+            'category_id' => 'required',
             'user_id' => 'required',
         ]);
 

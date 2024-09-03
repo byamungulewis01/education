@@ -6,9 +6,9 @@
  * Last Changes: 10 jan 2018
  * Author: RN53 Themes
  * Email:      rn53themes@gmail.com
- * Website:    http://www.rn53themes.net 
+ * Website:    http://www.rn53themes.net
  -----------------------------------------------*/
- 
+
 /*-------------------------------------------------------*/
 /* When the browser is between 0px and 1300px wide,below css will be applied.
 /*-------------------------------------------------------*/
@@ -86,9 +86,9 @@
      .sf-type {
          width: 60%;
     }
-     .top-logo,.ed-top{
+     /* .top-logo,.ed-top{
          display:none;
-    }
+    } */
      .ed-mob-menu{
          display:block;
     }
@@ -97,7 +97,7 @@
          border: 0px;
     }
      .carousel {
-         margin-top: 0px;
+         margin-top: 20px;
     }
      .home-top-cour-desc h3{
          margin-top:20px;
@@ -279,7 +279,7 @@
 .ed-ban-tit {
     width: 100%;
     padding: 25px;
-}	
+}
 .ed-ref-form {
     width: 100%;
 	padding-top:25px;
@@ -295,12 +295,14 @@
      .slider-con p{
          margin-bottom:15px;
     }
+
 }
 
 /*-------------------------------------------------------*/
 /* When the browser is between 0px and 767 wide,below css will be applied.
 /*-------------------------------------------------------*/
  @media screen and (max-width:767px){
+
      .mob-hide{
          display:none;
     }
@@ -420,7 +422,7 @@
     width: 100%;
     float: left;
     box-sizing: border-box;
-}	
+}
 .ed-ban-tit-32 {
     width: 100%;
 }
@@ -449,11 +451,11 @@
     }
      .slider-con h2{
          font-size:24px;
-         line-height: 24px 
+         line-height: 24px
     }
      .slider-con h2 span{
          font-size:24px;
-         line-height: 24px 
+         line-height: 24px
     }
      .slider-con p{
          margin-top: 0px;
@@ -468,7 +470,7 @@
     }
 .ed-rsear-dec a span {
     font-size: 10px;
-}	
+}
 .ed-rsear-dec a{
 	font-size: 10px;
 }
@@ -542,4 +544,3 @@
          width: 1000px;
     }
 }
- 

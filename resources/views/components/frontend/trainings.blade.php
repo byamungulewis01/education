@@ -31,7 +31,7 @@
                             <li><a href="#"><i class="fa fa-eye"
                                         aria-hidden="true"></i>{{ $item->modules->count() }}
                                     Modules</a> </li>
-                            <li><a href="#"><i class="fa fa-money" aria-hidden="true"></i>
+                            <li><a href="#"><i class="fa fa-dollar" aria-hidden="true"></i>
                                     {{ $item->price }}</a>
                             </li>
                         </ul>

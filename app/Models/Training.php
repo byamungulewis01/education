@@ -16,6 +16,7 @@ class Training extends Model
         'price',
         'status',
         'exam_status',
+        'category_id',
     ];
     public function user()
     {
@@ -28,5 +29,9 @@ class Training extends Model
     public function students()
     {
         return Enroll::where('training_id', $this->id)->count();
+    }
+    public function category()
+    {
+        return $this->belongsTo(category::class);
     }
 }

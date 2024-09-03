@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>@yield('title') | BCCH</title>
 
     <meta name="description" content="Boost Consultancy & Coaching Hub LTD" />
@@ -56,7 +57,7 @@
                                 <li><a href="{{ route('about') }}">About us</a></li>
                                 <li><a href="{{ route('trainings') }}">Trainings</a></li>
                                 <li><a href="{{ route('consultancy') }}">Consultancy</a></li>
-                                <li><a href="#">Partners & Accreditation</a></li>
+                                <li><a href="{{ route('accreditations') }}">Partners & Accreditation</a></li>
                                 {{-- <li><a href="#">Journal</a></li> --}}
                                 <li><a href="{{ route('contact') }}">Contact us</a></li>
                             </ul>
@@ -89,14 +90,14 @@
                                 <li><a href="#">Email: {{ $contact->head_email }}</a>
                                 </li>
                             </ul>
-                            <ul>
+                            {{-- <ul>
                                 <li><a href="#">Branch Contact </a>
                                 </li>
                                 <li><a href="#">Phone: {{ $contact->branch_phone }}</a>
                                 </li>
                                 <li><a href="#">Email: {{ $contact->branch_email }}</a>
                                 </li>
-                            </ul>
+                            </ul> --}}
                         </div>
                         <div class="ed-com-t1-right">
                             @if (auth()->guard('student')->check())
@@ -122,7 +123,7 @@
                 </div>
             </div>
         </div>
-
+        @if (!auth()->guard('student')->check())
         <!-- LOGO AND MENU SECTION -->
         <div class="top-logo" data-spy="affix" data-offset-top="250">
             <div class="container">
@@ -146,7 +147,7 @@
                                 </li>
                                 <li class="about-menu">
                                     <a href="#" @if (Request::routeIs(['trainings', 'training'])) style="color: #e66030;" @endif
-                                        class="mm-arr">Trainings</a>
+                                        class="mm-arr">School</a>
                                     <!-- MEGA MENU 1 -->
                                     <div class="mm-pos">
                                         <div class="about-mm m-menu">
@@ -162,14 +163,13 @@
 
                                                 </div>
                                                 @php
-                                                    $trainings = \App\Models\Training::orderBy('title')->get();
+                                                    $trainings = \App\Models\Category::orderBy('title')->get();
                                                 @endphp
-                                                @foreach ($trainings->chunk(10) as $chunk)
+                                                @foreach ($trainings->chunk(3) as $chunk)
                                                     <div class="mm1-com mm1-s1">
                                                         <ul>
                                                             @foreach ($chunk as $item)
-                                                                <li><a
-                                                                        href="{{ route('admission', $item->id) }}">{{ $item->title }}</a>
+                                                                <li><a href="{{ route('show_school', encrypt( $item->id)) }}">{{ $item->title }}</a>
                                                                 </li>
                                                             @endforeach
                                                         </ul>
@@ -190,7 +190,7 @@
                                                 @php
                                                     $consultancies = \App\Models\Consultance::orderBy('title')->get();
                                                 @endphp
-                                                @foreach ($consultancies->chunk(10) as $chunk)
+                                                @foreach ($consultancies->chunk(3) as $chunk)
                                                     <div class="mm1-com mm1-s1">
                                                         <ul>
                                                             @foreach ($chunk as $item)
@@ -206,11 +206,11 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <a href="#">Partners &
-                                        Accreditation</a>
-                                    {{-- <a href="{{ route('accreditations') }}"
-                                        @if (Request::routeIs('accreditations')) style="color: #e66030;" @endif>Partners &
+                                    {{-- <a href="#">Partners &
                                         Accreditation</a> --}}
+                                    <a href="{{ route('accreditations') }}"
+                                        @if (Request::routeIs('accreditations')) style="color: #e66030;" @endif>Partners &
+                                        Accreditation</a>
                                 </li>
 
                                 {{-- <li><a href="#">Journal</a> --}}
@@ -229,47 +229,7 @@
                 </div>
             </div>
         </div>
-        {{-- <div class="search-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="search-form">
-                            <form>
-                                <div class="sf-type">
-                                    <div class="sf-input">
-                                        <input type="text" id="sf-box"
-                                            placeholder="Search course and discount courses">
-                                    </div>
-                                    <div class="sf-list">
-                                        <ul>
-                                            <li><a href="course-details.html">Accounting/Finance</a></li>
-                                            <li><a href="course-details.html">civil engineering</a></li>
-                                            <li><a href="course-details.html">Art/Design</a></li>
-                                            <li><a href="course-details.html">Marine Engineering</a></li>
-                                            <li><a href="course-details.html">Business Management</a></li>
-                                            <li><a href="course-details.html">Journalism/Writing</a></li>
-                                            <li><a href="course-details.html">Physical Education</a></li>
-                                            <li><a href="course-details.html">Political Science</a></li>
-                                            <li><a href="course-details.html">Sciences</a></li>
-                                            <li><a href="course-details.html">Statistics</a></li>
-                                            <li><a href="course-details.html">Web Design/Development</a></li>
-                                            <li><a href="course-details.html">SEO</a></li>
-                                            <li><a href="course-details.html">Google Business</a></li>
-                                            <li><a href="course-details.html">Graphics Design</a></li>
-                                            <li><a href="course-details.html">Networking Courses</a></li>
-                                            <li><a href="course-details.html">Information technology</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="sf-submit">
-                                    <input type="submit" value="Search Course">
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
+        @endif
     </section>
     <!--END HEADER SECTION-->
 

@@ -60,7 +60,7 @@
                         </div>
 
                         <div class="col-12">
-                            <label for="title" class="form-label">Objective </label>
+                            <label for="title" class="form-label">Core Values </label>
                             <textarea class="form-control" name="objective" cols="30" rows="5">{{ $about->mission }}</textarea>
                         </div>
                         <div class="col-12 mt-4 text-end">

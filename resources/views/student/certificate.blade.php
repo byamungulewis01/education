@@ -97,18 +97,19 @@
         <img class="border-image" src="{{ public_path('assets/certificate/cert.png') }}" alt="Certificate Border">
         <div class="content">
             <img src="{{ public_path('assets/certificate/boost.png') }}" alt="Institution logo" class="logo">
-            <h1 style="font-family: Colonna MT;">PUBLICATION CERTIFICATE</h1>
+            <h1 style="font-family: Colonna MT;">PROFESSIONAL CERTIFICATE</h1>
             <img src="{{ public_path('assets/certificate/line.png') }}" alt="Line">
 
             <p
                 style="font-size: 18px; font-family :Georgia, 'Times New Roman', Times, serif; font-style :italic; font-weight:800">
-                This Certificate is proudly presented to</p>
+               In recognition of successful completion, it is hereby acknowledged that</p>
             <p class="name"><u>{{ $student->fname }} {{ $student->lname }}</u></p>
-            <p style="font-size: 18px; font-family :Georgia, 'Times New Roman', Times, serif; font-weight:500">for
-                having published a manuscript named</p>
+           <p style="font-size: 18px; font-family: Georgia, 'Times New Roman', Times, serif; margin-left: 200px; margin-right: 200px;">having complied with the requirements of Boost Consultancy & Coaching Hub studies by virtue of the authority in them vested, hereby awarded the</p>
+
             <p style="font-size: 30px; font-family :Georgia, 'Times New Roman', Times, serif;  font-weight:900">
                 {{ $training->training->title }}</p>
-            <p>In <strong>BOOST CONSULTANCY & COACHING HUB</strong>, Issue {{ $year }}
+            <p  style="font-size: 18px; font-family: Georgia, 'Times New Roman', Times, serif; margin-left: 200px; margin-right: 200px;" >and is entitled to all the rights and privileges there to appertaining, in testimony thereof, we have granted the professional certificate on this day <p>Office of Registration, Issued on {{ \Carbon\Carbon::parse($student->created_at)->isoFormat('MMMM Do YYYY') }}</p>
+
             </p>
             <img src="{{ public_path('assets/certificate/line.png') }}" alt="Line">
 

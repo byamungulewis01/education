@@ -36,36 +36,6 @@
             </a>
         </div>
     </section>
-    {{-- <section>
-        <div class="container">
-            <div class="row">
-                <div class="wed-hom-ser">
-                    <ul>
-                        <li>
-                            <a href="#" class="waves-effect waves-light btn-large wed-pop-ser-btn"><img
-                                    src="{{ asset('frontend/images/icon/h-ic1.png') }}" alt=""> Training
-
-
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="waves-effect waves-light btn-large wed-pop-ser-btn"><img
-                                    src="{{ asset('frontend/images/icon/h-ic2.png') }}" alt=""> Consultancy</a>
-                        </li>
-                        <li>
-                            <a href="#" class="waves-effect waves-light btn-large wed-pop-ser-btn"><img
-                                    src="{{ asset('frontend/images/icon/h-ic4.png') }}" alt="">Certificate</a>
-                        </li>
-                        <li>
-                            <a href="#" class="waves-effect waves-light btn-large wed-pop-ser-btn"><img
-                                    src="{{ asset('frontend/images/icon/h-ic3.png') }}" alt="">Admission</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-
     <section>
         <div class="container com-sp pad-bot-70">
             <div class="row">
@@ -112,6 +82,34 @@
             </div>
         </div>
     </section>
+
+    <section>
+        <div class="container com-sp pad-bot-70">
+            <div class="row">
+                <div class="con-title">
+                    <h2>School <span>Programs</span></h2>
+                    {{-- <p>Fusce id sem at ligula laoreet hendrerit venenatis sed purus. Ut pellentesque maximus lacus, nec pharetra augue.</p> --}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="ed-course">
+                    @foreach ($categories as $category)
+                    <div class="col-md-3 col-sm-4 col-xs-12">
+                        <div class="ed-course-in">
+                            <a class="course-overlay" href="{{ route('show_school', encrypt( $category->id)) }}">
+                                <img src="{{ asset('images/trainings/category/' . $category->imageName) }}" alt="">
+                                <span>{{ $category->title }}</span>
+                            </a>
+                        </div>
+                    </div>
+                    @endforeach
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
     <!-- POPULAR COURSES -->
     <section class="pop-cour">
         <div class="container com-sp pad-bot-70">
@@ -123,7 +121,7 @@
                         competency</p>
                 </div>
             </div>
-            <x-frontend.trainings limits=6 />
+            <x-frontend.trainings limits=4 />
             <div class="pg-pagina">
                 <a href="{{ route('trainings') }}" class="btn btn-primary">View All Trainings</a>
 

@@ -1,23 +1,24 @@
 <?php
 
-use App\Http\Controllers\AdminAuthController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AdminStudentController;
-use App\Http\Controllers\AuthContoller;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\ConsultanceController;
-use App\Http\Controllers\EnrollController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\InstructorController;
-use App\Http\Controllers\InstructorRegistration;
-use App\Http\Controllers\ModuleController;
-use App\Http\Controllers\PagesController;
-use App\Http\Controllers\StudentController;
-use App\Http\Controllers\StudentProfileController;
-use App\Http\Controllers\TrainingController;
-use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthContoller;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PagesController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\EnrollController;
+use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TrainingController;
+use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\ConsultanceController;
+use App\Http\Controllers\AdminStudentController;
+use App\Http\Controllers\InstructorRegistration;
+use App\Http\Controllers\AccreditationController;
+use App\Http\Controllers\StudentProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,9 +39,11 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/consultancy/{id}', 'consultancyShow')->name('consultancyShow');
     Route::get('/trainings', 'trainings')->name('trainings');
     Route::get('/trainings/{id}', 'training')->name('training');
+    Route::get('/school/{id}', 'show_school')->name('show_school');
     Route::get('/admission/{id}', 'admission')->name('admission');
     Route::get('/contact-us', 'contact')->name('contact');
     Route::get('/accreditations', 'accreditations')->name('accreditations');
+    Route::get('/accreditations/{id}', 'show_accreditation')->name('show_accreditation');
 });
 Route::controller(AuthContoller::class)->group(function () {
     Route::post('/login', 'login_auth')->name('login_auth');
@@ -140,6 +143,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
         Route::put('/{id}', 'update')->name('update');
         Route::delete('/{id}', 'destroy')->name('destroy');
         Route::get('/show/{id}', 'show')->name('show');
+        Route::get('/category/{id}', 'category')->name('category');
 
         Route::post('/question/{id}', 'store_question')->name('store_question');
         Route::put('/question/{id}', 'update_question')->name('update_question');
@@ -156,6 +160,15 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
     });
 
     Route::controller(ConsultanceController::class)->prefix('consultances')->name('consultance.')->middleware('user-access:admin,super_admin')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/', 'store')->name('store');
+        Route::put('/{id}', 'update')->name('update');
+        Route::delete('/{id}', 'destroy')->name('destroy');
+    });
+
+    Route::controller(AccreditationController::class)->prefix('accreditations')->name('accreditation.')->middleware('user-access:admin,super_admin')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
         Route::get('/edit/{id}', 'edit')->name('edit');

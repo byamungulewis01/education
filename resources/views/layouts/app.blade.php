@@ -43,7 +43,7 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/select2/select2.css') }}" />
 
     <!-- Helpers -->
-    <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=_lsWDrdhqSngJjiwwY1DJBN3TSj7jqOEVFRShmBJaA6IsIxiV44xv8n2xpTTxkwVRJpjY39gLU3eCbGo7bj3D63v7xQ5V_bBu8imrt6V4fcTiLa-0HLC1hjL4oNJ1Alt1xbg2K2Rziyn17gbtkzkL4sTIC1UhZQJQuj0JjYMB6SxH0Mlf5LWbxT9uzHS2x4CbzQiZTyH2cMPqCLPDYHNZw" charset="UTF-8"></script><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=ztJNDW9TdiX1GKMFXPwJZOEkmuJx-NdzkVl-K1_Wj9Z2CZgJ8JghDyebL_12DzKmk8ipVikvNOUKDK8SYi3tjpJWvmf0gMVggEsOpoV6uZsOoQD8Dzw4R2K7E-WYFX8Ok9nIG8aFwc4idKJcS75fxDmqLLs_SFFZmTMOJXgdj7J8QNVUJVStUYtxn3OSK2kB_Bxj49PEwi3ZeQFS6XzNzg" charset="UTF-8"></script><script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
 
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
@@ -70,7 +70,7 @@
 
     <div class="app-brand demo ">
         <a href="{{ route('admin.index') }}" class="app-brand-link">
-            <img src="{{ asset('assets/logo/light-logo2.png') }}" class="mt-1" alt="BCCH Logo" width="170">
+          <h1>BCCH</h1>
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">

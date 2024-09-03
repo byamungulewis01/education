@@ -25,7 +25,7 @@
                                 <div class="text-center mb-2">
                                     <h3>Add New Training</h3>
                                 </div>
-                                <form method="POST" class="row g-2" action="{{ route('admin.training.store') }}" enctype="multipart/form-data">
+                                <form method="POST" class="row g-3" action="{{ route('admin.training.store') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="col-12">
                                         <label for="title" class="form-label">Title</label>
@@ -33,16 +33,18 @@
                                             placeholder="Training Title" value="{{ old('title') }}">
                                     </div>
 
-                                    <div class="col-md-4">
-                                        <label for="price" class="form-label">Price</label>
-                                        <input name="price" type="number" id="price" value="{{ old('price') }}"
-                                            min="0" class="form-control" placeholder="Training Price">
+                                    <div class="col-md-6">
+                                        <label for="category" class="form-label">Category</label>
+                                        <select name="category_id" id="category" class="form-select" required>
+                                            @foreach ($categories as $category)
+                                                <option {{ old('category_id') == $category->id ? 'selected' : '' }}
+                                                    value="{{ $category->id }}">{{ $category->title }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
-
-                                    <div class="col-md-8">
-
+                                    <div class="col-md-6">
                                         <label for="instructor" class="form-label">Instructor</label>
-                                        <select name="user_id" id="instructor" class="form-select">
+                                        <select name="user_id" id="instructor" class="form-select" required>
                                             <option value="" selected disabled>Select</option>
                                             @foreach ($instructors as $instructor)
                                                 <option {{ old('user_id') == $instructor->id ? 'selected' : '' }}
@@ -50,7 +52,13 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
+                                        <label for="price" class="form-label">Price</label>
+                                        <input name="price" type="number" id="price" value="{{ old('price') }}"
+                                            min="0" class="form-control" placeholder="Training Price">
+                                    </div>
+
+                                    <div class="col-md-6">
                                         <label>Image</label>
                                         <input name="image" type="file" class="form-control">
                                     </div>
@@ -79,11 +87,11 @@
                             <th>#</th>
                             <th scope="col">Image</th>
                             <th scope="col">Training</th>
+                            <th scope="col">Category</th>
                             <th scope="col">Price</th>
                             <th scope="col">Instructor</th>
                             <th scope="col">Students</th>
 
-                            <th scope="col">Status</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -91,9 +99,9 @@
                         @foreach ($trainings as $item)
                             <tr>
                                 <th>{{ $loop->iteration }}</th>
-                                <td><img src="{{ asset('images/trainings/' . $item->imageName) }}" alt="image"
-                                        class="rounded-square w-50"></td>
+                                <td><img src="{{ asset('images/trainings/' . $item->imageName) }}" alt="image" width="120"></td>
                                 <td class="font-weight-bold">{{ $item->title }}</td>
+                                <td class="font-weight-bold">{{ $item->category->title }}</td>
                                 <td>{{ $item->price }} $ </td>
                                 <td>{{ $item->user->name }}</td>
                                 <td>
@@ -106,13 +114,13 @@
                                     @endif
                                 </td>
 
-                                <td>
+                                {{-- <td>
                                     @if ($item->status == 'active')
                                         <span class="badge bg-primary">Active</span>
                                     @else
                                         <span class="badge bg-danger">Inactive</span>
                                     @endif
-                                </td>
+                                </td> --}}
 
                                 <td>
                                     {{-- <a href="javascript:;" class="text-body delete-record 1"><i class="ti ti-trash ti-sm mx-2" data-id="1"></i></a> --}}
@@ -142,7 +150,16 @@
                                                             <input name="title" type="text" class="form-control"
                                                                 required value="{{ $item->title }}">
                                                         </div>
-                                                        <div class="col-md-12">
+                                                        <div class="col-md-6">
+                                                            <label for="category" class="form-label">Category</label>
+                                                            <select name="category_id" id="category" class="form-select" required>
+                                                                @foreach ($categories as $category)
+                                                                    <option {{ old('category_id',$category->id) == $category->id ? 'selected' : '' }}
+                                                                        value="{{ $category->id }}">{{ $category->title }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-6">
 
                                                             <label for="instructor" class="form-label">Instructor</label>
                                                             <select name="user_id" id="instructor" class="form-select">

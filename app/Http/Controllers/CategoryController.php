@@ -18,7 +18,7 @@ class CategoryController extends Controller
         $request->validate([
             'title' => 'required|unique:categories,title',
             'description' => 'required',
-            'image' => 'required|mimes:png,jpg'
+            'image' => 'required|mimes:png,jpg,jpeg'
         ]);
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -27,7 +27,7 @@ class CategoryController extends Controller
         $request->merge(['imageName' => $imageName]);
         try {
             Category::create($request->all());
-            $image->move(public_path('/images'), $imageName);
+            $image->move(public_path('images/trainings/category'), $imageName);
 
             return back()->with('success', 'Category Added Successfully');
         } catch (\Throwable $th) {
@@ -46,7 +46,7 @@ class CategoryController extends Controller
             $image = $request->file('image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $request->merge(['imageName' => $imageName]);
-            $image->move(public_path('/images'), $imageName);
+            $image->move(public_path('images/trainings/category'), $imageName);
         }
 
         try {

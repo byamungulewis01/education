@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BOOST Coaching Hub</title>
-    <link rel="shortcut icon" type="image/png" href="{{ public_path('assets/img/favicon/boost.png') }}" />
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Bookman Old Style', serif; /* Change the font-family */
             margin: 0;
             padding: 0;
+            text-align: justify; /* Justify all text */
+            font-size: 16px; /* Adjust font size */
         }
 
         .header {
@@ -32,6 +33,7 @@
 
         .content {
             padding: 20px;
+            line-height: 1.5; /* Adjust line height */
         }
 
         .contact-info {
@@ -41,6 +43,14 @@
         .contact-info p {
             margin: 5px 0;
         }
+
+        .qr-code {
+            width: 120px;
+        }
+
+        .issued-date {
+            font-size: 12px;
+        }
     </style>
 </head>
 
@@ -48,46 +58,25 @@
     <div class="container">
         <div class="header">
             <img src="{{ public_path('assets/img/favicon/boost.png') }}" alt="BOOST Coaching Hub Logo" class="logo">
-            <h2 class="title">Welcome to BOOST Coaching Hub!</h2>
+            <h2 class="title">Boost Consultancy & Coaching Hub</h2>
+            <p1>www.bcchacademy.com, info@bcchacademy.com</p1>
         </div>
-        <br><br>
+        <br>
         <div class="content">
-            <p>Dear {{ $student->fname }} {{ $student->lname }} ,</p>
-            <p>Welcome to BOOST Coaching Hub! We are excited to inform you that your enrollment has been confirmed for
-                the course:</p>
-            <p><strong>Registration Number:</strong> {{ $student->regnumber }}</p>
-            <p><strong>Training:</strong> {{ $training }}</p>
-            <p>We appreciate your decision to embark on this learning journey with us. To get started, please log in to
-                your dashboard and follow the instructions provided to access your course materials.</p>
-            <p>On your dashboard, you will find resources, assignments, and everything you need to make the most out of
-                your learning experience. If you have any questions or encounter any issues, our support team is here to
-                assist you.</p>
-            <div class="contact-info">
-                <p>For your convenience, here are important email contacts:</p>
-                <p>- Registration Email: <a href="mailto:maniraruta2018@gmail.com">maniraruta2018@gmail.com</a></p>
-                <p>- Instructor Email: <a href="mailto:simparinka@gmail.com">simparinka@gmail.com</a></p>
-                <p>- Organization Email: <a href="mailto:info@boasthub.com">info@boasthub.com</a></p>
-            </div>
-            <p>Thank you for choosing us as your online learning partner. We look forward to seeing you succeed in your
-                studies.</p>
-            <p>Best regards,</p>
-            <p>Dr. HATEGEKIMANA Jean Paul</p>
-            <p>Managing Director</p>
-            <table style="width: 100%">
-                <tr>
-                    <td>
-                        <p><strong>Organization Details:</strong><br>
-                            BOOST Coaching Hub<br>
-                            Kigali, Rwanda<br>
-                            <a href="mailto:info@boasthub.com">info@boasthub.com</a>
-                        </p>
-                    </td>
-                    <td>
-                        <img src="{{ public_path('assets/img/qrCode.png') }}" style="width: 120px;" alt="BOOST Coaching Hub Logo">
-                    </td>
-                </tr>
-            </table>
+            <p> Names: {{ $student->fname }} {{ $student->lname }}</p>
+            <p> Reg.No: {{ $student->regnumber }}</p>
+            <p> Email: {{ $student->email }}</p>
+            <p><strong>REF: Admission Letter</strong></p>
+            <p>Dear Applicant,</p>
+            <p>Reference is made to your application for admission into <strong>{{ $training }}</strong>, now, we are pleased to inform you that your application has been successful with Registration Number: <strong>{{ $student->regnumber }}</strong>. Congratulations for being selected and thank you for choosing Boost Consultancy & Coaching Hub as an avenue for your studies. Details regarding the Professional Training is available in your student account accessible via <a href="https://www.bcchacademy.com/">https://www.bcchacademy.com/</a> and Click To Sign In Button.</p>
 
+            <p>Thank you for choosing us as your online learning partner. We look forward to seeing you succeed in your studies.</p>
+            <p>Best regards,</p>
+            <p>BCCH Office of Registration</p>
+            <center>
+                <img src="{{ public_path('assets/img/qrCode.PNG') }}" class="qr-code" alt="BOOST Coaching Hub Logo">
+                <p class="issued-date"><strong>Issued on {{ $student->created_at }}</strong></p>
+            </center>
         </div>
     </div>
 </body>

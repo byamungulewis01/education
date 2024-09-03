@@ -32,6 +32,7 @@ class Student extends Authenticatable
         'reason',
         'regnumber',
         'country',
+        'reason',
     ];
 
     /**

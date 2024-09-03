@@ -74,8 +74,7 @@
                                                                     action="{{ route('student.trainingPay', $training->training_id) }}"
                                                                     method="post">
                                                                     @csrf
-                                                                    <button class="btn btn-danger btn-sm">
-                                                                        Pay Now</button>
+                                                               
                                                                 </form>
                                                             </li>
                                                             @else

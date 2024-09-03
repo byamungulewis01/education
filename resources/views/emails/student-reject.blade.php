@@ -1,5 +1,5 @@
 @component('mail::message')
-    #Your Application was rejectd
+    #Your Application was rejected
 
     {{ $reason }}
 @endcomponent

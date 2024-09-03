@@ -305,7 +305,6 @@ class StudentController extends Controller
     public function certificate_by_year(Request $request, $id)
     {
         $year = $request->year;
-        dd($year);
         $student = Student::find($id);
         $training = Enroll::where('student_id', $id)->where('training_id', $request->training_id)->first();
 
