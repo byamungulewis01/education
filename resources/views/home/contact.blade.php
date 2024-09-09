@@ -1,66 +1,149 @@
 @extends('layouts.front')
 @section('title', 'Contuct Us')
 @section('body')
+  <!-- Page Banner Section Start -->
+  <div class="page-banner bg-color-05">
+    <div class="page-banner__wrapper">
+        <div class="container">
 
-    <!--SECTION START-->
-    <section>
-        <div class="container com-sp pad-bot-70">
-            <div class="row">
-                <div class="cor about-sp">
-                    <div class="ed-about-tit">
-                        <div class="con-title">
-                            <h2>{{ $contact->title }}</h2>
-                            <p>{{ $contact->header_section }}</p>
+            <!-- Page Breadcrumb Start -->
+            <div class="page-breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active">Contact us 02</li>
+                </ul>
+            </div>
+            <!-- Page Breadcrumb End -->
+
+            <!-- Page Banner Caption Start -->
+            <div class="page-banner__caption text-center">
+                <h2 class="page-banner__main-title">Contact us 02</h2>
+            </div>
+            <!-- Page Banner Caption End -->
+
+        </div>
+    </div>
+</div>
+<!-- Contact us Section Start -->
+<div class="contact-section">
+    <div class="container custom-container">
+
+        <div class="section-padding-02">
+            <div class="row gy-8 justify-content-between">
+                <div class="col-lg-4">
+                    <!-- Contact Info Start -->
+                    <div class="contact-info">
+
+                        <!-- Section Title Start -->
+                        <div class="section-title text-center text-lg-start" data-aos="fade-up" data-aos-duration="1000">
+                            <h2 class="section-title__title-02">Keep In Touch <br> With Us.</h2>
                         </div>
-                    </div>
-                    <div class="pg-contact">
-                        <div class="col-md-4 col-sm-6 col-xs-12 new-con new-con1">
-                            <h2>{{ $contact->company_desc_title }}</h2>
-                            <p>{{ $contact->company_descr }}</p>
-                        </div>
-                        <div class="col-md-4 col-sm-6 col-xs-12 new-con new-con1"> <img src="img/contact/1.html" alt="">
-                            <h4>{{ $contact->addr_title }}</h4>
-                            <p>{{ $contact->company_addr_details }}</p>
-                        </div>
-                        <div class="col-md-4 col-sm-6 col-xs-12 new-con new-con3"> <img src="img/contact/2.html" alt="">
-                            <h4>{{ $contact->contact_title }}</h4>
-                            <p>{{ $contact->contact_details }}</p>
+                        <!-- Section Title End -->
+
+                        <div class="contact-info__wrapper" data-aos="fade-up" data-aos-duration="1000">
+
+                            <!-- Contact Info Start -->
+                            <div class="contact-info__item-02 text-center text-lg-start">
+                                <div class="d-lg-flex gap-4 mb-4">
+                                    <div class="contact-info__icon">
+                                        <i class="fas  fa-map-marker-alt"></i>
+                                    </div>
+                                    <div class="contact-info__content">
+                                        <h3 class="contact-info__title">Address</h3>
+                                    </div>
+                                </div>
+                                <p>1800 Abbot Kinney Blvd. Unit D & E Venice</p>
+                            </div>
+                            <!-- Contact Info End -->
+
+                            <!-- Contact Info Start -->
+                            <div class="contact-info__item-02 text-center text-lg-start">
+                                <div class="d-lg-flex gap-4 mb-4">
+                                    <div class="contact-info__icon">
+                                        <i class="fas  fa-mobile-alt"></i>
+                                    </div>
+                                    <div class="contact-info__content">
+                                        <h3 class="contact-info__title">Phone</h3>
+                                    </div>
+                                </div>
+                                <p>Mobile: <strong> (+88) - 1990 - 6886</strong></p>
+                                <p>Hotline: <strong>1800 - 1102</strong></p>
+                            </div>
+                            <!-- Contact Info End -->
+
+                            <!-- Contact Info Start -->
+                            <div class="contact-info__item-02 text-center text-lg-start">
+                                <div class="d-lg-flex gap-4 mb-4">
+                                    <div class="contact-info__icon">
+                                        <i class="fas fa-comment"></i>
+                                    </div>
+                                    <div class="contact-info__content">
+                                        <h3 class="contact-info__title">Email</h3>
+                                    </div>
+                                </div>
+                                <p>support@edumall.com</p>
+                                <p>hi@edumall.com</p>
+                            </div>
+                            <!-- Contact Info End -->
+
                         </div>
 
                     </div>
+                    <!-- Contact Info End -->
+                </div>
+                <div class="col-lg-7">
+                    <!-- Contact Map Start -->
+                    <div class="contact-map-02" data-aos="fade-up" data-aos-duration="1000">
+                        <iframe id="gmap_canvas" src="https://maps.google.com/maps?q=Mission%20District%2C%20San%20Francisco%2C%20CA%2C%20USA&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed"></iframe>
+                    </div>
+                    <!-- Contact Map End -->
                 </div>
             </div>
         </div>
-    </section>
-    <!--SECTION END-->
 
-    <section id="map">
-        <div class="row contact-map">
-            <!-- IFRAME: GET YOUR LOCATION FROM GOOGLE MAP -->
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6290413.804893654!2d-93.99620524741552!3d39.66116578737809!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880b2d386f6e2619%3A0x7f15825064115956!2sIllinois%2C+USA!5e0!3m2!1sen!2sin!4v1469954001005"
-                allowfullscreen=""></iframe>
-            <div class="container">
-                <div class="overlay-contact footer-part footer-part-form">
-                    <div class="map-head">
-                        <p>Send Us Now</p>
-                        <h2>GetIn Touch</h2> <span class="footer-ser-re">Service Request Form</span> </div>
-                    <!-- ENQUIRY FORM -->
-                    <form id="contact_form" name="contact_form" action="http://rn53themes.net/themes/demo/education-master/send.php">
-                        <ul>
-                            <li class="col-md-12 col-sm-12 col-xs-12 contact-input-spac">
-                                <input type="text" id="f1" value="" name="f1" placeholder="Name" required=""> </li>
-                            <li class="col-md-12 col-sm-12 col-xs-12 contact-input-spac">
-                                <input type="text" id="f2" value="" name="f2" placeholder="Email" required=""> </li>
+        <div class="section-padding-01">
+            <div class="row justify-content-between">
+                <div class="col-lg-4">
 
-                            <li class="col-md-12 col-sm-12 col-xs-12 contact-input-spac">
-                                <textarea id="f5" name="f5" required=""></textarea>
-                            </li>
-                            <li class="col-md-6">
-                                <input type="submit" value="SUBMIT"> </li>
-                        </ul>
-                    </form>
+                    <!-- Section Title Start -->
+                    <div class="section-title text-center text-lg-start" data-aos="fade-up" data-aos-duration="1000">
+                        <h2 class="section-title__title-02">Send a Message</h2>
+                    </div>
+                    <!-- Section Title End -->
+
+                </div>
+                <div class="col-lg-7">
+                    <!-- Contact Form Wrapper Start -->
+                    <div class="contact-form__wrapper" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="row gy-4">
+                            <div class="col-md-6">
+                                <div class="contact-form__input">
+                                    <input class="form-control" type="text" placeholder="Your name">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="contact-form__input">
+                                    <input class="form-control" type="email" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="contact-form__input">
+                                    <textarea class="form-control" placeholder="Message"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="contact-form__input text-center">
+                                    <button class="btn btn-primary btn-hover-secondary">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Contact Form Wrapper End -->
                 </div>
             </div>
         </div>
-    </section>
+
+    </div>
+</div>
+<!-- Contact us Section End -->
 @endsection

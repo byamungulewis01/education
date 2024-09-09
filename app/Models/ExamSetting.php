@@ -15,12 +15,13 @@ class ExamSetting extends Model
         'training_id',
         'questions_answers',
         'total_marks',
-        'status'
+        'status',
     ];
 
     public function training()
     {
         return $this->belongsTo(Training::class);
     }
+   
 
 }

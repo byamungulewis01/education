@@ -1,199 +1,115 @@
-@extends('layouts.front')
-@section('title', 'Profile')
+@extends('layouts.student')
+@section('title', 'Home')
 @section('body')
-    <!--SECTION START-->
-    <section>
-        @include('student.navbar')
-        <div class="stu-db">
-            <div class="container pg-inn">
-                @include('student.sidebar')
+    <div class="container">
+        <h4 class="dashboard-title">Dashboard</h4>
 
-                <div class="col-md-9">
-                    <div class="udb">
-                        @if (auth()->guard('student')->user()->status == 'approved')
-                            <div class="udb-sec udb-cour">
-                                <h4>Your Academic Documents</h4>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="home-top-cour" style="background-color: rgb(255, 255, 255)">
-                                            <!--POPULAR COURSES IMAGE-->
-
-                                            <div class="col-md-12 home-top-cour-desc">
-                                                <a href="">
-                                                    <h3>Admission Letter</h3>
-                                                </a>
-                                                {{-- <h4>Technology / Space / Aerospace</h4> --}}
-                                                <p>
-                                                    Admission Letter is a service provided by the University ...
-                                                </p>
-                                                <div class="hom-list-share">
-                                                    <ul>
-                                                        <li><a
-                                                                href="{{ route('student.admission',auth()->guard('student')->user()->id) }}"><i
-                                                                    class="fa fa-download" aria-hidden="true"></i> Get
-                                                                Now</a> </li>
-
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="home-top-cour" style="background-color: rgb(255, 255, 255)">
-                                            <!--POPULAR COURSES IMAGE-->
-
-                                            <div class="col-md-12 home-top-cour-desc">
-                                                <a href="#">
-                                                    <h3>Certificate</h3>
-                                                </a>
-                                                {{-- <h4>Technology / Space / Aerospace</h4> --}}
-                                                <p>
-                                                    Certificate provide after complete training provided by the University
-                                                    of
-                                                    Boost ...
-                                                    @php
-                                                        $exam = \App\Models\ExamSetting::where('training_id',$training->training_id)->where('student_id',$training->student_id)->first();
-                                                    @endphp
-
-                                                </p>
-                                                <div class="hom-list-share">
-                                                    <ul>
-                                                        <li>
-                                                            @if ($exam && $exam->status == 'success')
-
-                                                            <a
-                                                                href="{{ route('student.certificate',auth()->guard('student')->user()->id) }}"><i
-                                                                    class="fa fa-download" aria-hidden="true"></i> Get
-                                                                Now</a> </li>
-
-                                                            @else
-                                                            @if (!$training->is_payed)
-                                                            <li>
-                                                                <form
-                                                                    action="{{ route('student.trainingPay', $training->training_id) }}"
-                                                                    method="post">
-                                                                    @csrf
-                                                               
-                                                                </form>
-                                                            </li>
-                                                            @else
-                                                            <a href="{{ route('student.training_exam_show', $training->training_id) }}">Take Exam</a> </li>
-                                                            @endif
-                                                            @endif
-
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
+        <!-- Dashboard Info Start -->
+        <div class="dashboard-info">
+            @if (auth()->guard('student')->user()->status == 'approved')
+                <div class="row mb-3 gy-2 gy-sm-6">
+                    <div class="col-md-4 col-sm-6">
+                        <!-- Dashboard Info Card Start -->
+                        <div class="dashboard-info__card">
+                            <a class="dashboard-info__card-box" href="#">
+                                <div class="dashboard-info__card-icon icon-color-01">
+                                    <i class="edumi edumi-open-book"></i>
                                 </div>
-                            </div>
-                            <div class="udb-sec udb-cour-stat">
-                                <h3>{{ $training->training->title }} <span class="badge"
-                                        style="background-color: #ec563f;color:aliceblue;">{{ $training->training->price }}</span>
-                                </h3>
-                                <div class="cor-p5">
-                                    <p>{{ $training->training->description }}</p>
-
-                                    <div class="hom-list-share">
-                                        <ul>
-                                            @if ($training->is_payed)
-                                                <li><a
-                                                        href="{{ route('student.training_exam_show', $training->training_id) }}">GET
-                                                        CERTIFICATE</a> </li>
-                                                <li><a href="{{ route('student.chat', $training->training_id) }}">CHAT WITH
-                                                        INSTRUCTOR</a> </li>
-                                            @else
-                                                <li>
-                                                    <form
-                                                        action="{{ route('student.trainingPay', $training->training_id) }}"
-                                                        method="post">
-                                                        @csrf
-                                                        <button class="btn btn-danger btn-sm">
-                                                            Pay Now</button>
-                                                    </form>
-                                                </li>
-                                                <li><a href="#" style="cursor: none;"><i class="fa fa-money"
-                                                            aria-hidden="true"></i>
-                                                        {{ $training->training->price }}</a>
-                                                </li>
-                                            @endif
-
-                                        </ul>
-                                    </div>
-
+                                <div class="dashboard-info__card-content">
+                                    <div class="dashboard-info__card-value">19</div>
+                                    <div class="dashboard-info__card-heading">Enrolled Courses</div>
                                 </div>
-                                <div class="cor-p6">
-                                    <h3>Training Modules</h3>
-                                    @foreach ($modules as $item)
-                                        <div class="cor-p6-revi">
-                                            <div class="cor-p6-revi-left">
-                                                <img src="{{ asset('frontend/images/module.png') }}" alt="">
-                                            </div>
-                                            <div class="cor-p6-revi-right">
-                                                <h4>{{ $item->name }}</h4>
-                                                <p>{{ $item->description }}</p>
-
-                                                <a target="blank" href="{{ asset('files/components/' . $item->fileUrl) }}"
-                                                    {{ $training->is_payed ? '' : 'disabled' }}
-                                                    class="btn btn-sm btn-primary"><i class="fa fa-download"></i> &nbsp;
-                                                    Save Notes</a>
-
-                                            </div>
-                                        </div>
-                                    @endforeach
-
+                            </a>
+                        </div>
+                        <!-- Dashboard Info Card End -->
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <!-- Dashboard Info Card Start -->
+                        <div class="dashboard-info__card">
+                            <a class="dashboard-info__card-box" href="#">
+                                <div class="dashboard-info__card-icon icon-color-02">
+                                    <i class="edumi edumi-streaming"></i>
                                 </div>
-                            </div>
-                        @else
-                            <div class="udb-sec udb-cour-stat">
-                                <h3>{{ $training->training->title }} <span class="badge"
-                                        style="background-color: #ec563f;color:aliceblue;">{{ $training->training->price4 }}</span>
-                                </h3>
-                                <div class="cor-p5">
-                                    <p>{{ $training->training->description }}</p>
-
-                                    <div class="hom-list-share">
-                                        <ul>
-                                            <li><a href="#" style="cursor: none;"><i class="fa fa-money"
-                                                        aria-hidden="true"></i>
-                                                    {{ $training->training->price }}</a>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-
+                                <div class="dashboard-info__card-content">
+                                    <div class="dashboard-info__card-value">0</div>
+                                    <div class="dashboard-info__card-heading">Active Courses</div>
                                 </div>
-                                <div class="cor-p6">
-                                    <h3>Training Modules</h3>
-                                    @foreach ($modules as $item)
-                                        <div class="cor-p6-revi">
-                                            <div class="cor-p6-revi-left">
-                                                <img src="{{ asset('frontend/images/module.png') }}" alt="">
-                                            </div>
-                                            <div class="cor-p6-revi-right">
-                                                <h4>{{ $item->name }}</h4>
-                                                <p>{{ $item->description }}</p>
-
-                                                <a target="blank" href="{{ asset('files/components/' . $item->fileUrl) }}"
-                                                    {{ $training->is_payed ? '' : 'disabled' }}
-                                                    class="btn btn-sm btn-primary"><i class="fa fa-download"></i> &nbsp;
-                                                    Save Notes</a>
-
-                                            </div>
-                                        </div>
-                                    @endforeach
-
+                            </a>
+                        </div>
+                        <!-- Dashboard Info Card End -->
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <!-- Dashboard Info Card Start -->
+                        <div class="dashboard-info__card">
+                            <a class="dashboard-info__card-box" href="#">
+                                <div class="dashboard-info__card-icon icon-color-03">
+                                    <i class="edumi edumi-correct"></i>
                                 </div>
-                            </div>
-                        @endif
-
+                                <div class="dashboard-info__card-content">
+                                    <div class="dashboard-info__card-value">27</div>
+                                    <div class="dashboard-info__card-heading">Completed Courses</div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Dashboard Info Card End -->
                     </div>
                 </div>
-            </div>
+                <div class="row gy-8">
+                    <div class="col-lg-6">
+
+                        <!-- Banner Box Start -->
+                        <div class="banner-box banner-bg-1 aos-init aos-animate" data-aos="fade-up"
+                            data-aos-duration="1000">
+
+                            <h3 class="banner-caption__title">Admission Letter</h3>
+                            <p>Admission Letter is a service provided by the University ...</p>
+
+                            <a href="{{ route('student.admission', auth()->guard('student')->user()->id) }}"
+                                class="btn2 btn-primary btn-hover-secondary"><i class="fa fa-download"
+                                    aria-hidden="true"></i>
+                                Get
+                                Now</a>
+
+                        </div>
+                        <!-- Banner Box End -->
+
+                    </div>
+                    <div class="col-lg-6">
+
+                        <!-- Banner Box Start -->
+                        <div class="banner-box banner-bg-2 aos-init aos-animate" data-aos="fade-up"
+                            data-aos-duration="1000">
+
+                            <h3 class="banner-caption__title">Certificate</h3>
+                            <p>Certificate provide after complete training provided by the University of Boost ...</p>
+                            @php
+                                $exam = \App\Models\ExamSetting::where('training_id', $training->training_id)
+                                    ->where('student_id', $training->student_id)
+                                    ->first();
+                            @endphp
+                            @if ($exam && $exam->status == 'success')
+                                <a href="{{ route('student.certificate', auth()->guard('student')->user()->id) }}"
+                                    class="btn2 btn-info btn-hover-secondary"><i class="fa fa-download"
+                                        aria-hidden="true"></i>
+                                    Get Now</a>
+                            @else
+                                @if (!$training->is_payed)
+                                @else
+                                    <a class="btn2 btn-warning btn-hover-secondary"
+                                        href="{{ route('student.training_exam_show', $training->training_id) }}">Take
+                                        Exam</a>
+                                @endif
+                            @endif
+
+                        </div>
+                        <!-- Banner Box End -->
+
+                    </div>
+
+                </div>
+            @endif
+
         </div>
-    </section>
-    <!--SECTION END-->
+
+    </div>
 @endsection

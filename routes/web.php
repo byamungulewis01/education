@@ -61,9 +61,14 @@ Route::controller(AdminAuthController::class)->prefix('admin')->name('admin.')->
 Route::group(['middleware' => 'student'], function () {
     Route::controller(StudentController::class)->prefix('student')->name('student.')->group(function () {
         Route::get('/profile', 'profile')->name('profile');
+        Route::get('/settings', 'settings')->name('settings');
+        Route::get('/reset-password', 'reset_password')->name('reset-password');
+        Route::put('/reset-password', 'update_password')->name('password.update');
         Route::put('/changeProfile', 'changeProfile')->name('changeProfile');
         Route::get('/my-dashboard', 'dashboard')->name('dashboard');
-        Route::get('/my-trainings', 'trainings')->name('trainings');
+        Route::get('/trainings', 'trainings')->name('trainings');
+        Route::get('/exams', 'exams')->name('exams');
+        Route::get('/purchase-history', 'purchase_history')->name('purchase-history');
         Route::get('/my-notifications', 'notifications')->name('notifications');
         Route::get('/my-trainings/{id}', 'training_show')->name('training_show');
         Route::get('/my-marking_scheme/{id}', 'marking_scheme')->name('marking_scheme');

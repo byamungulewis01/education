@@ -34,4 +34,8 @@ class Training extends Model
     {
         return $this->belongsTo(category::class);
     }
+    public function quetions()
+    {
+        return $this->hasMany(Question::class);
+    }
 }

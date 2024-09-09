@@ -1,82 +1,87 @@
 @extends('layouts.front')
-@section('title', 'School Details')
+@section('title', 'School')
 @section('body')
-    <section>
-        <div class="head-2">
+    <!-- Page Banner Section Start -->
+    <div class="page-banner bg-color-04">
+        <div class="page-banner__wrapper">
+
+            <div class="page-banner__shape-01"></div>
+            <div class="page-banner__shape-02"></div>
+            <div class="page-banner__shape-03"></div>
+
             <div class="container">
-                <div class="head-2-inn head-2-inn-padd-top">
-                    <h1>{{ $category->title }}</h1>
-                    <p>{{ $category->description }}</p>
+
+                <!-- Page Banner Caption Start -->
+                <div class="page-banner__caption-02">
+                    <h2 class="page-banner__main-title-02 mt-4">{{ $category->title }}</h2>
                 </div>
+                <!-- Page Banner Caption End -->
+
             </div>
         </div>
-    </section>
-    <section class="pop-cour">
-        <div class="container com-sp">
-            <div class="row">
+    </div>
+    <!-- Page Banner Section End -->
+
+    <!-- Courses Category Featured Start -->
+    <div class="courses-category-section section-padding-02 mb-10">
+        <div class="container">
+
+            <!-- Section Title Start -->
+            <div class="section-title">
+                <h2 class="section-title__title"><mark>Featured</mark> Courses</h2>
+            </div>
+            <!-- Section Title End -->
+
+            <div class="row gy-6">
                 @foreach ($trainings as $item)
-                    <div class="col-md-6">
-                        <div class="home-top-cour">
-                            <!--POPULAR COURSES IMAGE-->
-                            <div class="col-md-3"> <img src="{{ asset('images/trainings/' . $item->imageName) }}"
-                                    alt="">
+                <div class="col-xl-3 col-md-6">
+
+                    <!-- Course Start -->
+                    <div class="course-item-03">
+                        <div class="course-header-03">
+                            <div class="course-header-03__thumbnail ">
+                                <a href="{{ route('training',  encrypt($item->id)) }}"><img src="{{ asset('images/trainings/' . $item->imageName) }}"
+                                        alt="courses" width="330" height="221"></a>
                             </div>
-                            <!--POPULAR COURSES: CONTENT-->
-                            <div class="col-md-9 home-top-cour-desc">
-                                <a href="{{ route('training', $item->id) }}">
-                                    <h3>{{ $item->title }}</h3>
-                                </a>
-                                {{-- <h4>Technology / Space / Aerospace</h4> --}}
-
-                                {{ Illuminate\Support\Str::limit(strip_tags($item->description), 100) }}
-
-                                <div class="hom-list-share">
-                                    <ul>
-                                        <li>
-                                            @if (auth()->guard('student')->check())
-                                                <a href="#!" data-toggle="modal"
-                                                    data-target="#bookTraining{{ $item->id }}"><i
-                                                        class="fa fa-bar-chart" aria-hidden="true"></i> Book
-                                                    Now</a>
-                                            @else
-                                                <a href="{{ route('admission', $item->id) }}"><i class="fa fa-bar-chart"
-                                                        aria-hidden="true"></i> Book
-                                                    Now</a>
-                                            @endif
-                                        </li>
-                                        <li><a href="#"><i class="fa fa-eye"
-                                                    aria-hidden="true"></i>{{ $item->modules->count() }}
-                                                Modules</a> </li>
-                                        <li><a href="#"><i class="fa fa-money" aria-hidden="true"></i>
-                                                {{ $item->price }}</a>
-                                        </li>
-                                    </ul>
-                                </div>
+                            <div class="course-header-03__badge">
+                                <span class="hot">Featured</span>
                             </div>
                         </div>
-                    </div>
+                        <div class="course-info-03">
+                            <h3 class="course-info-03__title"><a href="{{ route('training',  encrypt($item->id)) }}">{{ $item->title }}</a></h3>
+                            <div class="course-info-03__meta">
+                                <span>5 Lessons</span>
+                                <span>2.3 hours</span>
+                                <span>Intermediate</span>
+                            </div>
+                            <div class="course-info-03__description">
+                                <p>{{ Illuminate\Support\Str::limit(strip_tags($item->description), 100) }}</p>
+                            </div>
+                            <div class="course-info-03__footer">
 
-                    <div id="bookTraining{{ $item->id }}" class="modal fade" role="dialog">
-                        <div class="log-in-pop" style="padding: 4%">
-                            <a href="#" class="pop-close" data-dismiss="modal"><img
-                                    src="{{ asset('frontend/images/cancel.png') }}" alt="" />
-                            </a>
-                            <h4>{{ $item->title }}</h4>
-                            <br>
-                            <p>{{ $item->description }}</p>
-                            <br>
-                            <form class="s12" method="POST" action="{{ route('student.bookTraining', $item->id) }}">
-                                @csrf
-                                <div class="input-field s4">
-                                    <input type="submit" value="Book Now" class="waves-effect waves-light log-in-btn">
+                                <div class="course-info-03__footer-left">
+                                    <a class="course-info-03__instructor" href="#">Donald Logan</a>
+                                </div>
+                                <div class="course-info-03__footer-right">
+                                    <div class="course-info-03__price">
+                                        <span class="sale-price">${{ $item->price }}.<small class="separator">00</small></span>
+                                    </div>
                                 </div>
 
-                            </form>
+                            </div>
+
+
                         </div>
                     </div>
+                    <!-- Course End -->
+
+                </div>
                 @endforeach
 
             </div>
+
         </div>
-    </section>
+    </div>
+    <!-- Courses Category Featured End -->
+
 @endsection

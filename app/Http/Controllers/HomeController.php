@@ -3,16 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\About;
-use App\Models\Module;
-use App\Models\Country;
-use App\Models\Category;
-use App\Models\Training;
-use App\Models\ContactUs;
-use App\Models\Structure;
-use App\Models\HomeBanner;
-use App\Models\Consultance;
-use Illuminate\Http\Request;
 use App\Models\Accreditation;
+use App\Models\Category;
+use App\Models\Consultance;
+use App\Models\ContactUs;
+use App\Models\Country;
+use App\Models\HomeBanner;
+use App\Models\Structure;
+use App\Models\Training;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -23,11 +22,13 @@ class HomeController extends Controller
         $banners = HomeBanner::orderByDesc('id')->get();
 
         $categories = Category::orderByDesc('id')->get();
-        return view('home.index', compact('about', 'banners', 'categories'));
+        $trainings = Training::orderBy('title')->limit(12)->get();
+        return view('home.index', compact('about', 'banners', 'categories', 'trainings'));
     }
     public function consultancy()
     {
-        return view('home.consultancy');
+        $consultances = Consultance::orderBy('title')->get();
+        return view('home.consultancy', compact('consultances'));
     }
 
     public function consultancyShow($id)
@@ -37,9 +38,10 @@ class HomeController extends Controller
     }
     public function training($id)
     {
-        $training = Training::findorfail($id);
-        $modules = Module::where('training_id', $id)->orderByDesc('id')->get();
-        return view('home.show-training', compact('training', 'modules'));
+        $training = Training::findorfail(decrypt($id));
+        $countries = Country::orderBy('name')->get();
+
+        return view('home.show-training', compact('training', 'countries'));
     }
     public function admission($id)
     {
@@ -85,7 +87,8 @@ class HomeController extends Controller
     }
     public function trainings()
     {
-        return view('home.trainings');
+        $trainings = Training::orderByDesc('id')->paginate(12);
+        return view('home.trainings',compact('trainings'));
     }
     public function contact()
     {
@@ -97,12 +100,12 @@ class HomeController extends Controller
     {
         $accreditations = Accreditation::orderByDesc('id')->get();
 
-        return view('home.accreditations',compact('accreditations'));
+        return view('home.accreditations', compact('accreditations'));
     }
     public function show_accreditation($id)
     {
         $accreditation = Accreditation::findorfail(decrypt($id));
 
-        return view('home.show-accredit',compact('accreditation'));
+        return view('home.show-accredit', compact('accreditation'));
     }
 }

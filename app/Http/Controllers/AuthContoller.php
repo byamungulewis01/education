@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CreateAccount;
 use App\Models\Client;
 use App\Models\Enroll;
 use App\Models\Student;
-use App\Mail\CreateAccount;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
@@ -38,13 +39,14 @@ class AuthContoller extends Controller
             'fname' => 'required|string|min:3',
             'lname' => 'required|string|min:3',
             'email' => 'required|email|unique:students,email',
-            'phone' => 'required|numeric|unique:students,phone',
+            'phone' => 'required|unique:students,phone',
             'dob' => 'required',
             'country' => 'required',
             'gender' => 'required',
-            'password' => 'required|min:6',
+            'password' => 'required|min:6|confirmed',
             'academic_doc' => 'required|mimes:pdf,png,jpg',
             'identity_doc' => 'required|mimes:pdf,png,jpg',
+
         ]);
         $count = str_pad(Student::count() + 1, 3, '0', STR_PAD_LEFT);
         $regnumber = now()->year . '/BCCH/' . $count;
@@ -63,6 +65,7 @@ class AuthContoller extends Controller
         }
         try {
             $student = Student::create($request->all());
+
             $file1->move(public_path('/files'), $file1Name);
             $file2->move(public_path('/files'), $file2Name);
 
@@ -71,8 +74,9 @@ class AuthContoller extends Controller
                 'training_id' => $id,
             ]);
 
-            Mail::to($request->email)->send(new CreateAccount($student->fname, $student->lname, $student->regnumber));
-            return to_route('index')->with('message', 'Your Request Sent Successful');
+            // Mail::to($request->email)->send(new CreateAccount($student->fname, $student->lname, $student->regnumber));
+            Auth::guard('student')->login($student);
+            return to_route('student.dashboard')->with('message', 'login success');
         } catch (\Throwable $th) {
             //throw $th;
             // dd($th->getMessage());

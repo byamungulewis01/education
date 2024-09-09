@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ExamQuestionResource;
 use App\Models\Chat;
+use App\Models\Country;
 use App\Models\Enroll;
 use App\Models\ExamSetting;
 use App\Models\Module;
@@ -11,38 +13,49 @@ use App\Models\Student;
 use App\Models\Training;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\ValidationException;
 use KingFlamez\Rave\Facades\Rave as Flutterwave;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class StudentController extends Controller
 {
-    //index
-
     public function dashboard()
     {
         $training = Enroll::where('student_id', auth()->guard('student')->user()->id)->latest()->first();
         $modules = Module::where('training_id', $training->training_id)->orderByDesc('id')->get();
-
         return view('student.dashboard', compact('training', 'modules'));
     }
 
     public function profile()
     {
-        return view('student.profile');
+        $student = auth()->guard('student')->user();
+        return view('student.profile', compact('student'));
     }
+    public function settings()
+    {
+        $student = auth()->guard('student')->user();
+        $countries = Country::all();
+        return view('student.settings', compact('student', 'countries'));
+    }
+
     public function changeProfile(Request $request)
     {
         $id = auth()->guard('student')->user()->id;
         $request->validate([
-            'fname' => 'required|string|min:2',
-            'lname' => 'required|string|min:2',
+            'fname' => 'required|string|min:3',
+            'lname' => 'required|string|min:3',
             'email' => 'required|email|unique:users,email,' . $id,
-            'phone' => 'required|numeric|unique:users,phone,' . $id,
-            'image_file' => 'nullable|mimes:png,jpg,jpeg',
+            'phone' => 'required|unique:users,phone,' . $id,
+            'dob' => 'required',
+            'country' => 'required',
+            'gender' => 'required',
+            'profile_photo' => 'nullable|mimes:png,jpg,jpeg',
         ]);
-        if ($request->hasFile('image_file')) {
-            $image = $request->file('image_file');
+        if ($request->hasFile('profile_photo')) {
+            $image = $request->file('profile_photo');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('/images/students'), $imageName);
             $request->merge(['imageName' => $imageName]);
@@ -53,6 +66,27 @@ class StudentController extends Controller
             return back()->with('message', 'Profile Updated Successfully');
         } catch (\Throwable $th) {
             return back()->with('error', 'Some things went wrong try again');
+        }
+    }
+    public function reset_password()
+    {
+        return view('student.reset_password');
+    }
+
+    public function update_password(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'password' => 'required|confirmed|min:8',
+        ]);
+        $student = Student::findorfail(auth()->guard('student')->user()->id);
+        if (Hash::check($request->current_password, $student->password)) {
+            $student->update(['password' => Hash::make($request->password)]);
+            return back()->with('success', 'Password Changed Successfully');
+        } else {
+            throw ValidationException::withMessages([
+                'current_password' => 'Provided password is incorrect',
+            ]);
         }
     }
     public function chat($id)
@@ -74,9 +108,18 @@ class StudentController extends Controller
     }
     public function trainings()
     {
-
-        $trainings = Enroll::where('student_id', auth()->guard('student')->user()->id)->get();
+        $trainings = Enroll::where('is_payed', true)->where('student_id', auth()->guard('student')->user()->id)->get();
         return view('student.trainings', compact('trainings'));
+    }
+    public function exams()
+    {
+        $exams = ExamSetting::where('student_id', auth()->guard('student')->user()->id)->orderByDesc('id')->get();
+        return view('student.exams', compact('exams'));
+    }
+    public function purchase_history()
+    {
+        $trainings = Enroll::all();
+        return view('student.purchase-history', compact('trainings'));
     }
     public function marking_scheme($id)
     {
@@ -91,10 +134,10 @@ class StudentController extends Controller
     }
     public function training_show($id)
     {
-        $training = Enroll::where('student_id', auth()->guard('student')->user()->id)->where('training_id', $id)->latest()->first();
-        $modules = Module::where('training_id', $training->training_id)->orderByDesc('id')->get();
+        $course = Enroll::where('student_id', auth()->guard('student')->user()->id)->where('training_id', decrypt($id))->latest()->first();
+        // $course = Enroll::where('training_id', decrypt($id))->latest()->first();
 
-        return view('student.training_show', compact('training', 'modules'));
+        return view('student.training_show', compact('course'));
     }
     public function trainingShow($id)
     {
@@ -102,17 +145,18 @@ class StudentController extends Controller
         // $components = TrainingComponent::where('training_id', $id)->orderByDesc('id')->get();
         return view('student.show', compact('training'));
     }
-    public function training_exam_show($id)
+    public function training_exam_show(Request $request, $id)
     {
-        $exam_set = ExamSetting::where('training_id', $id)->where('student_id', auth()->guard('student')->user()->id)->first();
-        $questions = Question::where('training_id', $id)->get();
-        // dd(json_decode($exam_set->questions_answers), true);
+        $exam_set = ExamSetting::where('training_id', decrypt($id))->where('student_id', auth()->guard('student')->user()->id)->first();
+
+        $questions = ExamQuestionResource::collection(Question::where('training_id', decrypt($id))->get())->toArray(request());
+
         return view('student.exam_show', compact('id', 'exam_set', 'questions'));
     }
     public function trainingExam(Request $request, $id)
     {
+        $id = decrypt($id);
         $checkboxData = $request->all(); // Get all data from the request
-
         $formattedData = [];
         $marks = 0;
 
@@ -246,6 +290,7 @@ class StudentController extends Controller
             ],
         ];
 
+
         $payment = Flutterwave::initializePayment($data);
 
         if ($payment['status'] !== 'success') {
@@ -299,7 +344,7 @@ class StudentController extends Controller
 
         // return view('student.certificate', compact('student', 'training', 'qrCodeFilePath'));
         // // dd($student, $training);
-        $pdf = Pdf::loadView('student.certificate', compact('student', 'training', 'qrCodeFilePath'))->setPaper('a4', 'landscape');
+        $pdf = Pdf::loadView('student.certificate', compact('student', 'training', 'qrCodeFilePath'))->setPaper('a4', 'Portrait');
         return $pdf->stream($student->regnumber . '.pdf');
     }
     public function certificate_by_year(Request $request, $id)
