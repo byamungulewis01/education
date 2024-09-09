@@ -21,7 +21,6 @@
                     <!-- Tutor Course Top Info Start -->
                     <div class="tutor-course-top-info__content">
                         <div class="tutor-course-top-info__badges">
-                            <span class="onsale">-39%</span>
                             <a class="badges-category" href="#">{{ $training->category->title }}</a>
                         </div>
                         <h1 class="tutor-course-top-info__title">{{ $training->title }}</h1>
@@ -351,72 +350,6 @@
                                         </div>
                                     </li>
                                 </ul>
-                            </div>
-                        </div>
-                        <!-- Tutor Course Segment End -->
-
-                        <!-- Tutor Course Segment Start -->
-                        <div class="tutor-course-segment">
-                            <h4 class="tutor-course-segment__title">Write a review</h4>
-
-                            <div class="tutor-course-segment__reviews">
-                                <button class="tutor-course-segment__btn btn btn-primary btn-hover-secondary"
-                                    data-bs-toggle="collapse" data-bs-target="#collapseForm">Write a review</button>
-
-                                <div class="collapse" id="collapseForm">
-                                    <!-- Comment Form Start -->
-                                    <div class="comment-form">
-                                        <form action="#">
-                                            <div class="comment-form__rating">
-                                                <label class="label">Your rating: *</label>
-                                                <ul id="rating" class="rating">
-                                                    <li class="star" title='Poor' data-value='1'><i
-                                                            class="fas fa-star"></i></li>
-                                                    <li class="star" title='Poor' data-value='2'><i
-                                                            class="fas fa-star"></i></li>
-                                                    <li class="star" title='Poor' data-value='3'><i
-                                                            class="fas fa-star"></i></li>
-                                                    <li class="star" title='Poor' data-value='4'><i
-                                                            class="fas fa-star"></i></li>
-                                                    <li class="star" title='Poor' data-value='5'><i
-                                                            class="fas fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                            <div class="row gy-4">
-                                                <div class="col-md-6">
-                                                    <div class="comment-form__input">
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Your Name *">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="comment-form__input">
-                                                        <input type="email" class="form-control"
-                                                            placeholder="Your Email *">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="comment-form__input">
-                                                        <textarea class="form-control" placeholder="Your Comment"></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="comment-form__input form-check">
-                                                        <input type="checkbox" id="save">
-                                                        <label for="save">Save my name, email, and website in this
-                                                            browser for the next time I comment.</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="comment-form__input">
-                                                        <button class="btn btn-primary btn-hover-secondary">Submit</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <!-- Comment Form End -->
-                                </div>
                             </div>
                         </div>
                         <!-- Tutor Course Segment End -->

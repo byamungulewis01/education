@@ -6,18 +6,9 @@
     <div class="page-banner__wrapper">
         <div class="container">
 
-            <!-- Page Breadcrumb Start -->
-            <div class="page-breadcrumb">
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item active">Contact us 02</li>
-                </ul>
-            </div>
-            <!-- Page Breadcrumb End -->
-
             <!-- Page Banner Caption Start -->
             <div class="page-banner__caption text-center">
-                <h2 class="page-banner__main-title">Contact us 02</h2>
+                <h2 class="page-banner__main-title">Contact us</h2>
             </div>
             <!-- Page Banner Caption End -->
 

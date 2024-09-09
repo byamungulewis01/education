@@ -33,47 +33,33 @@
             <!-- Section Title End -->
 
             <div class="row gy-6">
-                @foreach ($trainings as $item)
+                @foreach ($trainings as $training)
                 <div class="col-xl-3 col-md-6">
 
-                    <!-- Course Start -->
-                    <div class="course-item-03">
-                        <div class="course-header-03">
-                            <div class="course-header-03__thumbnail ">
-                                <a href="{{ route('training',  encrypt($item->id)) }}"><img src="{{ asset('images/trainings/' . $item->imageName) }}"
-                                        alt="courses" width="330" height="221"></a>
-                            </div>
-                            <div class="course-header-03__badge">
-                                <span class="hot">Featured</span>
+                     <!-- Course Start -->
+                     <div class="course-item" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="course-header">
+                            <div class="course-header__thumbnail ">
+                                <a href="{{ route('training', encrypt($training->id)) }}"><img
+                                        src="{{ asset('frontend/images/courses/courses-1.jpg') }}"
+                                        alt="courses" width="258" height="173"></a>
                             </div>
                         </div>
-                        <div class="course-info-03">
-                            <h3 class="course-info-03__title"><a href="{{ route('training',  encrypt($item->id)) }}">{{ $item->title }}</a></h3>
-                            <div class="course-info-03__meta">
-                                <span>5 Lessons</span>
-                                <span>2.3 hours</span>
-                                <span>Intermediate</span>
-                            </div>
-                            <div class="course-info-03__description">
-                                <p>{{ Illuminate\Support\Str::limit(strip_tags($item->description), 100) }}</p>
-                            </div>
-                            <div class="course-info-03__footer">
-
-                                <div class="course-info-03__footer-left">
-                                    <a class="course-info-03__instructor" href="#">Donald Logan</a>
-                                </div>
-                                <div class="course-info-03__footer-right">
-                                    <div class="course-info-03__price">
-                                        <span class="sale-price">${{ $item->price }}.<small class="separator">00</small></span>
-                                    </div>
-                                </div>
-
-                            </div>
+                        <div class="course-header__badge">
+                            <span class="hot">${{ number_format($training->price) }}.<small
+                                class="separator">00</small></span>
+                        </div>
+                        <div class="course-info">
+                            <span class="course-info__badge-text badge-all">All Levels</span>
+                            <h3 class="course-info__title"><a
+                                    href="{{ route('training', encrypt($training->id)) }}">{{ $training->title }}</a>
+                            </h3>
+                            <a href="{{ route('training', encrypt($training->id)) }}" class="course-info__instructor">Read More</a>
 
 
                         </div>
                     </div>
-                    <!-- Course End -->
+                    <!-- Cours  e End -->
 
                 </div>
                 @endforeach
