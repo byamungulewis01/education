@@ -41,7 +41,7 @@
                         <div class="course-header">
                             <div class="course-header__thumbnail ">
                                 <a href="{{ route('training', encrypt($training->id)) }}"><img
-                                        src="{{ asset('frontend/images/courses/courses-1.jpg') }}"
+                                        src="{{ asset('images/trainings/' . $training->imageName) }}"
                                         alt="courses" width="258" height="173"></a>
                             </div>
                         </div>

@@ -53,22 +53,36 @@
         <!-- Header start -->
         <div class="header-section header-sticky">
 
-            <!-- Header Top Start -->
-            <div class="header-top d-none d-sm-block">
-                <div class="container">
+           <!-- Header Top Start -->
+           <div class="header-top d-none d-sm-block">
+            <div class="container">
 
-                    <!-- Header Top Bar Wrapper Start -->
-                    <div class="header-top-bar-wrap">
-                        <div class="header-top-bar-wrap__text text-center">
-                            <p>Keep learning with free resources during <strong>COVID-19.</strong> <a
-                                    href="#">Learn more</a></p>
-                        </div>
+                <!-- Header Top Bar Wrapper Start -->
+                <div class="header-top-bar-wrap d-sm-flex justify-content-between">
+
+                    <div class="header-top-bar-wrap__info">
+                        <ul class="header-top-bar-wrap__info-list">
+                            <li><a href="tel:+8819906886"><i class="fas fa-phone"></i> <span class="info-text">(+88) 1990 6886</span></a></li>
+                            <li><a href="mailto:agency@example.com"><i class="far fa-envelope"></i> <span class="info-text">agency@example.com</span></a></li>
+                        </ul>
                     </div>
-                    <!-- Header Top Bar Wrapper End -->
+
+                    <div class="header-top-bar-wrap__info d-sm-flex">
+
+                        <ul class="header-top-bar-wrap__info-social">
+                            <li><a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                        </ul>
+                    </div>
 
                 </div>
+                <!-- Header Top Bar Wrapper End -->
+
             </div>
-            <!-- Header Top End -->
+        </div>
+        <!-- Header Top End -->
 
             <!-- Header Main Start -->
             <div class="header-main">
@@ -129,9 +143,12 @@
                         <div class="header-navigation d-none d-xl-block">
                             <nav class="menu-primary">
                                 <ul class="menu-primary__container">
+                                    <li><a href="{{ route('trainings') }}"
+                                        class="{{ Request::routeIs('trainings') ? 'active' : '' }}"><span>Courses</span></a></li>
                                     <li><a href="{{ route('about') }}"
                                             class="{{ Request::routeIs('about') ? 'active' : '' }}"><span>About
                                                 Us</span></a></li>
+
                                     <li><a href="{{ route('consultancy') }}"><span>Consultancy</span></a>
                                         @php
                                             $consultancies = \App\Models\Consultance::orderBy('title')->get();
@@ -145,7 +162,7 @@
                                                             @foreach ($chunk as $item)
                                                                 <div class="col-xl-6">
                                                                     <div class="menu-content-list">
-                                                                        <a href="index.html"
+                                                                        <a href="{{ route('consultancyShow', $item->id) }}"
                                                                             class="menu-content-list__link">{{ $item->title }}</a>
 
                                                                     </div>
@@ -164,8 +181,8 @@
 
                                     </li>
 
-                                    <li><a href="#"
-                                            class=""><span>Partners &
+                                    <li><a  href="{{ route('accreditations') }}"
+                                        class="{{ Request::routeIs('accreditations') ? 'active' : '' }}"><span>Partners &
                                                 Accreditation</span></a></li>
                                     <li><a href="{{ route('contact') }}"
                                             class="{{ Request::routeIs('contact') ? 'active' : '' }}"><span>Contact

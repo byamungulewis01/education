@@ -69,24 +69,6 @@
 
                         <!-- Tutor Course Segment Start -->
                         <div class="tutor-course-segment">
-                            <h4 class="tutor-course-segment__title">Course Prerequisites</h4>
-
-                            <!-- Tutor Course Segment Prerequisites Start -->
-                            <div class="tutor-course-segment__prerequisites">
-                                <div class="tutor-course-segment__prerequisites-warning">
-                                    <i class="fas fa-exclamation-triangle"></i>
-                                    Please note that this course has the following prerequisites which must be completed
-                                    before it can be accessed
-                                </div>
-
-                            </div>
-                            <!-- Tutor Course Segment Prerequisites End -->
-
-                        </div>
-                        <!-- Tutor Course Segment End -->
-
-                        <!-- Tutor Course Segment Start -->
-                        <div class="tutor-course-segment">
                             <h4 class="tutor-course-segment__title">About This Course</h4>
 
                             <!-- Tutor Course Segment Content Wrapper Start -->
@@ -108,7 +90,7 @@
                                 <h4 class="tutor-course-segment__title">Curriculum</h4>
 
                                 <div class="tutor-course-segment__lessons-duration">
-                                    <span class="tutor-course-segment__lessons">4 Lessons</span>
+                                    <span class="tutor-course-segment__lessons">4 Modules</span>
                                     <span class="tutor-course-segment__duration">15h 15m</span>
                                 </div>
                             </div>
@@ -172,187 +154,13 @@
                                             <span><i class="fas fa-comment-alt"></i> 4 Reviews</span>
                                             <span><i class="fas fa-user"></i> 73 Students</span>
                                         </div>
-                                        <a class="tutor-instructor__link" href="#"><i class="fas fa-plus"></i> See
-                                            more</a>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Tutor Course Segment End -->
 
-                        <!-- Tutor Course Segment Start -->
-                        <div class="tutor-course-segment">
-                            <h4 class="tutor-course-segment__title">Student Feedback</h4>
-
-                            <div class="tutor-course-segment__feedback">
-                                <div class="tutor-course-segment__reviews-average">
-                                    <div class="count">4.4</div>
-                                    <div class="reviews-rating-star">
-                                        <div class="rating-star">
-                                            <div class="rating-label" style="width: 90%;"></div>
-                                        </div>
-                                    </div>
-                                    <div class="rating-total">8 Ratings</div>
-                                </div>
-                                <div class="tutor-course-segment__reviews-metar">
-
-                                    <div class="course-rating-metar">
-                                        <div class="rating-metar-star">
-                                            <div class="rating-star">
-                                                <div class="rating-label" style="width: 100%;"></div>
-                                            </div>
-                                        </div>
-                                        <div class="rating-metar-col">
-                                            <div class="rating-metar-bar">
-                                                <div class="rating-metar-line" style="width: 75%;"></div>
-                                            </div>
-                                        </div>
-                                        <div class="rating-metar-text">75%</div>
-                                    </div>
-
-                                    <div class="course-rating-metar">
-                                        <div class="rating-metar-star">
-                                            <div class="rating-star">
-                                                <div class="rating-label" style="width: 80%;"></div>
-                                            </div>
-                                        </div>
-                                        <div class="rating-metar-col">
-                                            <div class="rating-metar-bar">
-                                                <div class="rating-metar-line" style="width: 13%;"></div>
-                                            </div>
-                                        </div>
-                                        <div class="rating-metar-text">13%</div>
-                                    </div>
-
-                                    <div class="course-rating-metar">
-                                        <div class="rating-metar-star">
-                                            <div class="rating-star">
-                                                <div class="rating-label" style="width: 60%;"></div>
-                                            </div>
-                                        </div>
-                                        <div class="rating-metar-col">
-                                            <div class="rating-metar-bar">
-                                                <div class="rating-metar-line" style="width: 0%;"></div>
-                                            </div>
-                                        </div>
-                                        <div class="rating-metar-text">0%</div>
-                                    </div>
-
-                                    <div class="course-rating-metar">
-                                        <div class="rating-metar-star">
-                                            <div class="rating-star">
-                                                <div class="rating-label" style="width: 40%;"></div>
-                                            </div>
-                                        </div>
-                                        <div class="rating-metar-col">
-                                            <div class="rating-metar-bar">
-                                                <div class="rating-metar-line" style="width: 0%;"></div>
-                                            </div>
-                                        </div>
-                                        <div class="rating-metar-text">0%</div>
-                                    </div>
-
-                                    <div class="course-rating-metar">
-                                        <div class="rating-metar-star">
-                                            <div class="rating-star">
-                                                <div class="rating-label" style="width: 20%;"></div>
-                                            </div>
-                                        </div>
-                                        <div class="rating-metar-col">
-                                            <div class="rating-metar-bar">
-                                                <div class="rating-metar-line" style="width: 13%;"></div>
-                                            </div>
-                                        </div>
-                                        <div class="rating-metar-text">13%</div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Tutor Course Segment End -->
-
-                        <!-- Tutor Course Segment Start -->
-                        <div class="tutor-course-segment">
-                            <h4 class="tutor-course-segment__title">Reviews <span class="count">(3)</span></h4>
-
-                            <div class="tutor-course-segment__review-commnet">
-                                <ul class="comment-list-02">
-                                    <li>
-                                        <div class="comment-item-02">
-                                            <div class="comment-item-02__header">
-                                                <div class="comment-item-02__author">
-                                                    <img src="{{ asset('frontend/images/avatar/avatar-02.jpg') }}"
-                                                        alt="Avatar" width="52" height="52">
-                                                </div>
-                                                <div class="comment-item-02__info">
-                                                    <h6 class="comment-item-02__name"><a href="#">Chérif Akadiry</a>
-                                                    </h6>
-                                                    <p class="comment-item-02__date">2 weeks ago</p>
-                                                </div>
-                                            </div>
-                                            <div class="comment-item-02__body">
-
-                                                <div class="rating-star">
-                                                    <div class="rating-label" style="width: 80%;"></div>
-                                                </div>
-
-                                                <p>el mejor de la historia</p>
-
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="comment-item-02">
-                                            <div class="comment-item-02__header">
-                                                <div class="comment-item-02__author">
-                                                    <img src="{{ asset('frontend/images/avatar/avatar-03.jpg') }}"
-                                                        alt="Avatar" width="52" height="52">
-                                                </div>
-                                                <div class="comment-item-02__info">
-                                                    <h6 class="comment-item-02__name"><a href="#">Edumall
-                                                            Website</a></h6>
-                                                    <p class="comment-item-02__date">2 weeks ago</p>
-                                                </div>
-                                            </div>
-                                            <div class="comment-item-02__body">
-
-                                                <div class="rating-star">
-                                                    <div class="rating-label" style="width: 100%;"></div>
-                                                </div>
-
-                                                <p>el mejor de la historia</p>
-
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="comment-item-02">
-                                            <div class="comment-item-02__header">
-                                                <div class="comment-item-02__author">
-                                                    <img src="{{ asset('frontend/images/avatar/avatar-04.jpg') }}"
-                                                        alt="Avatar" width="52" height="52">
-                                                </div>
-                                                <div class="comment-item-02__info">
-                                                    <h6 class="comment-item-02__name"><a href="#">Adeniyi David</a>
-                                                    </h6>
-                                                    <p class="comment-item-02__date">2 weeks ago</p>
-                                                </div>
-                                            </div>
-                                            <div class="comment-item-02__body">
-
-                                                <div class="rating-star">
-                                                    <div class="rating-label" style="width: 100%;"></div>
-                                                </div>
-
-                                                <p>el mejor de la historia</p>
-
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- Tutor Course Segment End -->
 
                     </div>
                     <!-- Tutor Course Main Segment End -->
@@ -395,7 +203,7 @@
                                         </li>
                                         <li>
                                             <div class="label"><i class="fas fa-globe"></i> Language </div>
-                                            <div class="value">Russian</div>
+                                            <div class="value">Engish</div>
                                         </li>
                                     </ul>
                                 </div>
@@ -416,59 +224,23 @@
                                 <h3 class="sidebar-widget__title">Related Courses</h3>
 
                                 <div class="sidebar-widget__course">
-
+                                    @foreach ($related_courses as $item)
                                     <div class="sidebar-widget__course-item">
                                         <div class="sidebar-widget__course-thumbnail">
-                                            <a href="course-single-layout-01.html"><img
-                                                    src="{{ asset('frontend/images/courses/courses-21.jpg') }}"
+                                            <a href="{{ route('training', encrypt($item->id)) }}"><img
+                                                    src="{{ asset('images/trainings/' . $item->imageName) }}"
                                                     alt="Courses" width="120" height="72"></a>
                                         </div>
                                         <div class="sidebar-widget__course-content">
                                             <h4 class="sidebar-widget__course-title"><a
-                                                    href="course-single-layout-01.html">Artificial Intelligence:
-                                                    Reinforcement Learning in Python</a></h4>
+                                                    href="{{ route('training', encrypt($item->id)) }}">{{ $item->title }}</a></h4>
                                             <div class="sidebar-widget__course-price">
-                                                <span class="sale-price">$46<span class="separator">.00</span></span>
-                                                <span class="regular-price">$76<span class="separator">.00</span></span>
+                                                <span class="sale-price">${{ number_format($item->price) }}<span class="separator">.00</span></span>
                                             </div>
                                         </div>
                                     </div>
+                                    @endforeach
 
-                                    <div class="sidebar-widget__course-item">
-                                        <div class="sidebar-widget__course-thumbnail">
-                                            <a href="course-single-layout-01.html"><img
-                                                    src="{{ asset('frontend/images/courses/courses-15.jpg') }}"
-                                                    alt="Courses" width="120" height="72"></a>
-                                        </div>
-                                        <div class="sidebar-widget__course-content">
-                                            <h4 class="sidebar-widget__course-title"><a
-                                                    href="course-single-layout-01.html">Statistics for Data Science and
-                                                    Business Analysis</a></h4>
-                                            <div class="sidebar-widget__course-price">
-                                                <span class="sale-price">$25<span class="separator">.00</span></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="sidebar-widget__course-item">
-                                        <div class="sidebar-widget__course-thumbnail">
-                                            <a href="course-single-layout-01.html"><img
-                                                    src="{{ asset('frontend/images/courses/courses-33.jpg') }}"
-                                                    alt="Courses" width="120" height="72"></a>
-                                            <div class="sidebar-widget__course-badge">
-                                                <span class="onsale">-38%</span>
-                                            </div>
-                                        </div>
-                                        <div class="sidebar-widget__course-content">
-                                            <h4 class="sidebar-widget__course-title"><a
-                                                    href="course-single-layout-01.html">Artificial Intelligence:
-                                                    Reinforcement Learning in Python</a></h4>
-                                            <div class="sidebar-widget__course-price">
-                                                <span class="sale-price">$28<span class="separator">.00</span></span>
-                                                <span class="regular-price">$45<span class="separator">.00</span></span>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                 </div>
                             </div>

@@ -26,15 +26,15 @@
                         <!-- Blog Item Start -->
                         <div class="blog-item-02" data-aos="fade-up" data-aos-duration="1000">
                             <div class="blog-item-02__image">
-                                <a href="{{ route('consultancy', $item->id) }}"><img src="{{ asset('images/' . $item->imageName) }}"
-                                        alt="Blog" width="370" height="201"></a>
+                                <a href="{{ route('consultancyShow', $item->id) }}"><img src="{{ asset('images/' . $item->imageName) }}"
+                                        alt="Consultancy" width="370" height="201"></a>
                             </div>
                             <div class="blog-item-02__content">
 
-                                <h3 class="blog-item-02__title"><a href="{{ route('consultancy', $item->id) }}">{{ $item->title }}</a></h3>
+                                <h3 class="blog-item-02__title"><a href="{{ route('consultancyShow', $item->id) }}">{{ $item->title }}</a></h3>
                                 <p>{!! Illuminate\Support\Str::limit(strip_tags($item->description), 135) !!}</p>
                                 <a class="blog-item-02__more btn btn-light btn-hover-white"
-                                    href="{{ route('consultancy', $item->id) }}">Read More <i
+                                    href="{{ route('consultancyShow', $item->id) }}">Read More <i
                                         class="fas  fa-long-arrow-right"></i></a>
                             </div>
                         </div>
@@ -46,15 +46,7 @@
             </div>
 
             <!-- Page Pagination Start -->
-            <div class="page-pagination">
-                <ul class="pagination justify-content-center">
-                    <li><a class="active" href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">...</a></li>
-                    <li><a href="#">7</a></li>
-                    <li><a href="#"><i class="fas fa-angle-double-right"></i></a></li>
-                </ul>
-            </div>
+            {{ $consultances->links('vendor.pagination.custom') }}
             <!-- Page Pagination End -->
 
         </div>

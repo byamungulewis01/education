@@ -27,7 +27,7 @@ class HomeController extends Controller
     }
     public function consultancy()
     {
-        $consultances = Consultance::orderBy('title')->get();
+        $consultances = Consultance::orderBy('title')->paginate(6);
         return view('home.consultancy', compact('consultances'));
     }
 
@@ -40,8 +40,9 @@ class HomeController extends Controller
     {
         $training = Training::findorfail(decrypt($id));
         $countries = Country::orderBy('name')->get();
+        $related_courses = Training::whereNot('id', decrypt($id))->where('category_id', $training->category_id)->limit(3)->orderByDesc('id')->get();
 
-        return view('home.show-training', compact('training', 'countries'));
+        return view('home.show-training', compact('training', 'countries', 'related_courses'));
     }
     public function admission($id)
     {
@@ -87,8 +88,10 @@ class HomeController extends Controller
     }
     public function trainings()
     {
-        $trainings = Training::orderByDesc('id')->paginate(12);
-        return view('home.trainings',compact('trainings'));
+        $trainings = Training::orderByDesc('id')->paginate(8);
+        $categories = Category::orderByDesc('id')->get();
+
+        return view('home.trainings', compact('trainings', 'categories'));
     }
     public function contact()
     {

@@ -74,7 +74,7 @@ class AuthContoller extends Controller
                 'training_id' => $id,
             ]);
 
-            // Mail::to($request->email)->send(new CreateAccount($student->fname, $student->lname, $student->regnumber));
+            Mail::to($request->email)->send(new CreateAccount($student->fname, $student->lname, $student->regnumber));
             Auth::guard('student')->login($student);
             return to_route('student.dashboard')->with('message', 'login success');
         } catch (\Throwable $th) {

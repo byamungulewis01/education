@@ -1,26 +1,50 @@
 @extends('layouts.front')
 @section('title', 'Accreditation')
 @section('body')
+    <!-- Page Banner Section Start -->
+    <div class="page-banner">
+        <div class="page-banner__wrapper">
+            <div class="container">
 
-<section class="c-all p-semi p-event">
-    <div class="semi-inn">
-        <div class="semi-com semi-left">
-            <div class="all-title quote-title qu-new semi-text eve-reg-text">
-                {{-- <p class="help-line">Join this for free!</p> <br> --}}
+                <!-- Page Breadcrumb Start -->
+                <div class="page-breadcrumb">
 
-                <div class="semi-deta eve-deta">
-                    <ul>
-                        <li>{{ $accreditation->title }}</li>
-                    </ul>
                 </div>
-
-                <p>{!! $accreditation->description !!}</p>
+                <!-- Page Breadcrumb End -->
 
             </div>
         </div>
-        <div class="semi-com semi-right">
+    </div>
+    <!-- Page Banner Section End -->
 
+
+    <!-- Shop Start -->
+    <div class="shop-section section-padding-01">
+        <div class="container custom-container">
+
+            <!-- Shop Single Product Start -->
+            <div class="shop-single-product">
+                <div class="row gy-6">
+                    <div class="col-md-8">
+
+                        <!-- Shop Single Product Content Start -->
+                        <div class="shop-single-product__content">
+                            <h1 class="shop-single-product__title">{{ $accreditation->title }}</h1>
+
+
+
+                        </div>
+                        <!-- Shop Single Product Content End -->
+
+                    </div>
+                </div>
+                <div class="row">
+                    <p>{!! $accreditation->description !!}</p>
+                </div>
+            </div>
+            <!-- Shop Single Product End -->
         </div>
     </div>
-</section>
+    <!-- Shop End -->
+
 @endsection

@@ -15,6 +15,7 @@
                             <th class="amount">Amount</th>
                             <th class="status">Status</th>
                             <th class="date">Date</th>
+                            <th class="action">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,13 +39,28 @@
                                 </td>
                                 <td class="incorrect">
                                     @if ($item->is_payed)
-                                    <div class="dashboard-table__text completed">Completed</div>
+                                        <div class="dashboard-table__text completed">Completed</div>
                                     @else
                                         <div class="dashboard-table__text">Processing</div>
                                     @endif
                                 </td>
                                 <td class="earned">
                                     <div class="dashboard-table__text">{{ $item->created_at->format('F d, Y') }}</div>
+                                </td>
+                                <td class="incorrect">
+                                    @if ($item->student->status == 'approved')
+                                        @if (!$item->is_payed)
+                                            <form action="{{ route('student.trainingPay', $item->training_id) }}"
+                                                method="post">
+                                                @csrf
+                                                <button class="btn2 btn-danger btn-sm">
+                                                    Pay Now</button>
+                                            </form>
+                                        @endif
+                                    @else
+                                        <div class="dashboard-table__text cancelled">{{ ucfirst($item->student->status) }}
+                                        </div>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

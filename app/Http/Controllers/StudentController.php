@@ -118,12 +118,11 @@ class StudentController extends Controller
     }
     public function purchase_history()
     {
-        $trainings = Enroll::all();
+        $trainings = Enroll::where('student_id',auth()->guard('student')->id())->get();
         return view('student.purchase-history', compact('trainings'));
     }
     public function marking_scheme($id)
     {
-
         $exam_set = ExamSetting::withTrashed()->find($id);
         return view('student.marking_scheme', compact('exam_set'));
     }
@@ -344,7 +343,7 @@ class StudentController extends Controller
 
         // return view('student.certificate', compact('student', 'training', 'qrCodeFilePath'));
         // // dd($student, $training);
-        $pdf = Pdf::loadView('student.certificate', compact('student', 'training', 'qrCodeFilePath'))->setPaper('a4', 'Portrait');
+        $pdf = Pdf::loadView('student.certificate', compact('student', 'training', 'qrCodeFilePath'))->setPaper('a4', 'landscape');
         return $pdf->stream($student->regnumber . '.pdf');
     }
     public function certificate_by_year(Request $request, $id)
