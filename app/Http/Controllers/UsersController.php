@@ -95,7 +95,7 @@ class UsersController extends Controller
             'academic_doc' => 'required|mimes:pdf,png,jpg',
             'identity_doc' => 'required|mimes:pdf,png,jpg',
         ]);
-        $count = str_pad(Student::count() + 1, 3, '0', STR_PAD_LEFT);
+        $count = str_pad(Student::max('id') + 1, 3, '0', STR_PAD_LEFT);
         $regnumber = now()->year . '/BCCH/' . $count;
         $request->merge(['password' => Hash::make('password'), 'regnumber' => $regnumber]);
 
@@ -115,7 +115,7 @@ class UsersController extends Controller
             $file1->move(public_path('/files'), $file1Name);
             $file2->move(public_path('/files'), $file2Name);
 
-            Mail::to($request->email)->send(new CreateAccount($student));
+            Mail::to($request->email)->send(new CreateAccount($student->fname, $student->lname, $student->regnumber));
             return to_route('admin.student.index')->with('message', 'Student Created Successfully');
         } catch (\Throwable $th) {
             //throw $th;

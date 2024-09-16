@@ -48,7 +48,7 @@ class AuthContoller extends Controller
             'identity_doc' => 'required|mimes:pdf,png,jpg',
 
         ]);
-        $count = str_pad(Student::count() + 1, 3, '0', STR_PAD_LEFT);
+        $count = str_pad(Student::max('id') + 1, 3, '0', STR_PAD_LEFT);
         $regnumber = now()->year . '/BCCH/' . $count;
         $request->merge(['password' => Hash::make($request->password), 'regnumber' => $regnumber]);
 
