@@ -62,8 +62,8 @@
 
                     <div class="header-top-bar-wrap__info">
                         <ul class="header-top-bar-wrap__info-list">
-                            <li><a href="tel:+1(251)237-9112"><i class="fas fa-phone"></i> <span class="info-text">+1(251)237-9112</span></a></li>
-                            <li><a href="info@boast.com"><i class="far fa-envelope"></i> <span class="info-text">info@boast.com</span></a></li>
+                            <li><a href="tel:+250 783 590 293"><i class="fas fa-phone"></i> <span class="info-text">+250 783 590 293</span></a></li>
+                            <li><a href="info@bcchacademy.com"><i class="far fa-envelope"></i> <span class="info-text">info@bcchacademy.com</span></a></li>
                         </ul>
                     </div>
 
