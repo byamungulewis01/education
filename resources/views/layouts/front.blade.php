@@ -62,8 +62,8 @@
 
                     <div class="header-top-bar-wrap__info">
                         <ul class="header-top-bar-wrap__info-list">
-                            <li><a href="tel:+8819906886"><i class="fas fa-phone"></i> <span class="info-text">(+88) 1990 6886</span></a></li>
-                            <li><a href="mailto:agency@example.com"><i class="far fa-envelope"></i> <span class="info-text">agency@example.com</span></a></li>
+                            <li><a href="tel:+1(251)237-9112"><i class="fas fa-phone"></i> <span class="info-text">+1(251)237-9112</span></a></li>
+                            <li><a href="info@boast.com"><i class="far fa-envelope"></i> <span class="info-text">info@boast.com</span></a></li>
                         </ul>
                     </div>
 
@@ -129,7 +129,7 @@
                                                     <p>{{ \Illuminate\Support\Str::limit($item->description, 100, '...') }}
                                                     </p>
 
-
+                                                    <button class="btn2 btn-primary">Program</button>
                                                 </div>
                                             </a>
                                         </li>

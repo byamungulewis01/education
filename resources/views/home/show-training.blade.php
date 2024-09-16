@@ -199,11 +199,11 @@
                                         </li>
                                         <li>
                                             <div class="label"><i class="fas fa-tag"></i> Subject </div>
-                                            <div class="value"><a href="#">Data Modeling</a></div>
+                                            <div class="value"><a href="#">{{ $training->category->title }}</a></div>
                                         </li>
                                         <li>
                                             <div class="label"><i class="fas fa-globe"></i> Language </div>
-                                            <div class="value">Engish</div>
+                                            <div class="value">English</div>
                                         </li>
                                     </ul>
                                 </div>

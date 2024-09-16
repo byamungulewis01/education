@@ -14,12 +14,12 @@ class AdminStudentController extends Controller
     //index
     public function application()
     {
-        $students = Student::where('status', 'pending')->get();
+        $students = Student::where('status', 'pending')->orderByDesc('id')->get();
         return view('admin.students.apply', compact('students'));
     }
     public function approved()
     {
-        $students = Student::where('status', 'approved')->get();
+        $students = Student::where('status', 'approved')->orderByDesc('id')->get();
         return view('admin.students.approved', compact('students'));
     }
     public function approve($id)
@@ -37,7 +37,7 @@ class AdminStudentController extends Controller
     }
     public function rejected()
     {
-        $students = Student::where('status', 'rejected')->get();
+        $students = Student::where('status', 'rejected')->orderByDesc('id')->get();
         return view('admin.students.rejected', compact('students'));
     }
     public function reject(Request $request, $id)

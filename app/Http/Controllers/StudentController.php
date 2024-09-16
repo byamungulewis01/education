@@ -24,9 +24,8 @@ class StudentController extends Controller
 {
     public function dashboard()
     {
-        $training = Enroll::where('student_id', auth()->guard('student')->user()->id)->latest()->first();
-        $modules = Module::where('training_id', $training->training_id)->orderByDesc('id')->get();
-        return view('student.dashboard', compact('training', 'modules'));
+        $course = Enroll::where('student_id', auth()->guard('student')->user()->id)->latest()->first();
+        return view('student.dashboard', compact( 'course'));
     }
 
     public function profile()

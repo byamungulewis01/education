@@ -70,7 +70,7 @@
 
     <div class="app-brand demo ">
         <a href="{{ route('admin.index') }}" class="app-brand-link">
-          <h1>BCCH</h1>
+          <h4>BCCH</h4>
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -80,14 +80,14 @@
     </div>
     <div class="menu-inner-shadow"></div>
     @if (auth()->user())
-    @if (auth()->user()->role == 'instructor')
+@if (auth()->user()->role == 'instructor')
 <x-instructor.sidebar/>
 @else
 <x-sidebar/>
 @endif
 @else
 <x-student.sidebar />
-    @endif
+@endif
 </aside>
 
 
