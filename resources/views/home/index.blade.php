@@ -13,7 +13,7 @@
 
                             <!-- Slider Caption Start -->
                             <div class="slider-caption">
-                                <h3 class="slider-caption__sub-title">Start to success</h3>
+                                <h3 class="slider-caption__sub-title">Welcome To BCCH institution Start to success</h3>
                                 <h2 class="slider-caption__main-title">Access To <mark>5500+</mark> Courses from
                                     <mark>480</mark> Instructors & Institutions
                                 </h2>
@@ -461,8 +461,8 @@
                 <div class="col-lg-3 col-md-6">
                     <!-- Section Title Start -->
                     <div class="section-title" data-aos="fade-up" data-aos-duration="1000">
-                        <h2 class="section-title__title">People Say <br> About <mark>EduMall</mark> </h2>
-                        <p>One-stop solution for any eLearning center, online courses. People love EduMall because they can
+                        <h2 class="section-title__title">People Say <br> About <mark>BCCH Institution</mark> </h2>
+                        <p>One-stop solution for any eLearning center, online courses. People love BCCH Institution because they can
                             create their sites with ease here.</p>
                     </div>
                     <!-- Section Title End -->

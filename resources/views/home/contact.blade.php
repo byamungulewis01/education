@@ -43,7 +43,7 @@
                                         <h3 class="contact-info__title">Address</h3>
                                     </div>
                                 </div>
-                                <p>1800 Abbot Kinney Blvd. Unit D & E Venice</p>
+                                <p>kigali Rwanda </p>
                             </div>
                             <!-- Contact Info End -->
 
@@ -57,8 +57,8 @@
                                         <h3 class="contact-info__title">Phone</h3>
                                     </div>
                                 </div>
-                                <p>Mobile: <strong> (+88) - 1990 - 6886</strong></p>
-                                <p>Hotline: <strong>1800 - 1102</strong></p>
+                                <p>Mobile: <strong> (+250)783 590 293</strong></p>
+                             
                             </div>
                             <!-- Contact Info End -->
 
@@ -72,8 +72,8 @@
                                         <h3 class="contact-info__title">Email</h3>
                                     </div>
                                 </div>
-                                <p>support@edumall.com</p>
-                                <p>hi@edumall.com</p>
+                                <p>support@bcchacademy.com</p>
+                                <p>info@bcchacademy.com</p>
                             </div>
                             <!-- Contact Info End -->
 

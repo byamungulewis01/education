@@ -12,7 +12,7 @@
     <meta name="description" content="Boost Consultancy & Coaching Hub LTD" />
     <meta name="keywords" content="Boost Consultancy & Coaching Hub LTD,Boost Consultancy,BCCH LTD">
     <!-- Favicon -->
-    <title>@yield('title') | BCCH</title>
+    <title>@yield('title') | BCCH Institution</title>
 
     <!-- FAV ICON(BROWSER TAB ICON) -->
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/boost.png') }}" />
@@ -63,7 +63,7 @@
                     <div class="header-top-bar-wrap__info">
                         <ul class="header-top-bar-wrap__info-list">
                             <li><a href="tel:+250 783 590 293"><i class="fas fa-phone"></i> <span class="info-text">+250 783 590 293</span></a></li>
-                            <li><a href="info@bcchacademy.com"><i class="far fa-envelope"></i> <span class="info-text">info@bcchacademy.com</span></a></li>
+                            <li><a href="info@bcchacademy.com"><i class="far fa-envelope"></i> <span class="info-text"><span class="__cf_email__" ><span class="__cf_email__"><span class="__cf_email__"><span class="__cf_email__" data-cfemail="0c65626a634c6e6f6f646d6f6d68696175226f6361">info@bcchinstitution.com</span></span></span></span></span></a></li>
                         </ul>
                     </div>
 
@@ -90,11 +90,11 @@
                     <!-- Header Main Wrapper Start -->
                     <div class="header-main-wrapper">
 
-                        <!-- Header Logo Start -->
+                      
                         <div class="header-logo">
-                            <a class="header-logo__logo" href="{{ route('index') }}"><img
+                            <!--<a class="header-logo__logo" href="{{ route('index') }}"><img
                                     src="{{ asset('frontend/logo.png') }}" width="296" height="64"
-                                    alt="Logo"></a>
+                                    alt="Logo"></a>-->
                         </div>
                         <!-- Header Logo End -->
 
@@ -111,7 +111,7 @@
                                         </g>
                                     </svg>
                                 </div>
-                                <div class="header-category-toggle__text">Schools</div>
+                                <div class="header-category-toggle__text">BCCH Academy</div>
                             </a>
 
                             <div class="header-category-dropdown-wrap">
@@ -143,13 +143,12 @@
                         <div class="header-navigation d-none d-xl-block">
                             <nav class="menu-primary">
                                 <ul class="menu-primary__container">
-                                    <li><a href="{{ route('trainings') }}"
-                                        class="{{ Request::routeIs('trainings') ? 'active' : '' }}"><span>Courses</span></a></li>
+                                   
                                     <li><a href="{{ route('about') }}"
                                             class="{{ Request::routeIs('about') ? 'active' : '' }}"><span>About
                                                 Us</span></a></li>
 
-                                    <li><a href="{{ route('consultancy') }}"><span>Consultancy</span></a>
+                                    <li><a href="{{ route('consultancy') }}"><span>BCCH Consultancy Services</span></a>
                                         @php
                                             $consultancies = \App\Models\Consultance::orderBy('title')->get();
                                         @endphp
@@ -182,8 +181,11 @@
                                     </li>
 
                                     <li><a  href="{{ route('accreditations') }}"
-                                        class="{{ Request::routeIs('accreditations') ? 'active' : '' }}"><span>Partners &
+                                        class="{{ Request::routeIs('accreditations') ? 'active' : '' }}"><span>
                                                 Accreditation</span></a></li>
+                                  
+                                    <li><a  href="#"
+                                        class=""><span>BCCH Journal & Article</span></a></li>
                                     <li><a href="{{ route('contact') }}"
                                             class="{{ Request::routeIs('contact') ? 'active' : '' }}"><span>Contact
                                                 Us</span></a></li>
@@ -252,7 +254,8 @@
             <div class="offcanvas-body">
                 <nav class="canvas-menu">
                     <ul class="offcanvas-menu">
-                        <li><a class="active" href="#"><span>Schools</span></a>
+                        
+                        <li><a class="active" href="#"><span>BCCH Academy</span></a>
 
                             <ul class="mega-menu">
                                 <li>
@@ -286,7 +289,6 @@
             <div class="offcanvas-user d-lg-none">
                 <div class="offcanvas-user__button">
                     <button class="offcanvas-user__login btn btn-secondary btn-hover-secondarys"
-                        data-bs-toggle="modal" data-bs-target="#loginModal">Log In</button>
                 </div>
                 <div class="offcanvas-user__button">
                     <a class="offcanvas-user__signup btn btn-primary btn-hover-primary" href="{{ route('trainings') }}">Sign Up</a>
@@ -306,9 +308,9 @@
                         <div class="col-lg-4">
                             <!-- Footer Widget Start -->
                             <div class="footer-widget text-center">
-                                <a href="#" class="footer-widget__logo"><img
+                                <!-- <a href="#" class="footer-widget__logo"><img
                                         src="{{ asset('frontend/logo.png') }}" alt="Logo"
-                                        width="150" height="32"></a>
+                                        width="150" height="32"></a>-->
                                 <div class="footer-widget__social">
                                     <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
                                     <a href="https://www.facebook.com/" target="_blank"><i
@@ -320,7 +322,7 @@
                                 </div>
                                 <p class="footer-widget__copyright">&copy; {{ now()->year }} <span> BCCH </span> Made with <i
                                         class="fa fa-heart"></i> by <a
-                                        href="https://1.envato.market/c/417168/275988/4415?subId1=hastheme&amp;subId2=demo&amp;subId3=https%3A%2F%2Fthemeforest.net%2Fuser%2Fbootxperts%2Fportfolio&amp;u=https%3A%2F%2Fthemeforest.net%2Fuser%2Fbootxperts%2Fportfolio">BMG</a>
+                                        href="https://1.envato.market/c/417168/275988/4415?subId1=hastheme&amp;subId2=demo&amp;subId3=https%3A%2F%2Fthemeforest.net%2Fuser%2Fbootxperts%2Fportfolio&amp;u=https%3A%2F%2Fthemeforest.net%2Fuser%2Fbootxperts%2Fportfolio">BCCH Academy</a>
                                 </p>
                                 <ul class="footer-widget__link flex-row gap-8 justify-content-center">
                                     <li><a href="#">Terms of Use</a></li>
@@ -558,7 +560,7 @@
     <!-- JS Vendor, Plugins & Activation Script Files -->
 
     <!-- Vendors JS -->
-    <script src="{{ asset('frontend/js/vendor/modernizr-3.11.7.min.js') }}"></script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="{{ asset('frontend/js/vendor/modernizr-3.11.7.min.js') }}"></script>
     <script src="{{ asset('frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
     {{-- <script src="{{ asset('frontend/js/vendor/jquery-migrate-3.3.2.min.js') }}"></script> --}}
     <script src="{{ asset('frontend/js/vendor/bootstrap.bundle.min.js') }}"></script>
