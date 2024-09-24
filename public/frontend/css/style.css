@@ -2362,7 +2362,7 @@ span.flatpickr-weekday {
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.12);
   border: 1px solid #f8f8f8;
   border-radius: 5px;
-  width: 500px;
+  width: 1000px;
   position: relative;
   padding: 14px 0 22px;
 }

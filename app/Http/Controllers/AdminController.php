@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
+use App\Models\Training;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -11,7 +13,13 @@ class AdminController extends Controller
     //
     public function index()
     {
-        return view('admin.index');
+        $statistics = (object) [
+            'students' => Student::where('status','approved')->count(),
+            'instructors' => User::where('role','instructor')->count(),
+            'courses' => Training::count(),
+            'revenue' => 0,
+        ];
+        return view('admin.index' ,compact('statistics'));
     }
     public function profile()
     {

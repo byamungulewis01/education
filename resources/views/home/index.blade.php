@@ -315,12 +315,12 @@
 
                     <!-- Section Title Start -->
                     <div class="section-title" data-aos="fade-up" data-aos-duration="1000">
-                        <h2 class="section-title__title">Top <mark>Categories</mark> </h2>
+                        <h2 class="section-title__title">Top <mark>Courses</mark> </h2>
                     </div>
                     <!-- Section Title End -->
 
                 </div>
-                <div class="col-lg-9">
+                {{-- <div class="col-lg-9">
                     <div class="courses-tab-menu" data-aos="fade-up" data-aos-duration="1000">
                         <ul class="nav justify-content-lg-end">
                             <li><button class="active" data-bs-toggle="tab" data-bs-target="#tabAll">All</button></li>
@@ -331,7 +331,7 @@
 
                         </ul>
                     </div>
-                </div>
+                </div> --}}
             </div>
 
             <div class="tab-content">
@@ -371,7 +371,7 @@
                     </div>
 
                 </div>
-                @foreach ($categories as $item)
+                {{-- @foreach ($categories as $item)
                     <div class="tab-pane fade" id="tab{{ $item->id }}">
 
                         <div class="row row-cols-xl-4 g-6">
@@ -408,7 +408,7 @@
                         </div>
 
                     </div>
-                @endforeach
+                @endforeach --}}
 
             </div>
 
