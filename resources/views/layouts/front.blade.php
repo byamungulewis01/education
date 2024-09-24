@@ -42,7 +42,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/plugins/select2.min.css') }}"> --}}
 
     <!-- Style CSS -->
-    <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/style.css?v=2') }}">
 
 </head>
 
