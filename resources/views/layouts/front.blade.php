@@ -105,8 +105,8 @@
 
                         <!-- Header Logo Start -->
                         <div class="header-logo">
-                            <a class="header-logo__logo" href="{{ route('index') }}"><img src="/" width="296"
-                                    height="64" alt="Logo"></a>
+                            <a class="header-logo__logo" href="{{ route('index') }}"><img src="{{ asset('frontend/academy.png') }}" width="340"
+                                    height="50" alt="Logo"></a>
                         </div>
                         <!-- Header Logo End -->
 
@@ -125,12 +125,12 @@
                                             </g>
                                         </svg>
                                     </div>
-                                    <div class="header-category-toggle__text">BCCH Academy</div>
+                                    <div class="header-category-toggle__text">Schools</div>
                                 </a>
 
                                 <div class="header-category-dropdown-wrap">
                                     <ul class="header-category-dropdown">
-                                        <div class="row">
+                                        <div class="row gap-0">
                                             @foreach (\App\Models\Category::orderByDesc('id')->get() as $item)
                                                 <div class="col-6">
                                                     <li>
@@ -146,7 +146,7 @@
                                                                 <p>{{ \Illuminate\Support\Str::limit($item->description, 100, '...') }}
                                                                 </p>
 
-                                                                <button class="btn2 btn-primary">Program</button>
+                                                                <button class="btn2 btn-primary">Programs</button>
                                                             </div>
                                                         </a>
                                                     </li>
@@ -165,7 +165,7 @@
                                                 class="{{ Request::routeIs('about') ? 'active' : '' }}"><span>About
                                                     Us</span></a></li>
 
-                                        <li><a href="{{ route('consultancy') }}"><span>BCCH Consultancy
+                                        <li><a href="{{ route('consultancy') }}"><span>Consultancy
                                                     Services</span></a>
                                             @php
                                                 $consultancies = \App\Models\Consultance::orderBy('title')->get();
@@ -202,7 +202,7 @@
                                                 class="{{ Request::routeIs('accreditations') ? 'active' : '' }}"><span>
                                                     Accreditation</span></a></li>
 
-                                        <li><a href="#" class=""><span>BCCH Journal & Article</span></a>
+                                        <li><a href="#" class=""><span>Journal & Article</span></a>
                                         </li>
                                         <li><a href="{{ route('contact') }}"
                                                 class="{{ Request::routeIs('contact') ? 'active' : '' }}"><span>Contact

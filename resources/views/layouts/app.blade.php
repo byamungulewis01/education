@@ -70,7 +70,7 @@
 
     <div class="app-brand demo ">
         <a href="{{ route('admin.index') }}" class="app-brand-link">
-          <h4>BCCH</h4>
+          <img src="{{ asset('frontend/academy.png') }}" class="mt-1" alt="BCCH Logo" width="170">
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
