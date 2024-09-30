@@ -18602,7 +18602,7 @@ span.flatpickr-weekday {
   border-radius: 5px;
   border: 1px solid #ededed;
   background: #FFFFFF;
-  padding: 30px;
+  padding: 10px;
 }
 @media only screen and (max-width: 767px) {
   .dashboard-content-box {
@@ -19774,6 +19774,11 @@ span.flatpickr-weekday {
 }
 .dashboard-settings-profile__photo-meta {
   text-align: right;
+  padding-left: 190px;
+  margin-top: 16px;
+}
+.dashboard-settings-profile__photo-meta2 {
+  text-align: left;
   padding-left: 190px;
   margin-top: 16px;
 }

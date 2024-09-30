@@ -67,6 +67,26 @@ class StudentController extends Controller
             return back()->with('error', 'Some things went wrong try again');
         }
     }
+    public function changeProfileImage(Request $request)
+    {
+        $id = auth()->guard('student')->user()->id;
+        $request->validate([
+            'profile_photo' => 'required|mimes:png,jpg,jpeg',
+        ]);
+        if ($request->hasFile('profile_photo')) {
+            $image = $request->file('profile_photo');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('/images/students'), $imageName);
+            $request->merge(['imageName' => $imageName]);
+        }
+
+        try {
+            Student::findorfail($id)->update($request->all());
+            return back()->with('message', 'Profile Updated Successfully');
+        } catch (\Throwable $th) {
+            return back()->with('error', 'Some things went wrong try again');
+        }
+    }
     public function reset_password()
     {
         return view('student.reset_password');

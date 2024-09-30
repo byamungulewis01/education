@@ -65,6 +65,7 @@ Route::group(['middleware' => 'student'], function () {
         Route::get('/reset-password', 'reset_password')->name('reset-password');
         Route::put('/reset-password', 'update_password')->name('password.update');
         Route::put('/changeProfile', 'changeProfile')->name('changeProfile');
+        Route::put('/changeProfileImage', 'changeProfileImage')->name('changeProfileImage');
         Route::get('/my-dashboard', 'dashboard')->name('dashboard');
         Route::get('/trainings', 'trainings')->name('trainings');
         Route::get('/exams', 'exams')->name('exams');
