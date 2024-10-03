@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('training_id')->constrained()->cascadeOnDelete();
             $table->foreignId('student_id')->constrained()->cascadeOnDelete();
-            $table->string('questions_answers');
-            $table->integer('total_marks');
-            $table->enum('status',['success','failure']);
+            $table->dateTime('started_at');
+            $table->dateTime('ended_at');
+            $table->string('questions_answers')->nullable();
+            $table->integer('total_marks')->nullable();
+            $table->enum('status',['pending','success','failure'])->default('pending');
             $table->softDeletes();
             $table->timestamps();
         });

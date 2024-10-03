@@ -6,8 +6,7 @@
 
         <!-- Dashboard Info Start -->
         <div class="dashboard-info">
-            @if (auth()->guard('student')->user()->status == 'approved')
-                {{-- <div class="row mb-3 gy-2 gy-sm-6">
+            {{-- <div class="row mb-3 gy-2 gy-sm-6">
                     <div class="col-md-4 col-sm-6">
                         <!-- Dashboard Info Card Start -->
                         <div class="dashboard-info__card">
@@ -54,16 +53,17 @@
                         <!-- Dashboard Info Card End -->
                     </div>
                 </div> --}}
-                <div class="row gy-8 mb-4">
+            <div class="row gy-8 mb-4">
+                @if (auth()->guard('student')->user()->status == 'approved')
                     <div class="col-lg-6">
 
                         <!-- Banner Box Start -->
                         <div class="banner-box banner-bg-1 aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">
 
                             <h3 class="banner-caption__title">Admission Letter</h3>
-                            <p>Admission Letter is a service provided by the University ...</p>
+                            <p>An admission letter, also known as an acceptance letter, is a formal document that informs an applicant that they have been accepted into a program at an educational institution.</p>
 
-                            <a href="{{ route('student.admission', auth()->guard('student')->user()->id) }}"
+                            <a target="_blank" href="{{ route('student.admission', auth()->guard('student')->user()->id) }}"
                                 class="btn2 btn-primary btn-hover-secondary"><i class="fa fa-download"
                                     aria-hidden="true"></i>
                                 Get
@@ -73,10 +73,12 @@
                         <!-- Banner Box End -->
 
                     </div>
-                    <div class="col-lg-6">
+                @endif
 
-                        <!-- Banner Box Start -->
-                        {{-- <div class="banner-box banner-bg-2 aos-init aos-animate" data-aos="fade-up"
+                <div class="col-lg-6">
+
+                    <!-- Banner Box Start -->
+                    {{-- <div class="banner-box banner-bg-2 aos-init aos-animate" data-aos="fade-up"
                             data-aos-duration="1000">
 
                             <h3 class="banner-caption__title">Certificate</h3>
@@ -95,56 +97,54 @@
                             @endif
 
                         </div> --}}
-                        <!-- Banner Box End -->
-                        <!-- Dashboard Settings Info Start -->
-                        <div class="dashboard-content-box">
+                    <!-- Banner Box End -->
+                    <!-- Dashboard Settings Info Start -->
+                    <div class="dashboard-content-box">
 
-                            {{-- <h4 class="dashboard-content-box__title">Photo</h4>
+                        {{-- <h4 class="dashboard-content-box__title">Photo</h4>
                             <p>Upload your profile photo.</p> --}}
-                            <form action="{{ route('student.changeProfileImage') }}" method="post"
-                                enctype="multipart/form-data">
-                                @csrf
-                                @method('PUT')
+                        <form action="{{ route('student.changeProfileImage') }}" method="post"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
 
-                                <div id="dashboard-profile-cover-photo-editor" class="dashboard-settings-profile">
-                                    <input name="image" id="dashboard-photo-dialogue-box"
-                                        class="dashboard-settings-profile__input" type="file" accept=".png,.jpg,.jpeg" />
+                            <div id="dashboard-profile-cover-photo-editor" class="dashboard-settings-profile">
+                                <input name="image" id="dashboard-photo-dialogue-box"
+                                    class="dashboard-settings-profile__input" type="file" accept=".png,.jpg,.jpeg" />
 
-                                    <div id="profile-photo" class="dashboard-settings-profile__photo"
-                                        data-faslback="{{ asset('images/students/' . auth()->guard('student')->user()->imageName) }}"
-                                        style="background-image:url({{ asset('images/students/' . auth()->guard('student')->user()->imageName) }}">
-                                        <div class="overlay">
-                                            <i class="fas fa-camera"></i>
-                                        </div>
-                                    </div>
-                                    <div id="photo-meta-area" class="dashboard-settings-profile__photo-meta2">
-                                        <img src="{{ asset('frontend/images/info-icon.svg') }}" alt="icon" />
-                                        <span>Profile Photo Size: <strong>200x200</strong> pixels,</span>
-
-                                    </div>
-                                    <div id="photo-meta-area" class="dashboard-settings-profile__photo-meta2">
-
-                                        <button class="btn2 btn-info btn-hover-secondary">Change</button>
-
-                                    </div>
-
-                                    <div id="profile-photo-option" class="dashboard-settings-profile__photo-option">
-                                        <span class="profile-photo-uploader"><i class="fas fa-upload"></i> Upload
-                                            Photo</span>
-                                        <span class="profile-photo-deleter"><i class="fas fa-trash-alt"></i> Delete</span>
+                                <div id="profile-photo" class="dashboard-settings-profile__photo"
+                                    data-faslback="{{ asset('images/students/' . auth()->guard('student')->user()->imageName) }}"
+                                    style="background-image:url({{ asset('images/students/' . auth()->guard('student')->user()->imageName) }}">
+                                    <div class="overlay">
+                                        <i class="fas fa-camera"></i>
                                     </div>
                                 </div>
-                            </form>
+                                <div id="photo-meta-area" class="dashboard-settings-profile__photo-meta2">
+                                    <img src="{{ asset('frontend/images/info-icon.svg') }}" alt="icon" />
+                                    <span>Profile Photo Size: <strong>200x200</strong> pixels,</span>
+
+                                </div>
+                                <div id="photo-meta-area" class="dashboard-settings-profile__photo-meta2">
+
+                                    <button class="btn2 btn-info btn-hover-secondary">Change</button>
+
+                                </div>
+
+                                <div id="profile-photo-option" class="dashboard-settings-profile__photo-option">
+                                    <span class="profile-photo-uploader"><i class="fas fa-upload"></i> Upload
+                                        Photo</span>
+                                    <span class="profile-photo-deleter"><i class="fas fa-trash-alt"></i> Delete</span>
+                                </div>
+                            </div>
+                        </form>
 
 
-
-                        </div>
-                        <!-- Dashboard Settings Info End -->
 
                     </div>
+                    <!-- Dashboard Settings Info End -->
 
                 </div>
-            @endif
+            </div>
             @if (!$course->is_payed)
                 <div class="container">
                     <div class="card mb-4 p-2">

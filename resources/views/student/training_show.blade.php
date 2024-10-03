@@ -166,20 +166,33 @@
                                     </li>
                                     <li>
                                         <div class="label"><i class="fas fa-tag"></i> Subject </div>
-                                        <div class="value"><a href="#">{{ $course->training->category->title }}</a></div>
+                                        <div class="value"><a href="#">{{ $course->training->category->title }}</a>
+                                        </div>
                                     </li>
                                     <li>
                                         <div class="label"><i class="fas fa-globe"></i> Language </div>
                                         <div class="value">English</div>
                                     </li>
+
                                 </ul>
                             </div>
                             @if ($course->is_payed)
-                                <div class="tutor-course-price-preview__btn">
-                                    <a class="btn btn-primary btn-hover-danger w-100"
-                                        href="{{ route('student.training_exam_show', encrypt($course->training_id)) }}">GET
-                                        CERTIFICATE</a>
-                                </div>
+                                @if (!$exam)
+                                    <div class="tutor-course-price-preview__btn">
+                                        <a class="btn btn-primary btn-hover-secondary w-100" data-bs-toggle="modal"
+                                            data-bs-target="#startExam">START EXAM</a>
+                                    </div>
+                                @elseif ($exam->status == 'pending')
+                                    <div class="tutor-course-price-preview__btn">
+                                        <a href="{{ route('student.training_exam_show', encrypt($course->training_id)) }}"
+                                            class="btn btn-primary btn-hover-secondary w-100">CONTINUE EXAM</a>
+                                    </div>
+                                @else
+                                    <div class="tutor-course-price-preview__btn">
+                                        <a href="{{ route('student.training_exam_show', encrypt($course->training_id)) }}"
+                                            class="btn btn-primary btn-hover-secondary w-100">EXAM MARKING</a>
+                                    </div>
+                                @endif
                                 <div class="tutor-course-price-preview__btn">
                                     <a class="btn btn-success btn-hover-danger w-100"
                                         href="{{ route('student.chat', $course->training_id) }}">CHAT WITH INSTRUCTOR</a>
@@ -200,4 +213,41 @@
         </div>
 
     </div>
+
+
+    <!-- Log In Modal Start -->
+    <div class="modal fade" id="startExam">
+        <div class="modal-dialog modal-dialog-centered modal-login">
+
+            <!-- Modal Wrapper Start -->
+            <div class="modal-wrapper">
+                <button class="modal-close" data-bs-dismiss="modal"><i class="fas fa-times"></i></button>
+
+                <!-- Modal Content Start -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Start Exam</h5>
+                        <h6>Exam Duration is <span class="text-danger">{{ $course->training->exam_duration }}
+                                minutes</span></h6>
+                        <p class="modal-description">Please make sure you're ready to start an exam </p>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="{{ route('student.start_exam', $course->training_id) }}">
+                            @csrf
+                            <input type="hidden" name="exam_duration" value="{{ $course->training->exam_duration }}">
+                            <div class="modal-form">
+                                <button type="submit" class="btn btn-primary btn-hover-secondary w-100">Yes
+                                    Continue</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Modal Content End -->
+
+            </div>
+            <!-- Modal Wrapper End -->
+
+        </div>
+    </div>
+    <!-- Log In Modal End -->
 @endsection

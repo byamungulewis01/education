@@ -18,6 +18,7 @@ return new class extends Migration
             $table->longText('choices');
             $table->string('answers');
             $table->integer('marks');
+            $table->integer('duration');
             $table->timestamps();
         });
     }

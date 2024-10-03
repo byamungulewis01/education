@@ -13,14 +13,14 @@
 
 
     <li
-        class="menu-item {{ Request::routeIs('admin.training.index', 'admin.training.show','admin.training.students','admin.category.index','admin.training.category') ? 'open' : '' }}">
+        class="menu-item {{ Request::routeIs('admin.training.index', 'admin.training.create','admin.training.edit', 'admin.training.show','admin.training.students','admin.category.index','admin.training.category') ? 'open' : '' }}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons ti ti-link"></i>
             <div data-i18n="Trainings">Trainings</div>
         </a>
         <ul class="menu-sub">
             <li
-                class="menu-item {{ Request::routeIs('admin.training.index', 'admin.training.show','admin.training.students','admin.training.category') ? 'active' : '' }}">
+                class="menu-item {{ Request::routeIs('admin.training.index', 'admin.training.create','admin.training.edit','admin.training.show','admin.training.students','admin.training.category') ? 'active' : '' }}">
                 <a href="{{ route('admin.training.index') }}" class="menu-link">
                     <div data-i18n="List">List</div>
                 </a>

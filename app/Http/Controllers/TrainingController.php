@@ -17,18 +17,30 @@ class TrainingController extends Controller
     public function index()
     {
         $trainings = Training::orderByDesc('id')->get();
+
+        return view('admin.trainings.index', compact('trainings'));
+    }
+    public function create()
+    {
         $categories = Category::orderBy('title')->get();
         $instructors = User::where('role', 'instructor')->where('status', 'active')->orderByDesc('id')->get();
 
-        return view('admin.trainings.index', compact('trainings', 'instructors','categories'));
+        return view('admin.trainings.create', compact('instructors', 'categories'));
+    }
+    public function edit(Training $training)
+    {
+        $categories = Category::orderBy('title')->get();
+        $instructors = User::where('role', 'instructor')->where('status', 'active')->orderByDesc('id')->get();
+
+        return view('admin.trainings.edit', compact('training', 'instructors', 'categories'));
     }
     public function category($id)
     {
-        $trainings = Training::where('category_id',$id)->orderByDesc('id')->get();
+        $trainings = Training::where('category_id', $id)->orderByDesc('id')->get();
         $category = Category::find($id);
         $instructors = User::where('role', 'instructor')->where('status', 'active')->orderByDesc('id')->get();
 
-        return view('admin.trainings.category', compact('trainings', 'instructors','category'));
+        return view('admin.trainings.category', compact('trainings', 'instructors', 'category'));
     }
     public function students($id)
     {
@@ -38,7 +50,7 @@ class TrainingController extends Controller
     public function marking_scheme($id)
     {
         $exam_set = ExamSetting::withTrashed()->find($id);
-        return view('admin.trainings.marking_scheme',['exam_set' => $exam_set]);
+        return view('admin.trainings.marking_scheme', ['exam_set' => $exam_set]);
     }
     public function store(Request $request)
     {
@@ -49,6 +61,7 @@ class TrainingController extends Controller
             'image' => 'required|mimes:png,jpg,jpeg',
             'category_id' => 'required',
             'user_id' => 'required',
+            'exam_duration' => 'required',
         ]);
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -75,6 +88,7 @@ class TrainingController extends Controller
             'image' => 'nullable|mimes:png,jpg,jpeg',
             'category_id' => 'required',
             'user_id' => 'required',
+            'exam_duration' => 'required',
         ]);
 
         if ($request->hasFile('image')) {
@@ -100,7 +114,7 @@ class TrainingController extends Controller
     {
         $training = Training::find($id);
         $modules = Module::where('training_id', $id)->orderByDesc('id')->get();
-        $questions = Question::where('training_id', $id)->get();
+        $questions = Question::where('training_id', $id)->paginate(1);
         return view('admin.trainings.show', compact('training', 'modules', 'questions'));
     }
 
@@ -112,6 +126,7 @@ class TrainingController extends Controller
             'choices' => 'required|array',
             'answers' => 'required|array',
             'marks' => 'required',
+            'duration' => 'required',
         ]);
 
         $choices = implode('//next//', $request->choices);
@@ -123,6 +138,7 @@ class TrainingController extends Controller
                 'choices' => $choices,
                 'answers' => $answers,
                 'marks' => $request->marks,
+                'duration' => $request->duration,
                 'training_id' => $id,
             ]);
 
@@ -138,6 +154,8 @@ class TrainingController extends Controller
             'choices' => 'required|array',
             'answers' => 'required|array',
             'marks' => 'required',
+            'duration' => 'required',
+
         ]);
 
         $choices = implode('//next//', $request->choices);
@@ -149,6 +167,7 @@ class TrainingController extends Controller
                 'choices' => $choices,
                 'answers' => $answers,
                 'marks' => $request->marks,
+                'duration' => $request->duration,
             ]);
 
             return back()->with('success', 'Question Updated Successfully');

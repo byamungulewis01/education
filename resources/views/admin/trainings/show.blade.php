@@ -238,11 +238,14 @@
 
                                         <div class="col-12 mt-2">
                                             <div class="row">
-                                                <div class="col-6">
+                                                <div class="col-4">
+                                                    <label for="marks" class="form-label">Exam Marks</label>
                                                     <input name="marks" type="number" required class="form-control"
                                                         placeholder="Marks">
                                                 </div>
-                                                <div class="col-6">
+
+                                                <div class="col-4">
+                                                    <br>
                                                     <button type="submit"
                                                         class="btn btn-primary me-sm-3 me-1">Submit</button>
 
@@ -259,11 +262,11 @@
                 <div class="card-body">
                     <div class="row">
                         @foreach ($questions as $item)
-                            <div class="col-md-6 col-xl-6 mb-4">
+                            <div class="col-12 mb-3">
                                 <div class="card h-100">
                                     <div class="card-header d-flex justify-content-between">
                                         <div class="card-title m-0 me-2">
-                                            <h5 class="m-0 me-2">{{ $item->title }}</h5>
+                                            <h5 class="m-0 me-2">{{ ($questions->currentPage() - 1) * $questions->perPage() + $loop->iteration }}) {{ $item->title }}</h5>
                                         </div>
                                         <div class="dropdown">
                                             <button class="btn p-0" type="button" id="transactionID"
@@ -284,7 +287,7 @@
 
                                             </div>
                                         </div>
-                                
+
                                     </div>
                                     <div class="card-body">
                                         <ul class="p-0 m-0">
@@ -292,7 +295,6 @@
                                                 $choices = explode('//next//', $item->choices);
                                             @endphp
                                             @foreach ($choices as $key => $choice)
-
                                                 <li class="d-flex mb-2">
                                                     <strong>{{ $key + 1 }} ) &nbsp;</strong><span class="text-muted">
                                                         {{ $choice }}</span>
@@ -313,79 +315,92 @@
                             </div>
 
 
-                            <div class="modal fade" id="editQuestionModal{{ $item->id }}" tabindex="-1" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg modal-dialog-centered1 modal-simple modal-add-new-cc">
-                                                <div class="modal-content">
-                                                    <div class="modal-body">
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                        <div class="text-center mb-2">
-                                                            <h3>Edit Question</h3>
+                            <div class="modal fade" id="editQuestionModal{{ $item->id }}" tabindex="-1"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-lg modal-dialog-centered1 modal-simple modal-add-new-cc">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                            <div class="text-center mb-2">
+                                                <h3>Edit Question</h3>
+                                            </div>
+                                            <form method="POST" class="row g-2"
+                                                action="{{ route('admin.training.update_question', $item->id) }}">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="col-12 mb-2">
+                                                    <label>Question </label>
+                                                    <input name="title" type="text" required class="form-control"
+                                                        value="{{ $item->title }}">
+                                                </div>
+                                                <div class="col-12 mb-2">
+                                                    <label>Chooses</label>
+                                                    <table class="item_table1" style="width: 95%">
+                                                        @php
+                                                            $answer = explode(',', $item->answers);
+                                                        @endphp
+                                                        @foreach ($choices as $key => $choice)
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="row mb-2">
+                                                                        <div class="col-1">
+                                                                            <input type="checkbox"
+                                                                                value="{{ $key + 1 }}"
+                                                                                name="answers[{{ $key + 1 }}]"
+                                                                                class="form-check-input"
+                                                                                style="width: 31px; height: 31px;"
+                                                                                @if (in_array($key + 1, $answer)) checked @endif>
+                                                                        </div>
+                                                                        <div class="col-10">
+                                                                            <input name="choices[{{ $key + 1 }}]"
+                                                                                type="text" required
+                                                                                class="form-control"
+                                                                                value="{{ $choice }}">
+                                                                        </div>
+                                                                        <div class="col-1">
+                                                                            @if ($key == 0)
+                                                                                <button type="button"
+                                                                                    class="btn btn-primary add1"><i
+                                                                                        class="ti ti-plus ti-xs"></i></button>
+                                                                            @else
+                                                                                <button class="btn btn-danger remove1"><i
+                                                                                        class="ti ti-minus"></i></button>
+                                                                            @endif
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+
+                                                    </table>
+                                                </div>
+
+                                                <div class="col-12 mt-2">
+                                                    <div class="row">
+                                                        <div class="col-4">
+                                                            <label for="marks" class="form-label">Exam Marks</label>
+                                                            <input name="marks" type="number" required
+                                                                value="{{ $item->marks }}" class="form-control"
+                                                                placeholder="Marks">
                                                         </div>
-                                                        <form method="POST" class="row g-2"
-                                                            action="{{ route('admin.training.update_question', $item->id) }}">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <div class="col-12 mb-2">
-                                                                <label>Question</label>
-                                                                <input name="title" type="text" required class="form-control" value="{{ $item->title }}">
-                                                            </div>
-                                                            <div class="col-12 mb-2">
-                                                                <label>Chooses</label>
-                                                                <table class="item_table1" style="width: 95%">
-                                                                @php
-                                                                $answer = explode(',',$item->answers);
-                                                                @endphp
-                                                                @foreach ($choices as $key => $choice)
-                                                                    <tr>
-                                                                        <td>
-                                                                            <div class="row mb-2">
-                                                                                <div class="col-1">
-                                                                                    <input type="checkbox" value="{{ $key + 1 }}" name="answers[{{ $key + 1 }}]"
-                                                                                        class="form-check-input" 
-                                                                                        style="width: 31px; height: 31px;">
-                                                                                </div>
-                                                                                <div class="col-10">
-                                                                                    <input name="choices[{{ $key + 1 }}]" type="text" required
-                                                                                        class="form-control" value="{{ $choice }}">
-                                                                                </div>
-                                                                                <div class="col-1">
-                                                                                    @if($key == 0)
-                                                                                    <button type="button" class="btn btn-primary add1"><i
-                                                                                            class="ti ti-plus ti-xs"></i></button>
-                                                                                   @else
-                                                                                   <button class="btn btn-danger remove1"><i class="ti ti-minus"></i></button>
-                                                                                   @endif
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                    @endforeach
+                                            
+                                                        <div class="col-4">
+                                                            <br>
+                                                            <button type="submit"
+                                                                class="btn btn-primary me-sm-3 me-1">Save Changes</button>
 
-                                                                </table>
-                                                            </div>
-
-                                                            <div class="col-12 mt-2">
-                                                                <div class="row">
-                                                                    <div class="col-6">
-                                                                        <input name="marks" type="number" required class="form-control"
-                                                                           value="{{ $item->marks }}">
-                                                                    </div>
-                                                                    <div class="col-6">
-                                                                        <button type="submit"
-                                                                            class="btn btn-primary me-sm-3 me-1">Submit</button>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </form>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </form>
                                         </div>
-
+                                    </div>
+                                </div>
+                            </div>
                         @endforeach
                     </div>
+                    {{ $questions->links('vendor.pagination.custom') }}
                 </div>
             </div>
 

@@ -22,12 +22,22 @@ class AuthContoller extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
+
         $credentials = $request->only('email', 'password');
         if (auth()->guard('student')->attempt($credentials)) {
-            $training = Enroll::where('student_id', auth()->guard('student')->user()->id)->first();
-            if (!$training) {
-                return to_route('trainings')->with('warning', 'login success !!! , first Apply Training');
+            if (auth()->guard('student')->user()->status == 'approved' && $request->has('training_id')) {
+                $enroll = Enroll::where('training_id', $request->training_id)->where('student_id', auth()->guard('student')->user()->id)->first();
+                if ($enroll) {
+                    auth()->guard('student')->logout();
+                    return back()->with('warning', 'Course Arleady Enrolled');
+                }
+                Enroll::create([
+                    'student_id' => auth()->guard('student')->user()->id,
+                    'training_id' => $request->training_id,
+                ]);
+               return (new StudentController)->trainingPay($request->training_id);
             }
+
             return to_route('student.dashboard')->with('message', 'login success');
         }
         return redirect()->route('index')->with('error', 'Invalid Credentials');
@@ -44,8 +54,8 @@ class AuthContoller extends Controller
             'country' => 'required',
             'gender' => 'required',
             'password' => 'required|min:6|confirmed',
-            'academic_doc' => 'required|mimes:pdf,png,jpg',
-            'identity_doc' => 'required|mimes:pdf,png,jpg',
+            'academic_doc' => 'required|mimes:pdf,png,jpg|max:3072',
+            'identity_doc' => 'required|mimes:pdf,png,jpg|max:3072',
 
         ]);
         $count = str_pad(Student::max('id') + 1, 3, '0', STR_PAD_LEFT);

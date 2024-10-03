@@ -17,6 +17,7 @@ class Training extends Model
         'status',
         'exam_status',
         'category_id',
+        'exam_duration',
     ];
     public function user()
     {

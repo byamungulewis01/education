@@ -553,8 +553,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Login</h5>
-                        <p class="modal-description">Don't have an account yet? <button data-bs-toggle="modal"
-                                data-bs-target="#registerModal">Sign up for free</button></p>
+                        <p class="modal-description">Don't have an account yet? <a href="{{ route('trainings') }}">Sign up for free</a></p>
                     </div>
                     <div class="modal-body">
                         <form method="POST" action="{{ route('login_auth') }}">

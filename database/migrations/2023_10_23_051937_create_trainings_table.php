@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('price');
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->enum('exam_status', ['active', 'inactive'])->default('inactive');
+            $table->integer('exam_duration');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

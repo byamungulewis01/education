@@ -199,7 +199,8 @@
                                         </li>
                                         <li>
                                             <div class="label"><i class="fas fa-tag"></i> Subject </div>
-                                            <div class="value"><a href="#">{{ $training->category->title }}</a></div>
+                                            <div class="value"><a href="#">{{ $training->category->title }}</a>
+                                            </div>
                                         </li>
                                         <li>
                                             <div class="label"><i class="fas fa-globe"></i> Language </div>
@@ -210,7 +211,7 @@
 
                                 <div class="tutor-course-price-preview__btn">
                                     <button class="btn btn-primary btn-hover-danger w-100" data-bs-toggle="modal"
-                                        data-bs-target="#registerModal"> <i class="fas fa-shopping-basket"></i> Apply now
+                                        data-bs-target="#loginAndBuy"> <i class="fas fa-shopping-basket"></i> Apply now
                                     </button>
                                 </div>
 
@@ -225,20 +226,22 @@
 
                                 <div class="sidebar-widget__course">
                                     @foreach ($related_courses as $item)
-                                    <div class="sidebar-widget__course-item">
-                                        <div class="sidebar-widget__course-thumbnail">
-                                            <a href="{{ route('training', encrypt($item->id)) }}"><img
-                                                    src="{{ asset('images/trainings/' . $item->imageName) }}"
-                                                    alt="Courses" width="120" height="72"></a>
-                                        </div>
-                                        <div class="sidebar-widget__course-content">
-                                            <h4 class="sidebar-widget__course-title"><a
-                                                    href="{{ route('training', encrypt($item->id)) }}">{{ $item->title }}</a></h4>
-                                            <div class="sidebar-widget__course-price">
-                                                <span class="sale-price">${{ number_format($item->price) }}<span class="separator">.00</span></span>
+                                        <div class="sidebar-widget__course-item">
+                                            <div class="sidebar-widget__course-thumbnail">
+                                                <a href="{{ route('training', encrypt($item->id)) }}"><img
+                                                        src="{{ asset('images/trainings/' . $item->imageName) }}"
+                                                        alt="Courses" width="120" height="72"></a>
+                                            </div>
+                                            <div class="sidebar-widget__course-content">
+                                                <h4 class="sidebar-widget__course-title"><a
+                                                        href="{{ route('training', encrypt($item->id)) }}">{{ $item->title }}</a>
+                                                </h4>
+                                                <div class="sidebar-widget__course-price">
+                                                    <span class="sale-price">${{ number_format($item->price) }}<span
+                                                            class="separator">.00</span></span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
                                     @endforeach
 
 
@@ -258,6 +261,66 @@
     <!-- Tutor Course Main content End -->
 
     <!-- Log In Modal Start -->
+    <div class="modal fade" id="loginAndBuy">
+        <div class="modal-dialog modal-dialog-centered modal-login">
+
+            <!-- Modal Wrapper Start -->
+            <div class="modal-wrapper">
+                <button class="modal-close" data-bs-dismiss="modal"><i class="fas fa-times"></i></button>
+
+                <!-- Modal Content Start -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Login</h5>
+                        <p class="modal-description">Don't have an account yet? <button data-bs-toggle="modal"
+                                data-bs-target="#registerModal">Sign up for free</button></p>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="{{ route('login_auth') }}">
+                            @csrf
+                            <div class="modal-form">
+                                <label class="form-label">Username or email</label>
+                                <input type="hidden" name="training_id" value="{{ $training->id }}">
+                                <input type="text" class="form-control" name="email" placeholder="Your email">
+                                @error('email')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="modal-form">
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-control" name="password" placeholder="Password">
+                                @error('password')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="modal-form d-flex justify-content-between flex-wrap gap-2">
+                                <div class="form-check">
+                                    <input type="checkbox" id="rememberme">
+                                    <label for="rememberme">Remember me</label>
+                                </div>
+                                <div class="text-end">
+                                    <a class="modal-form__link" href="#">Forgot your password?</a>
+                                </div>
+                            </div>
+                            <div class="modal-form">
+                                <button type="submit" class="btn btn-primary btn-hover-secondary w-100">Log
+                                    In</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+                <!-- Modal Content End -->
+
+            </div>
+            <!-- Modal Wrapper End -->
+
+        </div>
+    </div>
+    <!-- Log In Modal End -->
+
+
+    <!-- Log In Modal Start -->
     <div class="modal fade" id="registerModal">
         <div class="modal-dialog modal-dialog-centered modal-register">
 
@@ -269,7 +332,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Sign Up</h5>
-
+                        <p class="modal-description">Already have an account? <button data-bs-toggle="modal" data-bs-target="#loginAndBuy">Log in</button></p>
                     </div>
                     <div class="modal-body">
                         <form action="{{ route('register_auth', $training->id) }}" enctype="multipart/form-data"
@@ -411,7 +474,6 @@
         </div>
         <!-- Modal Wrapper End -->
 
-    </div>
     </div>
     <!-- Log In Modal End -->
 

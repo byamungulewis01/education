@@ -13,6 +13,8 @@ class ExamSetting extends Model
     protected $fillable = [
         'student_id',
         'training_id',
+        'started_at',
+        'ended_at',
         'questions_answers',
         'total_marks',
         'status',
@@ -22,6 +24,6 @@ class ExamSetting extends Model
     {
         return $this->belongsTo(Training::class);
     }
-   
+
 
 }

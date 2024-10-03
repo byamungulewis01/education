@@ -3,13 +3,36 @@
 @section('body')
     <div class="container">
         <!-- Widget Filter Start -->
-        @if (!$exam_set)
-            <div class="card mb-3 p-4 col-lg-9 col-md-12">
+        @php
+            $training = \App\Models\Training::findorfail(decrypt($id));
+        @endphp
+        @if ($exam_set->status == 'pending')
+            <div class="card mb-3 p-4 col-lg-12 col-md-12">
                 <div class="card-header">
-                    <h4>{{ \App\Models\Training::findorfail(decrypt($id))->title }}'s Exam</h4>
+                    <h4>{{ $training->title }}'s Exam
+                        <span class="pull-left float-end">
+                            <!-- Countdown Timer with Boxes (no Days) -->
+                            <div class="countdown-boxes d-flex gap-2">
+                                <div class="countdown-item">
+                                    <span id="hours">00</span>
+                                    <p>Hours</p>
+                                </div>
+                                <div class="countdown-item">
+                                    <span id="minutes">00</span>
+                                    <p>Minutes</p>
+                                </div>
+                                <div class="countdown-item">
+                                    <span id="seconds">00</span>
+                                    <p>Seconds</p>
+                                </div>
+                            </div>
+                        </span>
+                    </h4>
                 </div>
                 <form id="exam-form" method="POST" action="{{ route('student.trainingExam', $id) }}">
                     @csrf
+                    @method('PUT')
+                    <input type="hidden" name="exam_id" value="{{ $exam_set->id }}">
                     <div class="card-body">
 
                         <div id="questions-container">
@@ -48,21 +71,23 @@
                         @endforeach
 
                         &nbsp;&nbsp;&nbsp;
-                        <button type="submit" class="btn2 btn-dark">Submit Answers</button>
+                        <button type="submit" id="submitAnswers" class="btn2 btn-dark">Submit Answers</button>
                     </div>
                 </form>
 
             </div>
         @else
-            <div class="card mb-3 p-4 col-lg-9 col-md-12">
+            <div class="card mb-3 p-4 col-lg-12 col-md-12">
                 <div class="card-header">
                     <h4>Exam Results <small style="color: #f82424; font-weight:300">(
-                            {{ $exam_set->total_marks }}/<span class="text-muted">{{ \App\Models\Question::where('training_id', $exam_set->training_id)->sum('marks') }} Marks</span>
+                            {{ $exam_set->total_marks }}/<span
+                                class="text-muted">{{ \App\Models\Question::where('training_id', $exam_set->training_id)->sum('marks') }}
+                                Marks</span>
                         </small>)
                         @if ($exam_set->status == 'success')
-                            <a href="{{ route('student.certificate', auth()->guard('student')->user()->id) }}"
-                                class="btn2 btn-primary" style="float: right;"><i
-                                    class="fa fa-download" aria-hidden="true"></i> Get Certficate</a>
+                            <a target="_blank" href="{{ route('student.certificate', auth()->guard('student')->user()->id) }}"
+                                class="btn2 btn-primary" style="float: right;"><i class="fa fa-download"
+                                    aria-hidden="true"></i> Get Certficate</a>
                         @else
                             <form action="{{ route('student.trainingRetake', $id) }}" method="post">
                                 @csrf
@@ -281,7 +306,62 @@
             color: #28a745;
             /* Success color */
         }
+
+        .countdown-boxes {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .countdown-item {
+            background-color: #fff;
+            border: 2px solid #d64a38;
+            border-radius: 8px;
+            width: 100px;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .countdown-item span {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .countdown-item p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
     </style>
+
+    <script>
+        const date = '{{ $exam_set->ended_at }}';
+        const countdownDate = new Date(date).getTime();
+
+        const x = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Update the countdown display
+            document.getElementById("hours").innerHTML = hours;
+            document.getElementById("minutes").innerHTML = minutes;
+            document.getElementById("seconds").innerHTML = seconds;
+
+            // If the countdown is over, display a message
+            if (distance < 0) {
+                clearInterval(x);
+                document.querySelector('.countdown-boxes').innerHTML = "EXAM FINISHED";
+                document.getElementById('exam-form').submit();
+            }
+        }, 1000);
+    </script>
+
+
 
 @endsection
 @section('js')

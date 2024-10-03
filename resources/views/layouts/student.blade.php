@@ -63,7 +63,7 @@
                 </div>
 
                 <div class="dashboard-nav__logo">
-                    <a class="logo" href="{{ route('student.dashboard') }}"><img src="{{ asset('frontend/logo.png') }}"
+                    <a class="logo" href="{{ route('student.dashboard') }}"><img src="{{ asset('frontend/academy.png') }}"
                             alt="Logo" width="148" height="62"></a>
                 </div>
 

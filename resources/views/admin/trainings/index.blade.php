@@ -11,72 +11,10 @@
         <div class="card">
             <div class="card-header border-bottom">
                 <h5 class="card-title mb-0">Trainings List
-                    <a class="btn btn-dark text-white pull-left float-end" data-bs-toggle="modal"
-                        data-bs-target="#addModal">
+                    <a class="btn btn-dark text-white pull-left float-end" href="{{ route('admin.training.create') }}">
                         <i class="ti ti-plus me-0 me-sm-1 ti-xs"></i>
                         <span class="d-none d-sm-inline-block">Training</span></a>
                 </h5>
-                <div class="modal fade" id="addModal" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-lg modal-dialog-centered1 modal-simple modal-add-new-cc">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                                <div class="text-center mb-2">
-                                    <h3>Add New Training</h3>
-                                </div>
-                                <form method="POST" class="row g-3" action="{{ route('admin.training.store') }}" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="col-12">
-                                        <label for="title" class="form-label">Title</label>
-                                        <input name="title" type="text" class="form-control" required
-                                            placeholder="Training Title" value="{{ old('title') }}">
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="category" class="form-label">Category</label>
-                                        <select name="category_id" id="category" class="form-select" required>
-                                            @foreach ($categories as $category)
-                                                <option {{ old('category_id') == $category->id ? 'selected' : '' }}
-                                                    value="{{ $category->id }}">{{ $category->title }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="instructor" class="form-label">Instructor</label>
-                                        <select name="user_id" id="instructor" class="form-select" required>
-                                            <option value="" selected disabled>Select</option>
-                                            @foreach ($instructors as $instructor)
-                                                <option {{ old('user_id') == $instructor->id ? 'selected' : '' }}
-                                                    value="{{ $instructor->id }}">{{ $instructor->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="price" class="form-label">Price</label>
-                                        <input name="price" type="number" id="price" value="{{ old('price') }}"
-                                            min="0" class="form-control" placeholder="Training Price">
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label>Image</label>
-                                        <input name="image" type="file" class="form-control">
-                                    </div>
-                                    <div class="col-md-12">
-
-                                        <label for="description" class="form-label">Description</label>
-                                        <textarea id="description" name="description" rows="6" class="form-control" placeholder="Description">{{ old('description') }}</textarea>
-                                    </div>
-                                    <div class="col-12 mt-4 text-center">
-                                        <button type="submit" class="btn btn-primary me-sm-3 me-1">Submit</button>
-                                        <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal"
-                                            aria-label="Close">Cancel</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
             </div>
 
@@ -126,92 +64,8 @@
                                     {{-- <a href="javascript:;" class="text-body delete-record 1"><i class="ti ti-trash ti-sm mx-2" data-id="1"></i></a> --}}
                                     <a href="{{ route('admin.training.show', $item->id) }}" class="text-body"><i
                                             class="ti ti-eye ti-sm mx-1"></i></a>
-                                    <a href="javascript:;" class="text-body" data-bs-toggle="modal"
-                                        data-bs-target="#editModel{{ $item->id }}"><i
+                                    <a href="{{ route('admin.training.edit',$item) }}" class="text-body" ><i
                                             class="ti ti-edit ti-sm mx-1"></i></a>
-
-                                    <div class="modal fade" id="editModel{{ $item->id }}" tabindex="-1"
-                                        aria-hidden="true">
-                                        <div
-                                            class="modal-dialog modal-lg modal-dialog-centered1 modal-simple modal-add-new-cc">
-                                            <div class="modal-content">
-                                                <div class="modal-body">
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                    <div class="text-center mb-2">
-                                                        <h3>Edit Training</h3>
-                                                    </div>
-                                                    <form method="POST" class="row g-3" enctype="multipart/form-data"
-                                                        action="{{ route('admin.training.update', $item->id) }}">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <div class="col-12">
-                                                            <label for="title" class="form-label">Title</label>
-                                                            <input name="title" type="text" class="form-control"
-                                                                required value="{{ $item->title }}">
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <label for="category" class="form-label">Category</label>
-                                                            <select name="category_id" id="category" class="form-select" required>
-                                                                @foreach ($categories as $category)
-                                                                    <option {{ old('category_id',$category->id) == $category->id ? 'selected' : '' }}
-                                                                        value="{{ $category->id }}">{{ $category->title }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-6">
-
-                                                            <label for="instructor" class="form-label">Instructor</label>
-                                                            <select name="user_id" id="instructor" class="form-select">
-                                                                <option value="" selected disabled>Select</option>
-                                                                @foreach ($instructors as $instructor)
-                                                                    <option
-                                                                        {{ $item->user_id == $instructor->id ? 'selected' : '' }}
-                                                                        value="{{ $instructor->id }}">
-                                                                        {{ $instructor->name }}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <label for="price" class="form-label">Price</label>
-                                                            <input name="price" type="number" id="price"
-                                                                value="{{ $item->price }}" min="0"
-                                                                class="form-control">
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <label for="status" class="form-label">Status</label>
-                                                            <select name="status" id="status" class="form-select">
-                                                                <option {{ $item->status == 'active' ? 'selected' : '' }}
-                                                                    value="active">Active</option>
-                                                                <option {{ $item->status == 'inactive' ? 'selected' : '' }}
-                                                                    value="inactive">Inactive</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <label>Image</label>
-                                                            <input name="image" type="file" class="form-control">
-                                                        </div>
-                                                        <div class="col-md-12">
-
-                                                            <label for="description"
-                                                                class="form-label">Description</label>
-                                                            <textarea id="description" name="description" rows="6" class="form-control" placeholder="Description">{{ $item->description }}</textarea>
-                                                        </div>
-                                                        <div class="col-12 mt-4 text-center">
-                                                            <button type="submit"
-                                                                class="btn btn-primary me-sm-3 me-1">Save</button>
-                                                            <button type="reset" class="btn btn-label-secondary"
-                                                                data-bs-dismiss="modal" aria-label="Close">Cancel</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
                                     <form id="deleteForm_{{ $item->id }}"
                                         action="{{ route('admin.training.destroy', $item->id) }}" method="post"
                                         class="d-inline">

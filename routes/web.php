@@ -75,8 +75,9 @@ Route::group(['middleware' => 'student'], function () {
         Route::get('/my-marking_scheme/{id}', 'marking_scheme')->name('marking_scheme');
         Route::get('/chat/{id}', 'chat')->name('chat');
         Route::post('/chat/{id}', 'storeChat')->name('storeChat');
+        Route::post('/start_exam/{id}', 'start_exam')->name('start_exam');
         Route::get('/my-trainings-exam/{id}', 'training_exam_show')->name('training_exam_show');
-        Route::post('/my-trainings-exam/{id}', 'trainingExam')->name('trainingExam');
+        Route::put('/my-trainings-exam/{id}', 'trainingExam')->name('trainingExam');
         Route::post('/my-trainings-retake/{id}', 'trainingRetake')->name('trainingRetake');
         Route::get('/retake-callback/{id}', 'trainingRetakeCallback')->name('trainingRetakeCallback');
 
@@ -143,12 +144,14 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
 
     Route::controller(TrainingController::class)->prefix('trainings')->name('training.')->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
         Route::get('/{id}/students', 'students')->name('students');
         Route::get('/marking-scheme/{id}', 'marking_scheme')->name('marking_scheme');
         Route::post('/', 'store')->name('store');
         Route::put('/{id}', 'update')->name('update');
         Route::delete('/{id}', 'destroy')->name('destroy');
         Route::get('/show/{id}', 'show')->name('show');
+        Route::get('/edit/{training}', 'edit')->name('edit');
         Route::get('/category/{id}', 'category')->name('category');
 
         Route::post('/question/{id}', 'store_question')->name('store_question');

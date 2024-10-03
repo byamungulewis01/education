@@ -2,30 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\ExamQuestionResource;
+use Carbon\Carbon;
 use App\Models\Chat;
-use App\Models\Country;
 use App\Models\Enroll;
-use App\Models\ExamSetting;
 use App\Models\Module;
-use App\Models\Question;
+use App\Models\Country;
 use App\Models\Student;
+use App\Models\Question;
 use App\Models\Training;
-use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\ExamSetting;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\Password;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Http\Resources\ExamQuestionResource;
 use Illuminate\Validation\ValidationException;
 use KingFlamez\Rave\Facades\Rave as Flutterwave;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class StudentController extends Controller
 {
     public function dashboard()
     {
         $course = Enroll::where('student_id', auth()->guard('student')->user()->id)->latest()->first();
-        return view('student.dashboard', compact( 'course'));
+        return view('student.dashboard', compact('course'));
     }
 
     public function profile()
@@ -127,7 +128,7 @@ class StudentController extends Controller
     }
     public function trainings()
     {
-        $trainings = Enroll::where('is_payed', true)->where('student_id', auth()->guard('student')->user()->id)->get();
+        $trainings = Enroll::where('is_payed', true)->where('student_id', auth()->guard('student')->user()->id)->orderByDesc('id')->get();
         return view('student.trainings', compact('trainings'));
     }
     public function exams()
@@ -137,7 +138,7 @@ class StudentController extends Controller
     }
     public function purchase_history()
     {
-        $trainings = Enroll::where('student_id',auth()->guard('student')->id())->get();
+        $trainings = Enroll::where('student_id', auth()->guard('student')->id())->get();
         return view('student.purchase-history', compact('trainings'));
     }
     public function marking_scheme($id)
@@ -154,14 +155,27 @@ class StudentController extends Controller
     {
         $course = Enroll::where('student_id', auth()->guard('student')->user()->id)->where('training_id', decrypt($id))->latest()->first();
         // $course = Enroll::where('training_id', decrypt($id))->latest()->first();
-
-        return view('student.training_show', compact('course'));
+        $exam = ExamSetting::where('student_id', auth()->guard('student')->user()->id)->where('training_id', decrypt($id))->first();
+        return view('student.training_show', compact('course', 'exam'));
     }
     public function trainingShow($id)
     {
         $training = Training::find($id);
         // $components = TrainingComponent::where('training_id', $id)->orderByDesc('id')->get();
         return view('student.show', compact('training'));
+    }
+    public function start_exam(Request $request, $id)
+    {
+        $startedAt = Carbon::now();
+        $endedAt = $startedAt->clone()->addMinutes($request->exam_duration);
+
+        ExamSetting::create([
+            'training_id' => $id,
+            'student_id' => auth()->guard('student')->user()->id,
+            'started_at' => $startedAt,
+            'ended_at' => $endedAt,
+        ]);
+        return to_route('student.training_exam_show', encrypt($id));
     }
     public function training_exam_show(Request $request, $id)
     {
@@ -177,7 +191,6 @@ class StudentController extends Controller
         $checkboxData = $request->all(); // Get all data from the request
         $formattedData = [];
         $marks = 0;
-
         foreach ($checkboxData as $key => $values) {
             // Check if the key starts with 'q-' and has values
             if (strpos($key, 'q-') === 0 && is_array($values)) {
@@ -193,20 +206,16 @@ class StudentController extends Controller
 
         $total_marks = (int) Question::where('training_id', $id)->sum('marks');
         $status = ($marks >= ($total_marks * 0.5)) ? 'success' : 'failure';
-
-        $exam = ExamSetting::create([
-            'training_id' => $id,
-            'student_id' => auth()->guard('student')->user()->id,
+        $exam = ExamSetting::find($request->exam_id);
+        $exam->update([
             'questions_answers' => json_encode($formattedData),
             'total_marks' => $marks,
             'status' => $status,
         ]);
 
         if ($exam->status == 'success') {
-
             return back()->with('exam_success', 'Exam Completed and You Have Success.');
         } else {
-
             return back()->with('exam_fail', 'You have failed the exam Please Try Again');
         }
     }
@@ -271,7 +280,19 @@ class StudentController extends Controller
             $data = Flutterwave::verifyTransaction($transactionID);
             // dd($data);
             ExamSetting::where('student_id', auth()->guard('student')->user()->id)
-                ->where('training_id', $id)->latest()->first()->delete();
+                ->where('training_id', decrypt($id))->first()->delete();
+            $training = Training::find(decrypt($id));
+            $startedAt = Carbon::now();
+
+            $endedAt = $startedAt->clone()->addMinutes($training->exam_duration);
+
+            ExamSetting::create([
+                'training_id' => $training->id,
+                'student_id' => auth()->guard('student')->user()->id,
+                'started_at' => $startedAt,
+                'ended_at' => $endedAt,
+            ]);
+
             return to_route('student.training_exam_show', $id)->with('message', 'Payment Done Continue With Exam');
         } elseif ($status == 'cancelled') {
             //Put desired action/code after transaction has been cancelled here
@@ -282,11 +303,10 @@ class StudentController extends Controller
         }
     }
 
-    public function trainingPay(Request $request, $id)
+    public function trainingPay($id)
     {
         //This generates a payment reference
         $reference = Flutterwave::generateReference();
-
         // Enter the details of the payment
         $data = [
             'payment_options' => 'card,banktransfer,mobilemoney',
@@ -303,8 +323,8 @@ class StudentController extends Controller
             ],
 
             "customizations" => [
-                "title" => 'Boost Consultancy & Coaching Hub',
-                "description" => "Boost Consultancy & Coaching Hub Paying Training Services",
+                "title" => 'BCCH Academy',
+                "description" => "BCCH Academy Paying Training Services",
             ],
         ];
 
@@ -329,7 +349,7 @@ class StudentController extends Controller
             // dd($data);
             Enroll::where('student_id', auth()->guard('student')->user()->id)
                 ->where('training_id', $id)->update(['is_payed' => true, 'payment_date' => now()]);
-            return to_route('student.dashboard')->with('message', 'Payment Completed Successfully');
+            return to_route('student.trainings')->with('message', 'Payment Completed Successfully');
         } elseif ($status == 'cancelled') {
             //Put desired action/code after transaction has been cancelled here
             return back()->with('warning', 'Transaction Cancelled');
@@ -345,7 +365,7 @@ class StudentController extends Controller
         $student = Student::find($id);
         $training = Enroll::where('student_id', $id)->first()->training->title;
         // dd($student, $training);
-        $pdf = Pdf::loadView('student.admission', compact('student', 'training'))->setPaper('a4', 'landscape');
+        $pdf = Pdf::loadView('student.admission', compact('student', 'training'))->setPaper('a4',);
         return $pdf->stream($student->regnumber . '.pdf');
     }
     public function certificate($id)
