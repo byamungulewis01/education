@@ -13,6 +13,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\OtherPageController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\ConsultanceController;
 use App\Http\Controllers\AdminStudentController;
@@ -44,6 +45,22 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/contact-us', 'contact')->name('contact');
     Route::get('/accreditations', 'accreditations')->name('accreditations');
     Route::get('/accreditations/{id}', 'show_accreditation')->name('show_accreditation');
+    
+    Route::get('/programs', 'programs')->name('programs');
+    Route::get('/awards', 'awards')->name('awards');
+    Route::get('/careers', 'careers')->name('careers');
+    Route::get('/testimonies', 'testimonies')->name('testimonies');
+});
+Route::controller(OtherPageController::class)->group(function () {
+    Route::get('/our-story', 'our_stoty')->name('our_stoty');
+    Route::get('/vision-and-mission', 'vision_mission')->name('vision_mission');
+    Route::get('/governance-structure', 'governance_structure')->name('governance_structure');
+    Route::get('/leadership', 'leadership')->name('leadership');
+    Route::get('/offices', 'offices')->name('offices');
+    Route::get('/policies-and-guidelines', 'policy_guidelines')->name('policy_guidelines');
+    Route::get('/partnerships', 'partnerships')->name('partnerships');
+
+
 });
 Route::controller(AuthContoller::class)->group(function () {
     Route::post('/login', 'login_auth')->name('login_auth');

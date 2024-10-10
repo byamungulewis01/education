@@ -105,245 +105,72 @@
 
                         <!-- Header Logo Start -->
                         <div class="header-logo">
-                            <a class="header-logo__logo" href="{{ route('index') }}"><img src="{{ asset('frontend/academy.png') }}" width="340"
-                                    height="50" alt="Logo"></a>
+                            <a class="header-logo__logo" href="{{ route('index') }}"><img
+                                    src="{{ asset('frontend/academy.png') }}" width="296" height="64"
+                                    alt="Logo"></a>
                         </div>
                         <!-- Header Logo End -->
-
                         <!-- Header Inner Start -->
                         <div class="header-inner">
-                            <div class="header-category-menu d-none d-xl-block">
-                                <a href="#" class="header-category-toggle">
-                                    <div class="header-category-toggle__icon">
-                                        <svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink">
-                                            <g stroke="none" stroke-width="1" fill-rule="evenodd">
-                                                <path
-                                                    d="M2,14 C3.1045695,14 4,14.8954305 4,16 C4,17.1045695 3.1045695,18 2,18 C0.8954305,18 0,17.1045695 0,16 C0,14.8954305 0.8954305,14 2,14 Z M9,14 C10.1045695,14 11,14.8954305 11,16 C11,17.1045695 10.1045695,18 9,18 C7.8954305,18 7,17.1045695 7,16 C7,14.8954305 7.8954305,14 9,14 Z M16,14 C17.1045695,14 18,14.8954305 18,16 C18,17.1045695 17.1045695,18 16,18 C14.8954305,18 14,17.1045695 14,16 C14,14.8954305 14.8954305,14 16,14 Z M2,7 C3.1045695,7 4,7.8954305 4,9 C4,10.1045695 3.1045695,11 2,11 C0.8954305,11 0,10.1045695 0,9 C0,7.8954305 0.8954305,7 2,7 Z M9,7 C10.1045695,7 11,7.8954305 11,9 C11,10.1045695 10.1045695,11 9,11 C7.8954305,11 7,10.1045695 7,9 C7,7.8954305 7.8954305,7 9,7 Z M16,7 C17.1045695,7 18,7.8954305 18,9 C18,10.1045695 17.1045695,11 16,11 C14.8954305,11 14,10.1045695 14,9 C14,7.8954305 14.8954305,7 16,7 Z M2,0 C3.1045695,0 4,0.8954305 4,2 C4,3.1045695 3.1045695,4 2,4 C0.8954305,4 0,3.1045695 0,2 C0,0.8954305 0.8954305,0 2,0 Z M9,0 C10.1045695,0 11,0.8954305 11,2 C11,3.1045695 10.1045695,4 9,4 C7.8954305,4 7,3.1045695 7,2 C7,0.8954305 7.8954305,0 9,0 Z M16,0 C17.1045695,0 18,0.8954305 18,2 C18,3.1045695 17.1045695,4 16,4 C14.8954305,4 14,3.1045695 14,2 C14,0.8954305 14.8954305,0 16,0 Z">
-                                                </path>
-                                            </g>
-                                        </svg>
-                                    </div>
-                                    <div class="header-category-toggle__text">Schools</div>
-                                </a>
 
-                                <div class="header-category-dropdown-wrap">
-                                    <ul class="header-category-dropdown">
-                                        <div class="row gap-0">
-                                            @foreach (\App\Models\Category::orderByDesc('id')->get() as $item)
-                                                <div class="col-6">
-                                                    <li>
-                                                        <a class="categories-course"
-                                                            href="{{ route('show_school', encrypt($item->id)) }}">
-                                                            <div class="categories-course__thumbnail">
-                                                                <img src="{{ asset('images/trainings/category/' . $item->imageName) }}"
-                                                                    alt="Course" width="62" height="50">
-                                                            </div>
-                                                            <div class="categories-course__caption">
-                                                                <h3 class="categories-course__title">
-                                                                    {{ $item->title }}</h3>
-                                                                <p>{{ \Illuminate\Support\Str::limit($item->description, 100, '...') }}
-                                                                </p>
 
-                                                                <button class="btn2 btn-primary">Programs</button>
-                                                            </div>
-                                                        </a>
-                                                    </li>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </ul>
-                                </div>
-                            </div>
                             <!-- Header Navigation Start -->
                             <div class="header-navigation d-none d-xl-block">
                                 <nav class="menu-primary">
                                     <ul class="menu-primary__container">
-
-                                        <li><a href="{{ route('about') }}"
-                                                class="{{ Request::routeIs('about') ? 'active' : '' }}"><span>About
-                                                    Us</span></a></li>
-
-                                        <li><a href="{{ route('consultancy') }}"><span>Consultancy
-                                                    Services</span></a>
-                                            @php
-                                                $consultancies = \App\Models\Consultance::orderBy('title')->get();
-                                            @endphp
-                                            <ul class="mega-menu">
+                                        <li><a href="{{ route('index') }}"
+                                                class="{{ Request::routeIs('index') ? 'active' : '' }}"><span>Home</span></a>
+                                        </li>
+                                        <li>
+                                            <a class="{{ Request::routeIs(['our_stoty', 'vision_mission', 'governance_structure', 'leadership', 'offices', 'policy_guidelines']) ? 'active' : '' }}"
+                                                href="#"><span>About Us</span></a>
+                                            <ul class="sub-menu">
+                                                <li><a href="{{ route('our_stoty') }}"><span>Our Story</span></a></li>
+                                                <li><a href="{{ route('vision_mission') }}"><span>Vision &
+                                                            Mission</span></a></li>
+                                                <li><a href="{{ route('governance_structure') }}"><span>Governance
+                                                            Structure</span></a></li>
+                                                <li><a href="{{ route('leadership') }}"><span>Leadership</span></a>
+                                                </li>
+                                                <li><a href="{{ route('offices') }}"><span>Offices</span></a></li>
+                                                <li><a href="{{ route('policy_guidelines') }}"><span>Policies &
+                                                            Guidelines</span></a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a class="{{ Request::routeIs(['programs', 'awards']) ? 'active' : '' }}"
+                                                href="#"><span>BCCH Academy</span></a>
+                                            <ul class="sub-menu">
                                                 <li>
-                                                    <!-- Mega Menu Content Start -->
-                                                    @foreach ($consultancies->chunk(4) as $chunk)
-                                                        <div class="mega-menu-content">
-                                                            <div class="row">
-                                                                @foreach ($chunk as $item)
-                                                                    <div class="col-xl-6">
-                                                                        <div class="menu-content-list">
-                                                                            <a href="{{ route('consultancyShow', $item->id) }}"
-                                                                                class="menu-content-list__link">{{ $item->title }}</a>
+                                                    <a href="{{ route('programs') }}"><span>Programs</span></a>
+                                                </li>
+                                                <li><a href="{{ route('awards') }}"><span>Awards</span></a></li>
 
-                                                                        </div>
-                                                                    </div>
-                                                                @endforeach
-
-                                                            </div>
-                                                        </div>
-                                                    @endforeach
-                                                    <!-- Mega Menu Content Start -->
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a class="{{ Request::routeIs(['careers', 'testimonies']) ? 'active' : '' }}"
+                                                href="#"><span>Consultancy</span></a>
+                                            <ul class="sub-menu">
+                                                <li><a href="{{ route('careers') }}"><span>Careers</span></a></li>
+                                                <li><a href="{{ route('testimonies') }}"><span>Testimonies</span></a>
                                                 </li>
                                             </ul>
-
-
-
-
                                         </li>
 
                                         <li><a href="{{ route('accreditations') }}"
-                                                class="{{ Request::routeIs('accreditations') ? 'active' : '' }}"><span>
-                                                    Accreditation</span></a></li>
-
-                                        <li><a href="#" class=""><span>Journal & Article</span></a>
+                                                class="{{ Request::routeIs('accreditations') ? 'active' : '' }}"><span>Accreditation</span></a>
                                         </li>
+                                        <li><a href="{{ route('partnerships') }}" class="{{ Request::routeIs('partnerships') ? 'active' : '' }}"><span>Partnerships</span></a></li>
+                                        <li><a href="#"><span>Journal & Articles</span></a></li>
                                         <li><a href="{{ route('contact') }}"
                                                 class="{{ Request::routeIs('contact') ? 'active' : '' }}"><span>Contact
                                                     Us</span></a></li>
-
 
                                     </ul>
                                 </nav>
                             </div>
                             <!-- Header Navigation End -->
-
-                            <!-- Header Mobile Toggle Start -->
-                            <div class="header-toggle">
-                                <button class="header-toggle__btn d-xl-none" data-bs-toggle="offcanvas"
-                                    data-bs-target="#offcanvasMobileMenu">
-                                    <span class="line"></span>
-                                    <span class="line"></span>
-                                    <span class="line"></span>
-                                </button>
-                            </div>
-                            <!-- Header Mobile Toggle End -->
-
-                        </div>
-                        <!-- Header Inner End -->
-
-                    </div>
-                    <!-- Header Main Wrapper End -->
-
-
-                    <!-- Header Main Wrapper Start -->
-                    {{-- <div class="header-main-wrapper">
-
-
-                        <div class="header-logo">
-                            <!--<a class="header-logo__logo" href="{{ route('index') }}"><img
-                                    src="{{ asset('frontend/logo.png') }}" width="296" height="64"
-                                    alt="Logo"></a>-->
-                        </div>
-                        <!-- Header Logo End -->
-
-                        <!-- Header Category Menu Start -->
-                        <div class="header-category-menu d-none d-xl-block">
-                            <a href="#" class="header-category-toggle">
-                                <div class="header-category-toggle__icon">
-                                    <svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1"
-                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                        <g stroke="none" stroke-width="1" fill-rule="evenodd">
-                                            <path
-                                                d="M2,14 C3.1045695,14 4,14.8954305 4,16 C4,17.1045695 3.1045695,18 2,18 C0.8954305,18 0,17.1045695 0,16 C0,14.8954305 0.8954305,14 2,14 Z M9,14 C10.1045695,14 11,14.8954305 11,16 C11,17.1045695 10.1045695,18 9,18 C7.8954305,18 7,17.1045695 7,16 C7,14.8954305 7.8954305,14 9,14 Z M16,14 C17.1045695,14 18,14.8954305 18,16 C18,17.1045695 17.1045695,18 16,18 C14.8954305,18 14,17.1045695 14,16 C14,14.8954305 14.8954305,14 16,14 Z M2,7 C3.1045695,7 4,7.8954305 4,9 C4,10.1045695 3.1045695,11 2,11 C0.8954305,11 0,10.1045695 0,9 C0,7.8954305 0.8954305,7 2,7 Z M9,7 C10.1045695,7 11,7.8954305 11,9 C11,10.1045695 10.1045695,11 9,11 C7.8954305,11 7,10.1045695 7,9 C7,7.8954305 7.8954305,7 9,7 Z M16,7 C17.1045695,7 18,7.8954305 18,9 C18,10.1045695 17.1045695,11 16,11 C14.8954305,11 14,10.1045695 14,9 C14,7.8954305 14.8954305,7 16,7 Z M2,0 C3.1045695,0 4,0.8954305 4,2 C4,3.1045695 3.1045695,4 2,4 C0.8954305,4 0,3.1045695 0,2 C0,0.8954305 0.8954305,0 2,0 Z M9,0 C10.1045695,0 11,0.8954305 11,2 C11,3.1045695 10.1045695,4 9,4 C7.8954305,4 7,3.1045695 7,2 C7,0.8954305 7.8954305,0 9,0 Z M16,0 C17.1045695,0 18,0.8954305 18,2 C18,3.1045695 17.1045695,4 16,4 C14.8954305,4 14,3.1045695 14,2 C14,0.8954305 14.8954305,0 16,0 Z">
-                                            </path>
-                                        </g>
-                                    </svg>
-                                </div>
-                                <div class="header-category-toggle__text">BCCH Academy</div>
-                            </a>
-
-                            <div class="header-category-dropdown-wrap">
-                                <ul class="header-category-dropdown">
-                                    @foreach (\App\Models\Category::orderByDesc('id')->get() as $item)
-                                        <li>
-                                            <a class="categories-course"
-                                                href="{{ route('show_school', encrypt($item->id)) }}">
-                                                <div class="categories-course__thumbnail">
-                                                    <img src="{{ asset('images/trainings/category/' . $item->imageName) }}"
-                                                        alt="Course" width="62" height="50">
-                                                </div>
-                                                <div class="categories-course__caption">
-                                                    <h3 class="categories-course__title">{{ $item->title }}</h3>
-                                                    <p>{{ \Illuminate\Support\Str::limit($item->description, 100, '...') }}
-                                                    </p>
-
-                                                    <button class="btn2 btn-primary">Program</button>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    @endforeach
-
-
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- Header Navigation Start -->
-                        <div class="header-navigation d-none d-xl-block">
-                            <nav class="menu-primary">
-                                <ul class="menu-primary__container">
-
-                                    <li><a href="{{ route('about') }}"
-                                            class="{{ Request::routeIs('about') ? 'active' : '' }}"><span>About
-                                                Us</span></a></li>
-
-                                    <li><a href="{{ route('consultancy') }}"><span>BCCH Consultancy
-                                                Services</span></a>
-                                        @php
-                                            $consultancies = \App\Models\Consultance::orderBy('title')->get();
-                                        @endphp
-                                        <ul class="mega-menu">
-                                            <li>
-                                                <!-- Mega Menu Content Start -->
-                                                @foreach ($consultancies->chunk(4) as $chunk)
-                                                    <div class="mega-menu-content">
-                                                        <div class="row">
-                                                            @foreach ($chunk as $item)
-                                                                <div class="col-xl-6">
-                                                                    <div class="menu-content-list">
-                                                                        <a href="{{ route('consultancyShow', $item->id) }}"
-                                                                            class="menu-content-list__link">{{ $item->title }}</a>
-
-                                                                    </div>
-                                                                </div>
-                                                            @endforeach
-
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                                <!-- Mega Menu Content Start -->
-                                            </li>
-                                        </ul>
-
-
-
-
-                                    </li>
-
-                                    <li><a href="{{ route('accreditations') }}"
-                                            class="{{ Request::routeIs('accreditations') ? 'active' : '' }}"><span>
-                                                Accreditation</span></a></li>
-
-                                    <li><a href="#" class=""><span>BCCH Journal & Article</span></a></li>
-                                    <li><a href="{{ route('contact') }}"
-                                            class="{{ Request::routeIs('contact') ? 'active' : '' }}"><span>Contact
-                                                Us</span></a></li>
-
-                                </ul>
-                            </nav>
-                        </div>
-                        <!-- Header Navigation End -->
-                        <!-- Header Category Menu End -->
-
-                        <!-- Header Inner Start -->
-                        <div class="header-inner">
-
 
                             <!-- Header Mobile Toggle Start -->
                             <div class="header-toggle">
@@ -364,7 +191,7 @@
                         </div>
                         <!-- Header Inner End -->
 
-                    </div> --}}
+                    </div>
                     <!-- Header Main Wrapper End -->
                 </div>
             </div>
@@ -410,9 +237,6 @@
                                     <!-- Mega Menu Content Start -->
                                 </li>
                             </ul>
-
-
-
 
                         </li>
                         <li><a href="#"><span>About Us</span></a></li>
@@ -553,7 +377,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Login</h5>
-                        <p class="modal-description">Don't have an account yet? <a href="{{ route('trainings') }}">Sign up for free</a></p>
+                        <p class="modal-description">Don't have an account yet? <a
+                                href="{{ route('trainings') }}">Sign up for free</a></p>
                     </div>
                     <div class="modal-body">
                         <form method="POST" action="{{ route('login_auth') }}">

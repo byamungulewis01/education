@@ -111,4 +111,20 @@ class HomeController extends Controller
 
         return view('home.show-accredit', compact('accreditation'));
     }
+    public function Programs()
+    {
+        return view('home.programs.index');
+    }
+    public function awards()
+    {
+        return view('home.programs.awards');
+    }
+    public function careers()
+    {
+        return view('home.consultancy.careers');
+    }
+    public function testimonies()
+    {
+        return view('home.consultancy.testimonies');
+    }
 }
